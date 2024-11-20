@@ -1,0 +1,9 @@
+<mat-progress-spinner
+	[mode]="mode()"
+	[strokeWidth]="strokeWidth()"
+	[diameter]="diameter()">
+</mat-progress-spinner>
+
+@if (text()) {
+	<span class="progress-spinner__txt">{{ text() }}</span>
+}

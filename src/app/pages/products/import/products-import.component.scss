@@ -1,0 +1,37 @@
+:host {
+	padding: 1rem 2rem;
+	display: block;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin: 0;
+}
+
+.cost {
+	width: 100%;
+	padding: 1rem;
+	border: solid 1px var(--app-primary-color);
+	box-sizing: border-box;
+	display: flex;
+	margin-bottom: 1rem;
+	border-radius: 7px;
+	align-items: center;
+	background-color: var(--app-primary-color-opacity-100);
+	gap: 1.5rem;
+
+	h3 {
+		font-size: 1.2rem;
+		margin: 0 0 .3rem;
+		line-height: 1;
+		white-space: nowrap;
+		color: var(--app-primary-color);
+		font-weight: 500;
+	}
+
+	p {
+		margin: 0;
+		font-size: 1rem;
+		font-weight: 500;
+	}
+}

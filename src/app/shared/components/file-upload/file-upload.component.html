@@ -1,0 +1,37 @@
+<app-flex-row verticalAlignment="center" direction="column">
+
+	@if (currentFiles().length) {
+		<div class="container">
+			<mat-chip-set>
+				@for (file of currentFiles(); track file.name) {
+					<mat-chip>
+						<div class="file">
+							<p>
+								{{ file.name }}
+							</p>
+							<mat-icon
+								(click)="removeFile(file)"
+
+							>cancel
+							</mat-icon>
+						</div>
+					</mat-chip>
+				}
+			</mat-chip-set>
+		</div>
+	} @else {
+		<app-no-results
+			label="Nenhum arquivo adicionado"
+			icon="upload">
+
+		</app-no-results>
+	}
+
+	<app-flex-row verticalAlignment="center">
+		<app-button
+			(click)="addFile()"
+			[label]="label()"
+			type="stroked"
+		/>
+	</app-flex-row>
+</app-flex-row>

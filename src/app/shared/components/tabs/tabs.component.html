@@ -1,0 +1,19 @@
+<mat-tab-group ngSkipHydration [preserveContent]="false" [selectedIndex]="selectedTab()"
+			   (selectedIndexChange)="onChangeTab($event)"
+			   dynamicHeight>
+	@for (child of tabChildren(); track $index) {
+		<mat-tab>
+			<ng-template mat-tab-label>
+				<div class="tab-header">
+					<mat-icon>{{ child.icon() }}</mat-icon>
+					{{ child.label() }}
+				</div>
+			</ng-template>
+			<app-local-actions
+				[where]="'tab-' + $index"
+			/>
+
+			<ng-container [ngTemplateOutlet]="child.template()!"/>
+		</mat-tab>
+	}
+</mat-tab-group>

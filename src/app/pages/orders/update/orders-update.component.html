@@ -1,0 +1,25 @@
+<app-window-loading [loading]="resource.isLoading()">
+	<div class="info">
+		<h2 class="title--medium title--color-primary">Pedido n° #{{ resource.data()?.code }}</h2>
+		<div class="container">
+			<div>
+				<h2 class="title--small title--color-primary">Data</h2>
+				<p>{{ resource.data()?.date | date: 'dd/MM/yyyy (HH:mm)' }}</p>
+			</div>
+			<div>
+				<h2 class="title--small title--color-primary">Nota</h2>
+				<p>{{ resource.data()?.customerInfo }}</p>
+			</div>
+
+			<div>
+				<h2 class="title--small title--color-primary">Total</h2>
+				<p>{{ resource.data()?.total | currency: 'R$' }}</p>
+			</div>
+		</div>
+		<h2 class="title--medium title--color-primary">Items</h2>
+		<app-orders-items
+			[product]="resource.data()!"
+			(requestUpdate)="resource.refresh()"
+		/>
+	</div>
+</app-window-loading>

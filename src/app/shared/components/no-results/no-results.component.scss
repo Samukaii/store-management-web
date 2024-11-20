@@ -1,0 +1,39 @@
+.no-results{
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	overflow: hidden;
+	padding: 1rem;
+	margin: auto;
+	border-top: var(--border);
+	border-bottom: var(--border);
+	border-radius: 0;
+
+	.no-results__title{
+		margin: 0;
+		font-size: .9rem;
+		color: var(--mat-primary-color);
+		font-weight: 400;
+		text-align: center;
+	}
+
+	&__description{
+		font-size: .8rem;
+		color: var(--mat-dark-grey-color);
+		text-align: center;
+		margin: .15rem 0 0 0;
+	}
+
+	.no-results__icon{
+		$size: 48px;
+
+		font-size: $size;
+		width: $size;
+		max-width: $size;
+		height: $size;
+		max-height: $size;
+		line-height: $size;
+		margin-bottom: .5rem;
+	}
+}

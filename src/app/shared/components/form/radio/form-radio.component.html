@@ -1,0 +1,10 @@
+<div [formGroup]="form()">
+	<label>{{ label() }}</label>
+
+	<mat-radio-group [formControlName]="name()">
+		@for (option of options(); track option.value) {
+			<mat-radio-button [value]="option.value">{{ option.name }}</mat-radio-button>
+		}
+	</mat-radio-group>
+</div>
+

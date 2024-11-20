@@ -1,0 +1,14 @@
+@for (breadcrumb of breadcrumbs(); track breadcrumb.route) {
+
+	@if (!$last) {
+		<a [routerLink]="breadcrumb.route">
+			{{ breadcrumb.name }}
+		</a>
+		<span>/</span>
+	} @else {
+		<a class="last">
+			{{ breadcrumb.name }}
+		</a>
+	}
+
+}

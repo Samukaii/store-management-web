@@ -1,0 +1,74 @@
+@let buttonType = type() ;
+
+@switch (buttonType) {
+	@case ("basic") {
+		<button
+			[disabled]="disabled()"
+			[matTooltip]="tooltip()"
+			mat-button
+		>{{label()}}
+		</button>
+	}
+	@case ("raised") {
+		<button
+			[disabled]="disabled()"
+			[matTooltip]="tooltip()"
+			mat-raised-button
+		>{{label()}}
+		</button>
+	}
+	@case ("stroked") {
+		<button
+			[disabled]="disabled()"
+			[matTooltip]="tooltip()"
+			mat-stroked-button
+		>{{label()}}
+		</button>
+	}
+	@case ("flat") {
+		<button
+			[disabled]="disabled()"
+			[matTooltip]="tooltip()"
+			mat-flat-button
+		>{{label()}}
+		</button>
+	}
+	@case ("icon") {
+		<button
+			[disabled]="disabled()"
+			[matTooltip]="tooltip()"
+			mat-icon-button
+		>
+			<mat-icon>{{icon()}}</mat-icon>
+		</button>
+	}
+	@case ("fab") {
+		<button
+			[disabled]="disabled()"
+			[matTooltip]="tooltip()"
+			mat-fab
+		>
+			<mat-icon>{{icon()}}</mat-icon>
+		</button>
+	}
+	@case ("mini-fab") {
+		<button
+			[disabled]="disabled()"
+			[matTooltip]="tooltip()"
+			mat-mini-fab
+		>
+			<mat-icon>{{icon()}}</mat-icon>
+		</button>
+	}
+	@case ("extended-fab") {
+		<button
+			[disabled]="disabled()"
+			[matTooltip]="tooltip()"
+			mat-fab
+			extended
+		>
+			<mat-icon>{{icon()}}</mat-icon>
+			{{label()}}
+		</button>
+	}
+}

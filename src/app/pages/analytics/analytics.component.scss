@@ -1,0 +1,41 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	padding: 1rem;
+}
+
+.card {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border-bottom: var(--border);
+	margin-bottom: 1rem;
+	gap: .3rem;
+	width: 100%;
+	padding: 1rem;
+}
+
+.chart {
+	width: 100%;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	border: var(--border);
+
+	app-form-radio {
+		width: 100%;
+	}
+
+	app-bar-chart, app-line-chart {
+		width: 100%;
+	}
+
+	app-pie-chart {
+		width: 50%;
+	}
+}

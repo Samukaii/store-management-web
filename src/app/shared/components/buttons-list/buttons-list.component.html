@@ -1,0 +1,13 @@
+<app-flex-row [verticalAlignment]="alignment()">
+	@for(action of actions(); track action) {
+		<app-button
+			(click)="onClick(action)"
+			[routerLink]="action.relativeRoute"
+			[label]="action.label"
+			[disabled]="action.disabled"
+			[icon]="action.icon"
+			[tooltip]="action.tooltip"
+			[type]="action.type ?? 'raised'"
+		/>
+	}
+</app-flex-row>

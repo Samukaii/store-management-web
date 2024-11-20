@@ -1,0 +1,7 @@
+<div class="no-results">
+	<mat-icon color="primary" class="no-results__icon" aria-hidden="true">{{ icon() }}</mat-icon>
+	<p class="no-results__title">{{ label() }}</p>
+	@if (description()){
+		<p class="no-results__description">{{ description() }}</p>
+	}
+</div>

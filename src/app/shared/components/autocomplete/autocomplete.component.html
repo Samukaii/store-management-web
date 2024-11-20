@@ -1,0 +1,13 @@
+<mat-form-field [formGroup]="internalForm" class="example-full-width">
+	<mat-label>{{ label() }}</mat-label>
+	<input type="text"
+		   [placeholder]="placeholder()"
+		   matInput
+		   formControlName="search"
+		   [matAutocomplete]="auto">
+	<mat-autocomplete (optionSelected)="onSelect($event)" #auto="matAutocomplete">
+		@for (option of filteredData.data(); track option) {
+			<mat-option [value]="option">{{option.name}}</mat-option>
+		}
+	</mat-autocomplete>
+</mat-form-field>

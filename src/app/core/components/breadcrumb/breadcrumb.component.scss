@@ -1,0 +1,30 @@
+:host {
+	display: flex;
+	align-items: center;
+}
+
+
+span {
+	font-size: 1.5rem;
+}
+
+a {
+	text-decoration: none;
+	color: var(--app-primary-color);
+	border-bottom: 1px solid transparent;
+	transition: .3s;
+	font-size: 1.1rem;
+	padding: .3rem;
+	cursor: pointer;
+
+
+	&:hover {
+		border-bottom: 1px solid var(--app-primary-color);
+	}
+
+	&.last {
+		color: black;
+		cursor: default;
+		border-bottom: 1px solid transparent;
+	}
+}

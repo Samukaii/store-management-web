@@ -1,0 +1,13 @@
+:host {
+	display: block;
+	height: 100%;
+	width: 100%;
+
+	--mat-table-row-item-outline-color: var(--border-color);
+}
+
+table {
+	border: var(--border);
+	padding: .3rem;
+	border-radius: 10px;
+}

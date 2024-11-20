@@ -1,0 +1,25 @@
+:host {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+mat-toolbar {
+	background-color: var(--app-primary-color-opacity-100);
+	min-height: 65px;
+	display: block;
+}
+
+.content, .routes, .container {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.routes {
+	height: 100%;
+	overflow-y: scroll;
+}
+
+.container {
+	display: flex;
+}

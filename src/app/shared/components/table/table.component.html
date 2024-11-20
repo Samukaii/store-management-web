@@ -1,0 +1,36 @@
+<app-window-loading [loading]="loading()">
+	@if (data().length) {
+		<table mat-table [fixedLayout]="true" [dataSource]="data()">
+			@for (column of header(); track column.position) {
+				<ng-container [matColumnDef]="column.position">
+					<th mat-header-cell *matHeaderCellDef> {{column.label}} </th>
+					<td mat-cell *matCellDef="let element">
+						@let columnDef = getColumn | call: column.position: element.id;
+						{{columnDef.value}}
+					</td>
+				</ng-container>
+			}
+
+			<ng-container matColumnDef="actions">
+				<th mat-header-cell *matHeaderCellDef></th>
+				<td mat-cell *matCellDef="let element">
+					@let actions = getActions | call: element;
+
+					<app-buttons-list
+						alignment="flex-end"
+						[actions]="actions"
+					/>
+				</td>
+			</ng-container>
+
+			<tr mat-header-row *matHeaderRowDef="displayedColumns()"></tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns();"></tr>
+		</table>
+	} @else {
+		<app-no-results
+			[label]="noResults().label"
+			[description]="noResults().description"
+			[icon]="noResults().icon"
+		/>
+	}
+</app-window-loading>

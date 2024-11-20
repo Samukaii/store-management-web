@@ -1,0 +1,20 @@
+ @if(product()) {
+	 <div class="cost">
+		 <h3>Custo do produto:</h3>
+		 <p>
+			 R$ {{ product()?.totalCost?.toFixed(2) }}
+		 </p>
+	 </div>
+ }
+
+<app-local-actions-updater
+	where="tab-1"
+	[actions]="actions"
+/>
+<app-table
+	[columnsFn]="getColumns"
+	[loading]="resource.isLoading()"
+	[data]="resource.data()"
+	[noResults]="noResults"
+	[actionsFn]="getActions"
+/>

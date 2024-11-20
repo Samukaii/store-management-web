@@ -1,0 +1,57 @@
+<h2>Definir preço</h2>
+
+<div class="cost">
+	<div>
+		<h3>Custo do produto:</h3>
+		<p>
+			R$ {{ product()?.totalCost?.toFixed(2) }}
+		</p>
+	</div>
+	<div>
+		<h3>Taxa do Ifood</h3>
+		<p>
+			R$ {{ variableTaxes().toFixed(2) }}
+		</p>
+	</div>
+	<div>
+		<h3>Preço sugerido</h3>
+		<p>
+			R$ {{ product()?.suggestedPrice?.toFixed(2) }}
+		</p>
+	</div>
+
+	<div>
+		<h3>Lucro total</h3>
+		<p>
+			R$ {{ profit().toFixed(2) }}
+		</p>
+	</div>
+
+	<div>
+		<h3>Margem de lucro</h3>
+		<p>
+			{{ profitMargin().toFixed(0) }}%
+		</p>
+	</div>
+</div>
+
+<app-form [data]="product()" [form]="form">
+	<app-form-input
+		[form]="form"
+		inputType="currency"
+		type="number"
+		name="price"
+		label="Preço"
+		placeholder="Informe aqui a quantidade"
+	>
+
+	</app-form-input>
+
+	<app-flex-row verticalAlignment="flex-end">
+		<app-button
+			type="flat"
+			label="Salvar"
+			(click)="onSubmit()"
+		/>
+	</app-flex-row>
+</app-form>

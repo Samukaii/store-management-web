@@ -1,0 +1,12 @@
+<mat-form-field [formGroup]="form()">
+	<mat-label>{{ label() }}</mat-label>
+
+	@let options = currencyOptions();
+
+	@if (options) {
+		<input [currencyMask]="options" matInput [formControlName]="name()" [placeholder]="placeholder()">
+	} @else {
+		<input [type]="type()" matInput [formControlName]="name()" [placeholder]="placeholder()">
+	}
+
+</mat-form-field>

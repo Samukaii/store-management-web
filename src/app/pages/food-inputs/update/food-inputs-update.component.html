@@ -1,0 +1,8 @@
+<app-window-loading [loading]="resource.isLoading()">
+	<app-food-inputs-form
+		[data]="resource.data() ?? undefined"
+		(formSubmit)="update($event)"
+	>
+
+	</app-food-inputs-form>
+</app-window-loading>

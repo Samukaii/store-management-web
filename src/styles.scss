@@ -1,1 +1,66 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@use './themes/main-theme';
+
+@include mat.core();
+
+html {
+	@include mat.core-theme(main-theme.$light-theme);
+	@include mat.all-component-themes(main-theme.$light-theme);
+
+	--app-primary-color: #A94E25;
+	--app-primary-color-opacity-100: rgba(180, 83, 40, 0.13);
+	--app-primary-color-opacity-200: rgba(180, 83, 40, 0.23);
+
+	* {
+		box-sizing: border-box;
+	}
+}
+
+html {
+	--border-color: rgba(128, 128, 128, 0.35);
+	--border: solid 1px var(--border-color);
+	--mdc-outlined-text-field-outline-color: rgba(70, 70, 70, 0.35);
+	--mdc-outlined-text-field-hover-outline-color: rgb(67, 92, 176)
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html {
+	.title--small {
+		font-size: 1rem;
+		line-height: 1;
+		margin: 0;
+	}
+
+	.title--medium {
+		font-size: 1.3rem;
+		font-weight: 500;
+		line-height: 1;
+		margin: 0;
+	}
+
+	.title--large {
+		font-size: 1.5rem;
+		line-height: 1.5;
+		margin: 0;
+	}
+
+	.title--color-primary {
+		color: var(--app-primary-color);
+	}
+
+	.mb-0-5 {
+		margin-bottom: .5rem;
+	}
+
+	.mb-1 {
+		margin-bottom: 1rem;
+	}
+}

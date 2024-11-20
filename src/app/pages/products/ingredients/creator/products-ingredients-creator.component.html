@@ -1,0 +1,46 @@
+<h2>Adicionar insumo</h2>
+
+<app-form [data]="data()" [form]="form">
+	<app-autocomplete
+		[form]="form"
+		name="foodInputId"
+		label="Insumo"
+		placeholder="Selecione aqui o insumo"
+		[method]="service.autocomplete"
+	/>
+
+	<app-form-radio
+		label="Unidade de medida"
+		[form]="form"
+		name="measurementUnit"
+		[options]="priceTypeOptions"
+	>
+
+	</app-form-radio>
+
+	@if (form.controls.measurementUnit.value) {
+		<app-flex-row [fill]="true">
+			<app-form-input
+				[form]="form"
+				inputType="integer"
+				[suffix]="quantitySuffix()"
+				type="number"
+				name="quantity"
+				label="Quantidade"
+				placeholder="Informe aqui a quantidade"
+			>
+
+			</app-form-input>
+		</app-flex-row>
+	}
+
+	<app-flex-row verticalAlignment="flex-end">
+		<app-button
+			type="flat"
+			label="Adicionar"
+			(click)="onSubmit()"
+		/>
+	</app-flex-row>
+
+
+</app-form>

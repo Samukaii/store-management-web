@@ -1,0 +1,18 @@
+<h2>Importar pedidos do IFood</h2>
+
+<app-form [form]="form">
+	<app-file-upload
+		[form]="form"
+		name="file"
+		accept="application/json"
+	/>
+
+	<app-flex-row verticalAlignment="flex-end">
+		<app-button
+			type="flat"
+			[disabled]="form.invalid"
+			label="Salvar"
+			(click)="onSubmit()"
+		/>
+	</app-flex-row>
+</app-form>

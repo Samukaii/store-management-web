@@ -1,0 +1,36 @@
+:host {
+	display: flex;
+	border-right: var(--border);
+	height: 100%;
+	width: 200px;
+	box-sizing: border-box;
+}
+
+mat-nav-list {
+	width: 100%;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+	width: 100%;
+	margin: 0;
+}
+
+.active {
+	background-color: var(--app-primary-color-opacity-100);
+	p, mat-icon {
+		color: var(--app-primary-color)
+	}
+}
+
+.content {
+	width: 100%;
+	display: flex;
+	gap: 1rem;
+	justify-content: flex-start;
+
+	p {
+		margin: 0;
+	}
+}

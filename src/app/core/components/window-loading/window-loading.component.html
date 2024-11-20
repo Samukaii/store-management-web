@@ -1,0 +1,10 @@
+@if (loading()) {
+	<app-progress-spinner mode="indeterminate"
+						  [strokeWidth]="strokeWidth()"
+						  [diameter]="diameter()">
+	</app-progress-spinner>
+} @else {
+	<div class="container">
+		<ng-content/>
+	</div>
+}
