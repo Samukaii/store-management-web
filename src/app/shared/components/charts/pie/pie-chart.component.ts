@@ -48,11 +48,10 @@ const getColor = (index: number, palette = bluePalette): string => {
 }
 
 @Component({
-	selector: 'app-pie-chart',
-	standalone: true,
-	imports: [],
-	templateUrl: './pie-chart.component.html',
-	styleUrl: './pie-chart.component.scss'
+    selector: 'app-pie-chart',
+    imports: [],
+    templateUrl: './pie-chart.component.html',
+    styleUrl: './pie-chart.component.scss'
 })
 export class PieChartComponent {
 	data = input.required<ChartData[]>();

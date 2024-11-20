@@ -12,23 +12,21 @@ import { range } from "rxjs";
 import { provideNativeDateAdapter } from "@angular/material/core";
 
 @Component({
-	selector: 'app-date-range',
-	standalone: true,
-	imports: [
-		MatEndDate,
-		MatStartDate,
-		MatDateRangeInput,
-		ReactiveFormsModule,
-		MatSuffix,
-		MatDatepickerToggle,
-		MatDateRangePicker,
-		MatLabel,
-		MatFormField
-
-	],
-	providers: [provideNativeDateAdapter()],
-	templateUrl: './date-range.component.html',
-	styleUrl: './date-range.component.scss'
+    selector: 'app-date-range',
+    imports: [
+        MatEndDate,
+        MatStartDate,
+        MatDateRangeInput,
+        ReactiveFormsModule,
+        MatSuffix,
+        MatDatepickerToggle,
+        MatDateRangePicker,
+        MatLabel,
+        MatFormField
+    ],
+    providers: [provideNativeDateAdapter()],
+    templateUrl: './date-range.component.html',
+    styleUrl: './date-range.component.scss'
 })
 export class DateRangeComponent {
 	form = input.required<FormGroup>();

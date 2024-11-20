@@ -12,19 +12,18 @@ import { takeUntilDestroyed, toSignal } from "@angular/core/rxjs-interop";
 import { AutocompleteMethod } from "./models/autocomplete-method";
 
 @Component({
-	selector: 'app-autocomplete',
-	standalone: true,
-	imports: [
-		MatAutocomplete,
-		MatOption,
-		ReactiveFormsModule,
-		MatAutocompleteTrigger,
-		MatInput,
-		MatLabel,
-		MatFormField
-	],
-	templateUrl: './autocomplete.component.html',
-	styleUrl: './autocomplete.component.scss'
+    selector: 'app-autocomplete',
+    imports: [
+        MatAutocomplete,
+        MatOption,
+        ReactiveFormsModule,
+        MatAutocompleteTrigger,
+        MatInput,
+        MatLabel,
+        MatFormField
+    ],
+    templateUrl: './autocomplete.component.html',
+    styleUrl: './autocomplete.component.scss'
 })
 export class AutocompleteComponent implements OnInit {
 	form = input.required<FormGroup>();

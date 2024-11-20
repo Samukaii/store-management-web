@@ -16,14 +16,13 @@ import { OrdersImportComponent } from "../import/orders-import.component";
 import { formatDate } from "@angular/common";
 
 @Component({
-	selector: 'app-orders-list',
-	standalone: true,
-	imports: [
-		TableComponent,
-		LocalActionsUpdaterComponent
-	],
-	templateUrl: './orders-list.component.html',
-	styleUrl: './orders-list.component.scss'
+    selector: 'app-orders-list',
+    imports: [
+        TableComponent,
+        LocalActionsUpdaterComponent
+    ],
+    templateUrl: './orders-list.component.html',
+    styleUrl: './orders-list.component.scss'
 })
 export class OrdersListComponent {
 	service = inject(OrdersService);

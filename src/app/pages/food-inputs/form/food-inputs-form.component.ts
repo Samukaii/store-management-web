@@ -17,19 +17,18 @@ import { FoodInputsForm } from "../models/food-inputs-form";
 import { JsonPipe } from "@angular/common";
 
 @Component({
-	selector: 'app-food-inputs-form',
-	standalone: true,
-	imports: [
-		FormComponent,
-		FormInputComponent,
-		FormRadioComponent,
-		ButtonComponent,
-		FlexRowComponent,
-		TitleComponent,
-		JsonPipe
-	],
-	templateUrl: './food-inputs-form.component.html',
-	styleUrl: './food-inputs-form.component.scss'
+    selector: 'app-food-inputs-form',
+    imports: [
+        FormComponent,
+        FormInputComponent,
+        FormRadioComponent,
+        ButtonComponent,
+        FlexRowComponent,
+        TitleComponent,
+        JsonPipe
+    ],
+    templateUrl: './food-inputs-form.component.html',
+    styleUrl: './food-inputs-form.component.scss'
 })
 export class FoodInputsFormComponent {
 	data = input<FoodInput>()

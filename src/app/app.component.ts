@@ -7,11 +7,10 @@ import { TopBarComponent } from "./core/components/top-bar/top-bar.component";
 import { injectIsAtBrowser } from "./shared/di/inject-is-at-browser";
 
 @Component({
-	selector: 'app-root',
-	standalone: true,
-	imports: [RouterOutlet, MenuComponent, TopBarComponent, MatToolbarRow, MatToolbar],
-	templateUrl: './app.component.html',
-	styleUrl: './app.component.scss'
+    selector: 'app-root',
+    imports: [RouterOutlet, MenuComponent, TopBarComponent, MatToolbarRow, MatToolbar],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
 	matIconReg = inject(MatIconRegistry);

@@ -15,21 +15,20 @@ import { TabsItemComponent } from "../../../shared/components/tabs/item/tabs-ite
 import { JsonPipe } from "@angular/common";
 
 @Component({
-  selector: 'app-products-update',
-  standalone: true,
-	imports: [
-		ProductsFormComponent,
-		WindowLoadingComponent,
-		MatTabGroup,
-		MatTab,
-		ProductsIngredientsComponent,
-		LocalActionsComponent,
-		TabsComponent,
-		TabsItemComponent,
-		JsonPipe
-	],
-  templateUrl: './products-update.component.html',
-  styleUrl: './products-update.component.scss'
+    selector: 'app-products-update',
+    imports: [
+        ProductsFormComponent,
+        WindowLoadingComponent,
+        MatTabGroup,
+        MatTab,
+        ProductsIngredientsComponent,
+        LocalActionsComponent,
+        TabsComponent,
+        TabsItemComponent,
+        JsonPipe
+    ],
+    templateUrl: './products-update.component.html',
+    styleUrl: './products-update.component.scss'
 })
 export class ProductsUpdateComponent {
 	id = input.required<number>();

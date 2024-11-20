@@ -14,22 +14,21 @@ import { RouterLink } from "@angular/router";
 import { MatTooltip } from "@angular/material/tooltip";
 
 @Component({
-  selector: 'app-button',
-  standalone: true,
-	imports: [
-		MatDivider,
-		MatButton,
-		MatAnchor,
-		MatIconButton,
-		MatIcon,
-		MatFabButton,
-		MatMiniFabButton,
-		MatFabAnchor,
-		RouterLink,
-		MatTooltip
-	],
-  templateUrl: './button.component.html',
-  styleUrl: './button.component.scss'
+    selector: 'app-button',
+    imports: [
+        MatDivider,
+        MatButton,
+        MatAnchor,
+        MatIconButton,
+        MatIcon,
+        MatFabButton,
+        MatMiniFabButton,
+        MatFabAnchor,
+        RouterLink,
+        MatTooltip
+    ],
+    templateUrl: './button.component.html',
+    styleUrl: './button.component.scss'
 })
 export class ButtonComponent {
 	type = input<ButtonType>("raised");

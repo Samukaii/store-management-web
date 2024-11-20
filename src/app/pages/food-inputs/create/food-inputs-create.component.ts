@@ -6,13 +6,12 @@ import { FoodInputsFormValue } from "../models/food-inputs-form-value";
 import { injectRouterActions } from "../../../shared/di/inject-router-actions";
 
 @Component({
-	selector: 'app-food-inputs-create',
-	standalone: true,
-	imports: [
-		FoodInputsFormComponent
-	],
-	templateUrl: './food-inputs-create.component.html',
-	styleUrl: './food-inputs-create.component.scss'
+    selector: 'app-food-inputs-create',
+    imports: [
+        FoodInputsFormComponent
+    ],
+    templateUrl: './food-inputs-create.component.html',
+    styleUrl: './food-inputs-create.component.scss'
 })
 export class FoodInputsCreateComponent {
 	service = inject(FoodInputsService);

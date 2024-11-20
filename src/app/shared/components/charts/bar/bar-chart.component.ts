@@ -30,11 +30,10 @@ const getColor = (index: number): string => {
 }
 
 @Component({
-	selector: 'app-bar-chart',
-	standalone: true,
-	imports: [],
-	templateUrl: './bar-chart.component.html',
-	styleUrl: './bar-chart.component.scss'
+    selector: 'app-bar-chart',
+    imports: [],
+    templateUrl: './bar-chart.component.html',
+    styleUrl: './bar-chart.component.scss'
 })
 export class BarChartComponent {
 	direction = input<"horizontal" | "vertical">("horizontal");

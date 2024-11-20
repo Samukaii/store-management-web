@@ -22,26 +22,25 @@ import { WindowLoadingComponent } from "../../../core/components/window-loading/
 import { NoResults } from "../no-results/models/no-results";
 
 @Component({
-	selector: 'app-table',
-	standalone: true,
-	imports: [
-		MatCell,
-		MatHeaderCell,
-		MatColumnDef,
-		MatTable,
-		MatHeaderRow,
-		MatRowDef,
-		MatHeaderRowDef,
-		MatRow,
-		MatCellDef,
-		MatHeaderCellDef,
-		CallPipe,
-		ButtonsListComponent,
-		NoResultsComponent,
-		WindowLoadingComponent
-	],
-	templateUrl: './table.component.html',
-	styleUrl: './table.component.scss'
+    selector: 'app-table',
+    imports: [
+        MatCell,
+        MatHeaderCell,
+        MatColumnDef,
+        MatTable,
+        MatHeaderRow,
+        MatRowDef,
+        MatHeaderRowDef,
+        MatRow,
+        MatCellDef,
+        MatHeaderCellDef,
+        CallPipe,
+        ButtonsListComponent,
+        NoResultsComponent,
+        WindowLoadingComponent
+    ],
+    templateUrl: './table.component.html',
+    styleUrl: './table.component.scss'
 })
 export class TableComponent<T extends Identifiable> {
 	data = input<T[]>([]);

@@ -16,14 +16,13 @@ import { OrderItem } from "../models/order-item";
 import { of } from "rxjs";
 
 @Component({
-	selector: 'app-orders-items',
-	standalone: true,
-	imports: [
-		LocalActionsUpdaterComponent,
-		TableComponent
-	],
-	templateUrl: './orders-items.component.html',
-	styleUrl: './orders-items.component.scss'
+    selector: 'app-orders-items',
+    imports: [
+        LocalActionsUpdaterComponent,
+        TableComponent
+    ],
+    templateUrl: './orders-items.component.html',
+    styleUrl: './orders-items.component.scss'
 })
 export class OrdersItemsComponent {
 	service = inject(OrdersItemsService);

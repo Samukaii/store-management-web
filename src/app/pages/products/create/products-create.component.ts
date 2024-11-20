@@ -7,13 +7,12 @@ import { injectRouterActions } from "../../../shared/di/inject-router-actions";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
-	selector: 'app-products-create',
-	standalone: true,
-	imports: [
-		ProductsFormComponent
-	],
-	templateUrl: './products-create.component.html',
-	styleUrl: './products-create.component.scss'
+    selector: 'app-products-create',
+    imports: [
+        ProductsFormComponent
+    ],
+    templateUrl: './products-create.component.html',
+    styleUrl: './products-create.component.scss'
 })
 export class ProductsCreateComponent {
 	service = inject(ProductsService);

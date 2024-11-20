@@ -16,14 +16,13 @@ import { DialogService } from "../../../shared/services/dialog.service";
 import { ProductsImportComponent } from "../import/products-import.component";
 
 @Component({
-	selector: 'app-products-list',
-	standalone: true,
-	imports: [
-		TableComponent,
-		LocalActionsUpdaterComponent
-	],
-	templateUrl: './products-list.component.html',
-	styleUrl: './products-list.component.scss'
+    selector: 'app-products-list',
+    imports: [
+        TableComponent,
+        LocalActionsUpdaterComponent
+    ],
+    templateUrl: './products-list.component.html',
+    styleUrl: './products-list.component.scss'
 })
 export class ProductsListComponent {
 	service = inject(ProductsService);

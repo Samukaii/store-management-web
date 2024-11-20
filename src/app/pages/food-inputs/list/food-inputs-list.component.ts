@@ -14,14 +14,13 @@ import { NoResults } from "../../../shared/components/no-results/models/no-resul
 import { FoodInputMeasurementUnit } from "../enums/food-input-measurement-unit";
 
 @Component({
-	selector: 'app-food-inputs-list',
-	standalone: true,
-	imports: [
-		TableComponent,
-		LocalActionsUpdaterComponent
-	],
-	templateUrl: './food-inputs-list.component.html',
-	styleUrl: './food-inputs-list.component.scss'
+    selector: 'app-food-inputs-list',
+    imports: [
+        TableComponent,
+        LocalActionsUpdaterComponent
+    ],
+    templateUrl: './food-inputs-list.component.html',
+    styleUrl: './food-inputs-list.component.scss'
 })
 export class FoodInputsListComponent {
 	service = inject(FoodInputsService);

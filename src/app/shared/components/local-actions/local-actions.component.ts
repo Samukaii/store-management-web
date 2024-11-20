@@ -6,15 +6,14 @@ import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { FlexRowComponent } from "../flex-row/flex-row.component";
 
 @Component({
-  selector: 'app-local-actions',
-  standalone: true,
-	imports: [
-		ButtonComponent,
-		RouterLink,
-		FlexRowComponent
-	],
-  templateUrl: './local-actions.component.html',
-  styleUrl: './local-actions.component.scss'
+    selector: 'app-local-actions',
+    imports: [
+        ButtonComponent,
+        RouterLink,
+        FlexRowComponent
+    ],
+    templateUrl: './local-actions.component.html',
+    styleUrl: './local-actions.component.scss'
 })
 export class LocalActionsComponent {
 	where = input.required<string>();

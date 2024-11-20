@@ -5,17 +5,16 @@ import { ProductsIngredientsComponent } from "../../../../pages/products/ingredi
 import { MatIcon } from "@angular/material/icon";
 
 @Component({
-	selector: 'app-tabs-item',
-	standalone: true,
-	imports: [
-		LocalActionsComponent,
-		MatTab,
-		ProductsIngredientsComponent,
-		MatTabLabel,
-		MatIcon
-	],
-	templateUrl: './tabs-item.component.html',
-	styleUrl: './tabs-item.component.scss'
+    selector: 'app-tabs-item',
+    imports: [
+        LocalActionsComponent,
+        MatTab,
+        ProductsIngredientsComponent,
+        MatTabLabel,
+        MatIcon
+    ],
+    templateUrl: './tabs-item.component.html',
+    styleUrl: './tabs-item.component.scss'
 })
 export class TabsItemComponent {
 	label = input("");

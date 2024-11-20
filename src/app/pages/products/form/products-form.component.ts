@@ -12,19 +12,18 @@ import { OrdersItemsService } from "../../orders/items/orders-items.service";
 import { JsonPipe } from "@angular/common";
 
 @Component({
-	selector: 'app-products-form',
-	standalone: true,
-	imports: [
-		FormComponent,
-		FormInputComponent,
-		FormRadioComponent,
-		ButtonComponent,
-		FlexRowComponent,
-		AutocompleteComponent,
-		JsonPipe
-	],
-	templateUrl: './products-form.component.html',
-	styleUrl: './products-form.component.scss'
+    selector: 'app-products-form',
+    imports: [
+        FormComponent,
+        FormInputComponent,
+        FormRadioComponent,
+        ButtonComponent,
+        FlexRowComponent,
+        AutocompleteComponent,
+        JsonPipe
+    ],
+    templateUrl: './products-form.component.html',
+    styleUrl: './products-form.component.scss'
 })
 export class ProductsFormComponent {
 	data = input<Product>()

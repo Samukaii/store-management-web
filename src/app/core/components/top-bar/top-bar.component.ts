@@ -3,14 +3,13 @@ import { LocalActionsComponent } from "../../../shared/components/local-actions/
 import { BreadcrumbComponent } from "../breadcrumb/breadcrumb.component";
 
 @Component({
-	selector: 'app-top-bar',
-	standalone: true,
-	imports: [
-		LocalActionsComponent,
-		BreadcrumbComponent
-	],
-	templateUrl: './top-bar.component.html',
-	styleUrl: './top-bar.component.scss'
+    selector: 'app-top-bar',
+    imports: [
+        LocalActionsComponent,
+        BreadcrumbComponent
+    ],
+    templateUrl: './top-bar.component.html',
+    styleUrl: './top-bar.component.scss'
 })
 export class TopBarComponent {
 

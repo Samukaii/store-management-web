@@ -9,17 +9,16 @@ import { OrdersFormValue } from "../models/orders-form-value";
 import { createOrdersForm } from "./create-orders-form";
 
 @Component({
-	selector: 'app-orders-form',
-	standalone: true,
-	imports: [
-		FormComponent,
-		FormInputComponent,
-		FormRadioComponent,
-		ButtonComponent,
-		FlexRowComponent
-	],
-	templateUrl: './orders-form.component.html',
-	styleUrl: './orders-form.component.scss'
+    selector: 'app-orders-form',
+    imports: [
+        FormComponent,
+        FormInputComponent,
+        FormRadioComponent,
+        ButtonComponent,
+        FlexRowComponent
+    ],
+    templateUrl: './orders-form.component.html',
+    styleUrl: './orders-form.component.scss'
 })
 export class OrdersFormComponent {
 	data = input<Order>()

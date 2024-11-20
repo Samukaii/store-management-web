@@ -14,23 +14,22 @@ import { TabsItemComponent } from "../../../shared/components/tabs/item/tabs-ite
 import { CurrencyPipe, DatePipe, JsonPipe } from "@angular/common";
 
 @Component({
-  selector: 'app-orders-update',
-  standalone: true,
-	imports: [
-		OrdersFormComponent,
-		WindowLoadingComponent,
-		MatTabGroup,
-		MatTab,
-		OrdersItemsComponent,
-		LocalActionsComponent,
-		TabsComponent,
-		TabsItemComponent,
-		JsonPipe,
-		DatePipe,
-		CurrencyPipe
-	],
-  templateUrl: './orders-update.component.html',
-  styleUrl: './orders-update.component.scss'
+    selector: 'app-orders-update',
+    imports: [
+        OrdersFormComponent,
+        WindowLoadingComponent,
+        MatTabGroup,
+        MatTab,
+        OrdersItemsComponent,
+        LocalActionsComponent,
+        TabsComponent,
+        TabsItemComponent,
+        JsonPipe,
+        DatePipe,
+        CurrencyPipe
+    ],
+    templateUrl: './orders-update.component.html',
+    styleUrl: './orders-update.component.scss'
 })
 export class OrdersUpdateComponent {
 	id = input.required<number>();

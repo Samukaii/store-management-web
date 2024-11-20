@@ -6,17 +6,16 @@ import { FormControlNames } from "../../../models/form-control-names";
 import { NgxCurrencyConfig, NgxCurrencyDirective, NgxCurrencyInputMode } from "ngx-currency";
 
 @Component({
-  selector: 'app-form-input',
-  standalone: true,
-	imports: [
-		MatLabel,
-		MatFormField,
-		ReactiveFormsModule,
-		MatInput,
-		NgxCurrencyDirective
-	],
-  templateUrl: './form-input.component.html',
-  styleUrl: './form-input.component.scss'
+    selector: 'app-form-input',
+    imports: [
+        MatLabel,
+        MatFormField,
+        ReactiveFormsModule,
+        MatInput,
+        NgxCurrencyDirective
+    ],
+    templateUrl: './form-input.component.html',
+    styleUrl: './form-input.component.scss'
 })
 export class FormInputComponent<Form extends FormGroup> {
 	form = input.required<Form>();

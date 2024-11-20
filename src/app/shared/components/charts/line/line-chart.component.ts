@@ -30,11 +30,10 @@ const getColor = (index: number): string => {
 }
 
 @Component({
-	selector: 'app-line-chart',
-	standalone: true,
-	imports: [],
-	templateUrl: './line-chart.component.html',
-	styleUrl: './line-chart.component.scss'
+    selector: 'app-line-chart',
+    imports: [],
+    templateUrl: './line-chart.component.html',
+    styleUrl: './line-chart.component.scss'
 })
 export class LineChartComponent {
 	direction = input<"horizontal" | "vertical">("horizontal");

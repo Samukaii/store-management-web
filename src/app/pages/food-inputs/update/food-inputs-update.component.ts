@@ -9,14 +9,13 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { injectRouterActions } from "../../../shared/di/inject-router-actions";
 
 @Component({
-  selector: 'app-food-inputs-update',
-  standalone: true,
-	imports: [
-		FoodInputsFormComponent,
-		WindowLoadingComponent
-	],
-  templateUrl: './food-inputs-update.component.html',
-  styleUrl: './food-inputs-update.component.scss'
+    selector: 'app-food-inputs-update',
+    imports: [
+        FoodInputsFormComponent,
+        WindowLoadingComponent
+    ],
+    templateUrl: './food-inputs-update.component.html',
+    styleUrl: './food-inputs-update.component.scss'
 })
 export class FoodInputsUpdateComponent {
 	id = input.required<number>();

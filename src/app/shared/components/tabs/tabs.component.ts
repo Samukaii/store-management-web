@@ -13,21 +13,20 @@ import { MatIcon } from "@angular/material/icon";
 import { LocalActionsService } from "../local-actions/local-actions.service";
 
 @Component({
-	selector: 'app-tabs',
-	standalone: true,
-	imports: [
-		LocalActionsComponent,
-		MatTab,
-		MatTabGroup,
-		ProductsIngredientsComponent,
-		ProductsFormComponent,
-		NgTemplateOutlet,
-		MatIcon,
-		MatTabLabel,
-		MatTabContent
-	],
-	templateUrl: './tabs.component.html',
-	styleUrl: './tabs.component.scss'
+    selector: 'app-tabs',
+    imports: [
+        LocalActionsComponent,
+        MatTab,
+        MatTabGroup,
+        ProductsIngredientsComponent,
+        ProductsFormComponent,
+        NgTemplateOutlet,
+        MatIcon,
+        MatTabLabel,
+        MatTabContent
+    ],
+    templateUrl: './tabs.component.html',
+    styleUrl: './tabs.component.scss'
 })
 export class TabsComponent {
 	router = inject(Router);

@@ -12,20 +12,19 @@ import { DOCUMENT } from "@angular/common";
 import { FileUploadComponent } from "../../../shared/components/file-upload/file-upload.component";
 
 @Component({
-	selector: 'app-orders-import',
-	standalone: true,
-	imports: [
-		AutocompleteComponent,
-		ButtonComponent,
-		FlexRowComponent,
-		FormComponent,
-		FormInputComponent,
-		FormRadioComponent,
-		NoResultsComponent,
-		FileUploadComponent
-	],
-	templateUrl: './orders-import.component.html',
-	styleUrl: './orders-import.component.scss'
+    selector: 'app-orders-import',
+    imports: [
+        AutocompleteComponent,
+        ButtonComponent,
+        FlexRowComponent,
+        FormComponent,
+        FormInputComponent,
+        FormRadioComponent,
+        NoResultsComponent,
+        FileUploadComponent
+    ],
+    templateUrl: './orders-import.component.html',
+    styleUrl: './orders-import.component.scss'
 })
 export class OrdersImportComponent {
 	formSubmit = output<ImportOrdersPayload>();

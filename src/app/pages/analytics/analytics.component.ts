@@ -26,21 +26,20 @@ const controlValue = <Form extends FormGroup, Key extends keyof Form['controls']
 }
 
 @Component({
-	selector: 'app-analytics',
-	standalone: true,
-	imports: [
-		BarChartComponent,
-		WindowLoadingComponent,
-		JsonPipe,
-		FormRadioComponent,
-		BarChartComponent,
-		LineChartComponent,
-		PieChartComponent,
-		FlexRowComponent,
-		DateRangeComponent
-	],
-	templateUrl: './analytics.component.html',
-	styleUrl: './analytics.component.scss'
+    selector: 'app-analytics',
+    imports: [
+        BarChartComponent,
+        WindowLoadingComponent,
+        JsonPipe,
+        FormRadioComponent,
+        BarChartComponent,
+        LineChartComponent,
+        PieChartComponent,
+        FlexRowComponent,
+        DateRangeComponent
+    ],
+    templateUrl: './analytics.component.html',
+    styleUrl: './analytics.component.scss'
 })
 export class AnalyticsComponent {
 	service = inject(AnalyticsService);

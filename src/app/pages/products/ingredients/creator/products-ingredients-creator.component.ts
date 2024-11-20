@@ -16,21 +16,20 @@ import { toSignal } from "@angular/core/rxjs-interop";
 import { BasicOption } from "../../../../shared/models/basic-option";
 
 @Component({
-	selector: 'app-products-ingredients-creator',
-	standalone: true,
-	imports: [
-		FormInputComponent,
-		FormComponent,
-		AutocompleteComponent,
-		FlexRowComponent,
-		ButtonComponent,
-		MatDialogActions,
-		MatButton,
-		MatDialogClose,
-		FormRadioComponent
-	],
-	templateUrl: './products-ingredients-creator.component.html',
-	styleUrl: './products-ingredients-creator.component.scss'
+    selector: 'app-products-ingredients-creator',
+    imports: [
+        FormInputComponent,
+        FormComponent,
+        AutocompleteComponent,
+        FlexRowComponent,
+        ButtonComponent,
+        MatDialogActions,
+        MatButton,
+        MatDialogClose,
+        FormRadioComponent
+    ],
+    templateUrl: './products-ingredients-creator.component.html',
+    styleUrl: './products-ingredients-creator.component.scss'
 })
 export class ProductsIngredientsCreatorComponent {
 	data = input<FoodInput>();

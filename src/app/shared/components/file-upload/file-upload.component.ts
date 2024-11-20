@@ -10,23 +10,22 @@ import { MatIconButton } from "@angular/material/button";
 import { MatRipple } from "@angular/material/core";
 
 @Component({
-  selector: 'app-file-upload',
-  standalone: true,
-	imports: [
-		ButtonComponent,
-		FlexRowComponent,
-		NoResultsComponent,
-		MatChipGrid,
-		MatChipRow,
-		MatIcon,
-		MatChipInput,
-		MatIconButton,
-		MatRipple,
-		MatChipSet,
-		MatChip
-	],
-  templateUrl: './file-upload.component.html',
-  styleUrl: './file-upload.component.scss'
+    selector: 'app-file-upload',
+    imports: [
+        ButtonComponent,
+        FlexRowComponent,
+        NoResultsComponent,
+        MatChipGrid,
+        MatChipRow,
+        MatIcon,
+        MatChipInput,
+        MatIconButton,
+        MatRipple,
+        MatChipSet,
+        MatChip
+    ],
+    templateUrl: './file-upload.component.html',
+    styleUrl: './file-upload.component.scss'
 })
 export class FileUploadComponent {
 	form = input.required<FormGroup>();

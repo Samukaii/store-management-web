@@ -5,13 +5,12 @@ import { Generic } from "../../../models/generic";
 import { FormModifier } from "../../../models/form-modifier";
 
 @Component({
-	selector: 'app-form',
-	standalone: true,
-	imports: [
-		ReactiveFormsModule
-	],
-	templateUrl: './form.component.html',
-	styleUrl: './form.component.scss'
+    selector: 'app-form',
+    imports: [
+        ReactiveFormsModule
+    ],
+    templateUrl: './form.component.html',
+    styleUrl: './form.component.scss'
 })
 export class FormComponent<Data extends Generic, Form extends FormGroup> {
 	form = input.required<Form>();

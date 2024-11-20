@@ -19,14 +19,13 @@ import { of } from "rxjs";
 import { ProductsDefinePriceComponent } from "../define-price/products-define-price.component";
 
 @Component({
-	selector: 'app-products-ingredients',
-	standalone: true,
-	imports: [
-		LocalActionsUpdaterComponent,
-		TableComponent
-	],
-	templateUrl: './products-ingredients.component.html',
-	styleUrl: './products-ingredients.component.scss'
+    selector: 'app-products-ingredients',
+    imports: [
+        LocalActionsUpdaterComponent,
+        TableComponent
+    ],
+    templateUrl: './products-ingredients.component.html',
+    styleUrl: './products-ingredients.component.scss'
 })
 export class ProductsIngredientsComponent {
 	service = inject(ProductsIngredientsService);

@@ -6,15 +6,14 @@ import { ButtonComponent } from "../button/button.component";
 import { RouterLink } from "@angular/router";
 
 @Component({
-  selector: 'app-buttons-list',
-  standalone: true,
-	imports: [
-		FlexRowComponent,
-		ButtonComponent,
-		RouterLink
-	],
-  templateUrl: './buttons-list.component.html',
-  styleUrl: './buttons-list.component.scss'
+    selector: 'app-buttons-list',
+    imports: [
+        FlexRowComponent,
+        ButtonComponent,
+        RouterLink
+    ],
+    templateUrl: './buttons-list.component.html',
+    styleUrl: './buttons-list.component.scss'
 })
 export class ButtonsListComponent {
 	alignment = input<FlexAlignment>("flex-start");

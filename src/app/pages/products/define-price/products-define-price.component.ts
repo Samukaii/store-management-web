@@ -13,18 +13,17 @@ import { FormRadioComponent } from "../../../shared/components/form/radio/form-r
 import { Product } from "../models/product";
 
 @Component({
-	selector: 'app-products-define-price',
-	standalone: true,
-	imports: [
-		AutocompleteComponent,
-		ButtonComponent,
-		FlexRowComponent,
-		FormComponent,
-		FormInputComponent,
-		FormRadioComponent
-	],
-	templateUrl: './products-define-price.component.html',
-	styleUrl: './products-define-price.component.scss'
+    selector: 'app-products-define-price',
+    imports: [
+        AutocompleteComponent,
+        ButtonComponent,
+        FlexRowComponent,
+        FormComponent,
+        FormInputComponent,
+        FormRadioComponent
+    ],
+    templateUrl: './products-define-price.component.html',
+    styleUrl: './products-define-price.component.scss'
 })
 export class ProductsDefinePriceComponent {
 	product = input<Product>();
