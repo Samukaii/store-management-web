@@ -1,22 +1,18 @@
 import { Component } from '@angular/core';
-import { MatMenuItem } from "@angular/material/menu";
 import { RouterLink, RouterLinkActive } from "@angular/router";
-import { MatRipple } from "@angular/material/core";
 import { MatIcon } from "@angular/material/icon";
 import { MatListItem, MatNavList } from "@angular/material/list";
 import { routeNames } from "../../../shared/route-names";
 
 @Component({
     selector: 'app-menu',
-    imports: [
-        MatMenuItem,
-        RouterLink,
-        MatRipple,
-        MatIcon,
-        MatNavList,
-        MatListItem,
-        RouterLinkActive
-    ],
+	imports: [
+		RouterLink,
+		MatIcon,
+		MatNavList,
+		MatListItem,
+		RouterLinkActive
+	],
     templateUrl: './menu.component.html',
     styleUrl: './menu.component.scss'
 })

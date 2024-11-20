@@ -7,6 +7,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient, withFetch } from "@angular/common/http";
 import { provideEnvironmentNgxCurrency } from "ngx-currency";
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from "@angular/material/form-field";
+import { provideNativeDateAdapter } from "@angular/material/core";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +16,17 @@ export const appConfig: ApplicationConfig = {
 	  provideClientHydration(),
 	  provideAnimationsAsync(),
 	  provideHttpClient(withFetch()),
+	  provideNativeDateAdapter({
+		  parse: {
+			  dateInput: 'DD/MM/YYYY',
+		  },
+		  display: {
+			  dateInput: 'DD/MM/YYYY',
+			  monthYearLabel: 'MMM YYYY',
+			  dateA11yLabel: 'LL',
+			  monthYearA11yLabel: 'MMMM YYYY',
+		  },
+	  }),
 	  provideEnvironmentNgxCurrency({
 		  align: "left",
 		  prefix: "R$",

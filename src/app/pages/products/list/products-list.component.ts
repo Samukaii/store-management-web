@@ -9,11 +9,10 @@ import { routeNames } from "../../../shared/route-names";
 import { TableColumnFn } from "../../../shared/components/table/table-column-fn";
 import { TableActionsFn } from "../../../shared/components/table/table-actions-fn";
 import { ProductsService } from "../products.service";
-import { resource } from "../../../shared/signals/resource";
 import { NoResults } from "../../../shared/components/no-results/models/no-results";
-import { OrdersImportComponent } from "../../orders/import/orders-import.component";
 import { DialogService } from "../../../shared/services/dialog.service";
 import { ProductsImportComponent } from "../import/products-import.component";
+import { rxResource } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: 'app-products-list',
@@ -28,8 +27,7 @@ export class ProductsListComponent {
 	service = inject(ProductsService);
 	dialog = inject(DialogService);
 
-	resource = resource({
-		initialValue: [],
+	resource = rxResource({
 		loader: () => this.service.getAll()
 	});
 
@@ -77,7 +75,7 @@ export class ProductsListComponent {
 					data: {
 						formSubmit: (value) => {
 							this.service.import(value).subscribe(() => {
-								this.resource.refresh();
+								this.resource.reload();
 								this.dialog.closeAll();
 							})
 						}
@@ -104,7 +102,7 @@ export class ProductsListComponent {
 			icon: "delete",
 			tooltip: "Remover",
 			click: () => this.service.delete(element.id).subscribe(() => {
-				this.resource.refresh();
+				this.resource.reload();
 			})
 		},
 	]

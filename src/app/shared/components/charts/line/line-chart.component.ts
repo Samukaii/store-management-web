@@ -1,4 +1,4 @@
-import { Component, effect, input } from '@angular/core';
+import { Component, computed, effect, ElementRef, input, viewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
 
 interface ChartData {
@@ -30,16 +30,20 @@ const getColor = (index: number): string => {
 }
 
 @Component({
-    selector: 'app-line-chart',
-    imports: [],
-    templateUrl: './line-chart.component.html',
-    styleUrl: './line-chart.component.scss'
+	selector: 'app-line-chart',
+	templateUrl: './line-chart.component.html',
+	styleUrl: './line-chart.component.scss'
 })
 export class LineChartComponent {
 	direction = input<"horizontal" | "vertical">("horizontal");
 	data = input.required<ChartData[]>();
 	label = input.required<string>();
-	chartName = input.required<string>();
+
+	chartElement = viewChild('canvas', {read: ElementRef});
+
+	element = computed(() =>
+		this.chartElement()?.nativeElement as HTMLCanvasElement | undefined
+	);
 
 	chart?: Chart;
 
@@ -47,9 +51,11 @@ export class LineChartComponent {
 		this.chart?.destroy();
 
 		const data = this.data();
-		if(!this.chartName()) return;
+		const element = this.element();
 
-		this.chart = new Chart(this.chartName(), {
+		if (!element) return;
+
+		this.chart = new Chart(element, {
 			type: 'line',
 			data: {
 				labels: this.data().map(item => item.label),
@@ -57,9 +63,9 @@ export class LineChartComponent {
 					{
 						label: this.label(),
 						data: data.map(item => item.value),
-						backgroundColor: '#A94E25',
+						backgroundColor: '#1c2541',
 						borderWidth: 1,
-						borderColor: '#A94E25'
+						borderColor: '#1c2541'
 					},
 				]
 			},

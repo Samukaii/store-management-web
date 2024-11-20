@@ -4,7 +4,6 @@ import { FlexDirection } from "./models/flex-direction";
 
 @Component({
     selector: 'app-flex-row',
-    imports: [],
     templateUrl: './flex-row.component.html',
     styleUrl: './flex-row.component.scss',
     host: {

@@ -1,15 +1,22 @@
 @use '@angular/material' as mat;
-@use './themes/main-theme';
 
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 
 html {
-	@include mat.core-theme(main-theme.$light-theme);
-	@include mat.all-component-themes(main-theme.$light-theme);
+	--app-primary-color: #1c2541;
+	--app-primary-dark-color: #0b132b;
+	--app-primary-color-rgb: 28, 37, 65;
+	--app-secondary-color-rgb: 91, 192, 190;
 
-	--app-primary-color: #A94E25;
-	--app-primary-color-opacity-100: rgba(180, 83, 40, 0.13);
-	--app-primary-color-opacity-200: rgba(180, 83, 40, 0.23);
+	--app-primary-color-opacity-100: rgba(var(--app-primary-color-rgb), 0.20);
+	--app-primary-color-opacity-200: rgba(var(--app-primary-color-rgb), 0.20);
+
+	--app-secondary-color-opacity-100: rgba(var(--app-secondary-color-rgb), 0.20);
+	--app-secondary-color-opacity-200: rgba(var(--app-secondary-color-rgb), 0.23);
+
+	@include mat.elevation-classes();
+	@include mat.app-background();
 
 	* {
 		box-sizing: border-box;
@@ -33,6 +40,25 @@ body {
 }
 
 html {
+	h1, h2, h3, h4, h5, h6 {
+		font-weight: 500;
+		margin: 0;
+	}
+
+	h2 {
+		font-size: 1.5rem;
+	}
+
+	h3 {
+		font-size: 1.3rem;
+	}
+
+	.dialog-title {
+		font-size: 1.5rem;
+		color: var(--app-primary-dark-color);
+		margin-bottom: .5rem !important;
+	}
+
 	.title--small {
 		font-size: 1rem;
 		line-height: 1;

@@ -1,16 +1,14 @@
 import { Component, computed, inject } from '@angular/core';
-import { resource } from "../../shared/signals/resource";
 import { WindowLoadingComponent } from "../../core/components/window-loading/window-loading.component";
-import { formatDate, JsonPipe } from "@angular/common";
+import { formatDate } from "@angular/common";
 import { FormRadioComponent } from "../../shared/components/form/radio/form-radio.component";
 import { BasicOption } from "../../shared/models/basic-option";
 import { FormGroup, NonNullableFormBuilder } from "@angular/forms";
-import { toSignal } from "@angular/core/rxjs-interop";
+import { rxResource, toSignal } from "@angular/core/rxjs-interop";
 import { BestSellingDisplayType } from "./enum/best-selling-display-type";
 import { AnalyticsService } from "./analytics.service";
 import { BarChartComponent } from "../../shared/components/charts/bar/bar-chart.component";
 import { LineChartComponent } from "../../shared/components/charts/line/line-chart.component";
-import { PieChartComponent } from "../../shared/components/charts/pie/pie-chart.component";
 import { FlexRowComponent } from "../../shared/components/flex-row/flex-row.component";
 import { DateRangeComponent } from "../../shared/components/date-range/date-range.component";
 
@@ -27,17 +25,15 @@ const controlValue = <Form extends FormGroup, Key extends keyof Form['controls']
 
 @Component({
     selector: 'app-analytics',
-    imports: [
-        BarChartComponent,
-        WindowLoadingComponent,
-        JsonPipe,
-        FormRadioComponent,
-        BarChartComponent,
-        LineChartComponent,
-        PieChartComponent,
-        FlexRowComponent,
-        DateRangeComponent
-    ],
+	imports: [
+		BarChartComponent,
+		WindowLoadingComponent,
+		FormRadioComponent,
+		BarChartComponent,
+		LineChartComponent,
+		FlexRowComponent,
+		DateRangeComponent
+	],
     templateUrl: './analytics.component.html',
     styleUrl: './analytics.component.scss'
 })
@@ -73,27 +69,25 @@ export class AnalyticsComponent {
 		}
 	});
 
-	products = resource({
-		initialValue: [],
+	products = rxResource({
 		request: this.params,
-		loader: (params) => this.service.bestSellingProducts(params)
+		loader: ({request}) => this.service.bestSellingProducts(request)
 	});
 
-	orders = resource({
-		initialValue: [],
+	orders = rxResource({
 		loader: () => this.service.ordersByPeriod()
 	});
 
 
 	chartData = computed(() => {
-		return this.products.data().map(item => {
+		return this.products.value()?.map(item => {
 			return {
 				label: item.product.name,
 				value: this.displayType() === BestSellingDisplayType.SALES_QUANTITY
 					? item.salesQuantity ?? 0
 					: item.totalBilled
 			}
-		}).sort((prev, curr) => curr.value - prev.value)
+		}).sort((prev, curr) => curr.value - prev.value) ?? []
 	});
 
 	label = computed(() => {
@@ -113,7 +107,7 @@ export class AnalyticsComponent {
 	]
 
 	profitMargin = computed(() => {
-		const data = this.products.data();
+		const data = this.products.value() ?? [];
 
 		const totalProfitMargin = data.reduce((item, current) =>
 			item + current.product.profitMargin * current.salesQuantity, 0
@@ -126,7 +120,7 @@ export class AnalyticsComponent {
 		return totalProfitMargin / totalSales;
 	})
 	dataProfits = computed(() => {
-		return this.products.data().map(item => ({profit: item.product.profitMargin, quantity: item.salesQuantity}))
+		return this.products.value()?.map(item => ({profit: item.product.profitMargin, quantity: item.salesQuantity})) ?? []
 	});
 
 	ordersChartData = computed(() => {
@@ -140,7 +134,7 @@ export class AnalyticsComponent {
 			return date;
 		});
 
-		const orders = this.orders.data();
+		const orders = this.orders.value() ?? [];
 
 		return allDates.reverse().map(date => {
 			const order = orders.find(order =>

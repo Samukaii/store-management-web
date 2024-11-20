@@ -1,9 +1,11 @@
 :host {
 	display: flex;
 	border-right: var(--border);
+	border: none !important;
 	height: 100%;
 	width: 200px;
 	box-sizing: border-box;
+	background-color: var(--app-primary-dark-color);
 }
 
 mat-nav-list {
@@ -20,7 +22,7 @@ ul {
 .active {
 	background-color: var(--app-primary-color-opacity-100);
 	p, mat-icon {
-		color: var(--app-primary-color)
+		color: white !important;
 	}
 }
 
@@ -32,5 +34,10 @@ ul {
 
 	p {
 		margin: 0;
+		color: rgba(255, 255, 255, 0.62);
+	}
+
+	mat-icon {
+		color: rgba(255, 255, 255, 0.62);
 	}
 }

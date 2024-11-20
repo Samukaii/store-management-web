@@ -8,7 +8,6 @@ import { TableColumnFn } from "../../../shared/components/table/table-column-fn"
 import { Product } from "../models/product";
 import { Button } from "../../../shared/components/button/models/button";
 import { TableActionsFn } from "../../../shared/components/table/table-actions-fn";
-import { resource } from "../../../shared/signals/resource";
 import { ProductsIngredientsService } from "./products-ingredients.service";
 import { DialogService } from "../../../shared/services/dialog.service";
 import { ProductsIngredientsCreatorComponent } from "./creator/products-ingredients-creator.component";
@@ -17,6 +16,7 @@ import { ProductFoodInput } from "../models/product-food-input";
 import { FoodInputMeasurementUnit } from "../../food-inputs/enums/food-input-measurement-unit";
 import { of } from "rxjs";
 import { ProductsDefinePriceComponent } from "../define-price/products-define-price.component";
+import { rxResource } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: 'app-products-ingredients',
@@ -34,10 +34,9 @@ export class ProductsIngredientsComponent {
 	product = input<Product>();
 	requestUpdate = output();
 
-	resource = resource({
-		initialValue: [],
+	resource = rxResource({
 		request: () => ({productId: this.product()?.id}),
-		loader: ({productId}) => {
+		loader: ({request: {productId}}) => {
 			if(!productId) return of<ProductFoodInput[]>([]);
 			return this.service.getAll()
 		}
@@ -83,7 +82,7 @@ export class ProductsIngredientsComponent {
 						product: this.product()!,
 						formSubmit: (value) => {
 							this.productsService.definePrice(this.product()!.id, value).subscribe(() => {
-								this.resource.refresh();
+								this.resource.reload();
 								this.dialog.closeAll();
 								this.requestUpdate.emit();
 							})
@@ -101,7 +100,7 @@ export class ProductsIngredientsComponent {
 					data: {
 						formSubmit: (value) => {
 							this.service.create(value).subscribe(() => {
-								this.resource.refresh();
+								this.resource.reload();
 								this.dialog.close(ProductsIngredientsCreatorComponent);
 								this.requestUpdate.emit();
 							})
@@ -121,7 +120,7 @@ export class ProductsIngredientsComponent {
 			icon: "delete",
 			tooltip: "Remover",
 			click: () => this.service.delete(element.id).subscribe(() => {
-				this.resource.refresh();
+				this.resource.reload();
 				this.requestUpdate.emit();
 			})
 		},

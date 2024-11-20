@@ -15,12 +15,12 @@
 			></app-form-radio>
 			<app-date-range
 				[form]="form"
+				label="Período"
 				startName="startDate"
 				endName="endDate"
 			/>
 			<app-bar-chart
 				direction="vertical"
-				chartName="products"
 				[data]="chartData()"
 				[label]="label()"
 			/>
@@ -44,7 +44,6 @@
 
 			</app-flex-row>
 			<app-line-chart
-				chartName="orders"
 				[data]="ordersChartData()"
 				label="Faturamento"
 			/>

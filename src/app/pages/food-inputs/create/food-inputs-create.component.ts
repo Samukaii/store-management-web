@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { FoodInputsFormComponent } from "../form/food-inputs-form.component";
-import { FoodInput } from "../models/food-input";
 import { FoodInputsService } from "../food-inputs.service";
 import { FoodInputsFormValue } from "../models/food-inputs-form-value";
 import { injectRouterActions } from "../../../shared/di/inject-router-actions";

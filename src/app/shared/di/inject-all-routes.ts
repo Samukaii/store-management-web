@@ -1,6 +1,6 @@
 import { ActivatedRouteSnapshot, NavigationEnd, Router } from "@angular/router";
 import { inject } from "@angular/core";
-import { filter, map, Observable, tap } from "rxjs";
+import { filter, map, Observable } from "rxjs";
 import { takeUntilDestroyed, toSignal } from "@angular/core/rxjs-interop";
 
 const collectRoutes = (router: Router) => {

@@ -2,7 +2,7 @@
 	<app-tabs>
 		<app-tabs-item label="Dados" icon="edit">
 			<app-products-form
-				[data]="resource.data() ?? undefined"
+				[data]="resource.value() ?? undefined"
 				(formSubmit)="update($event)"
 			>
 
@@ -10,8 +10,8 @@
 		</app-tabs-item>
 		<app-tabs-item label="Ingredientes" icon="restaurant">
 			<app-products-ingredients
-				[product]="resource.data()!"
-				(requestUpdate)="resource.refresh()"
+				[product]="resource.value()!"
+				(requestUpdate)="resource.reload()"
 			/>
 		</app-tabs-item>
 	</app-tabs>

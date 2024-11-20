@@ -2,27 +2,19 @@ import { Component, inject, output } from '@angular/core';
 import { createProductsImportForm, ImportProductsPayload } from "./create-products-import.form";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { ButtonComponent } from "../../../shared/components/button/button.component";
-import { AutocompleteComponent } from "../../../shared/components/autocomplete/autocomplete.component";
 import { FlexRowComponent } from "../../../shared/components/flex-row/flex-row.component";
 import { FormComponent } from "../../../shared/components/form/form/form.component";
-import { FormInputComponent } from "../../../shared/components/form/input/form-input.component";
-import { FormRadioComponent } from "../../../shared/components/form/radio/form-radio.component";
-import { NoResultsComponent } from "../../../shared/components/no-results/no-results.component";
 import { DOCUMENT } from "@angular/common";
 import { FileUploadComponent } from "../../../shared/components/file-upload/file-upload.component";
 
 @Component({
     selector: 'app-products-import',
-    imports: [
-        AutocompleteComponent,
-        ButtonComponent,
-        FlexRowComponent,
-        FormComponent,
-        FormInputComponent,
-        FormRadioComponent,
-        NoResultsComponent,
-        FileUploadComponent
-    ],
+	imports: [
+		ButtonComponent,
+		FlexRowComponent,
+		FormComponent,
+		FileUploadComponent
+	],
     templateUrl: './products-import.component.html',
     styleUrl: './products-import.component.scss'
 })

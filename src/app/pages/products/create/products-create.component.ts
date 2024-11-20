@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { ProductsFormComponent } from "../form/products-form.component";
-import { Product } from "../models/product";
 import { ProductsService } from "../products.service";
 import { ProductsFormValue } from "../models/products-form-value";
 import { injectRouterActions } from "../../../shared/di/inject-router-actions";

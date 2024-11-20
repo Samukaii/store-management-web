@@ -1,0 +1,10 @@
+@use '@angular/material' as mat;
+
+:host {
+	@include mat.button-overrides((
+		filled-container-color: var(--app-primary-color),
+		filled-label-text-color: white,
+		outlined-label-text-color: var(--app-primary-color),
+		outlined-ripple-color: var(--app-primary-color-opacity-100),
+	));
+}

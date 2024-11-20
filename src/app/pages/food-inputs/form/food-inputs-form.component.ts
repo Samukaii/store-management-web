@@ -1,6 +1,5 @@
-import { Component, computed, inject, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { FormComponent } from "../../../shared/components/form/form/form.component";
-import { FormBuilder, Validators } from "@angular/forms";
 import { FoodInput } from "../models/food-input";
 import { FormInputComponent } from "../../../shared/components/form/input/form-input.component";
 import { FormRadioComponent } from "../../../shared/components/form/radio/form-radio.component";
@@ -11,22 +10,18 @@ import { FoodInputsFormValue } from "../models/food-inputs-form-value";
 import { createFoodInputsForm } from "./food-inputs-form";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { FoodInputMeasurementUnit } from "../enums/food-input-measurement-unit";
-import { TitleComponent } from "../../../shared/components/title/title.component";
 import { FormModifier } from "../../../shared/models/form-modifier";
 import { FoodInputsForm } from "../models/food-inputs-form";
-import { JsonPipe } from "@angular/common";
 
 @Component({
     selector: 'app-food-inputs-form',
-    imports: [
-        FormComponent,
-        FormInputComponent,
-        FormRadioComponent,
-        ButtonComponent,
-        FlexRowComponent,
-        TitleComponent,
-        JsonPipe
-    ],
+	imports: [
+		FormComponent,
+		FormInputComponent,
+		FormRadioComponent,
+		ButtonComponent,
+		FlexRowComponent
+	],
     templateUrl: './food-inputs-form.component.html',
     styleUrl: './food-inputs-form.component.scss'
 })

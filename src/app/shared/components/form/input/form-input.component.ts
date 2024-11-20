@@ -1,9 +1,9 @@
-import { Component, computed, Input, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { MatFormField, MatLabel } from "@angular/material/form-field";
 import { MatInput } from "@angular/material/input";
 import { FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { FormControlNames } from "../../../models/form-control-names";
-import { NgxCurrencyConfig, NgxCurrencyDirective, NgxCurrencyInputMode } from "ngx-currency";
+import { NgxCurrencyConfig, NgxCurrencyDirective } from "ngx-currency";
 
 @Component({
     selector: 'app-form-input',

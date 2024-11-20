@@ -7,7 +7,7 @@ import { ChangeDetectorRef, EmbeddedViewRef, inject, Pipe, PipeTransform } from 
 export class CallPipe<C> implements PipeTransform {
 	private readonly context = (<EmbeddedViewRef<C>>inject(ChangeDetectorRef)).context;
 
-	transform<T, Fn extends (...args: any[]) => T>(fn: Fn, ...params: Parameters<Fn>): T {
+	transform<Fn extends (...args: any[]) => any>(fn: Fn, ...params: Parameters<Fn>): ReturnType<Fn> {
 		return fn.apply(this.context, [...params]);
 	}
 }

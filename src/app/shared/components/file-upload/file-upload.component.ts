@@ -1,29 +1,22 @@
 import { Component, computed, inject, input, signal } from '@angular/core';
-import {ButtonComponent} from "../button/button.component";
-import {FlexRowComponent} from "../flex-row/flex-row.component";
-import {NoResultsComponent} from "../no-results/no-results.component";
+import { ButtonComponent } from "../button/button.component";
+import { FlexRowComponent } from "../flex-row/flex-row.component";
+import { NoResultsComponent } from "../no-results/no-results.component";
 import { DOCUMENT } from "@angular/common";
 import { FormControl, FormGroup } from "@angular/forms";
-import { MatChip, MatChipGrid, MatChipInput, MatChipRow, MatChipSet } from "@angular/material/chips";
+import { MatChip, MatChipSet } from "@angular/material/chips";
 import { MatIcon } from "@angular/material/icon";
-import { MatIconButton } from "@angular/material/button";
-import { MatRipple } from "@angular/material/core";
 
 @Component({
     selector: 'app-file-upload',
-    imports: [
-        ButtonComponent,
-        FlexRowComponent,
-        NoResultsComponent,
-        MatChipGrid,
-        MatChipRow,
-        MatIcon,
-        MatChipInput,
-        MatIconButton,
-        MatRipple,
-        MatChipSet,
-        MatChip
-    ],
+	imports: [
+		ButtonComponent,
+		FlexRowComponent,
+		NoResultsComponent,
+		MatIcon,
+		MatChipSet,
+		MatChip
+	],
     templateUrl: './file-upload.component.html',
     styleUrl: './file-upload.component.scss'
 })

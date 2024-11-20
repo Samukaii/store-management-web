@@ -1,4 +1,4 @@
-import { Component, effect, input } from '@angular/core';
+import { Component, computed, effect, ElementRef, input, viewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
 
 interface ChartData {
@@ -49,24 +49,31 @@ const getColor = (index: number, palette = bluePalette): string => {
 
 @Component({
     selector: 'app-pie-chart',
-    imports: [],
     templateUrl: './pie-chart.component.html',
     styleUrl: './pie-chart.component.scss'
 })
 export class PieChartComponent {
 	data = input.required<ChartData[]>();
 	label = input.required<string>();
-	chartName = input.required<string>();
 
-	chart?: Chart<'pie'>;
+	chartElement = viewChild('canvas', {read: ElementRef});
+
+	element = computed(() =>
+		this.chartElement()?.nativeElement as HTMLCanvasElement | undefined
+	);
+
+	chart?: Chart<"pie">;
 
 	updateChart = effect(() => {
 		this.chart?.destroy();
 
 		const data = this.data();
-		if(!this.chartName()) return;
 
-		this.chart = new Chart(this.chartName(), {
+		const element = this.element();
+
+		if (!element) return;
+
+		this.chart = new Chart(element, {
 			type: 'pie',
 			data: {
 				labels: this.data().map(item => item.label),

@@ -1,18 +1,7 @@
-import { Component, contentChild, contentChildren, input, TemplateRef, viewChild } from '@angular/core';
-import { LocalActionsComponent } from "../../local-actions/local-actions.component";
-import { MatTab, MatTabLabel } from "@angular/material/tabs";
-import { ProductsIngredientsComponent } from "../../../../pages/products/ingredients/products-ingredients.component";
-import { MatIcon } from "@angular/material/icon";
+import { Component, input, TemplateRef, viewChild } from '@angular/core';
 
 @Component({
     selector: 'app-tabs-item',
-    imports: [
-        LocalActionsComponent,
-        MatTab,
-        ProductsIngredientsComponent,
-        MatTabLabel,
-        MatIcon
-    ],
     templateUrl: './tabs-item.component.html',
     styleUrl: './tabs-item.component.scss'
 })

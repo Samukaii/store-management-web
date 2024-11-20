@@ -8,12 +8,12 @@ import { TableColumnFn } from "../../../shared/components/table/table-column-fn"
 import { Order } from "../models/order";
 import { Button } from "../../../shared/components/button/models/button";
 import { TableActionsFn } from "../../../shared/components/table/table-actions-fn";
-import { resource } from "../../../shared/signals/resource";
 import { OrdersItemsService } from "./orders-items.service";
 import { DialogService } from "../../../shared/services/dialog.service";
 import { NoResults } from "../../../shared/components/no-results/models/no-results";
 import { OrderItem } from "../models/order-item";
 import { of } from "rxjs";
+import { rxResource } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: 'app-orders-items',
@@ -31,10 +31,9 @@ export class OrdersItemsComponent {
 	product = input<Order>();
 	requestUpdate = output();
 
-	resource = resource({
-		initialValue: [],
+	resource = rxResource({
 		request: () => ({productId: this.product()?.id}),
-		loader: ({productId}) => {
+		loader: ({request: {productId}}) => {
 			if(!productId) return of<OrderItem[]>([]);
 			return this.service.getAll()
 		}

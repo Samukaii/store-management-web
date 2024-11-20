@@ -14,7 +14,7 @@
 <app-table
 	[columnsFn]="getColumns"
 	[loading]="resource.isLoading()"
-	[data]="resource.data()"
+	[data]="resource.value() ?? []"
 	[noResults]="noResults"
 	[actionsFn]="getActions"
 />

@@ -9,9 +9,9 @@ import { routeNames } from "../../../shared/route-names";
 import { TableColumnFn } from "../../../shared/components/table/table-column-fn";
 import { TableActionsFn } from "../../../shared/components/table/table-actions-fn";
 import { FoodInputsService } from "../food-inputs.service";
-import { resource } from "../../../shared/signals/resource";
 import { NoResults } from "../../../shared/components/no-results/models/no-results";
 import { FoodInputMeasurementUnit } from "../enums/food-input-measurement-unit";
+import { rxResource } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: 'app-food-inputs-list',
@@ -25,8 +25,7 @@ import { FoodInputMeasurementUnit } from "../enums/food-input-measurement-unit";
 export class FoodInputsListComponent {
 	service = inject(FoodInputsService);
 
-	resource = resource({
-		initialValue: [],
+	resource = rxResource({
 		loader: () => this.service.getAll()
 	});
 
@@ -76,7 +75,7 @@ export class FoodInputsListComponent {
 			icon: "delete",
 			tooltip: "Remover",
 			click: () => this.service.delete(element.id).subscribe(() => {
-				this.resource.refresh();
+				this.resource.reload();
 			})
 		},
 	];

@@ -1,4 +1,4 @@
-import { afterRender, Component, computed, DestroyRef, effect, inject, input, OnInit } from '@angular/core';
+import { Component, computed, DestroyRef, inject, input, OnInit } from '@angular/core';
 import {
 	MatAutocomplete,
 	MatAutocompleteSelectedEvent,
@@ -7,8 +7,7 @@ import {
 } from "@angular/material/autocomplete";
 import { FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { MatFormField, MatInput, MatLabel } from "@angular/material/input";
-import { resource } from "../../signals/resource";
-import { takeUntilDestroyed, toSignal } from "@angular/core/rxjs-interop";
+import { rxResource, takeUntilDestroyed, toSignal } from "@angular/core/rxjs-interop";
 import { AutocompleteMethod } from "./models/autocomplete-method";
 
 @Component({
@@ -46,10 +45,9 @@ export class AutocompleteComponent implements OnInit {
 		initialValue: ""
 	});
 
-	filteredData = resource({
+	filteredData = rxResource({
 		request: this.search,
-		initialValue: [],
-		loader: (search) => this.method()({search})
+		loader: ({request: search}) => this.method()({search})
 	});
 
 	onSelect($event: MatAutocompleteSelectedEvent) {

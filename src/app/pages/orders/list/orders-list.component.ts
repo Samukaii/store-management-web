@@ -5,15 +5,14 @@ import {
 import { TableComponent } from "../../../shared/components/table/table.component";
 import { Order } from "../models/order";
 import { Button } from "../../../shared/components/button/models/button";
-import { routeNames } from "../../../shared/route-names";
 import { TableColumnFn } from "../../../shared/components/table/table-column-fn";
 import { TableActionsFn } from "../../../shared/components/table/table-actions-fn";
 import { OrdersService } from "../orders.service";
-import { resource } from "../../../shared/signals/resource";
 import { NoResults } from "../../../shared/components/no-results/models/no-results";
 import { DialogService } from "../../../shared/services/dialog.service";
 import { OrdersImportComponent } from "../import/orders-import.component";
 import { formatDate } from "@angular/common";
+import { rxResource } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: 'app-orders-list',
@@ -28,8 +27,7 @@ export class OrdersListComponent {
 	service = inject(OrdersService);
 	dialog = inject(DialogService);
 
-	resource = resource({
-		initialValue: [],
+	resource = rxResource({
 		loader: () => this.service.getAll()
 	});
 
@@ -77,7 +75,7 @@ export class OrdersListComponent {
 					data: {
 						formSubmit: (value) => {
 							this.service.import(value).subscribe(() => {
-								this.resource.refresh();
+								this.resource.reload();
 								this.dialog.closeAll();
 							})
 						}
