@@ -1,0 +1,18 @@
+<app-window-loading [loading]="resource.isLoading()">
+	<app-tabs>
+		<app-tabs-item label="Dados" icon="edit">
+			<app-preparations-form
+				[data]="resource.value() ?? undefined"
+				(formSubmit)="update($event)"
+			>
+
+			</app-preparations-form>
+		</app-tabs-item>
+		<app-tabs-item label="Ingredientes" icon="restaurant">
+			<app-preparations-ingredients
+				[preparation]="resource.value()!"
+				(requestUpdate)="resource.reload()"
+			/>
+		</app-tabs-item>
+	</app-tabs>
+</app-window-loading>

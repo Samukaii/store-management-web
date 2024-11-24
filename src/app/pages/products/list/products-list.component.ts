@@ -94,12 +94,14 @@ export class ProductsListComponent {
 		{
 			type: "icon",
 			icon: "edit",
+			iconColor: 'blue',
 			tooltip: "Editar",
 			relativeRoute: `${element.id}`
 		},
 		{
 			type: "icon",
 			icon: "delete",
+			iconColor: "red",
 			tooltip: "Remover",
 			click: () => this.service.delete(element.id).subscribe(() => {
 				this.resource.reload();

@@ -6,5 +6,24 @@
 		filled-label-text-color: white,
 		outlined-label-text-color: var(--app-primary-color),
 		outlined-ripple-color: var(--app-primary-color-opacity-100),
+		filled-disabled-container-color: #cbcbcb
 	));
+
+	.icon-color-primary {
+		@include mat.icon-button-overrides((
+			icon-color: var(--app-primary-color),
+		));
+	}
+
+	.icon-color-red {
+		@include mat.icon-button-overrides((
+			icon-color: #cb5050,
+		));
+	}
+
+	.icon-color-blue {
+		@include mat.icon-button-overrides((
+			icon-color: #28448f,
+		));
+	}
 }

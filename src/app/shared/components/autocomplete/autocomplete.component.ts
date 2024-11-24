@@ -1,4 +1,4 @@
-import { Component, computed, DestroyRef, inject, input, OnInit } from '@angular/core';
+import { Component, computed, DestroyRef, inject, input, OnInit, output } from '@angular/core';
 import {
 	MatAutocomplete,
 	MatAutocompleteSelectedEvent,
@@ -9,6 +9,7 @@ import { FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule } f
 import { MatFormField, MatInput, MatLabel } from "@angular/material/input";
 import { rxResource, takeUntilDestroyed, toSignal } from "@angular/core/rxjs-interop";
 import { AutocompleteMethod } from "./models/autocomplete-method";
+import { AutocompleteOption } from "./models/autocomplete-option";
 
 @Component({
     selector: 'app-autocomplete',
@@ -30,6 +31,7 @@ export class AutocompleteComponent implements OnInit {
 	method = input.required<AutocompleteMethod>();
 	label = input("");
 	placeholder = input("");
+	select = output<AutocompleteOption>();
 
 	private destroyRef = inject(DestroyRef);
 
@@ -53,6 +55,8 @@ export class AutocompleteComponent implements OnInit {
 	onSelect($event: MatAutocompleteSelectedEvent) {
 		this.control().setValue($event.option.value.id);
 		this.internalForm.controls.search.setValue($event.option.value.name);
+
+		this.select.emit($event.option.value);
 	}
 
 	ngOnInit() {

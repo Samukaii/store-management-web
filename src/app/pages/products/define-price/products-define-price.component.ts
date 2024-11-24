@@ -46,6 +46,7 @@ export class ProductsDefinePriceComponent {
 
 	profitMargin = computed(() => {
 		if(this.profit() < 0) return 0;
+		if(this.price() <= 0) return 0;
 
 		return (this.profit() / this.price()) * 100
 	});

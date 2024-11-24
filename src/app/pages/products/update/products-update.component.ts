@@ -24,11 +24,11 @@ import { rxResource } from "@angular/core/rxjs-interop";
     styleUrl: './products-update.component.scss'
 })
 export class ProductsUpdateComponent {
-	id = input.required<number>();
 	data = signal<Product | null>(null);
 	service = inject(ProductsService);
 	actions = injectRouterActions();
 	router = inject(Router);
+	id = input.required<number>();
 
 	resource = rxResource({
 		request: this.id,

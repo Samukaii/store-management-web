@@ -89,6 +89,7 @@ export class OrdersListComponent {
 		{
 			type: "icon",
 			icon: "edit",
+			iconColor: 'blue',
 			tooltip: "Editar",
 			relativeRoute: `${element.id}`
 		},

@@ -37,6 +37,7 @@
 		<button
 			[disabled]="disabled()"
 			[matTooltip]="tooltip()"
+			[ngClass]="['icon-color-' + iconColor()]"
 			mat-icon-button
 		>
 			<mat-icon>{{icon()}}</mat-icon>

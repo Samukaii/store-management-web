@@ -1,11 +1,11 @@
 export const routeNames = {
-	foodInputs: "food-inputs",
+	rawMaterials: "raw-materials",
 	orders: "orders",
 	products: "products",
 	recipes: "recipes",
 	single: ":id",
 	new: "new",
 	empty: "",
-	statistics: "statistics"
-
+	statistics: "statistics",
+	preparations: "preparations",
 } satisfies Record<string, string>;

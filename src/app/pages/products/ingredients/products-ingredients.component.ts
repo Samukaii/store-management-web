@@ -13,7 +13,7 @@ import { DialogService } from "../../../shared/services/dialog.service";
 import { ProductsIngredientsCreatorComponent } from "./creator/products-ingredients-creator.component";
 import { NoResults } from "../../../shared/components/no-results/models/no-results";
 import { ProductFoodInput } from "../models/product-food-input";
-import { FoodInputMeasurementUnit } from "../../food-inputs/enums/food-input-measurement-unit";
+import { RawMaterialsMeasurementUnit } from "../../raw-materials/enums/raw-materials-measurement-unit";
 import { of } from "rxjs";
 import { ProductsDefinePriceComponent } from "../define-price/products-define-price.component";
 import { rxResource } from "@angular/core/rxjs-interop";
@@ -57,7 +57,7 @@ export class ProductsIngredientsComponent {
 		{
 			position: "name",
 			label: "Nome",
-			value: element.foodInput.name
+			value: element.rawMaterial?.name ?? element.preparation?.name ?? ""
 		},
 		{
 			position: "cost",
@@ -67,7 +67,7 @@ export class ProductsIngredientsComponent {
 		{
 			position: "quantity",
 			label: "Quantidade",
-			value: this.calculateQuantity(element)
+			value: this.getQuantity(element)
 		},
 	]
 
@@ -118,6 +118,7 @@ export class ProductsIngredientsComponent {
 		{
 			type: "icon",
 			icon: "delete",
+			iconColor: "red",
 			tooltip: "Remover",
 			click: () => this.service.delete(element.id).subscribe(() => {
 				this.resource.reload();
@@ -126,12 +127,20 @@ export class ProductsIngredientsComponent {
 		},
 	];
 
-	private calculateQuantity(productFoodInput: ProductFoodInput) {
-		const {quantity, measurementUnit} = productFoodInput;
+	getQuantity(preparation: ProductFoodInput) {
+		const value = preparation.quantity < 1 ? preparation.quantity * 1000 : preparation.quantity;
 
-		if(measurementUnit.id === FoodInputMeasurementUnit.GRAMS && quantity >= 1000)
-			return `${(quantity/1000).toString().replace('.', ',')} Kg`;
+		return `${value} ${this.getLabel(preparation)}`;
+	}
 
-		return `${quantity} ${measurementUnit.name}`;
+	getLabel(preparation: ProductFoodInput) {
+		switch (preparation.measurementUnit.id) {
+			case RawMaterialsMeasurementUnit.KILOGRAMS:
+				return preparation.quantity < 1 ? 'g' : 'kg';
+			case RawMaterialsMeasurementUnit.LITER:
+				return preparation.quantity < 1 ? 'ml' : 'L';
+			default:
+				return 'unidade'
+		}
 	}
 }

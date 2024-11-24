@@ -1,0 +1,36 @@
+@if (preparation()) {
+	<div class="cost hint-box">
+		<div>
+			<h3>Custo do preparo</h3>
+			<p>
+				R$ {{ preparation()?.totalCost?.toFixed(2) }}
+			</p>
+		</div>
+		<div>
+
+			<h3>Rendimento</h3>
+			<p>
+				{{ preparation()?.quantity }} {{ preparation()?.measurementUnit?.name }}
+			</p>
+		</div>
+		<div>
+
+			<h3>Custo por {{ preparation()?.measurementUnit?.name?.toLowerCase() }}</h3>
+			<p>
+				R$ {{ preparation()?.costPerUnit?.toFixed(2) }}
+			</p>
+		</div>
+	</div>
+}
+
+<app-local-actions-updater
+	where="tab-1"
+	[actions]="actions"
+/>
+<app-table
+	[columnsFn]="getColumns"
+	[loading]="resource.isLoading()"
+	[data]="resource.value() ?? []"
+	[noResults]="noResults"
+	[actionsFn]="getActions"
+/>

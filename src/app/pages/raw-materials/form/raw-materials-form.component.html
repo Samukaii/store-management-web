@@ -1,0 +1,84 @@
+<app-form
+	[form]="form"
+	[data]="data()"
+	[modifiers]="modifiers"
+>
+	<app-form-input
+		[form]="form"
+		label="Nome"
+		placeholder="Informe aqui o nome"
+		name="name">
+
+	</app-form-input>
+
+	<h2 class="title--medium title--color-primary mb-1">Custo do insumo</h2>
+
+	<app-form-radio
+		class="m"
+		label="Unidade de medida"
+		[form]="form"
+		name="measurementUnit"
+		[options]="measurementUnits"
+	>
+
+	</app-form-radio>
+
+	<app-flex-row [fill]="true">
+		<app-form-input
+			[form]="form"
+			name="cost"
+			label="Preço"
+			inputType="currency"
+			placeholder="Informe aqui o preço"
+		>
+
+		</app-form-input>
+
+		@if (inputType() === 'decimal') {
+			<app-form-input
+				[form]="form"
+				[inputType]="'decimal'"
+				[suffix]="quantitySuffix()"
+				type="number"
+				name="quantity"
+				label="Quantidade"
+				placeholder="Informe aqui a quantidade"
+			>
+
+			</app-form-input>
+		} @else {
+			<app-form-input
+				[form]="form"
+				[inputType]="'integer'"
+				[suffix]="quantitySuffix()"
+				type="number"
+				name="quantity"
+				label="Quantidade"
+				placeholder="Informe aqui a quantidade"
+			>
+
+			</app-form-input>
+		}
+
+	</app-flex-row>
+
+	@if (value()) {
+		<div class="cost hint-box">
+			<h3>Custo do insumo:</h3>
+			<p>
+				{{ value() }}
+			</p>
+		</div>
+	}
+
+	<app-flex-row verticalAlignment="flex-end">
+		<app-button
+			[disabled]="form.invalid"
+			type="flat"
+			(click)="onSubmit()"
+			label="Salvar"
+		>
+		</app-button>
+	</app-flex-row>
+
+</app-form>

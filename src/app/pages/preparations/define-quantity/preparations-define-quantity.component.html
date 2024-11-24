@@ -1,0 +1,47 @@
+<h2 class="dialog-title">Definir rendimento</h2>
+
+<app-form [data]="preparation()" [form]="form">
+	<app-form-radio
+		class="m"
+		label="Unidade de medida"
+		[form]="form"
+		name="measurementUnit"
+		[options]="measurementUnits"
+	>
+
+	</app-form-radio>
+
+	@if (inputType() === 'decimal') {
+		<app-form-input
+			[form]="form"
+			[inputType]="'decimal'"
+			[suffix]="quantitySuffix()"
+			type="number"
+			name="quantity"
+			label="Quantidade"
+			placeholder="Informe aqui a quantidade"
+		>
+
+		</app-form-input>
+	} @else {
+		<app-form-input
+			[form]="form"
+			[inputType]="'integer'"
+			[suffix]="quantitySuffix()"
+			type="number"
+			name="quantity"
+			label="Quantidade"
+			placeholder="Informe aqui a quantidade"
+		>
+
+		</app-form-input>
+	}
+
+	<app-flex-row verticalAlignment="flex-end">
+		<app-button
+			type="flat"
+			label="Salvar"
+			(click)="onSubmit()"
+		/>
+	</app-flex-row>
+</app-form>

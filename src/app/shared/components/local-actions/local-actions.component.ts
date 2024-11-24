@@ -1,17 +1,12 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { ButtonComponent } from "../button/button.component";
-import { Button } from "../button/models/button";
 import { LocalActionsService } from "./local-actions.service";
-import { RouterLink } from "@angular/router";
-import { FlexRowComponent } from "../flex-row/flex-row.component";
+import { ButtonsListComponent } from "../buttons-list/buttons-list.component";
 
 @Component({
     selector: 'app-local-actions',
-    imports: [
-        ButtonComponent,
-        RouterLink,
-        FlexRowComponent
-    ],
+	imports: [
+		ButtonsListComponent
+	],
     templateUrl: './local-actions.component.html',
     styleUrl: './local-actions.component.scss'
 })
@@ -21,8 +16,4 @@ export class LocalActionsComponent {
 	private service = inject(LocalActionsService);
 
 	actions = computed(() => this.service.getActions(this.where()));
-
-	onClick(action: Button) {
-		action?.click?.();
-	}
 }

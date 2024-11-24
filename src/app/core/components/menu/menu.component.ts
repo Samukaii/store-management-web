@@ -20,8 +20,13 @@ export class MenuComponent {
 	items = [
 		{
 			name: "Insumos",
-			route: routeNames.foodInputs,
+			route: routeNames.rawMaterials,
 			icon: "restaurant"
+		},
+		{
+			name: "Preparos",
+			route: routeNames.preparations,
+			icon: "blender"
 		},
 		{
 			name: "Produtos",

@@ -1,12 +1,14 @@
-import { FoodInput } from "../../food-inputs/models/food-input";
+import { RawMaterial } from "../../raw-materials/models/raw-material";
 import { Identifiable } from "../../../shared/models/identifiable";
+import { Preparation } from "../../preparations/models/preparation";
 
 export interface ProductFoodInput extends Identifiable {
+	preparation?: Preparation;
 	totalCost: number;
 	quantity: number;
 	measurementUnit: {
 		id: number;
 		name: string;
 	};
-	foodInput: FoodInput;
+	rawMaterial?: RawMaterial;
 }

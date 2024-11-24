@@ -17,13 +17,22 @@ export const routes: AppRoutes = [
 		}
 	},
 	{
-		path: routeNames.foodInputs,
+		path: routeNames.rawMaterials,
 		data: {
 			routeConfiguration: {
 				breadcrumb: "Insumos"
 			}
 		},
-		loadChildren: () => import("./pages/food-inputs/food-inputs-routes"),
+		loadChildren: () => import("./pages/raw-materials/raw-materials-routes"),
+	},
+	{
+		path: routeNames.preparations,
+		data: {
+			routeConfiguration: {
+				breadcrumb: "Preparos"
+			}
+		},
+		loadChildren: () => import("./pages/preparations/preparations-routes"),
 	},
 	{
 		path: routeNames.products,

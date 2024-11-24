@@ -8,7 +8,7 @@ import { injectIsAtBrowser } from "./shared/di/inject-is-at-browser";
 
 @Component({
     selector: 'app-root',
-	imports: [RouterOutlet, MenuComponent, TopBarComponent, MatToolbar],
+	imports: [RouterOutlet, MenuComponent, TopBarComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })

@@ -1,13 +1,4 @@
-<app-flex-row verticalAlignment="flex-end">
-	@for (action of actions()(); track action.label) {
-		<app-button
-			(click)="onClick(action)"
-			[routerLink]="action.relativeRoute"
-			[label]="action.label"
-			[disabled]="action.disabled"
-			[icon]="action.icon"
-			[tooltip]="action.tooltip"
-			[type]="action.type ?? 'raised'"
-		/>
-	}
-</app-flex-row>
+<app-buttons-list
+	alignment="flex-end"
+	[actions]="actions()()"
+/>

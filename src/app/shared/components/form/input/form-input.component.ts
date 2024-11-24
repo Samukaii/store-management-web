@@ -24,7 +24,7 @@ export class FormInputComponent<Form extends FormGroup> {
 	inputType = input<"text" | "currency" | "decimal" | "integer">("text");
 	label = input("");
 	placeholder = input("");
-	suffix = input<string>()
+	suffix = input("")
 
 	currencyOptions = computed((): Partial<NgxCurrencyConfig> | undefined => {
 		switch (this.inputType()) {
@@ -33,7 +33,7 @@ export class FormInputComponent<Form extends FormGroup> {
 			case "decimal":
 				return {
 					prefix: "",
-					precision: 1,
+					precision: 3,
 					suffix: this.suffix()
 				}
 			case "integer":

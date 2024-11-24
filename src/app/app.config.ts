@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, provideExperimentalZonelessChangeDetection, } from '@angular/core';
 import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -7,16 +7,22 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient, withFetch } from "@angular/common/http";
 import { provideEnvironmentNgxCurrency } from "ngx-currency";
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from "@angular/material/form-field";
-import { provideNativeDateAdapter } from "@angular/material/core";
+import { provideMomentDateAdapter } from "@angular/material-moment-adapter";
+import localePT from '@angular/common/locales/pt';
+import { registerLocaleData } from "@angular/common";
+import 'moment/locale/pt-br';
+import { MAT_DATE_LOCALE } from "@angular/material/core";
+
+registerLocaleData(localePT);
 
 export const appConfig: ApplicationConfig = {
   providers: [
-	  provideZoneChangeDetection({ eventCoalescing: true }),
+	  provideExperimentalZonelessChangeDetection(),
 	  provideRouter(routes, withComponentInputBinding(), withViewTransitions()),
 	  provideClientHydration(),
 	  provideAnimationsAsync(),
 	  provideHttpClient(withFetch()),
-	  provideNativeDateAdapter({
+	  provideMomentDateAdapter({
 		  parse: {
 			  dateInput: 'DD/MM/YYYY',
 		  },
@@ -39,6 +45,10 @@ export const appConfig: ApplicationConfig = {
 		  useValue: {
 			  appearance: "outline"
 		  } as MatFormFieldDefaultOptions
+	  },
+	  {
+		  provide: MAT_DATE_LOCALE,
+		  useValue: 'pt-br'
 	  }
   ]
 };

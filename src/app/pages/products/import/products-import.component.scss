@@ -11,13 +11,10 @@ h2 {
 .cost {
 	width: 100%;
 	padding: 1rem;
-	border: solid 1px var(--app-primary-color);
 	box-sizing: border-box;
 	display: flex;
 	margin-bottom: 1rem;
-	border-radius: 7px;
 	align-items: center;
-	background-color: var(--app-primary-color-opacity-100);
 	gap: 1.5rem;
 
 	h3 {

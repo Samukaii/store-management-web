@@ -1,6 +1,8 @@
 import { ButtonType } from "./button-type";
+import { ButtonIconColor } from "./button-icon-color";
 
 export interface Button {
+	iconColor?: ButtonIconColor;
 	tooltip?: string;
 	label?: string;
 	icon?: string;
