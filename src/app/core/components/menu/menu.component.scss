@@ -6,9 +6,21 @@
 	width: 200px;
 	box-sizing: border-box;
 	background-color: var(--app-primary-dark-color);
+	flex-direction: column;
+	padding: 1rem 0;
+}
+
+h2 {
+	font-size: 1rem;
+	margin: 0 1rem;
+	padding: 0 0 .5rem;
+	color: rgba(255, 255, 255, 0.62);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.62);
 }
 
 mat-nav-list {
+	padding: 0;
+	margin-bottom: 1rem;
 	width: 100%;
 }
 
@@ -29,7 +41,7 @@ ul {
 .content {
 	width: 100%;
 	display: flex;
-	gap: 1rem;
+	gap: .5rem;
 	justify-content: flex-start;
 
 	p {

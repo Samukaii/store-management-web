@@ -1,0 +1,9 @@
+@use '@angular/material' as mat;
+
+:host {
+	@include mat.chips-overrides((
+		elevated-selected-container-color: var(--app-primary-color),
+		selected-label-text-color: white,
+		with-icon-selected-icon-color: white,
+	));
+}

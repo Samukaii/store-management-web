@@ -1,0 +1,10 @@
+<mat-chip-listbox aria-label="Cutest dog breeds">
+	@for (option of options(); track option.id) {
+		<mat-chip-option (click)="select(option)"
+						 [selectable]="false"
+						 [selected]="option.id === selected()"
+						 [value]="option"
+		>{{ option.name }}
+		</mat-chip-option>
+	}
+</mat-chip-listbox>

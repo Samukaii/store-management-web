@@ -1,0 +1,42 @@
+<app-form
+	[form]="form"
+	[data]="data()"
+	[modifiers]="modifiers"
+>
+	<app-form-input
+		[form]="form"
+		label="Nome"
+		placeholder="Informe aqui o nome"
+		name="name">
+
+	</app-form-input>
+
+	<app-autocomplete
+		[form]="form"
+		name="integrationName"
+		[method]="ordersItemsService.autocomplete"
+		label="Nome no Ifood"
+		placeholder="Informe aqui o nome no Ifood"
+		>
+
+	</app-autocomplete>
+
+	<app-autocomplete
+		[form]="form"
+		name="categoryId"
+		[method]="categoriesService.autocomplete"
+		label="Categoria"
+		placeholder="Informe aqui a categoria"
+	>
+
+	</app-autocomplete>
+
+	<app-flex-row verticalAlignment="flex-end">
+		<app-button
+			(click)="onSubmit()"
+			type="flat"
+			label="Salvar"
+		>
+		</app-button>
+	</app-flex-row>
+</app-form>

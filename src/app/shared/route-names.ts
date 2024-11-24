@@ -8,4 +8,5 @@ export const routeNames = {
 	empty: "",
 	statistics: "statistics",
 	preparations: "preparations",
+	categories: "categories",
 } satisfies Record<string, string>;

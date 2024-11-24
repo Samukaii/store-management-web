@@ -1,12 +1,15 @@
-<mat-nav-list>
-	@for (item of items; track item) {
-		<a mat-list-item [routerLink]="item.route" routerLinkActive="active">
-			<div class="content">
-				<mat-icon>{{item.icon}}</mat-icon>
-				<p>
-					{{ item.name }}
-				</p>
-			</div>
-		</a>
-	}
-</mat-nav-list>
+@for (item of items; track item) {
+	<h2>{{ item.name }}</h2>
+	<mat-nav-list>
+		@for (subItem of item.items; track subItem.route) {
+			<a mat-list-item [routerLink]="subItem.route" routerLinkActive="active">
+				<div class="content">
+					<mat-icon>{{ subItem.icon }}</mat-icon>
+					<p>
+						{{ subItem.name }}
+					</p>
+				</div>
+			</a>
+		}
+	</mat-nav-list>
+}

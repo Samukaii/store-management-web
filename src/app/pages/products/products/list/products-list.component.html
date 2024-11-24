@@ -1,0 +1,19 @@
+<app-local-actions-updater
+	where="top-bar"
+	[actions]="actions"
+>
+</app-local-actions-updater>
+
+<app-chips-selector
+	class="d-block mb-1"
+	[formControl]="filterForm.controls.categoryId"
+	[options]="categoriesOptions()"
+/>
+
+<app-table
+	[columnsFn]="getColumns"
+	[loading]="resource.isLoading()"
+	[data]="resource.value() ?? []"
+	[noResults]="noResults"
+	[actionsFn]="getActions"
+/>

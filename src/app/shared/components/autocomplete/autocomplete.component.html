@@ -5,7 +5,8 @@
 		   matInput
 		   formControlName="search"
 		   [matAutocomplete]="auto">
-	<mat-autocomplete (optionSelected)="onSelect($event)" #auto="matAutocomplete">
+	<mat-autocomplete
+		(optionSelected)="onSelect($event)" #auto="matAutocomplete">
 		@for (option of (filteredData.value() ?? []); track option) {
 			<mat-option [value]="option">{{option.name}}</mat-option>
 		}

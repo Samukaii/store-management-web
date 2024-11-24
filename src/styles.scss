@@ -89,6 +89,14 @@ html {
 		color: var(--app-primary-color);
 	}
 
+	.d-flex {
+		display: flex;
+	}
+
+	.d-block {
+		display: block;
+	}
+
 	.mb-0-5 {
 		margin-bottom: .5rem;
 	}
