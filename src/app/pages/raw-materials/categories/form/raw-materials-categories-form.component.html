@@ -1,0 +1,11 @@
+<app-form
+	[form]="form"
+	[data]="data()"
+	(formSubmit)="onSubmit()"
+>
+	<app-form-input
+		[control]="form.controls.name"
+		label="Nome"
+		placeholder="Informe aqui o nome"
+	/>
+</app-form>

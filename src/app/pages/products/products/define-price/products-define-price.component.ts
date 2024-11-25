@@ -1,19 +1,17 @@
 import { Component, computed, input, output } from '@angular/core';
 import { createProductsDefinePriceForm, ProductsDefinePricePayload } from "./create-products-define-price.form";
 import { toSignal } from "@angular/core/rxjs-interop";
-import { ButtonComponent } from "../../../../shared/components/button/button.component";
-import { FlexRowComponent } from "../../../../shared/components/flex-row/flex-row.component";
 import { FormComponent } from "../../../../shared/components/form/form/form.component";
 import { FormInputComponent } from "../../../../shared/components/form/input/form-input.component";
 import { Product } from "../models/product";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @Component({
     selector: 'app-products-define-price',
 	imports: [
-		ButtonComponent,
-		FlexRowComponent,
 		FormComponent,
-		FormInputComponent
+		FormInputComponent,
+		ReactiveFormsModule
 	],
     templateUrl: './products-define-price.component.html',
     styleUrl: './products-define-price.component.scss'

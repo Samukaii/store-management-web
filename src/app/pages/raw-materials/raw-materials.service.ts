@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { RawMaterial } from "./models/raw-material";
 import { RawMaterialsFormValue } from "./models/raw-materials-form-value";
+import { Generic } from "../../shared/models/generic";
 
 @Injectable({
 	providedIn: 'root'
@@ -11,8 +12,24 @@ export class RawMaterialsService {
 	http = inject(HttpClient);
 	baseUrl = `${environment.api}/raw_materials`;
 
-	getAll() {
-		return this.http.get<RawMaterial[]>(this.baseUrl);
+	getAll(params: Generic = {}) {
+		const paramsToSend: Generic = {
+			'category.id': params['categoryId']
+		};
+
+		if(paramsToSend['category.id'] === -1) {
+			delete paramsToSend['category.id'];
+		}
+
+		if(paramsToSend['category.id'] === -2) {
+			delete paramsToSend['category.id'];
+			paramsToSend['category'] = null;
+		}
+
+
+		return this.http.get<RawMaterial[]>(this.baseUrl, {
+			params: paramsToSend
+		});
 	}
 
 	single(id: number) {

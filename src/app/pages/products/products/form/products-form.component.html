@@ -2,14 +2,12 @@
 	[form]="form"
 	[data]="data()"
 	[modifiers]="modifiers"
+	(formSubmit)="onSubmit()"
 >
 	<app-form-input
-		[form]="form"
+		[control]="form.controls.name"
 		label="Nome"
-		placeholder="Informe aqui o nome"
-		name="name">
-
-	</app-form-input>
+		placeholder="Informe aqui o nome"/>
 
 	<app-autocomplete
 		[form]="form"
@@ -30,13 +28,4 @@
 	>
 
 	</app-autocomplete>
-
-	<app-flex-row verticalAlignment="flex-end">
-		<app-button
-			(click)="onSubmit()"
-			type="flat"
-			label="Salvar"
-		>
-		</app-button>
-	</app-flex-row>
 </app-form>

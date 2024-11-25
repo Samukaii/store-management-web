@@ -1,22 +1,12 @@
 <app-form
 	[form]="form"
 	[data]="data()"
+	(formSubmit)="onSubmit()"
 >
 	<app-form-input
-		[form]="form"
+		[control]="form.controls.name"
 		label="Nome"
-		placeholder="Informe aqui o nome"
-		name="name">
+		placeholder="Informe aqui o nome">
 
 	</app-form-input>
-
-	<app-flex-row verticalAlignment="flex-end">
-		<app-button
-			[disabled]="form.invalid"
-			type="flat"
-			(click)="onSubmit()"
-			label="Salvar"
-		>
-		</app-button>
-	</app-flex-row>
 </app-form>

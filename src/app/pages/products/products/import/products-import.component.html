@@ -1,18 +1,13 @@
 <h2 class="dialog-title">Importar produtos do IFood</h2>
 
-<app-form [form]="form">
+<app-form
+	[form]="form"
+	(formSubmit)="onSubmit()"
+
+>
 	<app-file-upload
 		[form]="form"
 		name="file"
 		accept="application/json"
 	/>
-
-	<app-flex-row verticalAlignment="flex-end">
-		<app-button
-			type="flat"
-			label="Salvar"
-			[disabled]="form.invalid"
-			(click)="onSubmit()"
-		/>
-	</app-flex-row>
 </app-form>

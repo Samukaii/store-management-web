@@ -1,7 +1,7 @@
 export enum RawMaterialsMeasurementUnit {
 	KILOGRAMS = 1,
-	GRAMS = 2,
-	LITER = 3,
-	MILLILITER = 4,
-	UNIT = 5,
+	LITER = 2,
+	UNIT = 3,
+	GRAMS = 4,
+	MILLILITER = 5,
 }

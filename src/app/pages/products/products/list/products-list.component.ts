@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, Signal } from '@angular/core';
+import { Component, computed, inject, Signal } from '@angular/core';
 import {
 	LocalActionsUpdaterComponent
 } from "../../../../shared/components/local-actions/updater/local-actions-updater.component";
@@ -16,38 +16,37 @@ import { rxResource, toSignal } from "@angular/core/rxjs-interop";
 import { ChipsSelectorComponent } from "../../../../shared/components/chips-selector/chips-selector.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { ProductsCategoriesService } from "../../categories/products-categories.service";
+import { FormValue } from "../../../../shared/models/form-value";
+import { ConfirmActionService } from "../../../../core/services/confirm-action.service";
 
-const formValue = <Form extends FormGroup>(form: Form) => {
+export const formValue = <Form extends FormGroup>(form: Form) => {
 	return toSignal(form.valueChanges, {
-		initialValue: form.value,
-	}) as Signal<ReturnType<Form['getRawValue']>>
+		initialValue: form.getRawValue()
+	}) as Signal<FormValue<Form>>;
 }
 
 @Component({
-    selector: 'app-products-list',
+	selector: 'app-products-list',
 	imports: [
 		TableComponent,
 		LocalActionsUpdaterComponent,
 		ChipsSelectorComponent,
 		ReactiveFormsModule
 	],
-    templateUrl: './products-list.component.html',
-    styleUrl: './products-list.component.scss'
+	templateUrl: './products-list.component.html',
+	styleUrl: './products-list.component.scss'
 })
 export class ProductsListComponent {
 	service = inject(ProductsService);
 	categoriesService = inject(ProductsCategoriesService);
 	dialog = inject(DialogService);
+	confirm = inject(ConfirmActionService);
 
 	filterForm = inject(FormBuilder).group({
 		categoryId: [-2 as null | number]
 	});
 
 	filters = formValue(this.filterForm);
-
-	value = effect(() => {
-		console.log(this.filters());
-	})
 
 	categories = rxResource({
 		loader: () => this.categoriesService.getAll()
@@ -144,9 +143,19 @@ export class ProductsListComponent {
 			type: "icon",
 			icon: "delete",
 			iconColor: "red",
-			tooltip: "Remover",
-			click: () => this.service.delete(element.id).subscribe(() => {
-				this.resource.reload();
+			tooltip: "Excluir",
+			click: () => this.confirm.confirm({
+				title: "Excluir produto",
+				description: "Você tem certeza de que deseja excluir este produto?",
+				actions: {
+					primary: {
+						click: () => {
+							this.service.delete(element.id).subscribe(() => {
+								this.resource.reload();
+							})
+						}
+					}
+				}
 			})
 		},
 	]

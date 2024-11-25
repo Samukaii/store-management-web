@@ -11,6 +11,7 @@ import { TableActionsFn } from "../../../../shared/components/table/table-action
 import { ProductsCategoriesService } from "../products-categories.service";
 import { NoResults } from "../../../../shared/components/no-results/models/no-results";
 import { rxResource } from "@angular/core/rxjs-interop";
+import { ConfirmActionService } from "../../../../core/services/confirm-action.service";
 
 @Component({
 	selector: 'app-products-categories-list',
@@ -23,6 +24,7 @@ import { rxResource } from "@angular/core/rxjs-interop";
 })
 export class ProductsCategoriesListComponent {
 	service = inject(ProductsCategoriesService);
+	confirm = inject(ConfirmActionService);
 
 	resource = rxResource({
 		loader: () => this.service.getAll()
@@ -53,7 +55,7 @@ export class ProductsCategoriesListComponent {
 			icon: "add",
 			label: "Adicionar categoria",
 			tooltip: "Adicionar categoria",
-			relativeRoute: `${routeNames.categories}/${routeNames.new}`
+			relativeRoute: `${routeNames.productsCategories}/${routeNames.new}`
 		}
 	]
 
@@ -70,8 +72,18 @@ export class ProductsCategoriesListComponent {
 			icon: "delete",
 			iconColor: "red",
 			tooltip: "Remover",
-			click: () => this.service.delete(element.id).subscribe(() => {
-				this.resource.reload();
+			click: () => this.confirm.confirm({
+				title: "Excluir categoria",
+				description: "Você tem certeza de que deseja excluir esta categoria?",
+				actions: {
+					primary: {
+						click: () => {
+							this.service.delete(element.id).subscribe(() => {
+								this.resource.reload();
+							})
+						}
+					}
+				}
 			})
 		},
 	];

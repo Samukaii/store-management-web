@@ -22,6 +22,11 @@ export class MenuComponent {
 			name: "Ingredientes",
 			items: [
 				{
+					name: "Categorias",
+					route: routeNames.rawMaterialsCategories,
+					icon: "category"
+				},
+				{
 					name: "Insumos",
 					route: routeNames.rawMaterials,
 					icon: "restaurant"
@@ -38,14 +43,14 @@ export class MenuComponent {
 			name: "Vendas",
 			items: [
 				{
+					name: "Categorias",
+					route: routeNames.productsCategories,
+					icon: "category"
+				},
+				{
 					name: "Produtos",
 					route: routeNames.products,
 					icon: "lunch_dining"
-				},
-				{
-					name: "Categorias",
-					route: routeNames.categories,
-					icon: "category"
 				},
 				{
 					name: "Pedidos",

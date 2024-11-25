@@ -2,14 +2,22 @@
 	[form]="form"
 	[data]="data()"
 	[modifiers]="modifiers"
+	(formSubmit)="onSubmit()"
 >
 	<app-form-input
-		[form]="form"
+		[control]="form.controls.name"
 		label="Nome"
 		placeholder="Informe aqui o nome"
-		name="name">
+	/>
+	<app-autocomplete
+		[form]="form"
+		name="categoryId"
+		[method]="categoriesService.autocomplete"
+		label="Categoria"
+		placeholder="Informe aqui a categoria"
+	>
 
-	</app-form-input>
+	</app-autocomplete>
 
 	<h2 class="title--medium title--color-primary mb-1">Custo do insumo</h2>
 
@@ -25,34 +33,27 @@
 
 	<app-flex-row [fill]="true">
 		<app-form-input
-			[form]="form"
-			name="cost"
+			[control]="form.controls.cost"
 			label="Preço"
 			inputType="currency"
 			placeholder="Informe aqui o preço"
-		>
-
-		</app-form-input>
+		/>
 
 		@if (inputType() === 'decimal') {
 			<app-form-input
-				[form]="form"
+				[control]="form.controls.quantity"
 				[inputType]="'decimal'"
 				[suffix]="quantitySuffix()"
 				type="number"
-				name="quantity"
 				label="Quantidade"
 				placeholder="Informe aqui a quantidade"
-			>
-
-			</app-form-input>
+			/>
 		} @else {
 			<app-form-input
-				[form]="form"
+				[control]="form.controls.quantity"
 				[inputType]="'integer'"
 				[suffix]="quantitySuffix()"
 				type="number"
-				name="quantity"
 				label="Quantidade"
 				placeholder="Informe aqui a quantidade"
 			>
@@ -70,15 +71,4 @@
 			</p>
 		</div>
 	}
-
-	<app-flex-row verticalAlignment="flex-end">
-		<app-button
-			[disabled]="form.invalid"
-			type="flat"
-			(click)="onSubmit()"
-			label="Salvar"
-		>
-		</app-button>
-	</app-flex-row>
-
 </app-form>

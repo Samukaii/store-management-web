@@ -17,8 +17,17 @@ export const routes: AppRoutes = [
 		}
 	},
 	{
-		path: routeNames.categories,
+		path: routeNames.productsCategories,
 		loadChildren: () => import("./pages/products/categories/products-categories-routes"),
+		data: {
+			routeConfiguration: {
+				breadcrumb: "Categorias"
+			}
+		}
+	},
+	{
+		path: routeNames.rawMaterialsCategories,
+		loadChildren: () => import("./pages/raw-materials/categories/raw-materials-categories-routes"),
 		data: {
 			routeConfiguration: {
 				breadcrumb: "Categorias"

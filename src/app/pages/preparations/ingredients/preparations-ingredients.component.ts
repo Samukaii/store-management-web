@@ -16,6 +16,7 @@ import { of } from "rxjs";
 import { rxResource } from "@angular/core/rxjs-interop";
 import { PreparationIngredient } from "../models/preparation-ingredient";
 import { PreparationsDefineQuantityComponent } from "../define-quantity/preparations-define-quantity.component";
+import { ConfirmActionService } from "../../../core/services/confirm-action.service";
 
 @Component({
     selector: 'app-preparations-ingredients',
@@ -30,6 +31,7 @@ export class ProductsIngredientsComponent {
 	service = inject(PreparationsIngredientsService);
 	preparationsService = inject(PreparationsService);
 	dialog = inject(DialogService);
+	confirm = inject(ConfirmActionService);
 	preparation = input<Preparation>();
 	requestUpdate = output();
 
@@ -56,7 +58,7 @@ export class ProductsIngredientsComponent {
 		{
 			position: "name",
 			label: "Nome",
-			value: element.rawMaterial.name
+			value: element.name
 		},
 		{
 			position: "cost",
@@ -92,11 +94,12 @@ export class ProductsIngredientsComponent {
 		},
 		{
 			type: "flat",
-			label: "Adicionar insumo",
+			label: "Adicionar ingrediente",
 			click: () => {
 				this.dialog.open({
 					component: PreparationsIngredientsCreatorComponent,
 					data: {
+						title: "Adicionar ingrediente",
 						formSubmit: (value) => {
 							this.service.create(value).subscribe(() => {
 								this.resource.reload();
@@ -119,16 +122,26 @@ export class ProductsIngredientsComponent {
 			icon: "delete",
 			iconColor: "red",
 			tooltip: "Remover",
-			click: () => this.service.delete(element.id).subscribe(() => {
-				this.resource.reload();
-				this.requestUpdate.emit();
+			click: () => this.confirm.confirm({
+				title: "Excluir ingrediente",
+				description: "Você tem certeza de que deseja excluir este ingrediente?",
+				actions: {
+					primary: {
+						click: () => {
+							this.service.delete(element.id).subscribe(() => {
+								this.resource.reload();
+								this.requestUpdate.emit();
+							})
+						}
+					}
+				}
 			})
 		},
 	];
 
-	private calculateQuantity(preparationIngredient: PreparationIngredient) {
-		const {quantity, rawMaterial} = preparationIngredient;
+	private calculateQuantity(ingredient: PreparationIngredient) {
+		const {quantity, measurementUnit} = ingredient;
 
-		return `${quantity} ${rawMaterial.measurementUnit.name}`;
+		return `${quantity} ${measurementUnit.name}`;
 	}
 }

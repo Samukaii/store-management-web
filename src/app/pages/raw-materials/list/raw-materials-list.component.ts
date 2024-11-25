@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import {
 	LocalActionsUpdaterComponent
 } from "../../../shared/components/local-actions/updater/local-actions-updater.component";
@@ -11,21 +11,58 @@ import { TableActionsFn } from "../../../shared/components/table/table-actions-f
 import { RawMaterialsService } from "../raw-materials.service";
 import { NoResults } from "../../../shared/components/no-results/models/no-results";
 import { rxResource } from "@angular/core/rxjs-interop";
+import { ChipsSelectorComponent } from "../../../shared/components/chips-selector/chips-selector.component";
+import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
+import { formValue } from "../../products/products/list/products-list.component";
+import { RawMaterialsCategoriesService } from "../categories/raw-materials-categories.service";
+import { ConfirmActionService } from "../../../core/services/confirm-action.service";
 
 @Component({
 	selector: 'app-raw-materials-list',
 	imports: [
 		TableComponent,
-		LocalActionsUpdaterComponent
+		LocalActionsUpdaterComponent,
+		ChipsSelectorComponent,
+		ReactiveFormsModule
 	],
 	templateUrl: './raw-materials-list.component.html',
 	styleUrl: './raw-materials-list.component.scss'
 })
 export class RawMaterialsListComponent {
 	service = inject(RawMaterialsService);
+	categoriesService = inject(RawMaterialsCategoriesService);
+	confirm = inject(ConfirmActionService);
+
+	filterForm = inject(FormBuilder).group({
+		categoryId: [-2 as null | number]
+	});
+
+	filters = formValue(this.filterForm);
+
+	categories = rxResource({
+		loader: () => this.categoriesService.getAll()
+	});
+
+	categoriesOptions = computed(() => {
+		return [
+			{
+				id: -1,
+				name: "Todos os insumos"
+			},
+			{
+				id: -2,
+				name: "Sem categoria"
+			},
+			...this.categories.value() ?? [],
+		]
+	});
 
 	resource = rxResource({
-		loader: () => this.service.getAll()
+		request: this.filters,
+		loader: ({request: params}) => {
+			console.log(params);
+			return this.service.getAll(params)
+		}
 	});
 
 	noResults: NoResults = {
@@ -75,8 +112,18 @@ export class RawMaterialsListComponent {
 			icon: "delete",
 			iconColor: "red",
 			tooltip: "Remover",
-			click: () => this.service.delete(element.id).subscribe(() => {
-				this.resource.reload();
+			click: () => this.confirm.confirm({
+				title: "Excluir insumo",
+				description: "Você tem certeza de que deseja excluir este insumo?",
+				actions: {
+					primary: {
+						click: () => {
+							this.service.delete(element.id).subscribe(() => {
+								this.resource.reload();
+							})
+						}
+					}
+				}
 			})
 		},
 	];

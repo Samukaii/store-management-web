@@ -26,4 +26,8 @@ export class OrdersService {
 
 		return this.http.post(this.baseUrl, asFormData);
 	}
+
+	delete(id: number) {
+		return this.http.delete<void>(`${this.baseUrl}/${id}`);
+	}
 }

@@ -1,12 +1,17 @@
-<mat-form-field [formGroup]="form()">
+<mat-form-field>
 	<mat-label>{{ label() }}</mat-label>
 
 	@let options = currencyOptions();
 
 	@if (options) {
-		<input [currencyMask]="options" matInput [formControlName]="name()" [placeholder]="placeholder()">
+		<input [currencyMask]="options" matInput [formControl]="control()" [placeholder]="placeholder()">
 	} @else {
-		<input [type]="type()" matInput [formControlName]="name()" [placeholder]="placeholder()">
+		<input [type]="type()" matInput [formControl]="control()" [placeholder]="placeholder()">
 	}
-
+	@if (error.hasError()) {
+		<mat-error>
+			{{ error.message() }}
+		</mat-error>
+	}
 </mat-form-field>
+

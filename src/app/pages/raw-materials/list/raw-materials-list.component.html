@@ -3,6 +3,13 @@
 	[actions]="actions"
 >
 </app-local-actions-updater>
+
+<app-chips-selector
+	class="d-block mb-1"
+	[formControl]="filterForm.controls.categoryId"
+	[options]="categoriesOptions()"
+/>
+
 <app-table
 	[columnsFn]="getColumns"
 	[loading]="resource.isLoading()"

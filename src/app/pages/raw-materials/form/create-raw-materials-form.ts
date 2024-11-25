@@ -8,6 +8,7 @@ export const createRawMaterialsForm = () => {
 	return fb.group({
 		name: ["", Validators.required],
 		cost: [null as number | null, Validators.required],
+		categoryId: [null as number | null, Validators.required],
 		measurementUnit: [RawMaterialsMeasurementUnit.GRAMS, Validators.required],
 		quantity: [1000, Validators.required],
 	});

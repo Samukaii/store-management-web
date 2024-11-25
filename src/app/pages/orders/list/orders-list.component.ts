@@ -13,6 +13,7 @@ import { DialogService } from "../../../shared/services/dialog.service";
 import { OrdersImportComponent } from "../import/orders-import.component";
 import { formatDate } from "@angular/common";
 import { rxResource } from "@angular/core/rxjs-interop";
+import { ConfirmActionService } from "../../../core/services/confirm-action.service";
 
 @Component({
     selector: 'app-orders-list',
@@ -25,6 +26,7 @@ import { rxResource } from "@angular/core/rxjs-interop";
 })
 export class OrdersListComponent {
 	service = inject(OrdersService);
+	confirm = inject(ConfirmActionService);
 	dialog = inject(DialogService);
 
 	resource = rxResource({
@@ -92,6 +94,25 @@ export class OrdersListComponent {
 			iconColor: 'blue',
 			tooltip: "Editar",
 			relativeRoute: `${element.id}`
+		},
+		{
+			type: "icon",
+			icon: "delete",
+			iconColor: "red",
+			tooltip: "Remover",
+			click: () => this.confirm.confirm({
+				title: "Excluir pedido",
+				description: "Você tem certeza de que deseja excluir este pedido?",
+				actions: {
+					primary: {
+						click: () => {
+							this.service.delete(element.id).subscribe(() => {
+								this.resource.reload();
+							})
+						}
+					}
+				}
+			})
 		},
 	]
 }

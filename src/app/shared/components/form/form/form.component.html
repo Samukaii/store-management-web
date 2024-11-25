@@ -1,3 +1,11 @@
 <form [formGroup]="form()">
-<ng-content/>
+	<ng-content/>
+	<app-flex-row verticalAlignment="flex-end">
+		<app-button
+			[type]="primaryAction().type ?? 'flat'"
+			[label]="primaryAction().label"
+			[disabled]="primaryAction().disabled"
+			(click)="onPrimaryClick()"
+		/>
+	</app-flex-row>
 </form>

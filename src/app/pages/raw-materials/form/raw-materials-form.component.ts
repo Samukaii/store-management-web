@@ -1,10 +1,9 @@
-import { Component, computed, input, output } from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
 import { FormComponent } from "../../../shared/components/form/form/form.component";
 import { RawMaterial } from "../models/raw-material";
 import { FormInputComponent } from "../../../shared/components/form/input/form-input.component";
 import { FormRadioComponent } from "../../../shared/components/form/radio/form-radio.component";
 import { BasicOption } from "../../../shared/models/basic-option";
-import { ButtonComponent } from "../../../shared/components/button/button.component";
 import { FlexRowComponent } from "../../../shared/components/flex-row/flex-row.component";
 import { RawMaterialsFormValue } from "../models/raw-materials-form-value";
 import { toSignal } from "@angular/core/rxjs-interop";
@@ -12,6 +11,9 @@ import { RawMaterialsMeasurementUnit } from "../enums/raw-materials-measurement-
 import { FormModifier } from "../../../shared/models/form-modifier";
 import { RawMaterialsForm } from "../models/raw-materials-form";
 import { createRawMaterialsForm } from "./create-raw-materials-form";
+import { AutocompleteComponent } from "../../../shared/components/autocomplete/autocomplete.component";
+import { RawMaterialsCategoriesService } from "../categories/raw-materials-categories.service";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @Component({
     selector: 'app-raw-materials-form',
@@ -19,16 +21,19 @@ import { createRawMaterialsForm } from "./create-raw-materials-form";
 		FormComponent,
 		FormInputComponent,
 		FormRadioComponent,
-		ButtonComponent,
-		FlexRowComponent
+		FlexRowComponent,
+		AutocompleteComponent,
+		ReactiveFormsModule
 	],
     templateUrl: './raw-materials-form.component.html',
     styleUrl: './raw-materials-form.component.scss'
 })
 export class RawMaterialsFormComponent {
-	data = input<RawMaterial>()
+	data = input<RawMaterial>();
 	formSubmit = output<RawMaterialsFormValue>()
 	form = createRawMaterialsForm();
+
+	categoriesService = inject(RawMaterialsCategoriesService);
 
 	formValue = toSignal(this.form.valueChanges, {
 		initialValue: this.form.value,

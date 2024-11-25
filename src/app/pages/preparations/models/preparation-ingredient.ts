@@ -1,8 +1,11 @@
 import { Identifiable } from "../../../shared/models/identifiable";
-import { RawMaterial } from "../../raw-materials/models/raw-material";
 
 export interface PreparationIngredient extends Identifiable {
+	name: string;
 	totalCost: number;
 	quantity: number;
-	rawMaterial: RawMaterial;
+	measurementUnit: {
+		id: number;
+		name: string;
+	};
 }

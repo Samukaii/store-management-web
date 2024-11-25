@@ -1,4 +1,4 @@
-<app-flex-row [verticalAlignment]="alignment()">
+<app-flex-row [gap]="gap()" [verticalAlignment]="alignment()">
 	@for(action of actions(); track action) {
 		<app-button
 			(click)="onClick(action)"

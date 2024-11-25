@@ -35,23 +35,18 @@
 	</div>
 </div>
 
-<app-form [data]="product()" [form]="form">
+<app-form
+	[data]="product()"
+	[form]="form"
+	(formSubmit)="onSubmit()"
+>
 	<app-form-input
-		[form]="form"
+		[control]="form.controls.price"
 		inputType="currency"
 		type="number"
-		name="price"
 		label="Preço"
 		placeholder="Informe aqui a quantidade"
 	>
 
 	</app-form-input>
-
-	<app-flex-row verticalAlignment="flex-end">
-		<app-button
-			type="flat"
-			label="Salvar"
-			(click)="onSubmit()"
-		/>
-	</app-flex-row>
 </app-form>

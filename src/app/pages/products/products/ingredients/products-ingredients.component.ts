@@ -17,19 +17,21 @@ import { of } from "rxjs";
 import { ProductsDefinePriceComponent } from "../define-price/products-define-price.component";
 import { rxResource } from "@angular/core/rxjs-interop";
 import { RawMaterialsMeasurementUnit } from "../../../raw-materials/enums/raw-materials-measurement-unit";
+import { ConfirmActionService } from "../../../../core/services/confirm-action.service";
 
 @Component({
-    selector: 'app-products-ingredients',
-    imports: [
-        LocalActionsUpdaterComponent,
-        TableComponent
-    ],
-    templateUrl: './products-ingredients.component.html',
-    styleUrl: './products-ingredients.component.scss'
+	selector: 'app-products-ingredients',
+	imports: [
+		LocalActionsUpdaterComponent,
+		TableComponent
+	],
+	templateUrl: './products-ingredients.component.html',
+	styleUrl: './products-ingredients.component.scss'
 })
 export class ProductsIngredientsComponent {
 	service = inject(ProductsIngredientsService);
 	productsService = inject(ProductsService);
+	confirm = inject(ConfirmActionService);
 	dialog = inject(DialogService);
 	product = input<Product>();
 	requestUpdate = output();
@@ -37,7 +39,7 @@ export class ProductsIngredientsComponent {
 	resource = rxResource({
 		request: () => ({productId: this.product()?.id}),
 		loader: ({request: {productId}}) => {
-			if(!productId) return of<ProductFoodInput[]>([]);
+			if (!productId) return of<ProductFoodInput[]>([]);
 			return this.service.getAll()
 		}
 	});
@@ -57,7 +59,7 @@ export class ProductsIngredientsComponent {
 		{
 			position: "name",
 			label: "Nome",
-			value: element.rawMaterial?.name ?? element.preparation?.name ?? ""
+			value: element.name
 		},
 		{
 			position: "cost",
@@ -67,7 +69,7 @@ export class ProductsIngredientsComponent {
 		{
 			position: "quantity",
 			label: "Quantidade",
-			value: this.getQuantity(element)
+			value: `${element.quantity} ${element.measurementUnit.name}`
 		},
 	]
 
@@ -93,7 +95,7 @@ export class ProductsIngredientsComponent {
 		},
 		{
 			type: "flat",
-			label: "Adicionar insumo",
+			label: "Adicionar ingrediente",
 			click: () => {
 				this.dialog.open({
 					component: ProductsIngredientsCreatorComponent,
@@ -120,9 +122,19 @@ export class ProductsIngredientsComponent {
 			icon: "delete",
 			iconColor: "red",
 			tooltip: "Remover",
-			click: () => this.service.delete(element.id).subscribe(() => {
-				this.resource.reload();
-				this.requestUpdate.emit();
+			click: () => this.confirm.confirm({
+				title: "Excluir ingrediente",
+				description: "Você tem certeza de que deseja excluir este ingrediente?",
+				actions: {
+					primary: {
+						click: () => {
+							this.service.delete(element.id).subscribe(() => {
+								this.resource.reload();
+								this.requestUpdate.emit();
+							})
+						}
+					}
+				}
 			})
 		},
 	];

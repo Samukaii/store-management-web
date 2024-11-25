@@ -1,4 +1,4 @@
-<div class="container" [style.flex-direction]="flexDirection()" [formGroup]="form()">
+<div class="container" [class.vertical]="direction() == 'vertical'" [formGroup]="form()">
 	<label>{{ label() }}</label>
 
 	<mat-radio-group [formControlName]="name()">

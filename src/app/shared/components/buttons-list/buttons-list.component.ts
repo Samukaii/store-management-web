@@ -16,6 +16,7 @@ import { RouterLink } from "@angular/router";
     styleUrl: './buttons-list.component.scss'
 })
 export class ButtonsListComponent {
+	gap = input<string>("1rem");
 	alignment = input<FlexAlignment>("flex-start");
 	actions = input.required<Button[]>();
 

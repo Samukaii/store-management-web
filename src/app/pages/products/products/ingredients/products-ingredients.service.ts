@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { injectParametrizedUrl } from "../../../../shared/di/inject-parametrized-url";
 import { HttpClient } from "@angular/common/http";
-import { ProductsIngredientsFormValue } from "../models/products-ingredients-form-value";
+import { ProductsAddIngredientFormValue } from "../models/products-add-ingredient-form-value";
 import { injectParams } from "../../../../shared/di/inject-params";
 import { ProductFoodInput } from "../models/product-food-input";
 import { environment } from "../../../../environments/environment";
@@ -26,11 +26,11 @@ export class ProductsIngredientsService {
 		return this.http.delete(`${this.baseUrl()}/${id}`);
 	}
 
-	create(value: ProductsIngredientsFormValue) {
+	create(value: ProductsAddIngredientFormValue) {
 		return this.http.post<ProductFoodInput>(this.baseUrl(), value);
 	}
 
-	update(id: number, value: ProductsIngredientsFormValue) {
+	update(id: number, value: ProductsAddIngredientFormValue) {
 		return this.http.put<ProductFoodInput>(`${this.baseUrl()}/${id}`, value);
 	}
 }

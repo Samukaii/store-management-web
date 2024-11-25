@@ -1,11 +1,10 @@
-import { Component, computed, inject, input, output, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
 import { createProductsIngredientsForm } from "../create-products-ingredients-form";
-import { ProductsIngredientsFormValue } from "../../models/products-ingredients-form-value";
+import { ProductsAddIngredientFormValue } from "../../models/products-add-ingredient-form-value";
 import { FormInputComponent } from "../../../../../shared/components/form/input/form-input.component";
 import { FormComponent } from "../../../../../shared/components/form/form/form.component";
 import { AutocompleteComponent } from "../../../../../shared/components/autocomplete/autocomplete.component";
 import { FlexRowComponent } from "../../../../../shared/components/flex-row/flex-row.component";
-import { ButtonComponent } from "../../../../../shared/components/button/button.component";
 import { FormRadioComponent } from "../../../../../shared/components/form/radio/form-radio.component";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { AutocompleteOption } from "../../../../../shared/components/autocomplete/models/autocomplete-option";
@@ -14,6 +13,10 @@ import { RawMaterialsService } from "../../../../raw-materials/raw-materials.ser
 import { PreparationsService } from "../../../../preparations/preparations.service";
 import { RawMaterial } from "../../../../raw-materials/models/raw-material";
 import { RawMaterialsMeasurementUnit } from "../../../../raw-materials/enums/raw-materials-measurement-unit";
+import { FormValidation } from "../../../../../shared/models/form-validation";
+import { ProductsAddIngredientForm } from "../../models/products-add-ingredient-form";
+import { ReactiveFormsModule } from "@angular/forms";
+import { ProductIngredientType } from "../../enums/product-ingredient-type";
 
 @Component({
 	selector: 'app-products-ingredients-creator',
@@ -22,21 +25,71 @@ import { RawMaterialsMeasurementUnit } from "../../../../raw-materials/enums/raw
 		FormComponent,
 		AutocompleteComponent,
 		FlexRowComponent,
-		ButtonComponent,
-		FormRadioComponent
+		FormRadioComponent,
+		ReactiveFormsModule
 	],
 	templateUrl: './products-ingredients-creator.component.html',
 	styleUrl: './products-ingredients-creator.component.scss'
 })
 export class ProductsIngredientsCreatorComponent {
 	data = input<RawMaterial>();
-	formSubmit = output<ProductsIngredientsFormValue>();
+	formSubmit = output<ProductsAddIngredientFormValue>();
 	form = createProductsIngredientsForm();
 
 	rawMaterialsService = inject(RawMaterialsService);
 	preparationsService = inject(PreparationsService);
 
 	selectedOption = signal<AutocompleteOption | null>(null);
+
+	ingredient = toSignal(this.form.controls.ingredientType.valueChanges, {
+		initialValue: this.form.controls.ingredientType.value,
+	});
+
+	resetFieldsOnIngredientChange = effect(() => {
+		this.ingredient();
+
+		this.form.controls.customName.reset();
+		this.form.controls.rawMaterialId.reset();
+		this.form.controls.preparationId.reset();
+		this.form.controls.customCost.reset();
+		this.form.controls.measurementUnit.reset();
+		this.form.controls.quantity.reset();
+
+		this.selectedOption.set(null);
+	});
+
+	validations: FormValidation<ProductsAddIngredientForm>[] = [
+		{
+			key: 'rawMaterialId',
+			validator: 'required',
+			enabled: value => value.ingredientType === ProductIngredientType.RAW_MATERIAL
+		},
+		{
+			key: 'preparationId',
+			validator: 'required',
+			enabled: value => value.ingredientType === ProductIngredientType.PREPARATION
+		},
+		{
+			key: "quantity",
+			validator: "required",
+			enabled: value => value.ingredientType !== ProductIngredientType.CUSTOM
+		},
+		{
+			key: 'measurementUnit',
+			validator: "required",
+			enabled: value => value.ingredientType !== ProductIngredientType.CUSTOM
+		},
+		{
+			key: "customName",
+			validator: 'required',
+			enabled: value => value.ingredientType === ProductIngredientType.CUSTOM
+		},
+		{
+			key: "customCost",
+			validator: 'required',
+			enabled: value => value.ingredientType === ProductIngredientType.CUSTOM
+		},
+	];
 
 	formValue = toSignal(this.form.valueChanges, {
 		initialValue: this.form.value,
@@ -119,17 +172,21 @@ export class ProductsIngredientsCreatorComponent {
 	ingredientTypes: BasicOption[] = [
 		{
 			name: "Insumo",
-			value: 1
+			value: ProductIngredientType.RAW_MATERIAL
 		},
 		{
 			name: "Preparo",
-			value: 2
+			value: ProductIngredientType.PREPARATION
+		},
+		{
+			name: "Personalizado",
+			value: ProductIngredientType.CUSTOM
 		},
 	];
 
 
-	onSubmit() {
-		const value = this.form.getRawValue();
+	onSubmit($event: ProductsAddIngredientFormValue) {
+		const value = $event;
 
 		if (value.measurementUnit === RawMaterialsMeasurementUnit.GRAMS) {
 			value.measurementUnit = RawMaterialsMeasurementUnit.KILOGRAMS;
@@ -142,4 +199,6 @@ export class ProductsIngredientsCreatorComponent {
 
 		this.formSubmit.emit(value);
 	}
+
+	protected readonly ProductIngredientType = ProductIngredientType;
 }

@@ -1,0 +1,8 @@
+<app-window-loading [loading]="resource.isLoading()">
+	<app-raw-materials-categories-form
+		[data]="resource.value() ?? undefined"
+		(formSubmit)="update($event)"
+	>
+
+	</app-raw-materials-categories-form>
+</app-window-loading>

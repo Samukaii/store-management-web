@@ -13,6 +13,7 @@ import { NoResults } from "../../../shared/components/no-results/models/no-resul
 import { DialogService } from "../../../shared/services/dialog.service";
 import { rxResource } from "@angular/core/rxjs-interop";
 import { RawMaterialsMeasurementUnit } from "../../raw-materials/enums/raw-materials-measurement-unit";
+import { ConfirmActionService } from "../../../core/services/confirm-action.service";
 
 @Component({
 	selector: 'app-preparations-list',
@@ -26,6 +27,7 @@ import { RawMaterialsMeasurementUnit } from "../../raw-materials/enums/raw-mater
 export class PreparationsListComponent {
 	service = inject(PreparationsService);
 	dialog = inject(DialogService);
+	confirm = inject(ConfirmActionService);
 
 	resource = rxResource({
 		loader: () => this.service.getAll()
@@ -81,8 +83,18 @@ export class PreparationsListComponent {
 			icon: "delete",
 			iconColor: "red",
 			tooltip: "Remover",
-			click: () => this.service.delete(element.id).subscribe(() => {
-				this.resource.reload();
+			click: () => this.confirm.confirm({
+				title: "Excluir preparo",
+				description: "Você tem certeza de que deseja excluir este preparo?",
+				actions: {
+					primary: {
+						click: () => {
+							this.service.delete(element.id).subscribe(() => {
+								this.resource.reload();
+							})
+						}
+					}
+				}
 			})
 		},
 	];

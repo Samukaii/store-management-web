@@ -2,18 +2,16 @@ import { Component, input, output } from '@angular/core';
 import { FormComponent } from "../../../shared/components/form/form/form.component";
 import { Preparation } from "../models/preparation";
 import { FormInputComponent } from "../../../shared/components/form/input/form-input.component";
-import { ButtonComponent } from "../../../shared/components/button/button.component";
-import { FlexRowComponent } from "../../../shared/components/flex-row/flex-row.component";
 import { PreparationsFormValue } from "../models/preparations-form-value";
 import { createPreparationsForm } from "./create-preparations-form";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @Component({
     selector: 'app-preparations-form',
 	imports: [
 		FormComponent,
 		FormInputComponent,
-		ButtonComponent,
-		FlexRowComponent
+		ReactiveFormsModule
 	],
     templateUrl: './preparations-form.component.html',
     styleUrl: './preparations-form.component.scss'

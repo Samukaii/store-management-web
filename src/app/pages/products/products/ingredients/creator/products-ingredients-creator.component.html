@@ -1,8 +1,14 @@
-<h2 class="dialog-title">Adicionar insumo</h2>
+<h2 class="dialog-title">Adicionar ingrediente</h2>
 
-<app-form [data]="data()" [form]="form">
+<app-form
+	[data]="data()"
+	[form]="form"
+	[validations]="validations"
+	(formSubmit)="onSubmit($event)"
+>
 	<app-form-radio
-		label="Tipo de ingrediente"
+		direction="horizontal"
+		label="Tipo"
 		[form]="form"
 		name="ingredientType"
 		[options]="ingredientTypes"
@@ -10,7 +16,7 @@
 
 	</app-form-radio>
 
-	@if (form.controls.ingredientType.value === 1) {
+	@if (form.controls.ingredientType.value === ProductIngredientType.RAW_MATERIAL) {
 		<app-autocomplete
 			[form]="form"
 			name="rawMaterialId"
@@ -21,7 +27,7 @@
 		/>
 
 	}
-	@if(form.controls.ingredientType.value === 2) {
+	@if(form.controls.ingredientType.value === ProductIngredientType.PREPARATION) {
 		<app-autocomplete
 			[form]="form"
 			name="preparationId"
@@ -32,7 +38,24 @@
 		/>
 	}
 
-	@if (selectedOption()) {
+	@if (form.controls.ingredientType.value === ProductIngredientType.CUSTOM) {
+		<app-form-input
+			[control]="form.controls.customName"
+			label="Nome"
+			placeholder="Informe aqui um nome para este custo"
+		/>
+
+		<app-form-input
+			[control]="form.controls.customCost"
+			inputType="currency"
+			type="number"
+			label="Custo"
+			placeholder="Informe aqui o custo"
+		>
+		</app-form-input>
+	}
+
+	@if (selectedOption() && form.controls.ingredientType.value !== ProductIngredientType.CUSTOM) {
 		<app-form-radio
 			label="Unidade de medida"
 			[form]="form"
@@ -44,41 +67,25 @@
 		@if (inputType() === 'integer') {
 			<app-flex-row [fill]="true">
 				<app-form-input
-					[form]="form"
+					[control]="form.controls.quantity"
 					inputType="integer"
 					[suffix]="quantitySuffix()"
 					type="number"
-					name="quantity"
 					label="Quantidade"
 					placeholder="Informe aqui a quantidade"
-				>
-
-				</app-form-input>
+				/>
 			</app-flex-row>
 		} @else {
 			<app-flex-row [fill]="true">
 				<app-form-input
-					[form]="form"
+					[control]="form.controls.quantity"
 					inputType="decimal"
 					[suffix]="quantitySuffix()"
 					type="number"
-					name="quantity"
 					label="Quantidade"
 					placeholder="Informe aqui a quantidade"
-				>
-
-				</app-form-input>
+				/>
 			</app-flex-row>
 		}
 	}
-
-	<app-flex-row verticalAlignment="flex-end">
-		<app-button
-			type="flat"
-			label="Adicionar"
-			(click)="onSubmit()"
-		/>
-	</app-flex-row>
-
-
 </app-form>
