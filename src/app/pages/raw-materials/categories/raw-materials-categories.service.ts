@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { RawMaterialCategory } from "./models/raw-material-category";
 import { RawMaterialsCategoriesFormValue } from "./models/raw-materials-categories-form-value";
+import { Generic } from "../../../shared/models/generic";
 
 @Injectable({
 	providedIn: 'root'
@@ -11,8 +12,8 @@ export class RawMaterialsCategoriesService {
 	http = inject(HttpClient);
 	baseUrl = `${environment.api}/raw_materials/categories`;
 
-	getAll() {
-		return this.http.get<RawMaterialCategory[]>(this.baseUrl);
+	getAll(params: Generic = {}) {
+		return this.http.get<RawMaterialCategory[]>(this.baseUrl, {params});
 	}
 
 	single(id: number) {
@@ -31,7 +32,7 @@ export class RawMaterialsCategoriesService {
 		return this.http.put(`${this.baseUrl}/${id}`, value);
 	}
 
-	autocomplete = (params: {search: string}) => {
+	autocomplete = (params: Generic) => {
 		return this.http.get<RawMaterialCategory[]>(`${this.baseUrl}/autocomplete`, {
 			params
 		});
