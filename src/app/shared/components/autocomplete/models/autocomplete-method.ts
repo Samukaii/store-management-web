@@ -1,4 +1,5 @@
 import { Observable } from "rxjs";
 import { AutocompleteOption } from "./autocomplete-option";
+import { Generic } from "../../../models/generic";
 
-export type AutocompleteMethod = <Params extends { search: string }>(params: Params) => Observable<AutocompleteOption[]>;
+export type AutocompleteMethod = (params: Generic) => Observable<AutocompleteOption[]>;

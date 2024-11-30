@@ -10,6 +10,8 @@ import { MatFormField, MatInput, MatLabel } from "@angular/material/input";
 import { rxResource, takeUntilDestroyed, toSignal } from "@angular/core/rxjs-interop";
 import { AutocompleteMethod } from "./models/autocomplete-method";
 import { AutocompleteOption } from "./models/autocomplete-option";
+import { map } from "rxjs";
+import { toNumberOrNull } from "../../helpers/to-number-or-null";
 
 @Component({
     selector: 'app-autocomplete',
@@ -49,7 +51,7 @@ export class AutocompleteComponent implements OnInit {
 
 	filteredData = rxResource({
 		request: this.search,
-		loader: ({request: search}) => this.method()({search})
+		loader: ({request: nameSearch}) => this.method()({'name:search': nameSearch})
 	});
 
 	onSelect($event: MatAutocompleteSelectedEvent) {
@@ -61,7 +63,21 @@ export class AutocompleteComponent implements OnInit {
 
 	ngOnInit() {
 		this.control().valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(value => {
-			this.internalForm.controls.search.setValue(value, {emitEvent: false})
+			const id = toNumberOrNull(value);
+
+			if(id !== null) {
+				this.getValue(id).subscribe(result => {
+					this.internalForm.controls.search.setValue(result?.name ?? "", {emitEvent: false});
+				});
+
+				return;
+			}
+
+			this.internalForm.controls.search.setValue(value, {emitEvent: false});
 		})
+	}
+
+	getValue(id: number) {
+		return this.method()({'id:equal': id}).pipe(map(items => items.at(0)))
 	}
 }
