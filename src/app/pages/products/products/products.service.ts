@@ -17,22 +17,8 @@ export class ProductsService {
 	baseUrl = `${environment.api}/products`;
 
 	getAll(params: Generic = {}) {
-		const paramsToSend: Generic = {
-			'category.id': params['categoryId']
-		};
-
-		if(paramsToSend['category.id'] === -1) {
-			delete paramsToSend['category.id'];
-		}
-
-		if(paramsToSend['category.id'] === -2) {
-			delete paramsToSend['category.id'];
-			paramsToSend['category'] = null;
-		}
-
-
 		return this.http.get<Product[]>(this.baseUrl, {
-			params: paramsToSend
+			params
 		});
 	}
 

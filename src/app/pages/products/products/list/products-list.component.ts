@@ -18,6 +18,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { ProductsCategoriesService } from "../../categories/products-categories.service";
 import { FormValue } from "../../../../shared/models/form-value";
 import { ConfirmActionService } from "../../../../core/services/confirm-action.service";
+import { Generic } from "../../../../shared/models/generic";
 
 export const formValue = <Form extends FormGroup>(form: Form) => {
 	return toSignal(form.valueChanges, {
@@ -43,23 +44,43 @@ export class ProductsListComponent {
 	confirm = inject(ConfirmActionService);
 
 	filterForm = inject(FormBuilder).group({
-		categoryId: [-2 as null | number]
+		categoryId: ['all' as string | number]
 	});
 
-	filters = formValue(this.filterForm);
+	filtersFormValue = formValue(this.filterForm);
 
 	categories = rxResource({
-		loader: () => this.categoriesService.getAll()
+		loader: () => this.categoriesService.autocomplete({
+			sortProperty: "name",
+			sortDirection: "asc",
+			'products:hasAssociation': true
+		})
+	});
+
+	filter = computed(() => {
+		const value = this.filtersFormValue();
+
+		const filter: Generic = {};
+
+		if(typeof value.categoryId === "number") {
+			filter['category.id:equal'] = value.categoryId;
+		}
+
+		if(value.categoryId === "no-category") {
+			filter['category:hasAssociation'] = false;
+		}
+
+		return filter;
 	});
 
 	categoriesOptions = computed(() => {
 		return [
 			{
-				id: -1,
+				id: 'all',
 				name: "Todos os produtos"
 			},
 			{
-				id: -2,
+				id: 'no-category',
 				name: "Sem categoria"
 			},
 			...this.categories.value() ?? [],
@@ -67,7 +88,7 @@ export class ProductsListComponent {
 	});
 
 	resource = rxResource({
-		request: this.filters,
+		request: this.filter,
 		loader: ({request: params}) => this.service.getAll(params)
 	});
 
