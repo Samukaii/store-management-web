@@ -44,6 +44,10 @@ export class RawMaterialsFormComponent {
 			key: "measurementUnit",
 			modifier: source => source.measurementUnit.id
 		},
+		{
+			key: "categoryId",
+			modifier: source => source.category.id
+		},
 	];
 
 	value = computed(() => {
@@ -90,7 +94,18 @@ export class RawMaterialsFormComponent {
 	];
 
 	onSubmit() {
-		this.formSubmit.emit(this.form.getRawValue());
+		const value = this.form.getRawValue();
+
+		if(value.measurementUnit === RawMaterialsMeasurementUnit.GRAMS) {
+			value.measurementUnit = RawMaterialsMeasurementUnit.KILOGRAMS;
+			value.quantity = (value.quantity ?? 0) / 1000;
+		}
+		if(value.measurementUnit === RawMaterialsMeasurementUnit.MILLILITER) {
+			value.measurementUnit = RawMaterialsMeasurementUnit.LITER;
+			value.quantity = (value.quantity ?? 0) / 1000;
+		}
+
+		this.formSubmit.emit(value);
 	}
 
 	inputType = computed(() => {
