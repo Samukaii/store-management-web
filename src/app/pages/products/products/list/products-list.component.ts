@@ -67,7 +67,7 @@ export class ProductsListComponent {
 		}
 
 		if(value.categoryId === "no-category") {
-			filter['category:hasAssociation'] = false;
+			filter['category:isNull'] = null;
 		}
 
 		return filter;
