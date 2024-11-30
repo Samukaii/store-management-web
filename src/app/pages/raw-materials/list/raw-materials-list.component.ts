@@ -40,7 +40,11 @@ export class RawMaterialsListComponent {
 	filters = formValue(this.filterForm);
 
 	categories = rxResource({
-		loader: () => this.categoriesService.getAll()
+		loader: () => this.categoriesService.autocomplete({
+			sortProperty: "name",
+			sortDirection: "asc",
+			'products:hasAssociation': true
+		})
 	});
 
 	categoriesOptions = computed(() => {
@@ -59,10 +63,7 @@ export class RawMaterialsListComponent {
 
 	resource = rxResource({
 		request: this.filters,
-		loader: ({request: params}) => {
-			console.log(params);
-			return this.service.getAll(params)
-		}
+		loader: ({request: params}) => this.service.getAll(params)
 	});
 
 	noResults: NoResults = {

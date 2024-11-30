@@ -14,16 +14,16 @@ export class RawMaterialsService {
 
 	getAll(params: Generic = {}) {
 		const paramsToSend: Generic = {
-			'category.id': params['categoryId']
+			'category.id:equal': params['categoryId']
 		};
 
-		if(paramsToSend['category.id'] === -1) {
-			delete paramsToSend['category.id'];
+		if(paramsToSend['category.id:equal'] === -1) {
+			delete paramsToSend['category.id:equal'];
 		}
 
-		if(paramsToSend['category.id'] === -2) {
-			delete paramsToSend['category.id'];
-			paramsToSend['category'] = null;
+		if(paramsToSend['category.id:equal'] === -2) {
+			delete paramsToSend['category.id:equal'];
+			paramsToSend['category:isNull'] = null;
 		}
 
 
