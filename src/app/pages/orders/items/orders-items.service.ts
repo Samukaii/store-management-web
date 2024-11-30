@@ -7,6 +7,7 @@ import { injectParams } from "../../../shared/di/inject-params";
 import { OrderItem } from "../models/order-item";
 import { map } from "rxjs";
 import { AutocompleteOption } from "../../../shared/components/autocomplete/models/autocomplete-option";
+import { Generic } from "../../../shared/models/generic";
 
 @Injectable({
 	providedIn: 'root'
@@ -32,7 +33,7 @@ export class OrdersItemsService {
 		return this.http.post<OrderItem>(this.baseUrl(), value);
 	}
 
-	autocomplete = (params: { search: string }) => {
+	autocomplete = (params: Generic) => {
 		return this.http.get<OrderItem[]>(`${environment.api}/order-items/autocomplete`, {
 			params: params
 		}).pipe(

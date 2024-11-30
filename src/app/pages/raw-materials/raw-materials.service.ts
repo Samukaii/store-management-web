@@ -48,7 +48,7 @@ export class RawMaterialsService {
 		return this.http.put(`${this.baseUrl}/${id}`, value);
 	}
 
-	autocomplete = (params: {search: string}) => {
+	autocomplete = (params: Generic) => {
 		return this.http.get<RawMaterial[]>(`${this.baseUrl}/autocomplete`, {
 			params
 		});

@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { Preparation } from "./models/preparation";
 import { PreparationsFormValue } from "./models/preparations-form-value";
+import { Generic } from "../../shared/models/generic";
 
 @Injectable({
 	providedIn: 'root'
@@ -27,7 +28,7 @@ export class PreparationsService {
 		return this.http.post<Preparation>(this.baseUrl, value);
 	}
 
-	autocomplete = (params: {search: string}) => {
+	autocomplete = (params: Generic) => {
 		return this.http.get<Preparation[]>(`${this.baseUrl}/autocomplete`, {
 			params
 		});
