@@ -95,12 +95,56 @@ html {
 		display: flex;
 	}
 
+	.p-1 {
+		padding: 1rem !important;
+	}
+
+	.p-0-5 {
+		padding: .5rem !important;
+	}
+
+	.flex-center {
+		justify-content: center;
+	}
+
+	.pos-top-1 {
+		position: relative;
+		top: 1rem;
+	}
+
+	.pos-top-0-5 {
+		position: relative;
+		top: .5rem;
+	}
+
 	.d-block {
 		display: block;
 	}
 
+	.m-0 {
+		margin: 0 !important;
+	}
+
 	.mb-0-5 {
 		margin-bottom: .5rem;
+	}
+
+	.badge {
+		color: white;
+		padding: 0 .8rem;
+		border-radius: 6px;
+
+		&--success {
+			background-color: #358f59;
+		}
+	}
+
+	.w-100 {
+		width: 100%;
+	}
+
+	.w-fit {
+		width: fit-content !important;
 	}
 
 	.mb-1 {
