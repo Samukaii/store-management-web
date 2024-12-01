@@ -1,4 +1,4 @@
-<app-window-loading [loading]="loading()">
+<app-window-loading noPreservation [loading]="loading()">
 	@if (data().length) {
 		<table mat-table [fixedLayout]="true" [dataSource]="data()">
 			@for (column of header(); track column.position) {

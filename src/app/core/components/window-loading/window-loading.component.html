@@ -1,10 +1,13 @@
-@if (loading()) {
+@if (loadingMode() == 'no-preservation') {
 	<app-progress-spinner mode="indeterminate"
 						  [strokeWidth]="strokeWidth()"
 						  [diameter]="diameter()">
 	</app-progress-spinner>
 } @else {
 	<div class="container">
+		@if (loadingMode() == 'preservation') {
+			<mat-progress-bar class="d-block w-100" mode="indeterminate"/>
+		}
 		<ng-content/>
 	</div>
 }
