@@ -1,15 +1,14 @@
-import { Component, input } from '@angular/core';
+import { booleanAttribute, Component, input } from '@angular/core';
 import { FlexAlignment } from "./models/flex-alignment";
-import { FlexDirection } from "./models/flex-direction";
 
 @Component({
     selector: 'app-flex-row',
     templateUrl: './flex-row.component.html',
     styleUrl: './flex-row.component.scss',
     host: {
-        '[style.justify-content]': 'direction() === "column" ? horizontalAlignment() : verticalAlignment()',
-        '[style.align-items]': 'direction() === "row" ? horizontalAlignment() : verticalAlignment()',
-        '[style.flex-direction]': 'direction()',
+        '[style.justify-content]': 'column() ? horizontalAlignment() : verticalAlignment()',
+        '[style.align-items]': '!column() ? horizontalAlignment() : verticalAlignment()',
+        '[style.flex-direction]': 'column() ? "column" : "row"',
         '[style.gap]': 'gap()',
         '[class.fill]': 'fill()',
     }
@@ -17,7 +16,7 @@ import { FlexDirection } from "./models/flex-direction";
 export class FlexRowComponent {
 	verticalAlignment = input<FlexAlignment>("flex-start");
 	horizontalAlignment = input<FlexAlignment>("flex-start");
-	direction = input<FlexDirection>("row");
 	gap = input("1rem");
-	fill = input(false);
+	fill = input(false, {transform: booleanAttribute});
+	column = input(false, {transform: booleanAttribute});
 }
