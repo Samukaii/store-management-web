@@ -1,6 +1,9 @@
-import { Component, computed, effect, ElementRef, input, viewChild } from '@angular/core';
+import { booleanAttribute, Component, computed, effect, ElementRef, input, viewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { injectIsAtBrowser } from "../../../di/inject-is-at-browser";
+import { WindowLoadingComponent } from "../../../../core/components/window-loading/window-loading.component";
+import { ChartDataset } from "chart.js";
 
 
 interface ChartData {
@@ -50,28 +53,61 @@ const getColor = (index: number): string => {
 }
 
 @Component({
-    selector: 'app-bar-chart',
-    templateUrl: './bar-chart.component.html',
-    styleUrl: './bar-chart.component.scss'
+	selector: 'app-bar-chart',
+	templateUrl: './bar-chart.component.html',
+	imports: [
+		WindowLoadingComponent
+	],
+	styleUrl: './bar-chart.component.scss'
 })
 export class BarChartComponent {
 	direction = input<"horizontal" | "vertical">("horizontal");
 	data = input.required<ChartData[]>();
 	label = input.required<string>();
 	chartElement = viewChild('canvas', {read: ElementRef});
+	minHeight = input(500);
+	height = input<string>();
+	minItemsCount = input(15);
+	heightPerData = input(30);
+	thickness = input<number | 'flex'>('flex');
+	showAverage = input(false, {transform: booleanAttribute});
+
+	isAtBrowser = injectIsAtBrowser();
 
 	element = computed(() =>
 		this.chartElement()?.nativeElement as HTMLCanvasElement | undefined
 	);
+
+	adjustedData = computed(() => {
+		let data = this.data();
+
+		if(data.length < this.minItemsCount()) {
+			data = [
+				...data,
+				...(new Array(this.minItemsCount() - data.length).fill(null).map(() => {
+					return {
+						label: "",
+						value: 0
+					}
+				}))
+			]
+		}
+
+		return data;
+	})
 
 	chart?: Chart;
 
 	updateChart = effect(() => {
 		this.chart?.destroy();
 
-		const data = this.data();
+		const data = this.adjustedData();
 
 		const element = this.element();
+
+		const average = data.reduce((previousValue, currentValue) =>
+			previousValue + currentValue.value, 0
+		) / data.length;
 
 		if (!element) return;
 
@@ -79,17 +115,26 @@ export class BarChartComponent {
 			type: 'bar',
 			plugins: [ChartDataLabels],
 			data: {
-				labels: this.data().map(item => item.label),
+				labels: data.map(item => item.label),
 				datasets: [
+					this.showAverage() ? {
+						label: "Média",
+						type: 'line',
+						data: data.map(() => average),
+						borderWidth: 1,
+						borderColor: '#005f99',
+						pointStyle: false,
+						pointHitRadius: 30,
+						backgroundColor: 'rgba(0,95,153,0.24)',
+					} : [],
 					{
 						label: this.label(),
 						data: data.map(item => item.value),
 						backgroundColor: bluePalette,
-						minBarLength: 20,
-
+						maxBarThickness: this.thickness() === 'flex' ? undefined : +this.thickness(),
 						borderColor: bluePalette
 					},
-				]
+				].flat() as ChartDataset[]
 			},
 			options: {
 				indexAxis: this.direction() === "horizontal" ? "x" : "y",
@@ -99,10 +144,10 @@ export class BarChartComponent {
 					y: {
 						beginAtZero: true,
 						ticks: {
-							callback: function(value) {
+							callback: function (value) {
 								const label = this.getLabelForValue(value as number);
 
-								if(label.length <= 15) return label;
+								if (label.length <= 15) return label;
 
 								return label.substring(0, 15) + '...';
 							},
@@ -126,11 +171,20 @@ export class BarChartComponent {
 						formatter: (value: number) => value
 					},
 				}
-			} ,
+			},
 		});
 	})
 
-	height = computed(() =>
-		this.data().length * 30
-	)
+	calculatedHeight = computed(() => {
+		return this.adjustedData().length * this.heightPerData() + 100;
+	})
+
+	elementHeight = computed(() => {
+		if (this.height()) return this.height()!;
+
+		if (this.direction() === "horizontal")
+			return "auto"
+
+		return this.calculatedHeight() + 'px';
+	})
 }

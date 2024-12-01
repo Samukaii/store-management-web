@@ -1,4 +1,7 @@
-<div [style.height.px]="height()">
-	<canvas #canvas></canvas>
-</div>
-
+@if (isAtBrowser) {
+	<div [style.height]="elementHeight()">
+		<canvas #canvas></canvas>
+	</div>
+} @else {
+	<app-window-loading [style.height]="elementHeight()" [loading]="true"/>
+}
