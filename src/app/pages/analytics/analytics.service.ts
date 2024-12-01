@@ -3,6 +3,8 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { Order } from "../orders/models/order";
 import { BestSellingProduct } from "../products/products/models/best-selling-product";
+import { Generic } from "../../shared/models/generic";
+import { toDateOrNull } from "../../shared/helpers/to-date-or-null";
 
 @Injectable({
 	providedIn: 'root'
@@ -11,21 +13,23 @@ export class AnalyticsService {
 	http = inject(HttpClient);
 	baseUrl = `${environment.api}/analytics`;
 
-	bestSellingProducts(params: {startDate: Date; endDate: Date}) {
+	bestSellingProducts(params: Generic) {
 		let httpParams = new HttpParams();
 
-		if(params.startDate)
-		httpParams = httpParams.append('startDate', params.startDate.toISOString());
+		Object.keys(params).forEach(key => {
+			const value = toDateOrNull(params[key]);
 
-		if(params.endDate)
-		httpParams = httpParams.append('endDate', params.endDate.toISOString());
+			if (!value) return;
+
+			httpParams = httpParams.append(key, value.toISOString());
+		});
 
 		return this.http.get<BestSellingProduct[]>(`${this.baseUrl}/best_selling_products`, {
 			params: httpParams
 		});
 	}
 
-	ordersByPeriod() {
-		return this.http.get<Order[]>(`${this.baseUrl}/orders_by_period`);
+	ordersByPeriod(params: Generic) {
+		return this.http.get<Order[]>(`${this.baseUrl}/orders_by_period`, {params});
 	}
 }
