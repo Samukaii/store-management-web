@@ -26,7 +26,7 @@ produtos, pedidos e estatísticas de vendas em uma loja. Abaixo estão as princi
 - CRUD completo de produtos.
 - Associe insumos e/ou preparos a um produto.
 - O custo total do produto será calculado com base nos custos de insumos e preparos.
-- A partir do custo total, da margem de lucro desejada e das taxas variávelis um preço sugerido será adicionado ao
+- A partir do custo total, da margem de lucro desejada e das taxas variáveis um preço sugerido será adicionado ao
   produto,
   ajudando o gerenciador da loja a tomar a melhor decisão de precificação do seu produto.
 - A margem de lucro será calculada com base no preço escolhido, nos custos e nas taxas variáveis
