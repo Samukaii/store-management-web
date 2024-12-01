@@ -1,0 +1,11 @@
+<mat-form-field [formGroup]="form()">
+	<mat-label>{{ label() }}</mat-label>
+	<input matInput [formControlName]="name()" [matDatepicker]="picker" placeholder="Data">
+	<mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+	<mat-datepicker
+		[startView]="startView()"
+		(monthSelected)="setMonthAndYear($event, picker)"
+		(yearSelected)="setYear($event, picker)"
+		#picker></mat-datepicker>
+</mat-form-field>
+
