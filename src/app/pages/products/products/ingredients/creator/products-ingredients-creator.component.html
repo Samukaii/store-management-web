@@ -65,7 +65,7 @@
 
 		</app-form-radio>
 		@if (inputType() === 'integer') {
-			<app-flex-row [fill]="true">
+			<app-flex-row fill>
 				<app-form-input
 					[control]="form.controls.quantity"
 					inputType="integer"
@@ -76,7 +76,7 @@
 				/>
 			</app-flex-row>
 		} @else {
-			<app-flex-row [fill]="true">
+			<app-flex-row fill>
 				<app-form-input
 					[control]="form.controls.quantity"
 					inputType="decimal"
