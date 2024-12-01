@@ -1,0 +1,67 @@
+<div class="chart mat-elevation-z3">
+	<h2 class="dialog-title w-100">Faturamento</h2>
+
+	<app-flex-row class="card w-100" column verticalAlignment="center" fill>
+		<app-flex-row gap=".5rem" verticalAlignment="space-between" horizontalAlignment="center" fill>
+			<app-form-radio
+				label="Modo de exibição"
+				[form]="form"
+				name="periodType"
+				[options]="options"
+			></app-form-radio>
+			@if (filters().periodType === OrdersDisplayType.DAY) {
+				<app-date-range
+					class="d-flex flex-center"
+					[form]="form"
+					label="Período"
+					startName="startDate"
+					endName="endDate"
+				/>
+			} @else {
+				<app-datepicker
+					appYearFormat
+					class="d-flex flex-center"
+					startView="multi-year"
+					closeOnYearSelect
+					label="Ano"
+					[form]="form"
+					name="startDate"
+				/>
+			}
+			<app-flex-row verticalAlignment="flex-end" column>
+				<app-flex-row class="badge badge--success p-0-5" gap=".5rem" verticalAlignment="center" horizontalAlignment="center">
+					<h2 class="title--medium m-0">Faturamento médio por {{ filters().periodType === OrdersDisplayType.DAY ? "dia" : "mês" }}:</h2>
+					<p class="title--medium">
+						R$ {{ billingAverage().toFixed(2) }}
+					</p>
+				</app-flex-row>
+				<app-flex-row class="badge badge--success p-0-5" gap=".5rem" verticalAlignment="center" horizontalAlignment="center">
+					<h2 class="title--medium m-0">Faturamento total: </h2>
+					<p class="title--medium">
+						R$ {{ totalBilling().toFixed(2) }}
+					</p>
+				</app-flex-row>
+			</app-flex-row>
+		</app-flex-row>
+	</app-flex-row>
+	<app-window-loading [loading]="orders.isLoading()">
+
+		@if (filters().periodType === OrdersDisplayType.DAY) {
+			<app-line-chart
+				showAverage
+				class="d-block"
+				[data]="ordersChartData()"
+				label="Faturamento"
+			/>
+		} @else {
+			<app-bar-chart
+				height="800px"
+				class="d-block"
+				label="Faturamento"
+				showAverage
+				[minItemsCount]="12"
+				[data]="ordersChartData()"
+			/>
+		}
+	</app-window-loading>
+</div>
