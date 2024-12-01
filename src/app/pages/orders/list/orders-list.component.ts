@@ -30,7 +30,10 @@ export class OrdersListComponent {
 	dialog = inject(DialogService);
 
 	resource = rxResource({
-		loader: () => this.service.getAll()
+		loader: () => this.service.getAll({
+			sortProperty: 'date',
+			sortDirection: 'desc'
+		})
 	});
 
 	noResults: NoResults = {
