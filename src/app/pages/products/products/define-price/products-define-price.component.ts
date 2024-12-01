@@ -33,19 +33,49 @@ export class ProductsDefinePriceComponent {
 	price = computed(() => this.formValue().price ?? 0);
 
 	totalCosts = computed(() => this.product()?.totalCost ?? 0);
+	idealProfitMargin = computed(() => 0.33);
 
-	variableTaxes = computed(() => this.price() * 0.26);
+	variableTaxesAnotai = 0.06;
+	variableTaxesIfood = 0.26;
 
-	profit = computed(() => {
-		const costs = this.variableTaxes() + this.totalCosts();
+	variableTaxesAnotaiValue = computed(() => this.price() * 0.06);
+	variableTaxesIfoodValue = computed(() => this.price() * 0.26);
+
+	suggestedPriceIfood = computed(() => {
+		const costs = this.totalCosts();
+
+		return (costs / (1 - this.idealProfitMargin() - this.variableTaxesIfood))
+	});
+
+	suggestedPriceAnotai = computed(() => {
+		const costs = this.totalCosts();
+
+		return (costs / (1 - this.idealProfitMargin() - this.variableTaxesAnotai))
+	});
+
+	profitIfood = computed(() => {
+		const costs = this.variableTaxesIfoodValue() + this.totalCosts();
 
 		return this.price() - costs;
 	});
 
-	profitMargin = computed(() => {
-		if(this.profit() < 0) return 0;
+	profitAnotai = computed(() => {
+		const costs = this.variableTaxesAnotaiValue() + this.totalCosts();
+
+		return this.price() - costs;
+	});
+
+	profitMarginIfood = computed(() => {
+		if(this.profitIfood() < 0) return 0;
 		if(this.price() <= 0) return 0;
 
-		return (this.profit() / this.price()) * 100
+		return (this.profitIfood() / this.price()) * 100
+	});
+
+	profitMarginAnotai = computed(() => {
+		if(this.profitAnotai() < 0) return 0;
+		if(this.price() <= 0) return 0;
+
+		return (this.profitAnotai() / this.price()) * 100
 	});
 }

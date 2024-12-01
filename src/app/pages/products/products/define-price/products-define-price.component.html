@@ -2,7 +2,7 @@
 
 <div class="cost hint-box">
 	<div>
-		<h3>Custo do produto:</h3>
+		<h3>Custo do produto (Ifood):</h3>
 		<p>
 			R$ {{ product()?.totalCost?.toFixed(2) }}
 		</p>
@@ -10,27 +10,62 @@
 	<div>
 		<h3>Taxa do Ifood</h3>
 		<p>
-			R$ {{ variableTaxes().toFixed(2) }}
+			R$ {{ variableTaxesIfoodValue().toFixed(2) }}
 		</p>
 	</div>
 	<div>
 		<h3>Preço sugerido</h3>
 		<p>
-			R$ {{ product()?.suggestedPrice?.toFixed(2) }}
+			R$ {{ suggestedPriceIfood().toFixed(2)}}
 		</p>
 	</div>
 
 	<div>
 		<h3>Lucro total</h3>
 		<p>
-			R$ {{ profit().toFixed(2) }}
+			R$ {{ profitIfood().toFixed(2) }}
 		</p>
 	</div>
 
 	<div>
 		<h3>Margem de lucro</h3>
 		<p>
-			{{ profitMargin().toFixed(0) }}%
+			{{ profitMarginIfood().toFixed(0) }}%
+		</p>
+	</div>
+</div>
+
+<div class="cost hint-box">
+	<div>
+		<h3>Custo do produto (Anotaí):</h3>
+		<p>
+			R$ {{ product()?.totalCost?.toFixed(2) }}
+		</p>
+	</div>
+	<div>
+		<h3>Taxa do Anotaí</h3>
+		<p>
+			R$ {{ variableTaxesAnotaiValue().toFixed(2) }}
+		</p>
+	</div>
+	<div>
+		<h3>Preço sugerido</h3>
+		<p>
+			R$ {{ suggestedPriceAnotai().toFixed(2)}}
+		</p>
+	</div>
+
+	<div>
+		<h3>Lucro total</h3>
+		<p>
+			R$ {{ profitAnotai().toFixed(2) }}
+		</p>
+	</div>
+
+	<div>
+		<h3>Margem de lucro</h3>
+		<p>
+			{{ profitMarginAnotai().toFixed(0) }}%
 		</p>
 	</div>
 </div>
