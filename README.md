@@ -58,15 +58,14 @@ produtos, pedidos e estatísticas de vendas em uma loja. Abaixo estão as princi
 
 Siga os passos abaixo para rodar a aplicação utilizando Docker:
 
-1. Construir a imagem Docker:
+1. Ter o docker instalado
+
+2. Rodar o script npm
     ```shell
-    docker build -t store-management-web .
+    npm run docker:run
     ```
-2. Rodar o container:
-    ```shell
-    docker run --name store-management-web -d -p 4000:4000 store-management-web
-    ```
-3. aplicação estará disponível em: http://localhost:4000
+   
+2. aplicação estará disponível em: http://localhost:4000
 
 ## Estrutura de pastas
 
