@@ -24,7 +24,12 @@ import { ButtonExtendedDirective } from "../../directives/button-extended/button
 	],
     templateUrl: './button.component.html',
     styleUrl: './button.component.scss',
-	hostDirectives: [ButtonRequestLoadingDirective],
+	hostDirectives: [
+		{
+			directive: ButtonRequestLoadingDirective,
+			outputs: ['finishLoading']
+		}
+	],
 	host: {
 		'ngSkipHydration': "true",
 		'[style.pointer-events]': "canClick() ? 'auto' : 'none'"
