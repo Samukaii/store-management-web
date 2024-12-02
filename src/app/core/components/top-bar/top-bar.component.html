@@ -1,5 +1,12 @@
-<app-breadcrumb/>
+<app-flex-row gap="0" horizontalAlignment="space-between" class="w-100 h-fit" column fill>
+	<app-flex-row verticalAlignment="space-between">
+		<app-breadcrumb/>
 
-<app-local-actions
-	where="top-bar"
-/>
+		<app-local-actions
+			where="top-bar"
+		/>
+	</app-flex-row>
+	<app-flex-row>
+		<mat-progress-bar [style.opacity]="service.isLoading() ? 1 : 0" class="d-block w-100" mode="indeterminate"/>
+	</app-flex-row>
+</app-flex-row>

@@ -1,7 +1,13 @@
 :host {
 	display: flex;
-	justify-content: space-between;
+	align-items: center;
 	padding: .5rem 1rem;
 	border-bottom: var(--border);
 	height: 70px;
+	position: relative;
+}
+
+mat-progress-bar {
+	bottom: 0;
+	position: absolute;
 }
