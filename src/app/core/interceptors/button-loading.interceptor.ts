@@ -19,6 +19,7 @@ export const buttonLoadingInterceptor: HttpInterceptorFn = (req, next) => {
 
 	return next(req).pipe(
 		catchError((error: HttpErrorResponse): ObservableInput<any>=> {
+			formButtonService.finishLoading(error);
 			throw error;
 		}),
 		tap({
