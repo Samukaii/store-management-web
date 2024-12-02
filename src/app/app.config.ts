@@ -4,7 +4,7 @@ import { provideRouter, withComponentInputBinding, withViewTransitions } from '@
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient, withFetch } from "@angular/common/http";
+import { provideHttpClient, withFetch, withInterceptors } from "@angular/common/http";
 import { provideEnvironmentNgxCurrency } from "ngx-currency";
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from "@angular/material/form-field";
 import { provideMomentDateAdapter } from "@angular/material-moment-adapter";
@@ -12,6 +12,7 @@ import localePT from '@angular/common/locales/pt';
 import { registerLocaleData } from "@angular/common";
 import 'moment/locale/pt-br';
 import { MAT_DATE_LOCALE } from "@angular/material/core";
+import { buttonLoadingInterceptor } from "./core/interceptors/button-loading.interceptor";
 
 registerLocaleData(localePT);
 
@@ -21,7 +22,12 @@ export const appConfig: ApplicationConfig = {
 	  provideRouter(routes, withComponentInputBinding(), withViewTransitions()),
 	  provideClientHydration(),
 	  provideAnimationsAsync(),
-	  provideHttpClient(withFetch()),
+	  provideHttpClient(
+		  withFetch(),
+		  withInterceptors([
+			  buttonLoadingInterceptor
+		  ])
+	  ),
 	  provideMomentDateAdapter({
 		  parse: {
 			  dateInput: 'DD/MM/YYYY',
