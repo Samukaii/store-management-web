@@ -42,7 +42,7 @@ produtos, pedidos e estatísticas de vendas em uma loja. Abaixo estão as princi
 
 ### Estatísticas
 
-- Obtenha informações detalhadas da performance da loja:
+- Obtenha informações detalhadas do desempenho da loja:
 	- **Produtos mais vendidos**: Listagem calculada com base nos itens de todos os pedidos.
 	- **Vendas por período**: Lista de todas as vendas feitas, agrupadas por dia ou por mês.
 
@@ -65,7 +65,7 @@ Siga os passos abaixo para rodar a aplicação utilizando Docker:
     npm run docker:run
     ```
    
-2. aplicação estará disponível em: http://localhost:4000
+3. aplicação estará disponível em: http://localhost:4000
 
 ## Estrutura de pastas
 
