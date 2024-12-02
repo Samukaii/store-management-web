@@ -34,10 +34,10 @@ export class ConfirmActionComponent {
 		{
 			type: "flat",
 			label: "Confirmar",
+			afterLoadingSuccess: () => this.dialog.close(ConfirmActionComponent),
 			...this.primaryAction(),
 			click: () => {
 				this.primaryAction().click?.();
-				this.dialog.close(ConfirmActionComponent);
 			}
 		},
 	];
