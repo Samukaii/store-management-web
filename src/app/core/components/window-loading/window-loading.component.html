@@ -5,9 +5,6 @@
 	</app-progress-spinner>
 } @else {
 	<div class="container">
-		@if (loadingMode() == 'preservation') {
-			<mat-progress-bar class="d-block w-100" mode="indeterminate"/>
-		}
 		<ng-content/>
 	</div>
 }
