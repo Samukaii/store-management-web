@@ -112,6 +112,21 @@ html {
 		top: 1rem;
 	}
 
+	.mat-loading {
+		position: relative;
+
+		& > *:not(mat-progress-spinner){
+			opacity: 0;
+		}
+
+		mat-progress-spinner {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+
 	.pos-top-0-5 {
 		position: relative;
 		top: .5rem;
@@ -153,5 +168,35 @@ html {
 
 	.mt-1 {
 		margin-top: 1rem;
+	}
+
+	.color-primary {
+		@include mat.icon-button-overrides((
+			icon-color: var(--app-primary-color),
+		));
+
+		@include mat.progress-spinner-overrides((
+			active-indicator-color: var(--app-primary-color),
+		));
+	}
+
+	.color-red {
+		@include mat.icon-button-overrides((
+			icon-color: #cb5050,
+		));
+
+		@include mat.progress-spinner-overrides((
+			active-indicator-color: #cb5050,
+		));
+	}
+
+	.color-blue {
+		@include mat.icon-button-overrides((
+			icon-color: #28448f,
+		));
+
+		@include mat.progress-spinner-overrides((
+			active-indicator-color: #28448f,
+		));
 	}
 }
