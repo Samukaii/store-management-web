@@ -3,6 +3,9 @@
 @switch (buttonType) {
 	@case ("basic") {
 		<button
+			appButtonExtended
+			[color]="iconColor()"
+			[loading]="loading() || requestLoading.loading()"
 			[disabled]="disabled()"
 			[matTooltip]="tooltip()"
 			mat-button
@@ -10,7 +13,11 @@
 		</button>
 	}
 	@case ("raised") {
+		{{loading() || requestLoading.loading()}}
 		<button
+			appButtonExtended
+			[color]="iconColor()"
+			[loading]="loading() || requestLoading.loading()"
 			[disabled]="disabled()"
 			[matTooltip]="tooltip()"
 			mat-raised-button
@@ -19,6 +26,9 @@
 	}
 	@case ("stroked") {
 		<button
+			appButtonExtended
+			[color]="iconColor()"
+			[loading]="loading() || requestLoading.loading()"
 			[disabled]="disabled()"
 			[matTooltip]="tooltip()"
 			mat-stroked-button
@@ -27,6 +37,9 @@
 	}
 	@case ("flat") {
 		<button
+			appButtonExtended
+			[color]="iconColor()"
+			[loading]="loading() || requestLoading.loading()"
 			[disabled]="disabled()"
 			[matTooltip]="tooltip()"
 			mat-flat-button
@@ -35,6 +48,9 @@
 	}
 	@case ("icon") {
 		<button
+			appButtonExtended
+			[color]="iconColor()"
+			[loading]="loading() || requestLoading.loading()"
 			[disabled]="disabled()"
 			[matTooltip]="tooltip()"
 			[ngClass]="['icon-color-' + iconColor()]"
@@ -45,6 +61,9 @@
 	}
 	@case ("fab") {
 		<button
+			appButtonExtended
+			[color]="iconColor()"
+			[loading]="loading() || requestLoading.loading()"
 			[disabled]="disabled()"
 			[matTooltip]="tooltip()"
 			mat-fab
@@ -54,6 +73,9 @@
 	}
 	@case ("mini-fab") {
 		<button
+			appButtonExtended
+			[color]="iconColor()"
+			[loading]="loading() || requestLoading.loading()"
 			[disabled]="disabled()"
 			[matTooltip]="tooltip()"
 			mat-mini-fab
@@ -63,6 +85,9 @@
 	}
 	@case ("extended-fab") {
 		<button
+			appButtonExtended
+			[color]="iconColor()"
+			[loading]="loading() || requestLoading.loading()"
 			[disabled]="disabled()"
 			[matTooltip]="tooltip()"
 			mat-fab
