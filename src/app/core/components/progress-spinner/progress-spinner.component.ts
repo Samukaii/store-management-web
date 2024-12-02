@@ -11,7 +11,7 @@ import { MatProgressSpinner, ProgressSpinnerMode } from "@angular/material/progr
 })
 export class ProgressSpinnerComponent {
 	mode = input<ProgressSpinnerMode>('indeterminate');
-	strokeWidth = input(0);
-	diameter = input(0);
+	strokeWidth = input(4);
+	diameter = input(40);
 	text = input<string>();
 }
