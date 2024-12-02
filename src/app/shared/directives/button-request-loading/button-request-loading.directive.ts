@@ -2,6 +2,7 @@ import { Directive, inject, input, OnChanges, OnDestroy, OnInit, output, signal,
 import { ButtonRequestLoadingService } from "./button-request-loading.service";
 import { v4 as uuidv4 } from 'uuid';
 import { ButtonLoadingFinishStatus } from "./models/button-loading-finish.status";
+import { wait } from "../../helpers/wait";
 
 @Directive({
 	selector: '[appButtonExtended]',
@@ -40,10 +41,12 @@ export class ButtonRequestLoadingDirective implements OnChanges, OnInit, OnDestr
 		this.loading.set(true);
 	}
 
-	finalizeLoading(status: 'success' | 'error' | 'no-request') {
-		this.loading.set(false);
-
+	async finalizeLoading(status: 'success' | 'error' | 'no-request') {
 		this.finishLoading.emit(status);
+
+		await wait(100);
+
+		this.loading.set(false);
 	}
 
 	ngOnDestroy() {
