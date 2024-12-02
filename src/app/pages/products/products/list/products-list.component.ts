@@ -70,7 +70,11 @@ export class ProductsListComponent {
 			filter['category:isNull'] = null;
 		}
 
-		return filter;
+		return {
+			sortProperty: "name",
+			sortDirection: "asc",
+			...filter
+		};
 	});
 
 	categoriesOptions = computed(() => {
