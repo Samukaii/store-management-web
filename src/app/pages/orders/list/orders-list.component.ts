@@ -1,26 +1,20 @@
 import { Component, inject } from '@angular/core';
-import {
-	LocalActionsUpdaterComponent
-} from "../../../shared/components/local-actions/updater/local-actions-updater.component";
 import { TableComponent } from "../../../shared/components/table/table.component";
 import { Order } from "../models/order";
-import { Button } from "../../../shared/components/button/models/button";
 import { TableColumnFn } from "../../../shared/components/table/table-column-fn";
 import { TableActionsFn } from "../../../shared/components/table/table-actions-fn";
 import { OrdersService } from "../orders.service";
 import { NoResults } from "../../../shared/components/no-results/models/no-results";
 import { DialogService } from "../../../shared/services/dialog.service";
-import { OrdersImportComponent } from "../import/orders-import.component";
 import { formatDate } from "@angular/common";
 import { rxResource } from "@angular/core/rxjs-interop";
 import { ConfirmActionService } from "../../../core/services/confirm-action.service";
 
 @Component({
     selector: 'app-orders-list',
-    imports: [
-        TableComponent,
-        LocalActionsUpdaterComponent
-    ],
+	imports: [
+		TableComponent
+	],
     templateUrl: './orders-list.component.html',
     styleUrl: './orders-list.component.scss'
 })
@@ -68,26 +62,6 @@ export class OrdersListComponent {
 			label: "Total",
 			value: `R$ ${element.total.toFixed(2)}`
 		},
-	]
-
-	actions: Button[] = [
-		{
-			type: "flat",
-			label: "Importar pedidos do IFood",
-			click: () => {
-				this.dialog.open({
-					component: OrdersImportComponent,
-					data: {
-						formSubmit: (value) => {
-							this.service.import(value).subscribe(() => {
-								this.resource.reload();
-								this.dialog.closeAll();
-							})
-						}
-					}
-				})
-			}
-		}
 	]
 
 	getActions: TableActionsFn<Order> = element => [

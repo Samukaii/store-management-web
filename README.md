@@ -34,7 +34,6 @@ produtos, pedidos e estatísticas de vendas em uma loja. Abaixo estão as princi
 ### Pedidos
 
 - Visualize e delete pedidos existentes.
-- Importe novos pedidos a partir de um arquivo JSON.
 
 ### Itens do Pedido
 
@@ -81,7 +80,6 @@ app:
 		analytics: "Módulo responsável pelas estatísticas e relatórios da aplicação"
 		orders:
 			form: "Componentes relacionados à criação de pedidos"
-			import: "Funcionalidade para importar pedidos"
 			items: "Componente para gerenciar itens dentro de pedidos"
 			list: "Exibição de pedidos em lista"
 			models: "Modelos de dados para pedidos"

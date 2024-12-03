@@ -5,8 +5,6 @@ import { Product } from "./models/product";
 import { ProductsFormValue } from "./models/products-form-value";
 import { ProductFoodInput } from "./models/product-food-input";
 import { ProductsDefinePricePayload } from "./define-price/create-products-define-price.form";
-import { BestSellingProduct } from "./models/best-selling-product";
-import { ImportProductsPayload } from "./import/create-products-import.form";
 import { Generic } from "../../../shared/models/generic";
 
 @Injectable({
@@ -40,17 +38,5 @@ export class ProductsService {
 
 	definePrice(id: number, value: ProductsDefinePricePayload) {
 		return this.http.put<ProductFoodInput>(`${this.baseUrl}/${id}`, value);
-	}
-
-	bestSelling() {
-		return this.http.get<BestSellingProduct[]>(`${this.baseUrl}/best_selling`);
-	}
-
-	import(value: ImportProductsPayload) {
-		const asFormData = new FormData();
-
-		asFormData.append('file', value.file!);
-
-		return this.http.post(`${this.baseUrl}/import`, asFormData);
 	}
 }

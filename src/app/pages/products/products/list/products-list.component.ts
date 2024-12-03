@@ -11,7 +11,6 @@ import { TableActionsFn } from "../../../../shared/components/table/table-action
 import { ProductsService } from "../products.service";
 import { NoResults } from "../../../../shared/components/no-results/models/no-results";
 import { DialogService } from "../../../../shared/services/dialog.service";
-import { ProductsImportComponent } from "../import/products-import.component";
 import { rxResource, toSignal } from "@angular/core/rxjs-interop";
 import { ChipsSelectorComponent } from "../../../../shared/components/chips-selector/chips-selector.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
@@ -132,23 +131,6 @@ export class ProductsListComponent {
 	]
 
 	actions: Button[] = [
-		{
-			type: "stroked",
-			label: "Importar produtos do IFood",
-			click: () => {
-				this.dialog.open({
-					component: ProductsImportComponent,
-					data: {
-						formSubmit: (value) => {
-							this.service.import(value).subscribe(() => {
-								this.resource.reload();
-								this.dialog.closeAll();
-							})
-						}
-					}
-				})
-			}
-		},
 		{
 			type: "flat",
 			label: "Adicionar produto",
