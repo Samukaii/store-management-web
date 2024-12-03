@@ -3,13 +3,22 @@
 
 	<app-flex-row class="card w-100" column verticalAlignment="center" fill>
 		<app-flex-row gap=".5rem" verticalAlignment="space-between" horizontalAlignment="center" fill>
-			<app-form-radio
-				label="Modo de exibição"
-				[form]="form"
-				name="periodType"
-				[options]="options"
-			></app-form-radio>
-			@if (filters().periodType === OrdersDisplayType.DAY) {
+			<app-flex-row column>
+				<app-form-radio
+					label="Filtrar por"
+					[form]="form"
+					name="displayType"
+					[options]="displayOptions"
+				></app-form-radio>
+				<app-form-radio
+					label="Modo de exibição"
+					[form]="form"
+					name="periodType"
+					[options]="options"
+				></app-form-radio>
+			</app-flex-row>
+
+			@if (filters().periodType === OrdersPeriodType.DAY) {
 				<app-date-range
 					class="d-flex flex-center"
 					[form]="form"
@@ -30,7 +39,7 @@
 			}
 			<app-flex-row verticalAlignment="flex-end" column>
 				<app-flex-row class="badge badge--success p-0-5" gap=".5rem" verticalAlignment="center" horizontalAlignment="center">
-					<h2 class="title--medium m-0">Faturamento médio por {{ filters().periodType === OrdersDisplayType.DAY ? "dia" : "mês" }}:</h2>
+					<h2 class="title--medium m-0">Faturamento médio por {{ filters().periodType === OrdersPeriodType.DAY ? "dia" : "mês" }}:</h2>
 					<p class="title--medium">
 						R$ {{ billingAverage().toFixed(2) }}
 					</p>
@@ -46,21 +55,18 @@
 	</app-flex-row>
 	<app-window-loading [loading]="orders.isLoading()">
 
-		@if (filters().periodType === OrdersDisplayType.DAY) {
+		@if (filters().periodType === OrdersPeriodType.DAY) {
 			<app-line-chart
 				showAverage
 				class="d-block"
-				[data]="ordersChartData()"
+				[data]="dailyChartData()"
 				label="Faturamento"
 			/>
 		} @else {
 			<app-bar-chart
 				height="800px"
 				class="d-block"
-				label="Faturamento"
-				showAverage
-				[minItemsCount]="12"
-				[data]="ordersChartData()"
+				[data]="monthlyChartData()"
 			/>
 		}
 	</app-window-loading>
