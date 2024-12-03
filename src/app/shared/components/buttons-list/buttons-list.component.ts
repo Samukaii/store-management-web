@@ -4,11 +4,13 @@ import { Button } from "../button/models/button";
 import { FlexRowComponent } from "../flex-row/flex-row.component";
 import { RouterLink } from "@angular/router";
 import { ButtonLoadingFinishStatus } from "../../directives/button-request-loading/models/button-loading-finish.status";
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
     selector: 'app-buttons-list',
 	imports: [
 		FlexRowComponent,
+		ButtonComponent,
 		RouterLink
 	],
     templateUrl: './buttons-list.component.html',
