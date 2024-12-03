@@ -1,5 +1,5 @@
 import { Component, computed, inject } from '@angular/core';
-import { BarChartComponent } from "../../../shared/components/charts/bar/bar-chart.component";
+import { BarChartComponent, chartBluePalette } from "../../../shared/components/charts/bar/bar-chart.component";
 import { DateRangeComponent } from "../../../shared/components/date-range/date-range.component";
 import { FlexRowComponent } from "../../../shared/components/flex-row/flex-row.component";
 import { FormRadioComponent } from "../../../shared/components/form/radio/form-radio.component";
@@ -13,6 +13,7 @@ import { AnalyticsService } from "../analytics.service";
 import { BasicOption } from "../../../shared/models/basic-option";
 import { WindowLoadingComponent } from "../../../core/components/window-loading/window-loading.component";
 import { OrdersDisplayType } from "../enum/orders-display-type";
+import { ChartData } from 'chart.js';
 
 @Component({
   selector: 'app-analytics-best-selling',
@@ -88,15 +89,53 @@ export class AnalyticsBestSellingComponent {
 		loader: ({request}) => this.service.bestSellingProducts(request)
 	});
 
-	chartData = computed(() => {
-		return this.products.value()?.map(item => {
+	chartItems = computed(() => {
+		let items = this.products.value()?.map(item => {
 			return {
 				label: item.name,
 				value: this.displayType() === BestSellingDisplayType.SALES_QUANTITY
 					? item.quantity ?? 0
 					: item.total
 			}
-		}).sort((prev, curr) => curr.value - prev.value) ?? []
+		}).sort((prev, curr) => curr.value - prev.value) ?? [];
+
+		if(items.length < 15) {
+			items = [
+				...items,
+				...(new Array(15 - items.length).fill(null).map(() => {
+					return {
+						label: "",
+						value: 0
+					}
+				}))
+			]
+		}
+
+		return items;
 	});
+
+	chartData = computed((): ChartData => {
+		const data = this.chartItems();
+
+		return {
+			labels: data.map(item => item.label),
+			datasets: [
+				{
+					label: "Faturamento",
+					data: data.map(item => item.value),
+					backgroundColor: chartBluePalette,
+					borderColor: chartBluePalette,
+					maxBarThickness: 25
+				},
+			]
+		}
+	});
+
+	height = computed(() => {
+		const height = this.chartItems().length * 30;
+
+		return height + "px";
+	});
+
 	protected readonly OrdersDisplayType = OrdersDisplayType;
 }
