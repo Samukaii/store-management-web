@@ -70,8 +70,7 @@ export class ProductsListComponent {
 		}
 
 		if(value.categoryId === "no-costs") {
-			filter['rawMaterials:hasAssociation'] = false;
-			filter['preparations:hasAssociation'] = false;
+			filter['ingredients:hasAssociation'] = false;
 		}
 
 		return {
