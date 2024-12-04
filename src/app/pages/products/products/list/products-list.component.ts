@@ -69,6 +69,10 @@ export class ProductsListComponent {
 			filter['category:isNull'] = null;
 		}
 
+		if(value.categoryId === "no-costs") {
+			filter['rawMaterials:hasAssociation'] = false;
+		}
+
 		return {
 			sortProperty: "name",
 			sortDirection: "asc",
@@ -85,6 +89,10 @@ export class ProductsListComponent {
 			{
 				id: 'no-category',
 				name: "Sem categoria"
+			},
+			{
+				id: 'no-costs',
+				name: "Sem custos"
 			},
 			...this.categories.value() ?? [],
 		]
