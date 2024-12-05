@@ -4,9 +4,13 @@
 			@for (column of header(); track column.position) {
 				<ng-container [matColumnDef]="column.position">
 					<th mat-header-cell *matHeaderCellDef> {{column.label}} </th>
-					<td mat-cell *matCellDef="let element">
+					<td mat-cell
+						matRipple
+						(click)="onRowClick(element)"
+						[matRippleDisabled]="disableRowClick()"
+						*matCellDef="let element">
 						@let columnDef = getColumn | call: column.position: element.id;
-						{{columnDef?.value}}
+						{{ columnDef?.value }}
 					</td>
 				</ng-container>
 			}
