@@ -7,6 +7,6 @@ export const createProductsForm = () => {
 	return fb.group({
 		name: ["", Validators.required],
 		integrationName: [""],
-		categoryId: [null as null | number, Validators.required],
+		categoryId: [null as null | number],
 	});
 };
