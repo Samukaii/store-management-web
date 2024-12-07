@@ -4,8 +4,8 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
 	selector: 'app-field-error',
-	templateUrl: 'field-error.component.html',
-	styleUrls: ['./form.component.scss']
+	templateUrl: './field-error.component.html',
+	styleUrls: ['./field-error.component.scss']
 })
 export class FieldErrorComponent implements OnInit {
 	control = input.required<FormControl>();
