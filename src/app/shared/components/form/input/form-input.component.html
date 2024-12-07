@@ -4,14 +4,12 @@
 	@let options = currencyOptions();
 
 	@if (options) {
-		<input [currencyMask]="options" matInput [formControl]="control()" [placeholder]="placeholder()">
+		<input [spellcheck]="!noSpellcheck()" [currencyMask]="options" matInput [formControl]="control()"
+			   [placeholder]="placeholder()">
 	} @else {
-		<input [type]="type()" matInput [formControl]="control()" [placeholder]="placeholder()">
+		<input [spellcheck]="!noSpellcheck()" [type]="type()" matInput [formControl]="control()"
+			   [placeholder]="placeholder()">
 	}
-	@if (error.hasError()) {
-		<mat-error>
-			{{ error.message() }}
-		</mat-error>
-	}
+	<app-field-error matError [control]="control()"/>
 </mat-form-field>
 

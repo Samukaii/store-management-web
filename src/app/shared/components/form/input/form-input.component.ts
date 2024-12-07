@@ -1,9 +1,9 @@
-import { Component, computed, input } from '@angular/core';
+import { booleanAttribute, Component, computed, input } from '@angular/core';
 import { MatError, MatFormField, MatLabel } from "@angular/material/form-field";
 import { MatInput } from "@angular/material/input";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { NgxCurrencyConfig, NgxCurrencyDirective } from "ngx-currency";
-import { controlError } from "../../form-error/form-error.component";
+import { FieldErrorComponent } from "../../field-error/field-error.component";
 
 @Component({
     selector: 'app-form-input',
@@ -13,7 +13,8 @@ import { controlError } from "../../form-error/form-error.component";
 		ReactiveFormsModule,
 		MatInput,
 		NgxCurrencyDirective,
-		MatError
+		MatError,
+		FieldErrorComponent,
 	],
     templateUrl: './form-input.component.html',
     styleUrl: './form-input.component.scss'
@@ -25,8 +26,7 @@ export class FormInputComponent {
 	label = input("");
 	placeholder = input("");
 	suffix = input("");
-
-	error = controlError(this.control);
+	noSpellcheck = input(false, {transform: booleanAttribute});
 
 	currencyOptions = computed((): Partial<NgxCurrencyConfig> | undefined => {
 		switch (this.inputType()) {
