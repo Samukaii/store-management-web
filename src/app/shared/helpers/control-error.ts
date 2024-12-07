@@ -1,6 +1,7 @@
-import { Component, computed, input, isSignal, Signal } from '@angular/core';
 import { FormControl } from "@angular/forms";
-import { MatError } from "@angular/material/form-field";
+import { computed, inject, isSignal, Signal } from "@angular/core";
+import { startWith } from "rxjs";
+import { toSignal } from "@angular/core/rxjs-interop";
 
 export const controlError = (control: FormControl | Signal<FormControl>) => {
 	const formControl = computed(() => {
@@ -9,8 +10,11 @@ export const controlError = (control: FormControl | Signal<FormControl>) => {
 		return control;
 	})
 
+	const status$ = formControl().statusChanges.pipe(startWith(formControl().status))
+	const status = toSignal(status$);
+
 	const controlInvalid = computed(() => {
-		return formControl().status === "INVALID"
+		return status() === "INVALID"
 	});
 
 	const error = computed(() => {
@@ -35,18 +39,4 @@ export const controlError = (control: FormControl | Signal<FormControl>) => {
 		hasError: computed(() => !!message()),
 		message
 	}
-}
-
-@Component({
-	selector: 'app-form-error',
-	imports: [
-		MatError
-	],
-	templateUrl: './form-error.component.html',
-	styleUrl: './form-error.component.scss'
-})
-export class FormErrorComponent {
-	control = input.required<FormControl>();
-
-	error = controlError(this.control);
 }
