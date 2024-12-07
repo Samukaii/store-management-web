@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, OnInit, signal, ViewContainerRef } from '@angular/core';
+import {Component, computed, DestroyRef, inject, input, OnInit, signal, ViewContainerRef} from '@angular/core';
 import { FormControl } from "@angular/forms";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
@@ -12,7 +12,7 @@ export class FieldErrorComponent implements OnInit {
 
 	invalid = signal(false);
 
-	untilDestroyed = takeUntilDestroyed();
+	destroyRef = inject(DestroyRef);
 
 	container = inject(ViewContainerRef);
 
@@ -35,7 +35,7 @@ export class FieldErrorComponent implements OnInit {
 	ngOnInit() {
 		this.invalid.set(this.control().status === "INVALID");
 
-		this.control().statusChanges.pipe(this.untilDestroyed).subscribe(status => {
+		this.control().statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(status => {
 			this.invalid.set(status === "INVALID");
 		})
 	}
