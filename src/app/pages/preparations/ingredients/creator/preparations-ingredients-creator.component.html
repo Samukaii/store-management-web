@@ -18,8 +18,7 @@
 
 	@if (form.controls.ingredientType.value === PreparationIngredientType.RAW_MATERIAL) {
 		<app-autocomplete
-			[form]="form"
-			name="rawMaterialId"
+			[control]="form.controls.rawMaterialId"
 			label="Insumo"
 			(select)="selectedOption.set($event)"
 			placeholder="Selecione aqui o insumo"
@@ -46,6 +45,7 @@
 
 	@if (selectedOption() && form.controls.ingredientType.value !== PreparationIngredientType.CUSTOM) {
 		<app-form-radio
+			selectFirstOption
 			label="Unidade de medida"
 			[form]="form"
 			name="measurementUnit"
@@ -54,6 +54,7 @@
 		</app-form-radio>
 		<app-flex-row fill>
 			<app-form-input
+				noSpellcheck
 				[control]="form.controls.quantity"
 				inputType="integer"
 				[suffix]="quantitySuffix()"

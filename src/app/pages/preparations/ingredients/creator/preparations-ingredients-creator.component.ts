@@ -109,24 +109,32 @@ export class PreparationsIngredientsCreatorComponent {
 		if(option.measurementUnit.id === RawMaterialsMeasurementUnit.KILOGRAMS)
 			return [
 				{
-					name: "Quilo (kg)",
-					value: RawMaterialsMeasurementUnit.KILOGRAMS
-				},
-				{
 					name: "Grama (g)",
 					value: RawMaterialsMeasurementUnit.GRAMS
 				},
+				{
+					name: "Quilo (kg)",
+					value: RawMaterialsMeasurementUnit.KILOGRAMS
+				},
 			];
 
+		if(option.measurementUnit.id === RawMaterialsMeasurementUnit.LITER) {
+			return [
+				{
+					name: "Mililitro (ml)",
+					value: RawMaterialsMeasurementUnit.MILLILITER
+				},
+				{
+					name: "Litro (L)",
+					value: RawMaterialsMeasurementUnit.LITER
+				},
+			];
+		}
 
 		return [
 			{
-				name: "Litro (L)",
-				value: RawMaterialsMeasurementUnit.LITER
-			},
-			{
-				name: "Mililitro (ml)",
-				value: RawMaterialsMeasurementUnit.MILLILITER
+				name: "Unidade",
+				value: RawMaterialsMeasurementUnit.UNIT
 			},
 		]
 	});
@@ -144,7 +152,7 @@ export class PreparationsIngredientsCreatorComponent {
 			case RawMaterialsMeasurementUnit.MILLILITER:
 				return " ml";
 			case RawMaterialsMeasurementUnit.UNIT:
-				return " g"
+				return " unidade(s)"
 			default:
 				return "";
 		}

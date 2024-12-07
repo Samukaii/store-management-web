@@ -28,6 +28,7 @@
 	[actions]="actions"
 />
 <app-table
+	disableRowClick
 	[columnsFn]="getColumns"
 	[loading]="resource.isLoading()"
 	[data]="resource.value() ?? []"
