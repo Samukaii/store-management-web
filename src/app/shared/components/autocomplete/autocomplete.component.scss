@@ -1,3 +1,15 @@
 mat-form-field {
 	width: 100%;
 }
+
+.loading {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+}
+
+::ng-deep {
+	.mdc-list-item__primary-text {
+		width: 100%;
+	}
+}

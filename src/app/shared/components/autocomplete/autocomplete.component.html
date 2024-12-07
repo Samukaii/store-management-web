@@ -7,8 +7,24 @@
 		   [matAutocomplete]="auto">
 	<mat-autocomplete
 		(optionSelected)="onSelect($event)" #auto="matAutocomplete">
+		@if (filteredData.isLoading()) {
+			<mat-option >
+				<div class="loading">
+					<app-progress-spinner/>
+				</div>
+			</mat-option>
+		}
+
 		@for (option of (filteredData.value() ?? []); track option) {
 			<mat-option [value]="option">{{option.name}}</mat-option>
+		} @empty {
+			@if (!filteredData.isLoading()) {
+				<mat-option>
+					Nenhum resultado encontrado
+				</mat-option>
+			}
 		}
 	</mat-autocomplete>
+
+	<app-field-error matError [control]="control()"/>
 </mat-form-field>
