@@ -10,8 +10,7 @@
 		placeholder="Informe aqui o nome"
 	/>
 	<app-autocomplete
-		[form]="form"
-		name="categoryId"
+		[control]="form.controls.categoryId"
 		[method]="categoriesService.autocomplete"
 		label="Categoria"
 		placeholder="Informe aqui a categoria"
@@ -22,7 +21,7 @@
 	<h2 class="title--medium title--color-primary mb-1">Custo do insumo</h2>
 
 	<app-form-radio
-		class="m"
+		selectFirstOption
 		label="Unidade de medida"
 		[form]="form"
 		name="measurementUnit"

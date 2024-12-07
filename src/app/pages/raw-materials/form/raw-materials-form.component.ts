@@ -46,7 +46,7 @@ export class RawMaterialsFormComponent {
 		},
 		{
 			key: "categoryId",
-			modifier: source => source.category.id
+			modifier: source => source.category?.id ?? null
 		},
 	];
 
@@ -72,24 +72,25 @@ export class RawMaterialsFormComponent {
 
 	measurementUnits: BasicOption[] = [
 		{
-			name: "Quilo (kg)",
-			value: RawMaterialsMeasurementUnit.KILOGRAMS
-		},
-		{
 			name: "Grama (g)",
 			value: RawMaterialsMeasurementUnit.GRAMS
 		},
 		{
-			name: "Litro (L)",
-			value: RawMaterialsMeasurementUnit.LITER
+			name: "Quilo (kg)",
+			value: RawMaterialsMeasurementUnit.KILOGRAMS
+		},
+		{
+			name: "Unidade",
+			value: RawMaterialsMeasurementUnit.UNIT
 		},
 		{
 			name: "Mililitro (ml)",
 			value: RawMaterialsMeasurementUnit.MILLILITER
 		},
+
 		{
-			name: "Unidade",
-			value: RawMaterialsMeasurementUnit.UNIT
+			name: "Litro (L)",
+			value: RawMaterialsMeasurementUnit.LITER
 		},
 	];
 
