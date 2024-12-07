@@ -1,5 +1,13 @@
 import { booleanAttribute, Component, computed, inject, input } from '@angular/core';
-import { MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable } from "@angular/material/table";
+import {
+	MatCell, MatCellDef,
+	MatColumnDef,
+	MatHeaderCell, MatHeaderCellDef,
+	MatHeaderRow,
+	MatHeaderRowDef,
+	MatRow, MatRowDef,
+	MatTable
+} from "@angular/material/table";
 import { CallPipe } from "../../pipes/call.pipe";
 import { TableColumn } from "./models/table-column";
 import { TableColumnFn } from "./table-column-fn";
@@ -9,9 +17,9 @@ import { ButtonsListComponent } from "../buttons-list/buttons-list.component";
 import { NoResultsComponent } from "../no-results/no-results.component";
 import { WindowLoadingComponent } from "../../../core/components/window-loading/window-loading.component";
 import { NoResults } from "../no-results/models/no-results";
-import { MatRipple } from "@angular/material/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RowClickFn } from "./models/row-click-fn";
+import { MatRippleModule } from "@angular/material/core";
 
 @Component({
     selector: 'app-table',
@@ -26,7 +34,11 @@ import { RowClickFn } from "./models/row-click-fn";
 		ButtonsListComponent,
 		NoResultsComponent,
 		WindowLoadingComponent,
-		MatRipple
+		MatRippleModule,
+		MatHeaderRowDef,
+		MatRowDef,
+		MatCellDef,
+		MatHeaderCellDef
 	],
     templateUrl: './table.component.html',
     styleUrl: './table.component.scss'

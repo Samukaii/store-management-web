@@ -11,3 +11,15 @@ table {
 	padding: .3rem;
 	border-radius: 10px;
 }
+
+.selectable-row {
+	cursor: pointer;
+
+	&:hover {
+		background-color: #00000009;
+	}
+}
+
+.actions {
+	justify-content: flex-end;
+}
