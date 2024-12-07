@@ -1,9 +1,9 @@
 import { Component, computed, DestroyRef, effect, inject, input, OnInit, output, signal } from '@angular/core';
 import {
 	FormControlStatus,
-	FormGroup,
+	FormGroup, PristineChangeEvent,
 	ReactiveFormsModule,
-	StatusChangeEvent,
+	StatusChangeEvent, TouchedChangeEvent,
 	Validators,
 	ValueChangeEvent
 } from "@angular/forms";
@@ -40,7 +40,8 @@ export class FormComponent<Data extends Generic, Form extends FormGroup<any>> im
 
 	formValue = signal<FormValue<Form> | null>(null);
 	formStatus = signal<FormControlStatus>('VALID');
-	formInvalid = computed(() => this.formStatus() === 'INVALID');
+	formPristine = signal(false);
+	shouldDisable = computed(() => this.formStatus() === 'INVALID' || this.formPristine());
 
 	destroyRef = inject(DestroyRef);
 
@@ -48,7 +49,7 @@ export class FormComponent<Data extends Generic, Form extends FormGroup<any>> im
 		return {
 			label: "Salvar",
 			type: "flat",
-			disabled: this.formInvalid(),
+			disabled: this.shouldDisable(),
 			...this.primaryActionFromInput(),
 		} as Button;
 	})
@@ -56,9 +57,8 @@ export class FormComponent<Data extends Generic, Form extends FormGroup<any>> im
 	ngOnInit() {
 		this.formValue.set(this.form().getRawValue());
 		this.formStatus.set(this.form().status);
+		this.formPristine.set(this.form().pristine);
 
-		this.form().valueChanges.pipe(takeUntilDestroyed(this.destroyRef))
-			.subscribe(() => this.formValue.set(this.form().getRawValue()));
 		this.form().events
 			.pipe(takeUntilDestroyed(this.destroyRef),
 				tap(event => {
@@ -67,9 +67,12 @@ export class FormComponent<Data extends Generic, Form extends FormGroup<any>> im
 
 					if(event instanceof StatusChangeEvent)
 						this.formStatus.set(this.form().status);
+
+					if(event instanceof PristineChangeEvent)
+						this.formPristine.set(this.form().pristine);
 				})
 			)
-			.subscribe(() => this.formValue.set(this.form().getRawValue()));
+			.subscribe();
 	}
 
 	updateForm = effect(() => {
