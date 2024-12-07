@@ -41,6 +41,7 @@ export class ProductsIngredientsCreatorComponent {
 
 	selectedOption = signal<AutocompleteOption | null>(null);
 
+	a = effect(() => console.log(this.selectedOption()))
 	ingredient = toSignal(this.form.controls.ingredientType.valueChanges, {
 		initialValue: this.form.controls.ingredientType.value,
 	});

@@ -18,8 +18,7 @@
 
 	@if (form.controls.ingredientType.value === ProductIngredientType.RAW_MATERIAL) {
 		<app-autocomplete
-			[form]="form"
-			name="rawMaterialId"
+			[control]="form.controls.rawMaterialId"
 			label="Insumo"
 			(select)="selectedOption.set($event)"
 			placeholder="Selecione aqui o insumo"
@@ -29,8 +28,7 @@
 	}
 	@if(form.controls.ingredientType.value === ProductIngredientType.PREPARATION) {
 		<app-autocomplete
-			[form]="form"
-			name="preparationId"
+			[control]="form.controls.preparationId"
 			label="Preparo"
 			(select)="selectedOption.set($event)"
 			placeholder="Selecione aqui o preparo"
