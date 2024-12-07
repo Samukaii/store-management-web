@@ -7,13 +7,13 @@ import {
 } from "@angular/material/autocomplete";
 import { FormControl, NonNullableFormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { MatError, MatFormField, MatInput, MatLabel } from "@angular/material/input";
-import { rxResource, takeUntilDestroyed, toSignal } from "@angular/core/rxjs-interop";
+import { rxResource, takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { AutocompleteMethod } from "./models/autocomplete-method";
 import { AutocompleteOption } from "./models/autocomplete-option";
-import { filter, map, of, startWith } from "rxjs";
+import { map, of, startWith } from "rxjs";
 import { toNumberOrNull } from "../../helpers/to-number-or-null";
 import { ProgressSpinnerComponent } from "../../../core/components/progress-spinner/progress-spinner.component";
-import { FieldErrorComponent } from "../../directives/field-error.component";
+import { FieldErrorComponent } from "../field-error/field-error.component";
 
 @Component({
     selector: 'app-autocomplete',
