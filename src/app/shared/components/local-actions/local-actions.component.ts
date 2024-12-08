@@ -8,7 +8,10 @@ import { ButtonsListComponent } from "../buttons-list/buttons-list.component";
 		ButtonsListComponent
 	],
     templateUrl: './local-actions.component.html',
-    styleUrl: './local-actions.component.scss'
+    styleUrl: './local-actions.component.scss',
+	host: {
+		'[style.padding]': 'actions()().length ? ".5rem 1rem": "0"'
+	}
 })
 export class LocalActionsComponent {
 	where = input.required<string>();
