@@ -1,5 +1,5 @@
 import { ComponentRef, inject, Injectable, OutputEmitterRef, OutputRefSubscription, Type } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material/dialog";
+import { MatDialog, MatDialogConfig, MatDialogRef, MatDialogState } from "@angular/material/dialog";
 import { Generic } from "../models/generic";
 import { componentInputExists } from "../helpers/component-input-exists";
 import { componentOutputExists } from "../helpers/component-output-exists";
@@ -17,7 +17,8 @@ export class DialogService {
 		height: "fit-content",
 		minWidth: "800px",
 		width: "fit-content",
-		maxHeight: "90vh"
+		maxHeight: "90vh",
+		closeOnNavigation: true
 	}
 
 	open<T, D extends ComponentDialogData<T>>(options: DialogOptions<T, D>) {
@@ -29,8 +30,9 @@ export class DialogService {
 	}
 
 	close(component: Type<any>) {
+		this.removeClosedDialogs();
 		this.getDialog(component)?.close();
-		this.removeDialog(component);
+		this.removeClosedDialogs();
 	}
 
 	closeAll() {
@@ -43,9 +45,9 @@ export class DialogService {
 		);
 	}
 
-	private removeDialog(component: Type<any>) {
+	private removeClosedDialogs() {
 		this.openedDialogs = this.openedDialogs.filter(dialog =>
-			dialog.componentRef?.componentType !== component
+			dialog.getState() !== MatDialogState.CLOSED
 		);
 	}
 
