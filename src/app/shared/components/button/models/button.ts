@@ -1,11 +1,11 @@
 import { ButtonType } from "./button-type";
-import { ButtonIconColor } from "./button-icon-color";
+import { AppColor } from "./app-color";
 import {
 	ButtonLoadingFinishStatus
 } from "../../../directives/button-request-loading/models/button-loading-finish.status";
 
 export interface Button {
-	iconColor?: ButtonIconColor;
+	iconColor?: AppColor;
 	tooltip?: string;
 	label?: string;
 	icon?: string;

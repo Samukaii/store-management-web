@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { MatProgressSpinner } from "@angular/material/progress-spinner";
 import { MatButton, MatIconButton } from "@angular/material/button";
-import { ButtonIconColor } from "../../components/button/models/button-icon-color";
+import { AppColor } from "../../components/button/models/app-color";
 
 @Directive({
 	selector: '[appButtonLoading]',
@@ -34,7 +34,7 @@ export class ButtonLoadingDirective {
 	get color() {
 		const button = this.matButton ?? this.matIconButton;
 
-		return button?.color as ButtonIconColor;
+		return button?.color as AppColor;
 	}
 
 	changeSpinner = effect(() => {

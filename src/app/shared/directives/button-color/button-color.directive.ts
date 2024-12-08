@@ -1,5 +1,5 @@
 import { Directive, input } from '@angular/core';
-import { ButtonIconColor } from "../../components/button/models/button-icon-color";
+import { AppColor } from "../../components/button/models/app-color";
 
 @Directive({
 	selector: '[appButtonColor]',
@@ -8,5 +8,5 @@ import { ButtonIconColor } from "../../components/button/models/button-icon-colo
 	}
 })
 export class ButtonColorDirective {
-	color = input<ButtonIconColor>('primary');
+	color = input<AppColor>('primary');
 }

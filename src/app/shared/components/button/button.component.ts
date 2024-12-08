@@ -4,7 +4,7 @@ import { MatButton, MatFabButton, MatIconButton, MatMiniFabButton } from "@angul
 import { MatIcon } from "@angular/material/icon";
 import { MatTooltip } from "@angular/material/tooltip";
 import { NgClass } from "@angular/common";
-import { ButtonIconColor } from "./models/button-icon-color";
+import { AppColor } from "./models/app-color";
 import {
 	ButtonRequestLoadingDirective
 } from "../../directives/button-request-loading/button-request-loading.directive";
@@ -40,7 +40,7 @@ export class ButtonComponent {
 	label = input<string>();
 	tooltip = input<string>();
 	icon = input<string>();
-	iconColor = input<ButtonIconColor>('primary');
+	color = input<AppColor>('primary');
 	disabled = input<boolean>();
 	loading = input(false);
 
