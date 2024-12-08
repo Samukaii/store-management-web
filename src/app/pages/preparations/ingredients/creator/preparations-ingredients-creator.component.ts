@@ -18,6 +18,9 @@ import { FormValidation } from "../../../../shared/models/form-validation";
 import { PreparationsIngredientsForm } from "../../models/preparations-ingredients-form";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { PreparationIngredient } from "../../models/preparation-ingredient";
+import { routeNames } from "../../../../shared/route-names";
+import { Preparation } from "../../models/preparation";
+import { AutocompleteNoResults } from "../../../../shared/components/autocomplete/no-results/autocomplete-no.results";
 
 @Component({
 	selector: 'app-preparations-ingredients-creator',
@@ -35,8 +38,26 @@ import { PreparationIngredient } from "../../models/preparation-ingredient";
 export class PreparationsIngredientsCreatorComponent {
 	service = inject(RawMaterialsService);
 	title = input("");
+	preparation = input<Preparation>(null as any as Preparation);
 	data = input<PreparationIngredient>();
 	formSubmit = output<PreparationsIngredientsFormValue>();
+
+	noResults = AutocompleteNoResults.showGoToCreation(searchValue => {
+		return {
+			noResultsIcon: "restaurant",
+			destination: {
+				url: `${routeNames.rawMaterials}/new`,
+				persistForm: {
+					key: "raw-materials",
+					value: {name: searchValue}
+				}
+			},
+			source: {
+				message: `Voltar para o preparo: ${this.preparation().name}`,
+				icon: "blender",
+			}
+		}
+	});
 
 	form = createPreparationsIngredientsForm();
 

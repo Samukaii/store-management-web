@@ -23,6 +23,7 @@
 			(select)="selectedOption.set($event)"
 			placeholder="Selecione aqui o insumo"
 			[method]="service.autocomplete"
+			[noResults]="noResults"
 		/>
 	}
 

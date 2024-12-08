@@ -16,7 +16,7 @@ import { of } from "rxjs";
 import { rxResource } from "@angular/core/rxjs-interop";
 import { PreparationIngredient } from "../models/preparation-ingredient";
 import { PreparationsDefineQuantityComponent } from "../define-quantity/preparations-define-quantity.component";
-import { ConfirmActionService } from "../../../core/services/confirm-action.service";
+import { ConfirmActionService } from "../../../core/services/confirm-action/confirm-action.service";
 
 @Component({
     selector: 'app-preparations-ingredients',
@@ -99,6 +99,7 @@ export class ProductsIngredientsComponent {
 				this.dialog.open({
 					component: PreparationsIngredientsCreatorComponent,
 					data: {
+						preparation: this.preparation()!,
 						title: "Adicionar ingrediente",
 						formSubmit: (value) => {
 							this.service.create(value).subscribe(() => {
