@@ -13,6 +13,7 @@ import { registerLocaleData } from "@angular/common";
 import 'moment/locale/pt-br';
 import { MAT_DATE_LOCALE } from "@angular/material/core";
 import { buttonLoadingInterceptor } from "./core/interceptors/button-loading.interceptor";
+import { errorInterceptor } from "./core/interceptors/error.interceptor";
 
 registerLocaleData(localePT);
 
@@ -25,7 +26,8 @@ export const appConfig: ApplicationConfig = {
 	  provideHttpClient(
 		  withFetch(),
 		  withInterceptors([
-			  buttonLoadingInterceptor
+			  buttonLoadingInterceptor,
+			  errorInterceptor
 		  ])
 	  ),
 	  provideMomentDateAdapter({
