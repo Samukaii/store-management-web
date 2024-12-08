@@ -5,9 +5,8 @@ import { OrdersItemsFormValue } from "../models/orders-items-form-value";
 import { environment } from "../../../environments/environment";
 import { injectParams } from "../../../shared/di/inject-params";
 import { OrderItem } from "../models/order-item";
-import { map } from "rxjs";
-import { AutocompleteOption } from "../../../shared/components/autocomplete/models/autocomplete-option";
 import { Generic } from "../../../shared/models/generic";
+import { BaseSelect } from "../../../shared/models/base-select";
 
 @Injectable({
 	providedIn: 'root'
@@ -34,16 +33,9 @@ export class OrdersItemsService {
 	}
 
 	autocomplete = (params: Generic) => {
-		return this.http.get<OrderItem[]>(`${environment.api}/order-items/autocomplete`, {
+		return this.http.get<BaseSelect[]>(`${environment.api}/order-items/autocomplete`, {
 			params: params
-		}).pipe(
-			map(orderItems => orderItems.map((item): AutocompleteOption =>
-				({
-					id: item.name,
-					name: item.name,
-				})
-			))
-		)
+		});
 	}
 
 	update(id: number, value: OrdersItemsFormValue) {

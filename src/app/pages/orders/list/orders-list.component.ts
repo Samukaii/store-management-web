@@ -8,7 +8,7 @@ import { NoResults } from "../../../shared/components/no-results/models/no-resul
 import { DialogService } from "../../../shared/services/dialog.service";
 import { formatDate } from "@angular/common";
 import { rxResource } from "@angular/core/rxjs-interop";
-import { ConfirmActionService } from "../../../core/services/confirm-action.service";
+import { ConfirmActionService } from "../../../core/services/confirm-action/confirm-action.service";
 
 @Component({
     selector: 'app-orders-list',
