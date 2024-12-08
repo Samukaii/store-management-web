@@ -5,10 +5,11 @@ import { MatToolbar } from "@angular/material/toolbar";
 import { MenuComponent } from "./core/components/menu/menu.component";
 import { TopBarComponent } from "./core/components/top-bar/top-bar.component";
 import { injectIsAtBrowser } from "./shared/di/inject-is-at-browser";
+import {NavigationContextComponent} from "./core/components/navigation-context/navigation-context.component";
 
 @Component({
     selector: 'app-root',
-	imports: [RouterOutlet, MenuComponent, TopBarComponent],
+    imports: [RouterOutlet, MenuComponent, TopBarComponent, NavigationContextComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })
