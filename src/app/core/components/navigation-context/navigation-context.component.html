@@ -1,0 +1,29 @@
+@let context = service.lastContext();
+
+@if (context) {
+	<app-flex-row
+		(click)="service.finishContext(context)"
+		matRipple
+		horizontalAlignment="center"
+		gap="4rem"
+		matRippleColor="#00000022"
+		class="context">
+		<app-flex-row horizontalAlignment="center">
+			@if (context.icon) {
+				<mat-icon>
+					{{ context.icon }}
+				</mat-icon>
+			}
+			<p>
+				{{ context.message }}
+			</p>
+		</app-flex-row>
+
+		<app-button
+			(click)="$event.stopPropagation(); service.clearAllContexts()"
+			color="white"
+			type="basic"
+			label="Fechar"
+		/>
+	</app-flex-row>
+}
