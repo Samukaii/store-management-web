@@ -14,6 +14,9 @@ import { createRawMaterialsForm } from "./create-raw-materials-form";
 import { AutocompleteComponent } from "../../../shared/components/autocomplete/autocomplete.component";
 import { RawMaterialsCategoriesService } from "../categories/raw-materials-categories.service";
 import { ReactiveFormsModule } from "@angular/forms";
+import { routeNames } from "../../../shared/route-names";
+
+import { AutocompleteNoResults } from "../../../shared/components/autocomplete/no-results/autocomplete-no.results";
 
 @Component({
     selector: 'app-raw-materials-form',
@@ -34,6 +37,12 @@ export class RawMaterialsFormComponent {
 	form = createRawMaterialsForm();
 
 	categoriesService = inject(RawMaterialsCategoriesService);
+
+	noResults = AutocompleteNoResults.autoCreation(() => ({
+		noResultsIcon: "category",
+		method: (params) => this.categoriesService.create(params as any),
+		key: "name"
+	}))
 
 	formValue = toSignal(this.form.valueChanges, {
 		initialValue: this.form.value,
