@@ -13,3 +13,10 @@ mat-form-field {
 		width: 100%;
 	}
 }
+
+.no-results {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	gap: .5rem;
+}

@@ -8,7 +8,7 @@
 	<mat-autocomplete
 		(optionSelected)="onSelect($event)" #auto="matAutocomplete">
 		@if (filteredData.isLoading()) {
-			<mat-option >
+			<mat-option [value]="null">
 				<div class="loading">
 					<app-progress-spinner/>
 				</div>
@@ -19,8 +19,17 @@
 			<mat-option [value]="option">{{option.name}}</mat-option>
 		} @empty {
 			@if (!filteredData.isLoading()) {
-				<mat-option>
-					Nenhum resultado encontrado
+				<mat-option [value]="null" (click)="noResultsClick()">
+					<div class="no-results">
+						@if (noResultsValue().icon) {
+							<app-button
+								type="icon"
+								[icon]="noResultsValue().icon"
+								color="blue"
+							/>
+						}
+						{{ noResultsValue().message }}
+					</div>
 				</mat-option>
 			}
 		}

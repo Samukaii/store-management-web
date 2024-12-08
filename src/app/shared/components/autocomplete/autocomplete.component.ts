@@ -1,19 +1,22 @@
-import { Component, DestroyRef, inject, input, OnInit, output, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, input, OnInit, output, signal } from '@angular/core';
 import {
 	MatAutocomplete,
 	MatAutocompleteSelectedEvent,
 	MatAutocompleteTrigger,
 	MatOption
 } from "@angular/material/autocomplete";
-import { FormControl, NonNullableFormBuilder, ReactiveFormsModule } from "@angular/forms";
+import { FormBuilder, FormControl, ReactiveFormsModule } from "@angular/forms";
 import { MatError, MatFormField, MatInput, MatLabel } from "@angular/material/input";
 import { rxResource, takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { AutocompleteMethod } from "./models/autocomplete-method";
 import { AutocompleteOption } from "./models/autocomplete-option";
 import { map, of, startWith } from "rxjs";
-import { toNumberOrNull } from "../../helpers/to-number-or-null";
 import { ProgressSpinnerComponent } from "../../../core/components/progress-spinner/progress-spinner.component";
 import { FieldErrorComponent } from "../field-error/field-error.component";
+import { toIdentifiable } from "../../helpers/to-identifiable";
+import { ButtonComponent } from "../button/button.component";
+import { NoResultsAction } from "./models/no-results-action";
+import { NoResultsActionsFn } from "./models/no-results-actions-fn";
 
 @Component({
     selector: 'app-autocomplete',
@@ -27,7 +30,8 @@ import { FieldErrorComponent } from "../field-error/field-error.component";
 		MatFormField,
 		ProgressSpinnerComponent,
 		MatError,
-		FieldErrorComponent
+		FieldErrorComponent,
+		ButtonComponent
 	],
     templateUrl: './autocomplete.component.html',
     styleUrl: './autocomplete.component.scss'
@@ -36,12 +40,16 @@ export class AutocompleteComponent implements OnInit {
 	control = input.required<FormControl>();
 	method = input.required<AutocompleteMethod>();
 	label = input("");
+	key = input("id");
 	placeholder = input("");
+	noResults = input<NoResultsAction | NoResultsActionsFn>({
+		message: "Nenhum resultado encontrado",
+	});
 	select = output<AutocompleteOption>();
 
 	destroyRef = inject(DestroyRef);
 
-	internalForm = inject(NonNullableFormBuilder).group({
+	internalForm = inject(FormBuilder).group({
 		search: [""]
 	});
 
@@ -65,6 +73,8 @@ export class AutocompleteComponent implements OnInit {
 		if (!value) return;
 
 		this.control().setValue(value.id);
+		this.control().markAsDirty();
+
 		this.internalForm.controls.search.setValue(value.name, {emitEvent: false});
 
 		this.select.emit(value);
@@ -76,13 +86,33 @@ export class AutocompleteComponent implements OnInit {
 		this.watchSearch();
 	}
 
+	noResultsValue = computed(() => {
+		const searchValue = this.search();
+		const control = this.control();
+		const noResults = this.noResults();
+
+		if(typeof noResults === "function")
+			return noResults({
+				searchValue,
+				control,
+				reload: () => {
+					this.filteredData.reload();
+				}
+			});
+
+		return noResults;
+	});
+
 	private watchControl() {
 		const search = this.internalForm.controls.search;
 
-		const controlChanges$ = this.control().valueChanges.pipe(takeUntilDestroyed(this.destroyRef));
+		const controlChanges$ = this.control().valueChanges.pipe(
+			startWith(this.control().value),
+			takeUntilDestroyed(this.destroyRef)
+		);
 
 		controlChanges$.subscribe(value => {
-			const id = toNumberOrNull(value);
+			const id = toIdentifiable(value);
 
 			if(id !== null) {
 				this.searchId(id).subscribe(result => {
@@ -116,12 +146,12 @@ export class AutocompleteComponent implements OnInit {
 		)
 	}
 
-	private searchId(id: number) {
+	private searchId(id: number | string) {
 		const foundOption = this.filteredData.value()?.find(option => option.id === id);
 
 		if (foundOption) return of(foundOption);
 
-		return this.method()({'id:equal': id}).pipe(
+		return this.method()({[`${this.key()}:equal`]: id}).pipe(
 			map(items => items.at(0)),
 			takeUntilDestroyed(this.destroyRef)
 		)
@@ -138,7 +168,13 @@ export class AutocompleteComponent implements OnInit {
 				return;
 			}
 
+			if(typeof value !== 'string') return;
+
 			this.search.set(value);
 		});
+	}
+
+	noResultsClick() {
+		this.noResultsValue().action?.();
 	}
 }
