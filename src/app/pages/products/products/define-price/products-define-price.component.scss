@@ -1,6 +1,7 @@
 :host {
 	padding: 1rem 2rem;
 	display: block;
+	width: fit-content;
 }
 
 h2 {
@@ -9,7 +10,7 @@ h2 {
 }
 
 .cost {
-	width: 100%;
+	width: fit-content;
 	padding: 1rem;
 	box-sizing: border-box;
 	display: flex;

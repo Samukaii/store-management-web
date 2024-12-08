@@ -22,6 +22,7 @@
 			label="Insumo"
 			(select)="selectedOption.set($event)"
 			placeholder="Selecione aqui o insumo"
+			[noResults]="rawMaterialNoResults"
 			[method]="rawMaterialsService.autocomplete"
 		/>
 
@@ -30,6 +31,7 @@
 		<app-autocomplete
 			[control]="form.controls.preparationId"
 			label="Preparo"
+			[noResults]="preparationsNoResults"
 			(select)="selectedOption.set($event)"
 			placeholder="Selecione aqui o preparo"
 			[method]="preparationsService.autocomplete"
@@ -55,6 +57,7 @@
 
 	@if (selectedOption() && form.controls.ingredientType.value !== ProductIngredientType.CUSTOM) {
 		<app-form-radio
+			selectFirstOption
 			label="Unidade de medida"
 			[form]="form"
 			name="measurementUnit"

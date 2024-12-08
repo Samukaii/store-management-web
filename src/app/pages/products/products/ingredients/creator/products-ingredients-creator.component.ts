@@ -17,6 +17,11 @@ import { FormValidation } from "../../../../../shared/models/form-validation";
 import { ProductsAddIngredientForm } from "../../models/products-add-ingredient-form";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ProductIngredientType } from "../../enums/product-ingredient-type";
+import { Product } from "../../models/product";
+import { routeNames } from "../../../../../shared/route-names";
+import {
+	AutocompleteNoResults
+} from "../../../../../shared/components/autocomplete/no-results/autocomplete-no.results";
 
 @Component({
 	selector: 'app-products-ingredients-creator',
@@ -33,6 +38,7 @@ import { ProductIngredientType } from "../../enums/product-ingredient-type";
 })
 export class ProductsIngredientsCreatorComponent {
 	data = input<RawMaterial>();
+	product = input<Product>(null as any as Product);
 	formSubmit = output<ProductsAddIngredientFormValue>();
 	form = createProductsIngredientsForm();
 
@@ -41,7 +47,36 @@ export class ProductsIngredientsCreatorComponent {
 
 	selectedOption = signal<AutocompleteOption | null>(null);
 
-	a = effect(() => console.log(this.selectedOption()))
+	rawMaterialNoResults = AutocompleteNoResults.showGoToCreation(searchValue => ({
+		noResultsIcon: "restaurant",
+		source: {
+			icon: "lunch_dining",
+			message: `Voltar para o produto: ${this.product().name}`,
+		},
+		destination: {
+			url: `${routeNames.rawMaterials}/new`,
+			persistForm: {
+				value: {name: searchValue},
+				key: "raw-materials"
+			}
+		}
+	}))
+
+	preparationsNoResults = AutocompleteNoResults.showGoToCreation(searchValue => ({
+		noResultsIcon: "blender",
+		source: {
+			icon: "lunch_dining",
+			message: `Voltar para o produto: ${this.product().name}`,
+		},
+		destination: {
+			url: `${routeNames.preparations}/new`,
+			persistForm: {
+				value: {name: searchValue},
+				key: "preparations"
+			}
+		}
+	}))
+
 	ingredient = toSignal(this.form.controls.ingredientType.valueChanges, {
 		initialValue: this.form.controls.ingredientType.value,
 	});
@@ -202,4 +237,5 @@ export class ProductsIngredientsCreatorComponent {
 	}
 
 	protected readonly ProductIngredientType = ProductIngredientType;
+
 }

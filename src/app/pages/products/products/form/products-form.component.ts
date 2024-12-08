@@ -10,6 +10,8 @@ import { ProductsForm } from "../models/products-form";
 import { OrdersItemsService } from "../../../orders/items/orders-items.service";
 import { ProductsCategoriesService } from "../../categories/products-categories.service";
 import { ReactiveFormsModule } from "@angular/forms";
+import { routeNames } from "../../../../shared/route-names";
+import { AutocompleteNoResults } from "../../../../shared/components/autocomplete/no-results/autocomplete-no.results";
 
 @Component({
     selector: 'app-products-form',
@@ -17,7 +19,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 		FormComponent,
 		FormInputComponent,
 		AutocompleteComponent,
-		ReactiveFormsModule
+		ReactiveFormsModule,
 	],
     templateUrl: './products-form.component.html',
     styleUrl: './products-form.component.scss'
@@ -32,9 +34,32 @@ export class ProductsFormComponent {
 	modifiers: FormModifier<ProductsForm, Product>[] = [
 		{
 			key: 'categoryId',
-			modifier: source => source.category.id
-		}
+			modifier: source => source.category?.id
+		},
 	];
+
+	noResults = AutocompleteNoResults.autoCreation(() => {
+		return {
+			noResultsIcon: "category",
+			method: params => this.categoriesService.create(params as any),
+			key: "name"
+		// 	destination: {
+		// 		url: `${routeNames.productsCategories}/new`,
+		// 		persistForm: {
+		// 			key: "products:categories",
+		// 			value: {name: searchValue}
+		// 		}
+		// 	},
+		// 	source: {
+		// 		message: `Voltar para a criação do produto`,
+		// 		icon: "lunch_dining",
+		// 		persistForm: {
+		// 			key: 'products',
+		// 			value: this.form.getRawValue()
+		// 		}
+		// 	}
+		}
+	});
 
 	onSubmit() {
 		this.formSubmit.emit(this.form.getRawValue());

@@ -17,7 +17,7 @@ import { of } from "rxjs";
 import { ProductsDefinePriceComponent } from "../define-price/products-define-price.component";
 import { rxResource } from "@angular/core/rxjs-interop";
 import { RawMaterialsMeasurementUnit } from "../../../raw-materials/enums/raw-materials-measurement-unit";
-import { ConfirmActionService } from "../../../../core/services/confirm-action.service";
+import { ConfirmActionService } from "../../../../core/services/confirm-action/confirm-action.service";
 
 @Component({
 	selector: 'app-products-ingredients',
@@ -89,6 +89,9 @@ export class ProductsIngredientsComponent {
 								this.requestUpdate.emit();
 							})
 						}
+					},
+					config: {
+						minWidth: "fit-content",
 					}
 				})
 			}
@@ -100,16 +103,17 @@ export class ProductsIngredientsComponent {
 				this.dialog.open({
 					component: ProductsIngredientsCreatorComponent,
 					data: {
+						product: this.product()!,
 						formSubmit: (value) => {
 							this.service.create(value).subscribe(() => {
-								this.resource.reload();
 								this.dialog.close(ProductsIngredientsCreatorComponent);
 								this.requestUpdate.emit();
 							})
 						}
 					},
 					config: {
-						minWidth: "900px"
+						minWidth: "900px",
+
 					}
 				})
 			}
@@ -129,7 +133,6 @@ export class ProductsIngredientsComponent {
 					primary: {
 						click: () => {
 							this.service.delete(element.id).subscribe(() => {
-								this.resource.reload();
 								this.requestUpdate.emit();
 							})
 						}

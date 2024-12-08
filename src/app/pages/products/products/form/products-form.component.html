@@ -10,6 +10,7 @@
 		placeholder="Informe aqui o nome"/>
 
 	<app-autocomplete
+		key="integrationName"
 		[control]="form.controls.integrationName"
 		[method]="ordersItemsService.autocomplete"
 		label="Nome no Ifood"
@@ -23,6 +24,7 @@
 		[method]="categoriesService.autocomplete"
 		label="Categoria"
 		placeholder="Informe aqui a categoria"
+		[noResults]="noResults"
 	>
 
 	</app-autocomplete>
