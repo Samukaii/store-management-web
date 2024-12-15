@@ -11,7 +11,7 @@ import { TableActionsFn } from "../../../../shared/components/table/table-action
 import { ProductsCategoriesService } from "../products-categories.service";
 import { NoResults } from "../../../../shared/components/no-results/models/no-results";
 import { rxResource } from "@angular/core/rxjs-interop";
-import { ConfirmActionService } from "../../../../core/services/confirm-action/confirm-action.service";
+import { ConfirmActionService } from "../../../../shared/components/confirm-action/confirm-action.service";
 
 @Component({
 	selector: 'app-products-categories-list',

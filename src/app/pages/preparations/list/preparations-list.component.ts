@@ -13,7 +13,7 @@ import { NoResults } from "../../../shared/components/no-results/models/no-resul
 import { DialogService } from "../../../shared/services/dialog.service";
 import { rxResource } from "@angular/core/rxjs-interop";
 import { RawMaterialsMeasurementUnit } from "../../raw-materials/enums/raw-materials-measurement-unit";
-import { ConfirmActionService } from "../../../core/services/confirm-action/confirm-action.service";
+import { ConfirmActionService } from "../../../shared/components/confirm-action/confirm-action.service";
 
 @Component({
 	selector: 'app-preparations-list',

@@ -16,7 +16,7 @@ import { of } from "rxjs";
 import { rxResource } from "@angular/core/rxjs-interop";
 import { PreparationIngredient } from "../models/preparation-ingredient";
 import { PreparationsDefineQuantityComponent } from "../define-quantity/preparations-define-quantity.component";
-import { ConfirmActionService } from "../../../core/services/confirm-action/confirm-action.service";
+import { ConfirmActionService } from "../../../shared/components/confirm-action/confirm-action.service";
 
 @Component({
     selector: 'app-preparations-ingredients',

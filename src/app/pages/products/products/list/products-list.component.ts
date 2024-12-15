@@ -16,7 +16,7 @@ import { ChipsSelectorComponent } from "../../../../shared/components/chips-sele
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { ProductsCategoriesService } from "../../categories/products-categories.service";
 import { FormValue } from "../../../../shared/models/form-value";
-import { ConfirmActionService } from "../../../../core/services/confirm-action/confirm-action.service";
+import { ConfirmActionService } from "../../../../shared/components/confirm-action/confirm-action.service";
 import { Generic } from "../../../../shared/models/generic";
 
 export const formValue = <Form extends FormGroup>(form: Form) => {

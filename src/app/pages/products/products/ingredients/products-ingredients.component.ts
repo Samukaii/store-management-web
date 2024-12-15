@@ -17,7 +17,7 @@ import { of } from "rxjs";
 import { ProductsDefinePriceComponent } from "../define-price/products-define-price.component";
 import { rxResource } from "@angular/core/rxjs-interop";
 import { RawMaterialsMeasurementUnit } from "../../../raw-materials/enums/raw-materials-measurement-unit";
-import { ConfirmActionService } from "../../../../core/services/confirm-action/confirm-action.service";
+import { ConfirmActionService } from "../../../../shared/components/confirm-action/confirm-action.service";
 
 @Component({
 	selector: 'app-products-ingredients',
@@ -77,6 +77,28 @@ export class ProductsIngredientsComponent {
 		{
 			type: "stroked",
 			label: "Definir preço",
+			click: () => {
+				this.dialog.open({
+					component: ProductsDefinePriceComponent,
+					data: {
+						product: this.product()!,
+						formSubmit: (value) => {
+							this.productsService.definePrice(this.product()!.id, value).subscribe(() => {
+								this.resource.reload();
+								this.dialog.closeAll();
+								this.requestUpdate.emit();
+							})
+						}
+					},
+					config: {
+						minWidth: "fit-content",
+					}
+				})
+			}
+		},
+		{
+			type: "stroked",
+			label: "Importar de outro produto",
 			click: () => {
 				this.dialog.open({
 					component: ProductsDefinePriceComponent,
