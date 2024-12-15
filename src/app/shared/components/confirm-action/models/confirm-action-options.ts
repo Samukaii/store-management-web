@@ -1,4 +1,4 @@
-import { Button } from "../components/button/models/button";
+import { Button } from "../../button/models/button";
 
 export interface ConfirmActionOptions {
 	title: string;

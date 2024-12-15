@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { ConfirmActionComponent } from "../../components/confirm-action/confirm-action.component";
-import { ConfirmActionOptions } from "../../../shared/models/confirm-action-options";
-import { DialogService } from "../../../shared/services/dialog.service";
+import { DialogService } from "../../services/dialog.service";
+import { ConfirmActionComponent } from "./confirm-action.component";
+import { ConfirmActionOptions } from "./models/confirm-action-options";
 
 @Injectable({
   providedIn: 'root'
