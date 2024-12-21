@@ -57,8 +57,8 @@ export class RawMaterialsListComponent {
 				id: -2,
 				name: "Sem categoria"
 			},
-			...this.categories.value() ?? [],
-		]
+			...(this.categories.value() ?? []),
+		];
 	});
 
 	resource = rxResource({

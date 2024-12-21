@@ -9,7 +9,7 @@ import { Preparation } from "../models/preparation";
 import { Button } from "../../../shared/components/button/models/button";
 import { TableActionsFn } from "../../../shared/components/table/table-actions-fn";
 import { PreparationsIngredientsService } from "./preparations-ingredients.service";
-import { DialogService } from "../../../shared/services/dialog.service";
+import { DialogService } from "../../../shared/services/dialog/dialog.service";
 import { PreparationsIngredientsCreatorComponent } from "./creator/preparations-ingredients-creator.component";
 import { NoResults } from "../../../shared/components/no-results/models/no-results";
 import { of } from "rxjs";

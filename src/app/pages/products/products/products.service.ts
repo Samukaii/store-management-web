@@ -6,6 +6,17 @@ import { ProductsFormValue } from "./models/products-form-value";
 import { ProductFoodInput } from "./models/product-food-input";
 import { ProductsDefinePricePayload } from "./define-price/create-products-define-price.form";
 import { Generic } from "../../../shared/models/generic";
+import { map, Observable } from "rxjs";
+import { AutocompleteOption } from "../../../shared/components/autocomplete/models/autocomplete-option";
+
+export const toAutoCompleteOptions = (idProperty = "id", nameProperty = "name") => <T extends any[]>(source: Observable<T>) => {
+	return source.pipe(
+		map((source): AutocompleteOption[] => source.map(item => ({
+			id: item[idProperty],
+			name: item[nameProperty],
+		})))
+	)
+}
 
 @Injectable({
 	providedIn: 'root'
@@ -18,6 +29,12 @@ export class ProductsService {
 		return this.http.get<Product[]>(this.baseUrl, {
 			params
 		});
+	}
+
+	autocomplete = (params: Generic = {}) => {
+		return this.http.get<Product[]>(this.baseUrl, {
+			params
+		}).pipe(toAutoCompleteOptions());
 	}
 
 	single(id: number) {

@@ -1,0 +1,19 @@
+@let currentControl = control();
+
+@switch (currentControl.type) {
+	@case ("input") {
+		<app-form-input
+			[control]="formControl"
+			[label]="currentControl.options.label"
+			[placeholder]="currentControl.options.placeholder"
+		/>
+	}
+	@case ("autocomplete") {
+		<app-autocomplete
+			[control]="formControl"
+			[placeholder]="currentControl.options.placeholder"
+			[label]="currentControl.options.label"
+			[method]="$any(currentControl.options).method"
+		/>
+	}
+}

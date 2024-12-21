@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { DialogService } from "../../services/dialog.service";
+import { DialogService } from "../../services/dialog/dialog.service";
 import { ConfirmActionComponent } from "./confirm-action.component";
 import { ConfirmActionOptions } from "./models/confirm-action-options";
+import { DynamicForm } from "../dynamic-form/models/dynamic-form-control";
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,14 @@ import { ConfirmActionOptions } from "./models/confirm-action-options";
 export class ConfirmActionService {
 	private dialog = inject(DialogService);
 
-	confirm(options: ConfirmActionOptions) {
+	confirm<Form extends DynamicForm>(options: ConfirmActionOptions<Form>) {
 		this.dialog.open({
 			component: ConfirmActionComponent,
 			data: options,
 			config: {
-				minWidth: "fit-content",
+				width: "fit-content",
+				minWidth: "500px",
+				...options.config
 			}
 		})
 	}

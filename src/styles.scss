@@ -23,6 +23,17 @@ html {
 	}
 }
 
+.snackbar-error {
+	--mdc-snackbar-container-color: #c04040;
+	--mat-snack-bar-button-color: white;
+	--mdc-snackbar-supporting-text-size: .97rem;
+
+	.mat-mdc-snackbar-surface {
+		padding: .3rem 1rem;
+		font-size: .95rem;
+	}
+}
+
 
 html {
 	--border-color: rgba(128, 128, 128, 0.35);

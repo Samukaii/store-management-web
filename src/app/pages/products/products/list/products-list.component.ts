@@ -10,7 +10,7 @@ import { TableColumnFn } from "../../../../shared/components/table/table-column-
 import { TableActionsFn } from "../../../../shared/components/table/table-actions-fn";
 import { ProductsService } from "../products.service";
 import { NoResults } from "../../../../shared/components/no-results/models/no-results";
-import { DialogService } from "../../../../shared/services/dialog.service";
+import { DialogService } from "../../../../shared/services/dialog/dialog.service";
 import { rxResource, toSignal } from "@angular/core/rxjs-interop";
 import { ChipsSelectorComponent } from "../../../../shared/components/chips-selector/chips-selector.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
@@ -94,8 +94,8 @@ export class ProductsListComponent {
 				id: 'no-costs',
 				name: "Sem custos"
 			},
-			...this.categories.value() ?? [],
-		]
+			...(this.categories.value() ?? []),
+		];
 	});
 
 	resource = rxResource({

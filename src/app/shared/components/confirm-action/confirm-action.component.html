@@ -1,8 +1,18 @@
 <h2 class="dialog-title">{{title()}}</h2>
+@if (description()) {
 <p>{{description()}}</p>
+}
 
+@let formToUse = form();
+
+@if (formToUse) {
+	<app-dynamic-form
+		[form]="dynamicForm"
+		[formConfig]="formToUse"
+	/>
+}
 <app-buttons-list
 	gap=".5rem"
 	alignment="flex-end"
-	[actions]="actionsList"
+	[actions]="actionsList()"
 />

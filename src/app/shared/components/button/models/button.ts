@@ -4,7 +4,7 @@ import {
 	ButtonLoadingFinishStatus
 } from "../../../directives/button-request-loading/models/button-loading-finish.status";
 
-export interface Button {
+export interface Button<ClickArgs extends any[] = []> {
 	iconColor?: AppColor;
 	tooltip?: string;
 	label?: string;
@@ -16,5 +16,5 @@ export interface Button {
 	afterLoadingSuccess?: (status: ButtonLoadingFinishStatus) => void;
 	afterLoadingError?: () => void;
 	afterLoading?: (status: ButtonLoadingFinishStatus) => void;
-	click?: () => void;
+	click?: (...args: ClickArgs) => void;
 }

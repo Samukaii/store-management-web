@@ -1,4 +1,4 @@
-import { Component, computed, DestroyRef, inject, input, OnInit, output, signal } from '@angular/core';
+import { Component, computed, DestroyRef, effect, inject, input, OnInit, output, signal } from '@angular/core';
 import {
 	MatAutocomplete,
 	MatAutocompleteSelectedEvent,
@@ -17,6 +17,8 @@ import { toIdentifiable } from "../../helpers/to-identifiable";
 import { ButtonComponent } from "../button/button.component";
 import { NoResultsAction } from "./models/no-results-action";
 import { NoResultsActionsFn } from "./models/no-results-actions-fn";
+import { GlobalErrorDirective } from "../../directives/global-error/global-error.directive";
+
 
 @Component({
     selector: 'app-autocomplete',
@@ -34,7 +36,11 @@ import { NoResultsActionsFn } from "./models/no-results-actions-fn";
 		ButtonComponent
 	],
     templateUrl: './autocomplete.component.html',
-    styleUrl: './autocomplete.component.scss'
+    styleUrl: './autocomplete.component.scss',
+	hostDirectives: [{
+		directive: GlobalErrorDirective,
+		inputs: ["control"]
+	}]
 })
 export class AutocompleteComponent implements OnInit {
 	control = input.required<FormControl>();
@@ -55,6 +61,17 @@ export class AutocompleteComponent implements OnInit {
 
 	search = signal("");
 	preventEmission = false;
+	searching = signal(false);
+
+	stopSearching = effect(() => {
+		if (this.search().length) return;
+
+		this.searching.set(false);
+
+		this.internalForm.controls.search.setValidators(() => this.control().errors);
+		this.preventEmission = true;
+		this.internalForm.controls.search.updateValueAndValidity();
+	})
 
 	filteredData = rxResource({
 		request: this.search,
@@ -72,6 +89,7 @@ export class AutocompleteComponent implements OnInit {
 
 		if (!value) return;
 
+		this.searching.set(false);
 		this.control().setValue(value.id);
 		this.control().markAsDirty();
 
@@ -122,7 +140,7 @@ export class AutocompleteComponent implements OnInit {
 				return;
 			}
 
-			search.setValue(value, {emitEvent: false});
+			if (!this.searching()) search.setValue(value, {emitEvent: false});
 		});
 	}
 
@@ -132,6 +150,14 @@ export class AutocompleteComponent implements OnInit {
 		const controlError = this.getControlError$();
 
 		controlError.subscribe(error => {
+			if (this.searching() && this.search().length) {
+				search.setValidators(() => null);
+				this.preventEmission = true;
+				search.updateValueAndValidity();
+
+				return;
+			}
+
 			search.setValidators(() => error);
 			this.preventEmission = true;
 			search.updateValueAndValidity();
@@ -169,6 +195,9 @@ export class AutocompleteComponent implements OnInit {
 			}
 
 			if(typeof value !== 'string') return;
+
+			this.searching.set(true);
+			this.control().setValue(null);
 
 			this.search.set(value);
 		});

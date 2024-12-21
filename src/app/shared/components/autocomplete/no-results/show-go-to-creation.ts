@@ -1,7 +1,7 @@
 import { NoResultsShowGoToCreationOptions } from "../models/no-results-show-go-to-creation.options";
 import { inject } from "@angular/core";
 import { FormPersistenceService } from "../../../../core/services/form-persistence/form-persistence.service";
-import { DialogService } from "../../../services/dialog.service";
+import { DialogService } from "../../../services/dialog/dialog.service";
 import { NavigationContextService } from "../../../../core/components/navigation-context/navigation-context.service";
 import { Router } from "@angular/router";
 import { NoResultsActionsFn } from "../models/no-results-actions-fn";

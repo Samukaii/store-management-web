@@ -9,15 +9,17 @@ import { Product } from "../models/product";
 import { Button } from "../../../../shared/components/button/models/button";
 import { TableActionsFn } from "../../../../shared/components/table/table-actions-fn";
 import { ProductsIngredientsService } from "./products-ingredients.service";
-import { DialogService } from "../../../../shared/services/dialog.service";
+import { DialogService } from "../../../../shared/services/dialog/dialog.service";
 import { ProductsIngredientsCreatorComponent } from "./creator/products-ingredients-creator.component";
 import { NoResults } from "../../../../shared/components/no-results/models/no-results";
 import { ProductFoodInput } from "../models/product-food-input";
-import { of } from "rxjs";
+import { map, of } from "rxjs";
 import { ProductsDefinePriceComponent } from "../define-price/products-define-price.component";
 import { rxResource } from "@angular/core/rxjs-interop";
 import { RawMaterialsMeasurementUnit } from "../../../raw-materials/enums/raw-materials-measurement-unit";
 import { ConfirmActionService } from "../../../../shared/components/confirm-action/confirm-action.service";
+import { Validators } from "@angular/forms";
+import { valueType } from "../../../../shared/helpers/value-type";
 
 @Component({
 	selector: 'app-products-ingredients',
@@ -100,20 +102,30 @@ export class ProductsIngredientsComponent {
 			type: "stroked",
 			label: "Importar de outro produto",
 			click: () => {
-				this.dialog.open({
-					component: ProductsDefinePriceComponent,
-					data: {
-						product: this.product()!,
-						formSubmit: (value) => {
-							this.productsService.definePrice(this.product()!.id, value).subscribe(() => {
-								this.resource.reload();
-								this.dialog.closeAll();
-								this.requestUpdate.emit();
-							})
+				this.confirm.confirm({
+					title: "Importar ingredientes",
+					form: {
+						productId: {
+							type: "autocomplete",
+							valueType: valueType<number>(),
+							validators: Validators.required,
+							options: {
+								label: "Produto",
+								placeholder: "Informe aqui o produto",
+								method: this.productsService.autocomplete
+							}
+						}
+					},
+					actions: {
+						primary: {
+							label: "Importar",
+							click: form => {
+								this.service.importIngredients(form).subscribe();
+							}
 						}
 					},
 					config: {
-						minWidth: "fit-content",
+						minWidth: "800px"
 					}
 				})
 			}

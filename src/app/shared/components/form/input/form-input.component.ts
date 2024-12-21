@@ -4,6 +4,7 @@ import { MatInput } from "@angular/material/input";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { NgxCurrencyConfig, NgxCurrencyDirective } from "ngx-currency";
 import { FieldErrorComponent } from "../../field-error/field-error.component";
+import { GlobalErrorDirective } from "../../../directives/global-error/global-error.directive";
 
 @Component({
     selector: 'app-form-input',
@@ -17,7 +18,11 @@ import { FieldErrorComponent } from "../../field-error/field-error.component";
 		FieldErrorComponent,
 	],
     templateUrl: './form-input.component.html',
-    styleUrl: './form-input.component.scss'
+    styleUrl: './form-input.component.scss',
+	hostDirectives: [{
+		directive: GlobalErrorDirective,
+		inputs: ["control"]
+	}]
 })
 export class FormInputComponent {
 	control = input.required<FormControl>();

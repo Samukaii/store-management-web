@@ -10,7 +10,7 @@ import { TableColumnFn } from "../../../shared/components/table/table-column-fn"
 import { TableActionsFn } from "../../../shared/components/table/table-actions-fn";
 import { PreparationsService } from "../preparations.service";
 import { NoResults } from "../../../shared/components/no-results/models/no-results";
-import { DialogService } from "../../../shared/services/dialog.service";
+import { DialogService } from "../../../shared/services/dialog/dialog.service";
 import { rxResource } from "@angular/core/rxjs-interop";
 import { RawMaterialsMeasurementUnit } from "../../raw-materials/enums/raw-materials-measurement-unit";
 import { ConfirmActionService } from "../../../shared/components/confirm-action/confirm-action.service";

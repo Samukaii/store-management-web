@@ -9,7 +9,7 @@ import { Order } from "../models/order";
 import { Button } from "../../../shared/components/button/models/button";
 import { TableActionsFn } from "../../../shared/components/table/table-actions-fn";
 import { OrdersItemsService } from "./orders-items.service";
-import { DialogService } from "../../../shared/services/dialog.service";
+import { DialogService } from "../../../shared/services/dialog/dialog.service";
 import { NoResults } from "../../../shared/components/no-results/models/no-results";
 import { OrderItem } from "../models/order-item";
 import { of } from "rxjs";

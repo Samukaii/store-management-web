@@ -21,4 +21,10 @@ type OptionalComponentInputs<T> = {
 	[Key in ExtractUndefined<ComponentInput<T>>]?: ComponentInput<T>[Key];
 }
 
+export type UndefinedToOptional<T> = {
+	[Key in ExtractNonUndefined<T>]: T[Key]
+} & {
+	[Key in ExtractUndefined<T>]?: T[Key];
+}
+
 export type ComponentInputs<T> = RequiredComponentInputs<T> & OptionalComponentInputs<T>;

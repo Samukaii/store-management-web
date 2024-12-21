@@ -5,6 +5,7 @@ import { ProductsAddIngredientFormValue } from "../models/products-add-ingredien
 import { injectParams } from "../../../../shared/di/inject-params";
 import { ProductFoodInput } from "../models/product-food-input";
 import { environment } from "../../../../environments/environment";
+import { Generic } from "../../../../shared/models/generic";
 
 @Injectable({
 	providedIn: 'root'
@@ -32,5 +33,9 @@ export class ProductsIngredientsService {
 
 	update(id: number, value: ProductsAddIngredientFormValue) {
 		return this.http.put<ProductFoodInput>(`${this.baseUrl()}/${id}`, value);
+	}
+
+	importIngredients(form: Generic) {
+		return this.http.post<ProductFoodInput>(`${this.baseUrl()}/import`, form);
 	}
 }

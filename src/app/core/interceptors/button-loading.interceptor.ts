@@ -11,12 +11,6 @@ export const buttonLoadingInterceptor: HttpInterceptorFn = (req, next) => {
 	formButtonService.addLoading(req);
 	formButtonService.removeLastClickedButton();
 
-	const event = next(req);
-
-	event.pipe(
-		filter(event => event instanceof HttpResponse)
-	)
-
 	return next(req).pipe(
 		catchError((error: HttpErrorResponse): ObservableInput<any>=> {
 			formButtonService.finishLoading(error);
