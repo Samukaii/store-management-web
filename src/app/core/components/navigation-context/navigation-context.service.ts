@@ -6,33 +6,36 @@ import { NavigationContext } from "./models/navigation-context";
 	providedIn: 'root'
 })
 export class NavigationContextService {
-	contexts = signal<NavigationContext[]>([]);
+	private internalContexts = signal<NavigationContext[]>([]);
+
 	lastContext = computed(() => {
-		return this.contexts().at(0) ?? null;
+		return this.internalContexts().at(0) ?? null;
 	});
+
+	contexts = this.internalContexts.asReadonly();
 
 	private router = inject(Router);
 
 	registerContext(context: NavigationContext) {
-		const contexts = this.contexts();
+		const contexts = this.internalContexts();
 
-		this.contexts.set([
+		this.internalContexts.set([
 			context,
 			...contexts
 		]);
 	}
 
 	finishContext(contextToFinish: NavigationContext) {
-		let contexts = this.contexts();
+		let contexts = this.internalContexts();
 
 		contexts = contexts.filter(context => context !== contextToFinish);
 
 		this.router.navigateByUrl(contextToFinish.url);
 
-		this.contexts.set(contexts);
+		this.internalContexts.set(contexts);
 	}
 
 	clearAllContexts() {
-		this.contexts.set([]);
+		this.internalContexts.set([]);
 	}
 }

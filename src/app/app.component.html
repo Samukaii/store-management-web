@@ -2,7 +2,7 @@
 	<app-menu/>
 	<div class="content">
 		<app-top-bar/>
-		<div class="routes" [style.max-height]="routesHeight()">
+		<div data-test-id="routes-container" class="routes" [style.max-height]="routesHeight()">
 			<router-outlet/>
 		</div>
 		<app-navigation-context/>

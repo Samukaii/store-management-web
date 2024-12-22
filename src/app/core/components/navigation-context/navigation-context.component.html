@@ -2,6 +2,7 @@
 
 @if (context) {
 	<app-flex-row
+		[attr.data-test-id]="'context'"
 		(click)="service.finishContext(context)"
 		matRipple
 		horizontalAlignment="center"
@@ -10,16 +11,17 @@
 		class="context">
 		<app-flex-row horizontalAlignment="center">
 			@if (context.icon) {
-				<mat-icon>
+				<mat-icon [attr.data-test-id]="'icon'">
 					{{ context.icon }}
 				</mat-icon>
 			}
-			<p>
+			<p [attr.data-test-id]="'message'">
 				{{ context.message }}
 			</p>
 		</app-flex-row>
 
 		<app-button
+			[attr.data-test-id]="'action'"
 			(click)="$event.stopPropagation(); service.clearAllContexts()"
 			color="white"
 			type="basic"

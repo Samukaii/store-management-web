@@ -1,15 +1,18 @@
-@for (item of items; track item) {
-	<h2>{{ item.name }}</h2>
-	<mat-nav-list>
-		@for (subItem of item.items; track subItem.route) {
-			<a mat-list-item [routerLink]="subItem.route" routerLinkActive="active">
-				<div class="content">
-					<mat-icon>{{ subItem.icon }}</mat-icon>
-					<p>
-						{{ subItem.name }}
-					</p>
-				</div>
-			</a>
-		}
-	</mat-nav-list>
+@for (item of items; track item.name) {
+	<div [attr.data-test-id]="'menu'">
+		<h2 [attr.data-test-id]="'title'">{{ item.name }}</h2>
+		<mat-nav-list>
+			@for (subItem of item.items; track subItem.route) {
+				<a [attr.data-test-id]="'item'" mat-list-item [routerLink]="subItem.route" routerLinkActive="active">
+					<div class="content">
+						<mat-icon [attr.data-test-id]="'icon'">{{ subItem.icon }}</mat-icon>
+						<p [attr.data-test-id]="'name'">
+							{{ subItem.name }}
+						</p>
+					</div>
+				</a>
+			}
+		</mat-nav-list>
+	</div>
+
 }

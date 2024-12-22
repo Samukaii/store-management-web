@@ -3,6 +3,7 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
 import { MatIcon } from "@angular/material/icon";
 import { MatListItem, MatNavList } from "@angular/material/list";
 import { routeNames } from "../../../shared/route-names";
+import { injectMenuItems } from "../../../shared/di/inject-menu-items";
 
 @Component({
 	selector: 'app-menu',
@@ -17,57 +18,5 @@ import { routeNames } from "../../../shared/route-names";
 	styleUrl: './menu.component.scss'
 })
 export class MenuComponent {
-	items = [
-		{
-			name: "Ingredientes",
-			items: [
-				{
-					name: "Categorias",
-					route: routeNames.rawMaterialsCategories,
-					icon: "category"
-				},
-				{
-					name: "Insumos",
-					route: routeNames.rawMaterials,
-					icon: "restaurant"
-				},
-				{
-					name: "Preparos",
-					route: routeNames.preparations,
-					icon: "blender"
-				},
-
-			]
-		},
-		{
-			name: "Vendas",
-			items: [
-				{
-					name: "Categorias",
-					route: routeNames.productsCategories,
-					icon: "category"
-				},
-				{
-					name: "Produtos",
-					route: routeNames.products,
-					icon: "lunch_dining"
-				},
-				{
-					name: "Pedidos",
-					route: routeNames.orders,
-					icon: "menu_book"
-				},
-			]
-		},
-		{
-			name: "Análises",
-			items: [
-				{
-					name: "Estatísticas",
-					route: routeNames.statistics,
-					icon: "monitoring"
-				},
-			]
-		}
-	]
+	items = injectMenuItems();
 }

@@ -1,11 +1,10 @@
 import { Component, computed, ElementRef, inject, OnInit, viewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatIconRegistry } from "@angular/material/icon";
-import { MatToolbar } from "@angular/material/toolbar";
 import { MenuComponent } from "./core/components/menu/menu.component";
 import { TopBarComponent } from "./core/components/top-bar/top-bar.component";
 import { injectIsAtBrowser } from "./shared/di/inject-is-at-browser";
-import {NavigationContextComponent} from "./core/components/navigation-context/navigation-context.component";
+import { NavigationContextComponent } from "./core/components/navigation-context/navigation-context.component";
 
 @Component({
     selector: 'app-root',
@@ -18,16 +17,12 @@ export class AppComponent implements OnInit {
 
 	isAtBrowser = injectIsAtBrowser();
 
-	toolbarElement = viewChild(MatToolbar, {read: ElementRef});
-	topBarElement = viewChild(TopBarComponent, {read: ElementRef});
+	topBarElement = viewChild(TopBarComponent);
 
 	allOccupiedSpaces = computed(() => {
 		if(!this.isAtBrowser) return 0;
 
-		const toolbarHeight = this.getHeight(this.toolbarElement());
-		const topBarHeight = this.getHeight(this.topBarElement());
-
-		return toolbarHeight + topBarHeight;
+		return this.getHeight(this.topBarElement()?.elementRef);
 	});
 
 	routesHeight = computed(() => {

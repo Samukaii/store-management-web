@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject } from '@angular/core';
 import { LocalActionsComponent } from "../../../shared/components/local-actions/local-actions.component";
 import { BreadcrumbComponent } from "../breadcrumb/breadcrumb.component";
 import { MatProgressBar } from "@angular/material/progress-bar";
@@ -14,8 +14,9 @@ import { TopBarLoadingService } from "./top-bar-loading.service";
 		FlexRowComponent
 	],
     templateUrl: './top-bar.component.html',
-    styleUrl: './top-bar.component.scss'
+    styleUrl: './top-bar.component.scss',
 })
 export class TopBarComponent {
 	protected service = inject(TopBarLoadingService);
+	elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 }

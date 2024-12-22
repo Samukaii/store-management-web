@@ -4,7 +4,6 @@ import { LocalActionsService } from "../local-actions.service";
 
 @Component({
 	selector: 'app-local-actions-updater',
-	standalone: true,
 	template: '',
 	styles: ''
 })

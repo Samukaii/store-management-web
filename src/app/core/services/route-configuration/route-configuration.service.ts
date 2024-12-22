@@ -8,11 +8,8 @@ import { injectRouteData } from "../../../shared/di/inject-route-data";
 export class RouteConfigurationService {
 	private routeData = injectRouteData();
 
-	private defaultConfiguration: Required<AppRouteConfiguration> = {
-		showToolbar: true,
-		showMenu: true,
-		showFriends: true,
-		breadcrumb: ""
+	private defaultConfiguration: AppRouteConfiguration = {
+		breadcrumb: "",
 	};
 
 	routeConfiguration = computed(

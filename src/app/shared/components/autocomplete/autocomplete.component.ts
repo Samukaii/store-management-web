@@ -11,13 +11,13 @@ import { rxResource, takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { AutocompleteMethod } from "./models/autocomplete-method";
 import { AutocompleteOption } from "./models/autocomplete-option";
 import { map, of, startWith } from "rxjs";
-import { ProgressSpinnerComponent } from "../../../core/components/progress-spinner/progress-spinner.component";
 import { FieldErrorComponent } from "../field-error/field-error.component";
 import { toIdentifiable } from "../../helpers/to-identifiable";
 import { ButtonComponent } from "../button/button.component";
 import { NoResultsAction } from "./models/no-results-action";
 import { NoResultsActionsFn } from "./models/no-results-actions-fn";
 import { GlobalErrorDirective } from "../../directives/global-error/global-error.directive";
+import { ProgressSpinnerComponent } from "../progress-spinner/progress-spinner.component";
 
 
 @Component({

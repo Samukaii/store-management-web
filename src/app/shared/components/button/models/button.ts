@@ -6,6 +6,7 @@ import {
 
 export interface Button<ClickArgs extends any[] = []> {
 	iconColor?: AppColor;
+	name?: string;
 	tooltip?: string;
 	label?: string;
 	icon?: string;

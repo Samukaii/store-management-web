@@ -1,6 +1,8 @@
 export interface AppRouteConfiguration {
-	showToolbar?: boolean;
-	showMenu?: boolean;
-	showFriends?: boolean;
 	breadcrumb?: string;
+	menu?: {
+		parent?: string;
+		name: string;
+		icon: string;
+	}
 }

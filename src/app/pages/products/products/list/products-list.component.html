@@ -5,12 +5,14 @@
 </app-local-actions-updater>
 
 <app-chips-selector
+	data-test-id="categories"
 	class="d-block mb-1"
 	[formControl]="filterForm.controls.categoryId"
 	[options]="categoriesOptions()"
 />
 
 <app-table
+	data-test-id="table"
 	[columnsFn]="getColumns"
 	[loading]="resource.isLoading()"
 	[data]="resource.value() ?? []"
