@@ -2,10 +2,10 @@ import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { catchError, ObservableInput, of } from "rxjs";
 import { inject } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { isBasicError } from "../error-handling/matchers/is-basic-error";
-import { ErrorsService } from "../error-handling/errors.service";
-import { isArgumentError } from "../error-handling/matchers/is-argument-error";
-import { SnackbarService } from "../../shared/services/snackbar/snackbar.service";
+import { isBasicError } from "../../error-handling/matchers/is-basic-error";
+import { ErrorsService } from "../../error-handling/errors.service";
+import { isArgumentError } from "../../error-handling/matchers/is-argument-error";
+import { SnackbarService } from "../../../shared/services/snackbar/snackbar.service";
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 	const snackbar = inject(SnackbarService);
