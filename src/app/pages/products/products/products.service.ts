@@ -3,9 +3,9 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { Product } from "./models/product";
 import { ProductsFormValue } from "./models/products-form-value";
-import { ProductFoodInput } from "./models/product-food-input";
 import { ProductsDefinePricePayload } from "./define-price/create-products-define-price.form";
 import { Generic } from "../../../shared/models/generic";
+import { toAutoCompleteOptions } from "../../../shared/helpers/to-auto-complete-options";
 
 @Injectable({
 	providedIn: 'root'
@@ -18,6 +18,12 @@ export class ProductsService {
 		return this.http.get<Product[]>(this.baseUrl, {
 			params
 		});
+	}
+
+	autocomplete(params: Generic) {
+		return this.http.get<Product[]>(this.baseUrl, {
+			params
+		}).pipe(toAutoCompleteOptions());
 	}
 
 	single(id: number) {
@@ -37,6 +43,6 @@ export class ProductsService {
 	}
 
 	definePrice(id: number, value: ProductsDefinePricePayload) {
-		return this.http.put<ProductFoodInput>(`${this.baseUrl}/${id}`, value);
+		return this.http.put<Product>(`${this.baseUrl}/${id}`, value);
 	}
 }
