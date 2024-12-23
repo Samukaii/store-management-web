@@ -1,12 +1,4 @@
-import {
-	assertInInjectionContext,
-	Component,
-	computed,
-	inject, resource,
-	ResourceRef,
-	ResourceStatus,
-	Signal
-} from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import {
 	LocalActionsUpdaterComponent
 } from "../../../../shared/components/local-actions/updater/local-actions-updater.component";
@@ -19,51 +11,13 @@ import { TableActionsFn } from "../../../../shared/components/table/table-action
 import { ProductsService } from "../products.service";
 import { NoResults } from "../../../../shared/components/no-results/models/no-results";
 import { DialogService } from "../../../../shared/services/dialog/dialog.service";
-import { RxResourceOptions, toObservable, toSignal } from "@angular/core/rxjs-interop";
+import { rxResource } from "@angular/core/rxjs-interop";
 import { ChipsSelectorComponent } from "../../../../shared/components/chips-selector/chips-selector.component";
-import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
+import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { ProductsCategoriesService } from "../../categories/products-categories.service";
-import { FormValue } from "../../../../shared/models/form-value";
 import { ConfirmActionService } from "../../../../shared/components/confirm-action/confirm-action.service";
 import { Generic } from "../../../../shared/models/generic";
-import { finalize, Subject, switchMap, take, takeUntil, tap } from "rxjs";
-import { AsyncPipe } from "@angular/common";
-
-export const formValue = <Form extends FormGroup>(form: Form) => {
-	return toSignal(form.valueChanges, {
-		initialValue: form.getRawValue()
-	}) as Signal<FormValue<Form>>;
-}
-
-export function rxResource<T, R>(opts: RxResourceOptions<T, R>): ResourceRef<T> {
-	opts?.injector || assertInInjectionContext(rxResource);
-	return resource<T, R>({
-		...opts,
-		loader: (params) => {
-			const cancelled = new Subject<void>();
-			let aborted = false;
-			params.abortSignal.addEventListener('abort', () => {
-				aborted = true;
-				cancelled.next();
-			});
-
-			// Note: this is identical to `firstValueFrom` which we can't use,
-			// because at the time of writing, `core` still supports rxjs 6.x.
-			return new Promise<T>((resolve, reject) => {
-				opts
-					.loader(params)
-					.pipe(take(1), takeUntil(cancelled))
-					.subscribe({
-						next: value => {
-							resolve(value)
-						},
-						error: reject,
-						complete: () => reject(new Error('Resource completed before producing a value')),
-					});
-			});
-		},
-	});
-}
+import { formValue } from "../../../../shared/helpers/form-value";
 
 @Component({
 	selector: 'app-products-list',
@@ -71,8 +25,7 @@ export function rxResource<T, R>(opts: RxResourceOptions<T, R>): ResourceRef<T> 
 		TableComponent,
 		LocalActionsUpdaterComponent,
 		ChipsSelectorComponent,
-		ReactiveFormsModule,
-		AsyncPipe
+		ReactiveFormsModule
 	],
 	templateUrl: './products-list.component.html',
 	styleUrl: './products-list.component.scss'
@@ -139,21 +92,12 @@ export class ProductsListComponent {
 		];
 	});
 
-	// data$ = toObservable(this.filter).pipe(
-	// 	switchMap((params) => {
-	// 		return this.service.getAll(params);
-	// 	})
-	// );
-	//
-	// data = toSignal(this.data$);
-
 	resource = rxResource({
 		request: () => this.filter(),
 		loader: ({request: params}) => {
 			return this.service.getAll(params);
 		}
 	});
-
 
 	noResults: NoResults = {
 		label: "Nenhum produto adicionado",
