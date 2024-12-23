@@ -1,6 +1,6 @@
-import { setupComponentTesting } from "../../../testing/setup-component-testing";
+import { setupComponentTesting } from "../../../testing/setup/setup-component-testing";
 import { BreadcrumbComponent } from "./breadcrumb.component";
-import { hasCreatedComponent } from "../../../testing/has-created-component";
+import { hasCreatedComponent } from "../../../testing/utils/has-created-component";
 import { provideMockedRouter } from "../../../testing/mocks/provide-mocked-router";
 import { ActivatedRouteSnapshot, UrlSegment } from "@angular/router";
 import { DeepPartial } from "../../../shared/models/deep-partial";

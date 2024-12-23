@@ -1,6 +1,6 @@
-import { setupComponentTesting } from "../../../testing/setup-component-testing";
+import { setupComponentTesting } from "../../../testing/setup/setup-component-testing";
 import { MenuComponent } from "./menu.component";
-import { hasCreatedComponent } from "../../../testing/has-created-component";
+import { hasCreatedComponent } from "../../../testing/utils/has-created-component";
 import { provideRouteConfiguration } from "../../../shared/di/providers/provide-route-configuration";
 import { AppRoutes } from "../../../shared/models/app-routes";
 import { DeepPartial } from "../../../shared/models/deep-partial";

@@ -1,6 +1,6 @@
-import { setupComponentTesting } from "../../../testing/setup-component-testing";
+import { setupComponentTesting } from "../../../testing/setup/setup-component-testing";
 import { NavigationContextComponent } from "./navigation-context.component";
-import { hasCreatedComponent } from "../../../testing/has-created-component";
+import { hasCreatedComponent } from "../../../testing/utils/has-created-component";
 import { NavigationContextService } from "./navigation-context.service";
 import { signal } from "@angular/core";
 import { NavigationContext } from "./models/navigation-context";
@@ -8,7 +8,7 @@ import { DeepPartial } from "../../../shared/models/deep-partial";
 import { TestBed } from "@angular/core/testing";
 import { getByTestId } from "../../../testing/getters/get-by-test-id";
 import { findByTestId } from "../../../testing/getters/find-by-test-id";
-import { detectChanges } from "../../../testing/detect-changes";
+import { detectChanges } from "../../../testing/utils/detect-changes";
 
 interface SetupConfig {
 
@@ -80,7 +80,7 @@ describe(NavigationContextComponent.name, () => {
 			setup();
 
 			const service = TestBed.inject(NavigationContextService);
-			const finishContext = spyOn(service, 'finishContext');
+			const finishContext = jest.spyOn(service, 'finishContext');
 
 			const expectedContext: NavigationContext = {
 				icon: "some-icon",
@@ -103,7 +103,7 @@ describe(NavigationContextComponent.name, () => {
 			setup();
 
 			const service = TestBed.inject(NavigationContextService);
-			const clearAllContexts = spyOn(service, 'clearAllContexts');
+			const clearAllContexts = jest.spyOn(service, 'clearAllContexts');
 
 			const expectedContext: NavigationContext = {
 				icon: "some-icon",
@@ -119,7 +119,7 @@ describe(NavigationContextComponent.name, () => {
 			const action = contextElement.getByTestId('action');
 
 			const event = {
-				stopPropagation: jasmine.createSpy('stopPropagation'),
+				stopPropagation: jest.fn(),
 			}
 
 			action.triggerEventHandler('click', event);

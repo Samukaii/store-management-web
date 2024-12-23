@@ -1,6 +1,6 @@
-import { setupComponentTesting } from "../../../testing/setup-component-testing";
+import { setupComponentTesting } from "../../../testing/setup/setup-component-testing";
 import { TopBarComponent } from "./top-bar.component";
-import { hasCreatedComponent } from "../../../testing/has-created-component";
+import { hasCreatedComponent } from "../../../testing/utils/has-created-component";
 import { TopBarLoadingService } from "./top-bar-loading.service";
 import { signal } from "@angular/core";
 import { BreadcrumbComponent } from "../breadcrumb/breadcrumb.component";
@@ -8,8 +8,8 @@ import { LocalActionsComponent } from "../../../shared/components/local-actions/
 import { MatProgressBar } from "@angular/material/progress-bar";
 import { getByDirective } from "../../../testing/getters/get-by-directive";
 import { TestBed } from "@angular/core/testing";
-import { detectChanges } from "../../../testing/detect-changes";
-import { MockComponent } from "ng-mocks";
+import { detectChanges } from "../../../testing/utils/detect-changes";
+import { mockComponent } from "../../../testing/mocks/mock-component";
 
 interface SetupConfig {
 
@@ -20,9 +20,9 @@ const setup = (config?: SetupConfig) => {
 
 	setupComponentTesting(TopBarComponent, {
 		imports: [
-			MockComponent(BreadcrumbComponent),
-			MockComponent(LocalActionsComponent),
-			MockComponent(MatProgressBar)
+			mockComponent(BreadcrumbComponent),
+			mockComponent(LocalActionsComponent),
+			mockComponent(MatProgressBar)
 		],
 		providers: [
 			{
