@@ -1,17 +1,17 @@
 import { AppComponent } from "./app.component";
-import { setupComponentTesting } from "./testing/setup-component-testing";
-import { hasCreatedComponent } from "./testing/has-created-component";
+import { setupComponentTesting } from "./testing/setup/setup-component-testing";
+import { hasCreatedComponent } from "./testing/utils/has-created-component";
 import { MenuComponent } from "./core/components/menu/menu.component";
 import { NavigationContextComponent } from "./core/components/navigation-context/navigation-context.component";
 import { TopBarComponent } from "./core/components/top-bar/top-bar.component";
 import { RouterOutlet } from "@angular/router";
-import { spyDependencyBeforeCreation } from "./testing/spy-dependency-before-creation";
+import { spyDependencyBeforeCreation } from "./testing/spies/spy-dependency-before-creation";
 import { MatIconRegistry } from "@angular/material/icon";
 import { getByDirective } from "./testing/getters/get-by-directive";
 import { getByTestId } from "./testing/getters/get-by-test-id";
 import { PLATFORM_ID } from "@angular/core";
-import { getCurrentComponentFixture } from "./testing/current-component-fixture";
-import { MockComponent, MockDirective } from "ng-mocks";
+import { getCurrentComponentFixture } from "./testing/core/current-component-fixture";
+import { mockComponent } from "./testing/mocks/mock-component";
 
 interface SetupConfig {
 	topBarHeight?: number;
@@ -21,10 +21,22 @@ interface SetupConfig {
 const setup = (config?: SetupConfig) => {
 	setupComponentTesting(AppComponent, {
 		imports: [
-			MockComponent(TopBarComponent),
-			MockDirective(RouterOutlet),
-			MockComponent(MenuComponent),
-			MockComponent(NavigationContextComponent)
+			mockComponent(TopBarComponent, {
+				properties: {
+					elementRef: {
+						nativeElement: {
+							getBoundingClientRect(): DOMRect {
+								return {
+									height: config?.topBarHeight ?? 0
+								} as DOMRect;
+							}
+						}
+					}
+				}
+			}),
+			mockComponent(RouterOutlet, {selector: 'router-outlet'}),
+			mockComponent(MenuComponent),
+			mockComponent(NavigationContextComponent)
 		],
 		providers: [
 			{provide: PLATFORM_ID, useValue: config?.platformId ?? ""},
