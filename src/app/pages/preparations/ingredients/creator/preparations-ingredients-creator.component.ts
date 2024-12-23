@@ -12,7 +12,6 @@ import { RawMaterialsMeasurementUnit } from "../../../raw-materials/enums/raw-ma
 import { AutocompleteOption } from "../../../../shared/components/autocomplete/models/autocomplete-option";
 import { ReactiveFormsModule } from "@angular/forms";
 import { PreparationIngredientType } from "../../enums/preparation-ingredient-type";
-import { formValue } from "../../../products/products/list/products-list.component";
 import { BasicOption } from "../../../../shared/models/basic-option";
 import { FormValidation } from "../../../../shared/models/form-validation";
 import { PreparationsIngredientsForm } from "../../models/preparations-ingredients-form";
@@ -21,6 +20,7 @@ import { PreparationIngredient } from "../../models/preparation-ingredient";
 import { routeNames } from "../../../../shared/route-names";
 import { Preparation } from "../../models/preparation";
 import { AutocompleteNoResults } from "../../../../shared/components/autocomplete/no-results/autocomplete-no.results";
+import { formValue } from '../../../../shared/helpers/form-value';
 
 @Component({
 	selector: 'app-preparations-ingredients-creator',
