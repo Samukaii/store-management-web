@@ -1,8 +1,8 @@
-import { setupComponentTesting } from "../../../../testing/setup-component-testing";
+import { setupComponentTesting } from "../../../../testing/setup/setup-component-testing";
 import { ProductsListComponent } from "./products-list.component";
-import { hasCreatedComponent } from "../../../../testing/has-created-component";
+import { hasCreatedComponent } from "../../../../testing/utils/has-created-component";
 import { ProductsService } from "../products.service";
-import { BehaviorSubject } from "rxjs";
+import { of } from "rxjs";
 import { DeepPartial } from "../../../../shared/models/deep-partial";
 import { Product } from "../models/product";
 import {
@@ -15,37 +15,24 @@ import { ProductCategory } from "../../categories/models/product-category";
 import { AutocompleteOption } from "../../../../shared/components/autocomplete/models/autocomplete-option";
 import { ChipsSelectorComponent } from "../../../../shared/components/chips-selector/chips-selector.component";
 import { fakeAsync, flush } from "@angular/core/testing";
-import { detectChanges } from "../../../../testing/detect-changes";
-import { spyDependencyBeforeCreation } from "../../../../testing/spy-dependency-before-creation";
+import { detectChanges } from "../../../../testing/utils/detect-changes";
 import { TableComponent } from "../../../../shared/components/table/table.component";
-import { testTable } from "../../../../testing/test-table";
-import { testConfirmAction } from "../../../../testing/test-confirm-action";
-import { spyDependency } from "../../../../testing/spy-dependency";
+import { testTable } from "../../../../testing/utils/test-table";
+import { testConfirmAction } from "../../../../testing/utils/test-confirm-action";
+import { spyDependency } from "../../../../testing/spies/spy-dependency";
 import { ConfirmActionService } from "../../../../shared/components/confirm-action/confirm-action.service";
-import { Generic } from "../../../../shared/models/generic";
 import { getByTestId } from "../../../../testing/getters/get-by-test-id";
 import { FormControl } from "@angular/forms";
-import { AsyncPipe } from "@angular/common";
-import { beforeComponentCreate } from "../../../../testing/before-component-create";
-import { MockComponent, MockProvider } from "ng-mocks";
+import { MockProvider } from "ng-mocks";
+import { mockComponent } from "../../../../testing/mocks/mock-component";
+import { EntityWithParams } from "../../../../testing/models/entity-with-params";
+import { applyParams } from "../../../../testing/filtering/apply-params";
+import { applyToAllObjects } from "../../../../testing/utils/apply-to-all-objects";
 
-
-interface ExtendedProduct extends DeepPartial<Product> {
-	params?: Generic;
-}
 
 interface SetupConfig {
-	products?: ExtendedProduct[];
-	categories?: DeepPartial<ProductCategory>[];
-}
-
-export const applyToAllObjects = <T>(list: T[], changes: DeepPartial<T>) => {
-	return list.map(item => {
-		return {
-			...changes,
-			...item
-		}
-	});
+	products?: EntityWithParams<Product>[];
+	categories?: EntityWithParams<ProductCategory>[];
 }
 
 const setup = (config?: SetupConfig) => {
@@ -55,79 +42,26 @@ const setup = (config?: SetupConfig) => {
 		profitMargin: 0,
 	});
 
-	const products$ = new BehaviorSubject(products as any as Product[]);
-
 	setupComponentTesting(ProductsListComponent, {
 		imports: [
-			AsyncPipe,
-			MockComponent(LocalActionsUpdaterComponent),
-			MockComponent(ChipsSelectorComponent),
-			MockComponent(TableComponent),
+			mockComponent(LocalActionsUpdaterComponent),
+			mockComponent(ChipsSelectorComponent),
+			mockComponent(TableComponent),
 		],
 		providers: [
 			MockProvider(ConfirmActionService),
-			// mockProvider(ProductsService, {
-			// 	getAll: params => {
-			// 		let filtered = products;
-			//
-			// 		filtered = products.filter(item => {
-			// 			const conditions: boolean[] = [];
-			//
-			// 			if (item.params?.['category.id:equal']) {
-			// 				conditions.push(item.params['category.id:equal']===params?.['category.id:equal']);
-			// 			}
-			//
-			// 			if (item.params?.['category:isNull']) {
-			// 				conditions.push(item.params['category:isNull']===params?.['category:isNull']);
-			// 			}
-			//
-			// 			if (item.params?.['ingredients:hasAssociation']) {
-			// 				conditions.push(item.params['ingredients:hasAssociation']===params?.['ingredients:hasAssociation']);
-			// 			}
-			//
-			//
-			// 			return conditions.every(condition => condition);
-			// 		});
-			//
-			// 		if (params?.['sortProperty'] && params?.['sortDirection']) {
-			// 			filtered = filtered.sort((prev, curr) => {
-			// 				const direction = params['sortDirection'] as 'asc' | 'desc';
-			// 				const sortProperty = params['sortProperty'] as string;
-			// 				const previous = prev as Generic;
-			// 				const current = curr as Generic;
-			//
-			// 				if(previous[sortProperty] === current[sortProperty])
-			// 					return 0;
-			//
-			// 				if (direction==='asc')
-			// 					return previous[sortProperty] > current[sortProperty] ? 1 : -1;
-			//
-			// 				if (direction==='desc')
-			// 					return previous[sortProperty] < current[sortProperty] ? 1 : -1;
-			//
-			// 				return 0;
-			// 			});
-			// 		}
-			//
-			// 		products$.next(filtered as any);
-			// 		//
-			// 		// console.log(filtered);
-			//
-			// 		return of(filtered.map(item => {
-			// 			const copy = {...item};
-			//
-			// 			delete copy.params;
-			//
-			// 			return copy as Product;
-			// 		}))
-			// 	},
-			// }),
+			MockProvider(ProductsService, {
+				getAll: params => {
+					return of(applyParams(products, params) as any)
+				},
+			}),
+			MockProvider(ProductsCategoriesService, {
+				autocomplete: params => {
+					return of(applyParams(config?.categories ?? [], params) as any)
+				},
+			}),
 		]
 	});
-
-
-
-
 }
 
 
@@ -162,59 +96,36 @@ describe(ProductsListComponent.name, () => {
 	});
 
 	describe('Categories list', () => {
-		it('must call autocomplete with correct params', fakeAsync(() => {
-			const unresolvedAutocomplete = spyDependencyBeforeCreation(ProductsCategoriesService, 'autocomplete');
-
+		it('must receive options from categories autocomplete for only categories with product association and custom filter options', fakeAsync(() => {
 			setup({
 				categories: [
 					{
 						id: 1,
-						name: "Category 1"
+						name: "Fruits",
+						params: {
+							'products:hasAssociation': true,
+						}
 					},
 					{
 						id: 2,
-						name: "Category 2"
+						name: "Meat & Poultry",
+						params: {
+							'products:hasAssociation': false,
+						}
 					},
 					{
 						id: 3,
-						name: "Category 3"
-					},
-				]
-			});
-
-			flush();
-
-			const autocomplete = unresolvedAutocomplete.resolve();
-
-			expect(autocomplete).toHaveBeenCalledTimes(1);
-			expect(autocomplete).toHaveBeenCalledWith({
-				sortProperty: "name",
-				sortDirection: "asc",
-				'products:hasAssociation': true
-			});
-		}));
-		it('must receive options from categories autocomplete and custom filter options', fakeAsync(() => {
-			setup({
-				categories: [
-					{
-						id: 1,
-						name: "Category 1"
-					},
-					{
-						id: 2,
-						name: "Category 2"
-					},
-					{
-						id: 3,
-						name: "Category 3"
+						name: "Seafood",
+						params: {
+							'products:hasAssociation': true,
+						}
 					},
 					{
 						id: 4,
-						name: "Category 4"
-					},
-					{
-						id: 5,
-						name: "Category 5"
+						name: "Bakery & Pastries",
+						params: {
+							'products:hasAssociation': true,
+						}
 					},
 				]
 			});
@@ -239,24 +150,16 @@ describe(ProductsListComponent.name, () => {
 					name: "Sem custos"
 				},
 				{
-					id: 1,
-					name: "Category 1"
+					id: 4,
+					name: "Bakery & Pastries"
 				},
 				{
-					id: 2,
-					name: "Category 2"
+					id: 1,
+					name: "Fruits"
 				},
 				{
 					id: 3,
-					name: "Category 3"
-				},
-				{
-					id: 4,
-					name: "Category 4"
-				},
-				{
-					id: 5,
-					name: "Category 5"
+					name: "Seafood"
 				},
 			]);
 		}));
@@ -265,7 +168,7 @@ describe(ProductsListComponent.name, () => {
 	describe('Table', () => {
 		describe('When no filter applied', () => {
 			it('must receive data from service get method ordered by name asc', fakeAsync(() => {
-				const products: ExtendedProduct[] = [
+				const products: EntityWithParams<Product>[] = [
 					{
 						id: 1,
 						name: "Cheeseburger"
@@ -288,7 +191,7 @@ describe(ProductsListComponent.name, () => {
 					}
 				];
 
-				const expectedProducts: ExtendedProduct[] = [
+				const expectedProducts: EntityWithParams<Product>[] = [
 					{
 						id: 1,
 						name: "Cheeseburger"
@@ -328,12 +231,7 @@ describe(ProductsListComponent.name, () => {
 
 		describe('When some specific category is selected', () => {
 			it('must receive data from service get method ordered by name asc for only products with this category', fakeAsync(() => {
-				beforeComponentCreate(() => {
-
-				});
-
-
-				const products: ExtendedProduct[] = [
+				const products: EntityWithParams<Product>[] = [
 					{
 						id: 1,
 						name: "Cheeseburger",
@@ -371,7 +269,7 @@ describe(ProductsListComponent.name, () => {
 					}
 				];
 
-				const expectedProducts: ExtendedProduct[] = [
+				const expectedProducts: EntityWithParams<Product>[] = [
 					{
 						id: 1,
 						name: "Cheeseburger"
@@ -393,13 +291,157 @@ describe(ProductsListComponent.name, () => {
 
 				control?.setValue(5);
 
+				detectChanges();
 				flush();
 				detectChanges();
 
-				const table = getByTestId('table');
-				const data = table.getProperty<ExtendedProduct[]>('data');
+				const table = testTable('table');
 
-				expect(data).toEqual(applyToAllObjects(expectedProducts, {
+				expect(table.getData()).toEqual(applyToAllObjects(expectedProducts, {
+					price: 0,
+					profit: 0,
+					profitMargin: 0,
+				}));
+			}));
+		});
+
+		describe('When select "no-category" filter', () => {
+			it('must receive data from service get method ordered by name asc for only products without category', fakeAsync(() => {
+				const products: EntityWithParams<Product>[] = [
+					{
+						id: 1,
+						name: "Cheeseburger",
+						params: {
+							'category:isNull': null
+						}
+					},
+					{
+						id: 2,
+						name: "French Fries",
+						params: {
+							'category.id:equal': 2
+						}
+					},
+					{
+						id: 3,
+						name: "Milkshake",
+						params: {
+							'category:isNull': null,
+						}
+					},
+					{
+						id: 4,
+						name: "Chicken Nuggets",
+						params: {
+							'category.id:equal': 5
+						}
+					},
+					{
+						id: 5,
+						name: "Hot Dog",
+						params: {
+							'category.id:equal': 5
+						}
+					}
+				];
+
+				const expectedProducts: EntityWithParams<Product>[] = [
+					{
+						id: 1,
+						name: "Cheeseburger"
+					},
+					{
+						id: 3,
+						name: "Milkshake"
+					},
+				]
+
+				setup({products});
+
+				const categorySelector = getByTestId('categories');
+				const control = categorySelector.getProperty<FormControl>('formControl');
+
+				control?.setValue('no-category');
+
+				detectChanges();
+				flush();
+				detectChanges();
+
+				const table = testTable('table');
+
+				expect(table.getData()).toEqual(applyToAllObjects(expectedProducts, {
+					price: 0,
+					profit: 0,
+					profitMargin: 0,
+				}));
+			}));
+		});
+
+		describe('When select "no-costs" filter', () => {
+			it('must receive data from service get method ordered by name asc for only products without cost', fakeAsync(() => {
+				const products: EntityWithParams<Product>[] = [
+					{
+						id: 1,
+						name: "Cheeseburger",
+						params: {
+							'category:isNull': null
+						}
+					},
+					{
+						id: 2,
+						name: "French Fries",
+						params: {
+							'ingredients:hasAssociation': false
+						}
+					},
+					{
+						id: 3,
+						name: "Milkshake",
+						params: {
+							'category.id:equal': 3
+						}
+					},
+					{
+						id: 4,
+						name: "Chicken Nuggets",
+						params: {
+							'ingredients:hasAssociation': false
+						}
+					},
+					{
+						id: 5,
+						name: "Hot Dog",
+						params: {
+							'category.id:equal': 5
+						}
+					}
+				];
+
+				const expectedProducts: EntityWithParams<Product>[] = [
+					{
+						id: 4,
+						name: "Chicken Nuggets",
+					},
+					{
+						id: 2,
+						name: "French Fries",
+					},
+				]
+
+				setup({products});
+
+				const categorySelector = getByTestId('categories');
+				const control = categorySelector.getProperty<FormControl>('formControl');
+
+				control?.setValue('no-costs');
+
+				detectChanges();
+				flush();
+				detectChanges();
+
+				const table = testTable('table');
+
+				expect(table.getData()).toEqual(applyToAllObjects(expectedProducts, {
 					price: 0,
 					profit: 0,
 					profitMargin: 0,
@@ -456,7 +498,7 @@ describe(ProductsListComponent.name, () => {
 				}));
 			});
 
-			describe('Edit', () => {
+			describe('Delete', () => {
 				it('must open a confirmation to delete element', fakeAsync(() => {
 					const products: DeepPartial<Product>[] = [
 						{
@@ -498,12 +540,17 @@ describe(ProductsListComponent.name, () => {
 					const confirm = testConfirmAction();
 
 					const deleteMethod = spyDependency(ProductsService, 'delete').asObservableOf();
+					const getAll = spyDependency(ProductsService, 'getAll').asObservableOf([]);
 
 					action.click?.();
 
 					confirm.primaryClick();
 
 					expect(deleteMethod).toHaveBeenCalledWith(546);
+
+					detectChanges();
+
+					expect(getAll).toHaveBeenCalledTimes(1);
 				}));
 			});
 		});
