@@ -13,9 +13,9 @@ import { NoResults } from "../../../shared/components/no-results/models/no-resul
 import { rxResource } from "@angular/core/rxjs-interop";
 import { ChipsSelectorComponent } from "../../../shared/components/chips-selector/chips-selector.component";
 import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
-import { formValue } from "../../products/products/list/products-list.component";
 import { RawMaterialsCategoriesService } from "../categories/raw-materials-categories.service";
 import { ConfirmActionService } from "../../../shared/components/confirm-action/confirm-action.service";
+import { formValue } from "../../../shared/helpers/form-value";
 
 @Component({
 	selector: 'app-raw-materials-list',
