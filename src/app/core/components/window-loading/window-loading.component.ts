@@ -34,8 +34,6 @@ export class WindowLoadingComponent {
 
 		if(this.noPreservation()) return 'no-preservation';
 
-		if(!this.firstLoad) return 'preservation';
-
-		return 'no-preservation';
+		return 'preservation';
 	})
 }
