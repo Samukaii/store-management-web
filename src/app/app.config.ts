@@ -12,8 +12,8 @@ import localePT from '@angular/common/locales/pt';
 import { registerLocaleData } from "@angular/common";
 import 'moment/locale/pt-br';
 import { MAT_DATE_LOCALE } from "@angular/material/core";
-import { buttonLoadingInterceptor } from "./core/interceptors/button-loading.interceptor";
-import { errorInterceptor } from "./core/interceptors/error.interceptor";
+import { buttonLoadingInterceptor } from "./core/interceptors/button-loading/button-loading.interceptor";
+import { errorInterceptor } from "./core/interceptors/error/error.interceptor";
 import { provideRouteConfiguration } from "./shared/di/providers/provide-route-configuration";
 
 registerLocaleData(localePT);
