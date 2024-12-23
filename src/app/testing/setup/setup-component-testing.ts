@@ -1,7 +1,7 @@
 import { NO_ERRORS_SCHEMA, reflectComponentType, Type } from "@angular/core";
 import { TestBed, TestModuleMetadata } from "@angular/core/testing";
-import { setCurrentComponentFixture } from "./current-component-fixture";
-import { runBeforeComponentCreateActions } from "./before-component-create";
+import { setCurrentComponentFixture } from "../core/current-component-fixture";
+import { runBeforeComponentCreateActions } from "../core/before-component-create";
 
 interface SetupComponentTestingConfig extends TestModuleMetadata{
 }

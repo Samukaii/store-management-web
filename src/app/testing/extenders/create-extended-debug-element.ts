@@ -1,11 +1,11 @@
 import { DebugElement } from "@angular/core";
-import { ExtendedDebugElement } from "./models/extended-debug-element";
-import { getByDirective } from "./getters/get-by-directive";
-import { getByTestId } from "./getters/get-by-test-id";
-import { getAllByTestId } from "./getters/get-all-by-test-id";
-import { findByDirective } from "./getters/find-by-directive";
-import { findByTestId } from "./getters/find-by-test-id";
-import { findAllByTestId } from "./getters/find-all-by-test-id";
+import { ExtendedDebugElement } from "../models/extended-debug-element";
+import { getByDirective } from "../getters/get-by-directive";
+import { getByTestId } from "../getters/get-by-test-id";
+import { getAllByTestId } from "../getters/get-all-by-test-id";
+import { findByDirective } from "../getters/find-by-directive";
+import { findByTestId } from "../getters/find-by-test-id";
+import { findAllByTestId } from "../getters/find-all-by-test-id";
 
 export const createExtendedDebugElement = <T>(element: DebugElement) => {
 	const result = element as ExtendedDebugElement<T>;
