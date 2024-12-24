@@ -4,7 +4,15 @@ import { ButtonLoadingDirective } from "../button-loading/button-loading.directi
 import { ButtonColorDirective } from "../button-color/button-color.directive";
 
 @Directive({
-	selector: '[appButtonExtended]',
+	selector: `
+		button[mat-button][appButtonExtended],
+		button[mat-raised-button][appButtonExtended],
+		button[mat-stroked-button][appButtonExtended],
+		button[mat-flat-button][appButtonExtended],
+		button[mat-icon-button][appButtonExtended],
+		button[mat-fab][appButtonExtended],
+		button[mat-mini-fab][appButtonExtended],
+	`,
 	hostDirectives: [
 		{
 			directive: ButtonLoadingDirective,

@@ -64,7 +64,6 @@ describe(buttonLoadingInterceptor.name, () => {
 			setup();
 
 			const addLoading = spyDependency(ButtonRequestLoadingService, 'addLoading');
-			const removeLastClickedButton = spyDependency(ButtonRequestLoadingService, 'removeLastClickedButton');
 
 			client().get('some-url').subscribe();
 
@@ -80,9 +79,6 @@ describe(buttonLoadingInterceptor.name, () => {
 			});
 
 			expect(addLoading).toHaveBeenCalledExactlyOnceWith(request.request);
-			expect(removeLastClickedButton).toHaveBeenCalledExactlyOnceWith();
-
-			expect(addLoading).toHaveBeenCalledBefore(removeLastClickedButton);
 		});
 	});
 
@@ -117,7 +113,6 @@ describe(buttonLoadingInterceptor.name, () => {
 			setup();
 
 			const addLoading = spyDependency(ButtonRequestLoadingService, 'addLoading');
-			const removeLastClickedButton = spyDependency(ButtonRequestLoadingService, 'removeLastClickedButton');
 
 			client().get('some-url').subscribe();
 
@@ -133,9 +128,6 @@ describe(buttonLoadingInterceptor.name, () => {
 			});
 
 			expect(addLoading).toHaveBeenCalledExactlyOnceWith(request.request);
-			expect(removeLastClickedButton).toHaveBeenCalledExactlyOnceWith();
-
-			expect(addLoading).toHaveBeenCalledBefore(removeLastClickedButton);
 		});
 	});
 });

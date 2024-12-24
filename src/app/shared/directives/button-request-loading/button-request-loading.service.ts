@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpRequest, HttpResponse } from "@angular/common/http";
 import { ButtonRequestLoadingDirective } from "./button-request-loading.directive";
-import { removeUrlParameters } from "../../helpers/remove-url-parameters";
+import { removeUrlParameters } from "../../helpers/remove-url-parameters/remove-url-parameters";
 import { ButtonLoadingFinishStatus } from "./models/button-loading-finish.status";
 
 @Injectable({
@@ -11,10 +11,6 @@ export class ButtonRequestLoadingService {
 	private lastClickedButtonIdentifier: string | null = null;
 	private allButtons = new Map<string, ButtonRequestLoadingDirective>();
 	private currentButtonsRequesting = new Map<string, ButtonRequestLoadingDirective>();
-
-	getButton(identifier: string) {
-		return this.allButtons.get(identifier);
-	}
 
 	registerButton(identifier: string, button: ButtonRequestLoadingDirective): void {
 		this.allButtons.set(identifier, button);
@@ -28,21 +24,16 @@ export class ButtonRequestLoadingService {
 		this.lastClickedButtonIdentifier = id;
 	}
 
-	removeLastClickedButton(): void {
-		this.lastClickedButtonIdentifier = null;
-	}
-
 	addLoading(httpRequest: HttpRequest<unknown>): void {
 		const url = removeUrlParameters(httpRequest.url);
 
-		if (this.lastClickedButtonIdentifier) {
-			const button = this.getButton(this.lastClickedButtonIdentifier);
-			if (!button) return;
+		const button = this.getLastClickedButton();
+		if (!button) return;
 
-			button.startRequestLoading();
+		this.removeLastClickedButton();
+		button.startRequestLoading();
 
-			this.currentButtonsRequesting.set(url, button);
-		}
+		this.currentButtonsRequesting.set(url, button);
 	}
 
 	finishLoading(response: HttpResponse<any> | HttpErrorResponse) {
@@ -51,11 +42,21 @@ export class ButtonRequestLoadingService {
 		const formButtonLoadingFromRequest =
 			this.currentButtonsRequesting.get(url)
 
-		if(formButtonLoadingFromRequest) {
-			const status: ButtonLoadingFinishStatus = response.ok ? 'success' : 'error';
+		if (formButtonLoadingFromRequest) {
+			const status: ButtonLoadingFinishStatus = response.ok ? 'success':'error';
 			formButtonLoadingFromRequest.finalizeLoading(status);
 
 			this.currentButtonsRequesting.delete(url);
 		}
+	}
+
+	private getLastClickedButton() {
+		if (!this.lastClickedButtonIdentifier) return;
+
+		return this.allButtons.get(this.lastClickedButtonIdentifier);
+	}
+
+	private removeLastClickedButton(): void {
+		this.lastClickedButtonIdentifier = null;
 	}
 }

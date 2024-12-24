@@ -1,8 +1,8 @@
-import { computed, DestroyRef, Directive, effect, ElementRef, inject, input, OnDestroy, OnInit } from '@angular/core';
-import { ErrorsService } from "../../../core/error-handling/errors.service";
-import { AbstractControl, FormControl } from "@angular/forms";
-import { isObjectLiteral } from "../../helpers/is-object-literal";
+import { computed, Directive, effect, ElementRef, inject, input, OnDestroy } from '@angular/core';
+import { ErrorsService } from "src/app/core/error-handling/errors.service";
+import { FormControl } from "@angular/forms";
 import { Subscription } from "rxjs";
+import { Generic } from "src/app/shared/models/generic";
 
 @Directive({
 	selector: '[appGlobalError]'
@@ -30,9 +30,12 @@ export class GlobalErrorDirective implements OnDestroy {
 	});
 
 	private getControlName(control: FormControl) {
-		const controls = control.parent?.controls;
+		const parent = control.parent;
 
-		if (!isObjectLiteral(controls)) return;
+		if (!parent)
+			throw new Error("The control must have a parent. Make sure it is inside a FormGroup");
+
+		const controls = parent.controls as Generic;
 
 		return Object.keys(controls).find(name => control === controls[name]);
 	}

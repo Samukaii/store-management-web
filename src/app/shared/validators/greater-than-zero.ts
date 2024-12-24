@@ -1,5 +1,5 @@
 import { ValidatorFn } from "@angular/forms";
-import { toNumberOrNull } from "../helpers/to-number-or-null";
+import { toNumberOrNull } from "../helpers/to-number-or-null/to-number-or-null";
 
 export const greaterThanZero: ValidatorFn = (control) => {
 	const value = toNumberOrNull(control.value);
@@ -11,6 +11,6 @@ export const greaterThanZero: ValidatorFn = (control) => {
 	if(value > 0) return null;
 
 	return {
-		customError: "Não pode ser zero"
+		customError: "Deve ser maior que zero"
 	}
 }

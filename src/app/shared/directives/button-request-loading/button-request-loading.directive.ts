@@ -1,52 +1,60 @@
-import { Directive, inject, input, OnChanges, OnDestroy, OnInit, output, signal, SimpleChanges } from '@angular/core';
+import {
+	computed,
+	Directive,
+	inject,
+	input,
+	OnChanges,
+	OnDestroy,
+	OnInit,
+	output,
+	signal,
+	SimpleChanges
+} from '@angular/core';
 import { ButtonRequestLoadingService } from "./button-request-loading.service";
-import { v4 as uuidv4 } from 'uuid';
 import { ButtonLoadingFinishStatus } from "./models/button-loading-finish.status";
-import { wait } from "../../helpers/wait";
+import { UuidService } from "../../services/uuid/uuid.service";
 
 @Directive({
-	selector: '[appButtonExtended]',
+	selector: '[appButtonRequestLoading]',
 	host: {
 		'(click)': 'onButtonClick()'
 	}
 })
 export class ButtonRequestLoadingDirective implements OnChanges, OnInit, OnDestroy {
 	private service = inject(ButtonRequestLoadingService);
+	private uuidService = inject(UuidService);
+	internalLoading = signal(false);
 
 	finishLoading = output<ButtonLoadingFinishStatus>();
 
-	identifier = input<string>(uuidv4());
-
-	loading = signal(false);
+	identifier = input<string>(this.uuidService.generate());
+	loading = computed(() => this.internalLoading())
 
 	ngOnInit() {
 		this.service.registerButton(this.identifier(), this);
 	}
 
-
 	ngOnChanges(changes: SimpleChanges) {
 		const change = changes['identifier'];
 
 		if(change) {
-			this.service.unregisterButton(change.previousValue);
+			if (change.previousValue) this.service.unregisterButton(change.previousValue);
 			this.service.registerButton(change.currentValue, this);
 		}
 	}
 
-	onButtonClick() {
-		this.service.setLastClickedButton(this.identifier());
-	}
-
 	startRequestLoading() {
-		this.loading.set(true);
+		this.internalLoading.set(true);
 	}
 
-	async finalizeLoading(status: 'success' | 'error' | 'no-request') {
+	async finalizeLoading(status: ButtonLoadingFinishStatus) {
 		this.finishLoading.emit(status);
 
-		await wait(100);
+		setTimeout(() => this.internalLoading.set(false), 100);
+	}
 
-		this.loading.set(false);
+	protected onButtonClick() {
+		this.service.setLastClickedButton(this.identifier());
 	}
 
 	ngOnDestroy() {
