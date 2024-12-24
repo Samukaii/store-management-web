@@ -3,8 +3,8 @@ import { MatDialog, MatDialogConfig, MatDialogRef, MatDialogState } from "@angul
 import { ComponentDialogData } from "../models/component-dialog-data";
 import { DialogOptions } from "../models/dialog-options";
 import { Generic } from "../../models/generic";
-import { componentInputExists } from "../../helpers/component-input-exists";
-import { componentOutputExists } from "../../helpers/component-output-exists";
+import { componentInputExists } from "../../helpers/component-input-exists/component-input-exists";
+import { componentOutputExists } from "../../helpers/component-output-exists/component-output-exists";
 
 
 @Injectable({

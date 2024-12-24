@@ -1,12 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { MatSnackBar, MatSnackBarConfig } from "@angular/material/snack-bar";
-
-interface SnackBarOptions {
-	message: string;
-	level: "success" | "error";
-	action?: string;
-	config?: MatSnackBarConfig;
-}
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { SnackBarOptions } from "src/app/shared/services/models/snack-bar-options";
 
 @Injectable({
 	providedIn: 'root'
