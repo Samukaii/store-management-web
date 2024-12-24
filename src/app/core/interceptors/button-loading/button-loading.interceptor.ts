@@ -9,7 +9,6 @@ export const buttonLoadingInterceptor: HttpInterceptorFn = (req, next) => {
 	const formButtonService = inject(ButtonRequestLoadingService);
 
 	formButtonService.addLoading(req);
-	formButtonService.removeLastClickedButton();
 
 	return next(req).pipe(
 		catchError((error: HttpErrorResponse): ObservableInput<any>=> {
