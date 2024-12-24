@@ -2,25 +2,25 @@ import { Component, computed, effect, inject, input, output, signal } from '@ang
 import { RawMaterial } from "../../../raw-materials/models/raw-material";
 import { createPreparationsIngredientsForm } from "../create-preparations-ingredients-form";
 import { PreparationsIngredientsFormValue } from "../../models/preparations-ingredients-form-value";
-import { FormInputComponent } from "../../../../shared/components/form/input/form-input.component";
-import { FormComponent } from "../../../../shared/components/form/form/form.component";
-import { AutocompleteComponent } from "../../../../shared/components/autocomplete/autocomplete.component";
+import { FormInputComponent } from "src/app/shared/components/form/input/form-input.component";
+import { FormComponent } from "src/app/shared/components/form/form/form.component";
+import { AutocompleteComponent } from "src/app/shared/components/autocomplete/autocomplete.component";
 import { RawMaterialsService } from "../../../raw-materials/raw-materials.service";
-import { FlexRowComponent } from "../../../../shared/components/flex-row/flex-row.component";
-import { FormRadioComponent } from "../../../../shared/components/form/radio/form-radio.component";
+import { FlexRowComponent } from "src/app/shared/components/flex-row/flex-row.component";
+import { FormRadioComponent } from "src/app/shared/components/form/radio/form-radio.component";
 import { RawMaterialsMeasurementUnit } from "../../../raw-materials/enums/raw-materials-measurement-unit";
-import { AutocompleteOption } from "../../../../shared/components/autocomplete/models/autocomplete-option";
+import { AutocompleteOption } from "src/app/shared/components/autocomplete/models/autocomplete-option";
 import { ReactiveFormsModule } from "@angular/forms";
 import { PreparationIngredientType } from "../../enums/preparation-ingredient-type";
-import { BasicOption } from "../../../../shared/models/basic-option";
-import { FormValidation } from "../../../../shared/models/form-validation";
+import { BasicOption } from "src/app/shared/models/basic-option";
+import { FormValidation } from "src/app/shared/models/form-validation";
 import { PreparationsIngredientsForm } from "../../models/preparations-ingredients-form";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { PreparationIngredient } from "../../models/preparation-ingredient";
-import { routeNames } from "../../../../shared/route-names";
+import { routeNames } from "src/app/shared/route-names";
 import { Preparation } from "../../models/preparation";
-import { AutocompleteNoResults } from "../../../../shared/components/autocomplete/no-results/autocomplete-no.results";
-import { formValue } from '../../../../shared/helpers/form-value';
+import { AutocompleteNoResults } from "src/app/shared/components/autocomplete/no-results/autocomplete-no.results";
+import { formValue } from 'src/app/shared/helpers/form-value/form-value';
 
 @Component({
 	selector: 'app-preparations-ingredients-creator',

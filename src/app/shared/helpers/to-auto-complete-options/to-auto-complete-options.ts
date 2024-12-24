@@ -1,5 +1,5 @@
 import { map, Observable } from "rxjs";
-import { AutocompleteOption } from "../components/autocomplete/models/autocomplete-option";
+import { AutocompleteOption } from "src/app/shared/components/autocomplete/models/autocomplete-option";
 
 export const toAutoCompleteOptions = (idProperty = "id", nameProperty = "name") => <T extends any[]>(source: Observable<T>) => {
 	return source.pipe(

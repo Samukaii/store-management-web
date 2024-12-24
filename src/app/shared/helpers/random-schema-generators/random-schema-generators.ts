@@ -1,6 +1,6 @@
-import { RandomGenerator } from "./random-generator";
-import { RandomSchemaType } from "../models/random-schema-type";
-import { RandomSchema } from "../models/random-schema";
+import { RandomGenerator } from "src/app/shared/helpers/random-generator/random-generator";
+import { RandomSchemaType } from "src/app/shared/models/random-schema-type";
+import { RandomSchema } from "src/app/shared/models/random-schema";
 
 export const randomSchemaGenerators = {
 	id: (random: typeof RandomGenerator) => random.integer(1000, 9999),

@@ -5,7 +5,7 @@ import { Product } from "./models/product";
 import { ProductsFormValue } from "./models/products-form-value";
 import { ProductsDefinePricePayload } from "./define-price/create-products-define-price.form";
 import { Generic } from "../../../shared/models/generic";
-import { toAutoCompleteOptions } from "../../../shared/helpers/to-auto-complete-options";
+import { toAutoCompleteOptions } from "../../../shared/helpers/to-auto-complete-options/to-auto-complete-options";
 
 @Injectable({
 	providedIn: 'root'

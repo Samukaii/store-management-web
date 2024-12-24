@@ -1,4 +1,4 @@
-import { Generic } from "../models/generic";
+import { Generic } from "../../models/generic";
 
 export class UrlHelper {
 	static joinParams(url: string, params: Generic, separator = "/") {

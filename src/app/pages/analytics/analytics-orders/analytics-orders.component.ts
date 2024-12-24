@@ -1,25 +1,27 @@
 import { Component, computed, inject, untracked } from '@angular/core';
-import { FlexRowComponent } from "../../../shared/components/flex-row/flex-row.component";
-import { LineChartComponent } from "../../../shared/components/charts/line/line-chart.component";
+import { FlexRowComponent } from "src/app/shared/components/flex-row/flex-row.component";
+import { LineChartComponent } from "src/app/shared/components/charts/line/line-chart.component";
 import { AnalyticsService } from "../analytics.service";
 import { FormBuilder } from "@angular/forms";
-import { extendedDate } from "../../../shared/helpers/extended-date";
+import { extendedDate } from "src/app/shared/helpers/extended-date/extended-date";
 import { rxResource } from "@angular/core/rxjs-interop";
 import { formatDate } from "@angular/common";
-import { WindowLoadingComponent } from "../../../core/components/window-loading/window-loading.component";
+import { WindowLoadingComponent } from "src/app/core/components/window-loading/window-loading.component";
 import { OrdersDisplayType } from "../enum/orders-display-type";
-import { DateRangeComponent } from "../../../shared/components/date-range/date-range.component";
-import { FormRadioComponent } from "../../../shared/components/form/radio/form-radio.component";
-import { BasicOption } from "../../../shared/models/basic-option";
-import { formValue } from "../../../shared/helpers/form-value";
-import { distinctPropertiesAvoidingNull } from "../../../shared/helpers/distinct-properties-avoiding-null";
-import { distinctValue } from "../../../shared/helpers/distinct-value";
-import { BarChartComponent, chartBluePalette } from "../../../shared/components/charts/bar/bar-chart.component";
-import { DatePickerComponent } from "../../../shared/components/date-picker/date-picker.component";
-import { YearFormatDirective } from "../../../shared/directives/year-format/year-format.directive";
-import { capitalize } from "../../../shared/helpers/capitalize";
+import { DateRangeComponent } from "src/app/shared/components/date-range/date-range.component";
+import { FormRadioComponent } from "src/app/shared/components/form/radio/form-radio.component";
+import { BasicOption } from "src/app/shared/models/basic-option";
+import { formValue } from "src/app/shared/helpers/form-value/form-value";
+import {
+	distinctPropertiesAvoidingNull
+} from "src/app/shared/helpers/distinct-properties-avoiding-null/distinct-properties-avoiding-null";
+import { distinctValue } from "src/app/shared/helpers/distinct-value/distinct-value";
+import { BarChartComponent, chartBluePalette } from "src/app/shared/components/charts/bar/bar-chart.component";
+import { DatePickerComponent } from "src/app/shared/components/date-picker/date-picker.component";
+import { YearFormatDirective } from "src/app/shared/directives/year-format/year-format.directive";
+import { capitalize } from "src/app/shared/helpers/capitalize/capitalize";
 import { ChartData } from "chart.js/auto";
-import { ChartDataset, ScriptableContext } from "chart.js";
+import { ScriptableContext } from "chart.js";
 import { OrdersPeriodType } from "../enum/orders-period-type";
 
 const fillPeriodWithDates = (start: Date | string, end: Date | string) => {

@@ -17,7 +17,7 @@ import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { ProductsCategoriesService } from "../../categories/products-categories.service";
 import { ConfirmActionService } from "../../../../shared/components/confirm-action/confirm-action.service";
 import { Generic } from "../../../../shared/models/generic";
-import { formValue } from "../../../../shared/helpers/form-value";
+import { formValue } from "../../../../shared/helpers/form-value/form-value";
 
 @Component({
 	selector: 'app-products-list',

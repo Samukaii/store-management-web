@@ -1,5 +1,5 @@
 import { ApplicationErrorType } from "../enumerations/application-error-type";
-import { isObjectLiteral } from "../../../shared/helpers/is-object-literal";
+import { isObjectLiteral } from "src/app/shared/helpers/is-object-literal/is-object-literal";
 import { ApplicationBasicError } from "../models/application-basic-error";
 
 export const isBasicError = (error: unknown): error is ApplicationBasicError => {

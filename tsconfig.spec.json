@@ -3,7 +3,11 @@
 	"compilerOptions": {
 		"outDir": "./out-tsc/spec",
 		"module": "CommonJs",
-		"types": ["jest"]
+		"types": ["jest"],
+		"baseUrl": "./",
+		"paths": {
+			"src/*": ["./src/*"]
+		}
 	},
 	"files": ["global.d.ts"],
 	"include": ["src/**/*.spec.ts", "src/**/*.d.ts"]

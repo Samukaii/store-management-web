@@ -12,7 +12,7 @@ import { AutocompleteMethod } from "./models/autocomplete-method";
 import { AutocompleteOption } from "./models/autocomplete-option";
 import { map, of, startWith } from "rxjs";
 import { FieldErrorComponent } from "../field-error/field-error.component";
-import { toIdentifiable } from "../../helpers/to-identifiable";
+import { toIdentifiable } from "../../helpers/to-identifiable/to-identifiable";
 import { ButtonComponent } from "../button/button.component";
 import { NoResultsAction } from "./models/no-results-action";
 import { NoResultsActionsFn } from "./models/no-results-actions-fn";

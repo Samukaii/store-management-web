@@ -1,4 +1,4 @@
-import { isObjectLiteral } from "./is-object-literal";
+import { isObjectLiteral } from "src/app/shared/helpers/is-object-literal/is-object-literal";
 
 export const distinctValue = (prev: unknown, curr: unknown): boolean => {
 	if (typeof prev !== typeof curr) return true;

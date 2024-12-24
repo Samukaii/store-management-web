@@ -1,4 +1,4 @@
-import { DateOperationType } from "./date-operation-type";
+import { DateOperationType } from "src/app/shared/models/date-operation-type";
 
 export const extendedDate = (date = new Date()) => {
 	const dateToUse = new Date(date);

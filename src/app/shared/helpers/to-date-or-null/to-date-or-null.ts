@@ -1,5 +1,4 @@
-import { isDate } from "./is-date";
-import moment from "moment/moment";
+import moment, { isDate } from "moment/moment";
 
 export const toDateOrNull = (value: unknown) => {
 	if (!isDate(value)) return null;

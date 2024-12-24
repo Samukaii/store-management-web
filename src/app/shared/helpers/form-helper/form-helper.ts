@@ -1,6 +1,6 @@
 import { FormGroup } from "@angular/forms";
-import { Generic } from "../models/generic";
-import { FormModifier } from "../models/form-modifier";
+import { Generic } from "../../models/generic";
+import { FormModifier } from "src/app/shared/models/form-modifier";
 
 export class FormHelper {
 	static patchForm<Form extends FormGroup, Source extends Generic>(form: Form, source: Source, modifiers: FormModifier<Form, Source>[]) {

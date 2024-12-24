@@ -7,7 +7,7 @@ import {
 	Validators,
 	ValueChangeEvent
 } from "@angular/forms";
-import { FormHelper } from "../../../helpers/form-helper";
+import { FormHelper } from "../../../helpers/form-helper/form-helper";
 import { Generic } from "../../../models/generic";
 import { FormModifier } from "../../../models/form-modifier";
 import { FormValidation } from "../../../models/form-validation";

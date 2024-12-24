@@ -4,7 +4,7 @@ import { environment } from "../../environments/environment";
 import { Order } from "../orders/models/order";
 import { BestSellingProduct } from "../products/products/models/best-selling-product";
 import { Generic } from "../../shared/models/generic";
-import { toDateOrNull } from "../../shared/helpers/to-date-or-null";
+import { toDateOrNull } from "../../shared/helpers/to-date-or-null/to-date-or-null";
 
 @Injectable({
 	providedIn: 'root'

@@ -7,4 +7,7 @@ module.exports = {
 		'./src/app/pages/**/*.{ts,html}',
 		'./src/app/app.component.{ts,html}',
 	],
+	moduleNameMapper: {
+		'src/(.*)': '<rootDir>/src/$1'
+	}
 };

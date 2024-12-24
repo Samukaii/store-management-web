@@ -1,25 +1,25 @@
 import { Component, inject, input, output } from '@angular/core';
 import {
 	LocalActionsUpdaterComponent
-} from "../../../../shared/components/local-actions/updater/local-actions-updater.component";
-import { TableComponent } from "../../../../shared/components/table/table.component";
+} from "src/app/shared/components/local-actions/updater/local-actions-updater.component";
+import { TableComponent } from "src/app/shared/components/table/table.component";
 import { ProductsService } from "../products.service";
-import { TableColumnFn } from "../../../../shared/components/table/table-column-fn";
+import { TableColumnFn } from "src/app/shared/components/table/table-column-fn";
 import { Product } from "../models/product";
-import { Button } from "../../../../shared/components/button/models/button";
-import { TableActionsFn } from "../../../../shared/components/table/table-actions-fn";
+import { Button } from "src/app/shared/components/button/models/button";
+import { TableActionsFn } from "src/app/shared/components/table/table-actions-fn";
 import { ProductsIngredientsService } from "./products-ingredients.service";
-import { DialogService } from "../../../../shared/services/dialog/dialog.service";
+import { DialogService } from "src/app/shared/services/dialog/dialog.service";
 import { ProductsIngredientsCreatorComponent } from "./creator/products-ingredients-creator.component";
-import { NoResults } from "../../../../shared/components/no-results/models/no-results";
+import { NoResults } from "src/app/shared/components/no-results/models/no-results";
 import { ProductFoodInput } from "../models/product-food-input";
-import { map, of } from "rxjs";
+import { of } from "rxjs";
 import { ProductsDefinePriceComponent } from "../define-price/products-define-price.component";
 import { rxResource } from "@angular/core/rxjs-interop";
 import { RawMaterialsMeasurementUnit } from "../../../raw-materials/enums/raw-materials-measurement-unit";
-import { ConfirmActionService } from "../../../../shared/components/confirm-action/confirm-action.service";
+import { ConfirmActionService } from "src/app/shared/components/confirm-action/confirm-action.service";
 import { Validators } from "@angular/forms";
-import { valueType } from "../../../../shared/helpers/value-type";
+import { valueType } from "src/app/shared/helpers/value-type/value-type";
 
 @Component({
 	selector: 'app-products-ingredients',

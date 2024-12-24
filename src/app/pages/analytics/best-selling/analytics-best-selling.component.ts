@@ -5,10 +5,10 @@ import { FlexRowComponent } from "../../../shared/components/flex-row/flex-row.c
 import { FormRadioComponent } from "../../../shared/components/form/radio/form-radio.component";
 import { BestSellingDisplayType } from "../enum/best-selling-display-type";
 import { rxResource } from "@angular/core/rxjs-interop";
-import { distinctPropertiesAvoidingNull } from "../../../shared/helpers/distinct-properties-avoiding-null";
+import { distinctPropertiesAvoidingNull } from "../../../shared/helpers/distinct-properties-avoiding-null/distinct-properties-avoiding-null";
 import { NonNullableFormBuilder } from "@angular/forms";
-import { extendedDate } from "../../../shared/helpers/extended-date";
-import { controlValue } from "../../../shared/helpers/control-value";
+import { extendedDate } from "../../../shared/helpers/extended-date/extended-date";
+import { controlValue } from "../../../shared/helpers/control-value/control-value";
 import { AnalyticsService } from "../analytics.service";
 import { BasicOption } from "../../../shared/models/basic-option";
 import { WindowLoadingComponent } from "../../../core/components/window-loading/window-loading.component";

@@ -1,4 +1,4 @@
-import { UrlHelper } from "../helpers/url-helper";
+import { UrlHelper } from "../helpers/url-helper/url-helper";
 import { injectParams } from "./inject-params";
 import { computed } from "@angular/core";
 

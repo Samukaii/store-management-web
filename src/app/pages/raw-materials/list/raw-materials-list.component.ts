@@ -15,7 +15,7 @@ import { ChipsSelectorComponent } from "../../../shared/components/chips-selecto
 import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { RawMaterialsCategoriesService } from "../categories/raw-materials-categories.service";
 import { ConfirmActionService } from "../../../shared/components/confirm-action/confirm-action.service";
-import { formValue } from "../../../shared/helpers/form-value";
+import { formValue } from "../../../shared/helpers/form-value/form-value";
 
 @Component({
 	selector: 'app-raw-materials-list',
