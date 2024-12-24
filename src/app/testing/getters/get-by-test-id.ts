@@ -1,8 +1,8 @@
 import { DebugElement } from "@angular/core";
 import { findByTestId } from "./find-by-test-id";
 
-export const getByTestId = (selector: string, parent?: DebugElement) => {
-	const element = findByTestId(selector, parent);
+export const getByTestId = <T = unknown>(selector: string, parent?: DebugElement) => {
+	const element = findByTestId<T>(selector, parent);
 	const fullSelector = `[data-test-id="${selector}"]`;
 
 	if (!element)
