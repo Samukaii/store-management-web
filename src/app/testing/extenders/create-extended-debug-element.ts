@@ -19,7 +19,9 @@ export const createExtendedDebugElement = <T>(element: DebugElement) => {
 	result.findAllByTestId = (selector: string) => findAllByTestId(selector, result);
 
 	result.text = () => result.nativeElement.textContent?.trim() ?? "";
-	result.getProperty = (property) => result.attributes[property] ?? result.properties[property] ?? null
+	result.getProperty = (property) => result.attributes[property] ?? result.properties[property] ?? null;
+
+	result.read = (token) => result.injector.get(token)
 
 	return result;
 };

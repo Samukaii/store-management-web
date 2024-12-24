@@ -1,4 +1,4 @@
-import { DebugElement, Type } from "@angular/core";
+import { DebugElement, InjectionToken, Type } from "@angular/core";
 
 export interface ExtendedDebugElement<T = any> extends DebugElement {
 	nativeElement: HTMLElement;
@@ -11,4 +11,5 @@ export interface ExtendedDebugElement<T = any> extends DebugElement {
 	findByDirective: <Directive>(directive: Type<Directive>) => ExtendedDebugElement<Directive> | undefined;
 	findAllByTestId: (selector: string) => ExtendedDebugElement[] | undefined;
 	getProperty: <T = any>(property: string) => T | null;
+	read: <T>(token: Type<T> | InjectionToken<T>) => T | null;
 }
