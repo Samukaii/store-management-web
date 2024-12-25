@@ -32,8 +32,8 @@ export class AnalyticsBestSellingComponent {
 
 	form = inject(NonNullableFormBuilder).group({
 		displayType: [BestSellingDisplayType.SALES_QUANTITY as BestSellingDisplayType],
-		startDate: [extendedDate().minus(3, 'month').get()],
-		endDate: [extendedDate().get()],
+		startDate: [extendedDate().minus(3, 'month')],
+		endDate: [extendedDate()],
 	});
 
 	displayType = controlValue(this.form, 'displayType');
