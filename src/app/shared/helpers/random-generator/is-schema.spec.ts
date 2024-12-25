@@ -1,4 +1,4 @@
-import { isSchema } from "src/app/shared/helpers/random-schema-generators/is-schema";
+import { isSchema } from "src/app/shared/helpers/random-generator/is-schema";
 
 describe(isSchema.name, () => {
 	describe('Valid schema', () => {

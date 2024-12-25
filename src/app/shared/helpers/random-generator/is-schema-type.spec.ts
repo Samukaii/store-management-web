@@ -1,4 +1,4 @@
-import { isSchemaType } from "src/app/shared/helpers/random-schema-generators/is-schema-type";
+import { isSchemaType } from "src/app/shared/helpers/random-generator/is-schema-type";
 import { RandomSchemaType } from "src/app/shared/models/random-schema-type";
 
 describe(isSchemaType.name, () => {

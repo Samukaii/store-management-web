@@ -1,4 +1,4 @@
-import { generateSchema } from "src/app/shared/helpers/random-schema-generators/generate-schema";
+import { generateSchema } from "src/app/shared/helpers/random-generator/generate-schema";
 import { RandomGenerator } from "src/app/shared/helpers/random-generator/random-generator";
 
 const mockGenerator = () => {
