@@ -1,1 +1,1 @@
-export const valueType = <T>(defaultValue?: any) => (defaultValue ?? null) as any as T;
+export const valueType = <T = null>(defaultValue?: T) => (defaultValue ?? null) as any as T;
