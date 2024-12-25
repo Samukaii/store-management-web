@@ -98,8 +98,8 @@ export class AnalyticsOrdersComponent {
 	form = inject(FormBuilder).group({
 		periodType: [OrdersPeriodType.DAY],
 		displayType: [OrdersDisplayType.BILLING],
-		startDate: [extendedDate().minus(1, 'month').get()],
-		endDate: [extendedDate().get()],
+		startDate: [extendedDate().minus(1, 'month')],
+		endDate: [extendedDate()],
 	});
 
 	displayOptions: BasicOption[] = [
@@ -136,8 +136,8 @@ export class AnalyticsOrdersComponent {
 		}
 
 		return {
-			'date:min': formValue.startDate ? extendedDate(new Date("2024-07-01T12:00:00")).getISO() : null,
-			'date:max': formValue.startDate ? extendedDate(new Date("2024-07-01T12:00:00")).plus(12, 'month').getISO() : null,
+			'date:min': formValue.startDate ? extendedDate("2024-07-01T12:00:00").toISOString() : null,
+			'date:max': formValue.startDate ? extendedDate("2024-07-01T12:00:00").plus(12, 'month').toISOString() : null,
 		}
 	}, {equal: distinctPropertiesAvoidingNull(['date:max', 'date:min'])});
 
@@ -177,8 +177,8 @@ export class AnalyticsOrdersComponent {
 
 		if (this.filters().periodType === OrdersPeriodType.MONTH) {
 			const dates = fillPeriodWithMonths(
-				extendedDate(new Date("2024-07-01T12:00:00")).get(),
-				extendedDate(new Date("2024-07-01T12:00:00")).plus(12, 'month').get()
+				extendedDate("2024-07-01T12:00:00"),
+				extendedDate("2024-07-01T12:00:00").plus(12, 'month')
 			);
 
 			data = dates.map(date => {
