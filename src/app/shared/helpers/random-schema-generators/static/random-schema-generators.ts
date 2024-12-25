@@ -1,6 +1,4 @@
 import { RandomGenerator } from "src/app/shared/helpers/random-generator/random-generator";
-import { RandomSchemaType } from "src/app/shared/models/random-schema-type";
-import { RandomSchema } from "src/app/shared/models/random-schema";
 
 export const randomSchemaGenerators = {
 	id: (random: typeof RandomGenerator) => random.integer(1000, 9999),
@@ -20,10 +18,3 @@ export const randomSchemaGenerators = {
 	hour: (random: typeof RandomGenerator) => random.randomHour(),
 	trueFalse: (random: typeof RandomGenerator) => random.trueFalse(),
 };
-
-
-export const generateSchema = (type: RandomSchemaType, generator: typeof RandomGenerator) => randomSchemaGenerators[type](generator);
-
-export const isSchemaType = (value: unknown): value is RandomSchemaType =>
-	!!randomSchemaGenerators[value as RandomSchemaType];
-export const isSchema = (value: unknown): value is RandomSchema => typeof value === "object";

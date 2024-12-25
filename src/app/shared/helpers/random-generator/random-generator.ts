@@ -1,12 +1,10 @@
 import { Generic } from "../../models/generic";
-import {
-	generateSchema,
-	isSchema,
-	isSchemaType
-} from "src/app/shared/helpers/random-schema-generators/random-schema-generators";
 import { RandomSchema } from "src/app/shared/models/random-schema";
 import { BaseSelect } from "src/app/shared/models/base-select";
 import { createArray } from "src/app/shared/helpers/create-array/create-array";
+import { generateSchema } from "src/app/shared/helpers/random-schema-generators/generate-schema";
+import { isSchemaType } from "src/app/shared/helpers/random-schema-generators/is-schema-type";
+import { isSchema } from "src/app/shared/helpers/random-schema-generators/is-schema";
 
 export class RandomGenerator {
 	static schema<T = Generic>(schemaGenerator: RandomSchema<T>){
