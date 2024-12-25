@@ -1,4 +1,5 @@
-import moment, { isDate } from "moment/moment";
+import moment from "moment/moment";
+import { isDate } from "src/app/shared/helpers/is-date/is-date";
 
 export const toDateOrNull = (value: unknown) => {
 	if (!isDate(value)) return null;

@@ -1,3 +1,3 @@
 export const removeUrlParameters = (url: string) => {
-	return url.replace(/\?.+/g, '');
+	return url.replace(/\?.+/g, '').replace('?', '');
 }
