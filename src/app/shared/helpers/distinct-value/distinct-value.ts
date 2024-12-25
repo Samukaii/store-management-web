@@ -1,7 +1,7 @@
 import { isObjectLiteral } from "src/app/shared/helpers/is-object-literal/is-object-literal";
 
 export const distinctValue = (prev: unknown, curr: unknown): boolean => {
-	if (typeof prev !== typeof curr) return true;
+	if (typeof prev !== typeof curr) return false;
 
 	if (prev instanceof Date && curr instanceof Date)
 		return prev.getTime() === curr.getTime();
