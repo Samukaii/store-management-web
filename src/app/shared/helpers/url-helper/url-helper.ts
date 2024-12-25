@@ -1,8 +1,8 @@
 import { Generic } from "../../models/generic";
 
 export class UrlHelper {
-	static joinParams(url: string, params: Generic, separator = "/") {
-		const slices = url.split(separator).map(slice => {
+	static joinParams(url: string, params: Generic) {
+		const slices = url.split('/').map(slice => {
 			if (!slice.startsWith(':')) return slice;
 
 			const key = slice.replace(':', '');
@@ -12,6 +12,6 @@ export class UrlHelper {
 			return result ?? slice;
 		});
 
-		return slices.join(separator);
+		return slices.join('/');
 	}
 }
