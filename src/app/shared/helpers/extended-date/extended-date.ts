@@ -1,11 +1,4 @@
-import { DateOperationType } from "src/app/shared/models/date-operation-type";
-
-interface ExtendedDate extends Date {
-	lastDayOf: (type: Exclude<DateOperationType, 'day'>) => ExtendedDate;
-	firstDayOf: (type: Exclude<DateOperationType, 'day'>) => ExtendedDate;
-	minus: (value: number, type?: DateOperationType) => ExtendedDate;
-	plus: (value: number, type?: DateOperationType) => ExtendedDate;
-}
+import { ExtendedDate } from "src/app/shared/models/extended-date";
 
 export const extendedDate = (date: Date | string = new Date()) => {
 	const dateToUse = new Date(date) as ExtendedDate;
