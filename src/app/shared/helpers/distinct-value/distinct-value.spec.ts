@@ -61,7 +61,7 @@ describe(distinctValue.name, () => {
 			expect(distinctValue(prev, curr)).toBe(false);
 		});
 
-		it('must return false if length is equal and values are equal', () => {
+		it('must return true if length is equal and values are equal', () => {
 			let prev: unknown[] = [1, 2, 3];
 			let curr: unknown[] = [1, 2, 3];
 
