@@ -37,6 +37,7 @@ export class DialogService {
 
 	closeAll() {
 		this.dialog.closeAll();
+		this.removeClosedDialogs();
 	}
 
 	private getDialog(component: Type<any>) {
