@@ -5,12 +5,11 @@ import { Breadcrumb } from "../models/breadcrumb";
 import { injectAllRoutes } from "./inject-all-routes";
 
 const joinBreadcrumbUrls = (breadcrumbs: Breadcrumb[], name: string) => {
-	const names = [
-		...breadcrumbs.map(breadcrumb => breadcrumb.route),
-		name
-	];
+	const lastBreadcrumb = breadcrumbs.at(-1)?.route;
 
-	return names.join('/');
+	if(!lastBreadcrumb) return name;
+
+	return `${lastBreadcrumb}/${name}`;
 }
 
 const getBreadcrumbs = (routes: ActivatedRouteSnapshot[]): Breadcrumb[] => {
