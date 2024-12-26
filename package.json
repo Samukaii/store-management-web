@@ -6,7 +6,7 @@
 		"start": "ng serve",
 		"build": "ng build --configuration production",
 		"docker:run": "./docker-run.sh",
-		"test": "jest --watch --coverage",
+		"test": "jest --watch --coverage --verbose",
 		"test:coverage": "jest --coverage",
 		"serve:ssr:store-management": "node dist/store-management/server/server.mjs"
 	},
