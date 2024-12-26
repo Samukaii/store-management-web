@@ -1,19 +1,15 @@
 import { TestBed } from "@angular/core/testing";
 import { NavigationContextService } from "./navigation-context.service";
-import { provideMockedRouter } from "../../../testing/mocks/provide-mocked-router";
-import { injectDep } from "../../../testing/utils/inject-dep";
+import { mockRouter } from "src/app/testing/mocks/mock-router";
+import { injectDep } from "src/app/testing/utils/inject-dep";
 import { NavigationContext } from "./models/navigation-context";
-import { spyDependency } from "../../../testing/spies/spy-dependency";
+import { spyDependency } from "src/app/testing/spies/spy-dependency";
 import { Router } from "@angular/router";
 
-interface SetupConfig {
-
-}
-
-const setup = (config?: SetupConfig) => {
+const setup = () => {
 	TestBed.configureTestingModule({
 		providers: [
-			provideMockedRouter()
+			mockRouter()
 		]
 	})
 

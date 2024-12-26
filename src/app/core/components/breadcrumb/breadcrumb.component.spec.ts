@@ -1,11 +1,11 @@
-import { setupComponentTesting } from "../../../testing/setup/setup-component-testing";
+import { setupComponentTesting } from "src/app/testing/setup/setup-component-testing";
 import { BreadcrumbComponent } from "./breadcrumb.component";
-import { hasCreatedComponent } from "../../../testing/utils/has-created-component";
-import { provideMockedRouter } from "../../../testing/mocks/provide-mocked-router";
+import { hasCreatedComponent } from "src/app/testing/utils/has-created-component";
+import { mockRouter } from "src/app/testing/mocks/mock-router";
 import { ActivatedRouteSnapshot, UrlSegment } from "@angular/router";
-import { DeepPartial } from "../../../shared/models/deep-partial";
-import { Breadcrumb } from "../../../shared/models/breadcrumb";
-import { getAllByTestId } from "../../../testing/getters/get-all-by-test-id";
+import { DeepPartial } from "src/app/shared/models/deep-partial";
+import { Breadcrumb } from "src/app/shared/models/breadcrumb";
+import { getAllByTestId } from "src/app/testing/getters/get-all-by-test-id";
 
 interface SetupConfig {
 	route?: DeepPartial<ActivatedRouteSnapshot>;
@@ -14,7 +14,7 @@ interface SetupConfig {
 const setup = (config?: SetupConfig) => {
 	setupComponentTesting(BreadcrumbComponent, {
 		providers: [
-			provideMockedRouter(config?.route)
+			mockRouter(config?.route)
 		]
 	})
 }

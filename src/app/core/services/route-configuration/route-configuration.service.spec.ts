@@ -1,9 +1,9 @@
 import { TestBed } from "@angular/core/testing";
 import { RouteConfigurationService } from "./route-configuration.service";
-import { provideMockedRouter } from "../../../testing/mocks/provide-mocked-router";
+import { mockRouter } from "src/app/testing/mocks/mock-router";
 import { ActivatedRouteSnapshot } from "@angular/router";
-import { DeepPartial } from "../../../shared/models/deep-partial";
-import { AppRouteConfiguration } from "../../../shared/models/app-route-configuration";
+import { DeepPartial } from "src/app/shared/models/deep-partial";
+import { AppRouteConfiguration } from "src/app/shared/models/app-route-configuration";
 
 interface SetupConfig {
 	routerSnapshot?: DeepPartial<ActivatedRouteSnapshot>;
@@ -12,7 +12,7 @@ interface SetupConfig {
 const setup = (config?: SetupConfig) => {
 	TestBed.configureTestingModule({
 		providers: [
-			provideMockedRouter(config?.routerSnapshot)
+			mockRouter(config?.routerSnapshot)
 		]
 	})
 

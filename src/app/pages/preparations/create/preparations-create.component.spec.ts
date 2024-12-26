@@ -1,14 +1,14 @@
-import { setupComponentTesting } from "../../../testing/setup/setup-component-testing";
+import { setupComponentTesting } from "src/app/testing/setup/setup-component-testing";
 import { PreparationsCreateComponent } from "./preparations-create.component";
-import { hasCreatedComponent } from "../../../testing/utils/has-created-component";
+import { hasCreatedComponent } from "src/app/testing/utils/has-created-component";
 import { MockProvider } from "ng-mocks";
 import { PreparationsService } from "../preparations.service";
-import { provideMockedRouter } from "../../../testing/mocks/provide-mocked-router";
-import { getByTestId } from "../../../testing/getters/get-by-test-id";
+import { mockRouter } from "src/app/testing/mocks/mock-router";
+import { getByTestId } from "src/app/testing/getters/get-by-test-id";
 import { PreparationsFormValue } from "../models/preparations-form-value";
-import { spyDependency } from "../../../testing/spies/spy-dependency";
+import { spyDependency } from "src/app/testing/spies/spy-dependency";
 import { ActivatedRoute, Router } from "@angular/router";
-import { injectDep } from "../../../testing/utils/inject-dep";
+import { injectDep } from "src/app/testing/utils/inject-dep";
 
 interface SetupConfig {
 
@@ -18,7 +18,7 @@ const setup = (config?: SetupConfig) => {
 	setupComponentTesting(PreparationsCreateComponent, {
 		providers: [
 			MockProvider(PreparationsService),
-			provideMockedRouter()
+			mockRouter()
 		]
 	})
 }
