@@ -3,7 +3,7 @@ import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from "@
 import { DeepPartial } from "../../shared/models/deep-partial";
 import { MockProvider } from "ng-mocks";
 
-export const provideMockedRouter = (routeSnapShot?: DeepPartial<ActivatedRouteSnapshot>) => {
+export const mockRouter = (routeSnapShot?: DeepPartial<ActivatedRouteSnapshot>) => {
 	const events = new BehaviorSubject<NavigationEnd>(new NavigationEnd(0, '', ''));
 
 	const router = {
