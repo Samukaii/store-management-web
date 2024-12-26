@@ -13,7 +13,7 @@ export const randomSchemaGenerators = {
 	date: (random: typeof RandomGenerator) => random.date().toString(),
 	baseSelects: (random: typeof RandomGenerator) => random.array({
 		id: "id",
-		name: "shortText"
+		name: "word:short"
 	}, 5),
 	hour: (random: typeof RandomGenerator) => random.randomHour(),
 	trueFalse: (random: typeof RandomGenerator) => random.trueFalse(),

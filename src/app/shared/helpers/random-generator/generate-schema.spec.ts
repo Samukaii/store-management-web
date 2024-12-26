@@ -1,5 +1,6 @@
 import { generateSchema } from "src/app/shared/helpers/random-generator/generate-schema";
 import { RandomGenerator } from "src/app/shared/helpers/random-generator/random-generator";
+import { BaseSelect } from "src/app/shared/models/base-select";
 
 const mockGenerator = () => {
 	const generator = {
@@ -131,16 +132,25 @@ describe(generateSchema.name, () => {
 		expect(generator.date).toHaveBeenCalledExactlyOnceWith();
 	});
 
-	it('should generate baseSelects schema', () => {
-		const generator = mockGenerator();
+	it('should generate baseSelects schema',
+		() => {
+			const generator = mockGenerator();
 
-		generator.array.mockReturnValue([{ id: '1', name: 'Item 1' }, { id: '2', name: 'Item 2' }, { id: '3', name: 'Item 3' }, { id: '4', name: 'Item 4' }, { id: '5', name: 'Item 5' }]);
+			const expectedResult: BaseSelect[] = [
+				{id: 1, name: 'Item 1'},
+				{id: 2, name: 'Item 2'},
+				{id: 3, name: 'Item 3'},
+				{id: 4, name: 'Item 4'},
+				{id: 5, name: 'Item 5'}
+			];
 
-		const result = generateSchema('baseSelects', generator.parsed());
+			generator.array.mockReturnValue(expectedResult);
 
-		expect(result).toEqual([{ id: '1', name: 'Item 1' }, { id: '2', name: 'Item 2' }, { id: '3', name: 'Item 3' }, { id: '4', name: 'Item 4' }, { id: '5', name: 'Item 5' }]);
-		expect(generator.array).toHaveBeenCalledExactlyOnceWith({ id: "id", name: "shortText" }, 5);
-	});
+			const result = generateSchema('baseSelects', generator.parsed());
+
+			expect(result).toEqual(expectedResult);
+			expect(generator.array).toHaveBeenCalledExactlyOnceWith({id: "id", name: "word:short"}, 5);
+		});
 
 	it('should generate hour schema', () => {
 		const generator = mockGenerator();
