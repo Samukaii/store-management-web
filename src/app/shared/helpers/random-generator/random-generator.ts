@@ -5,6 +5,7 @@ import { createArray } from "src/app/shared/helpers/create-array/create-array";
 import { generateSchema } from "src/app/shared/helpers/random-generator/generate-schema";
 import { isSchemaType } from "src/app/shared/helpers/random-generator/is-schema-type";
 import { isSchema } from "src/app/shared/helpers/random-generator/is-schema";
+import { timeIsValid } from "src/app/shared/helpers/time-is-valid/time-is-valid";
 
 export class RandomGenerator {
 	static schema<T = Generic>(schemaGenerator: RandomSchema<T>){
@@ -36,21 +37,17 @@ export class RandomGenerator {
 		}) as T[];
 	}
 
-	static date(minDate?: Date | string, maxDate: Date | string = new Date()) {
-		maxDate = new Date(maxDate);
-		const timestamp = Math.floor(Math.random() * maxDate.getTime());
-		return new Date(timestamp);
+	static date(minDate?: Date | string, maxDate?: Date | string) {
+		const start = minDate ? new Date(minDate).getTime() : new Date(0).getTime();
+		const end = maxDate ? new Date(maxDate).getTime() : new Date().getTime();
+
+		if (start > end) {
+			throw new Error('A data inicial não pode ser posterior à data final');
+		}
+
+		const randomTimestamp = Math.floor(Math.random() * (end - start + 1)) + start;
+		return new Date(randomTimestamp);
 	};
-
-	static randomDate(minDate?: Date | string, maxDate?: Date | string) {
-		const defaultMin = new Date(1970, 1, 1);
-		const defaultMax = new Date(3000, 12, 31);
-
-		minDate = new Date(minDate ?? defaultMin);
-		maxDate = new Date(maxDate ?? defaultMax);
-
-		return new Date(minDate.getTime() + Math.random() * (maxDate.getTime() - minDate.getTime()));
-	}
 
 	static integer(min = -99999, max = 99999) {
 		min = Math.ceil(min);
@@ -63,45 +60,44 @@ export class RandomGenerator {
 		return Math.random() * (max - min) + min;
 	}
 
+	static enumKeys<T extends Generic>(enumeration: T): Extract<keyof T, string>[] {
+		return Object.keys(enumeration).filter((key) => isNaN(+key)) as Extract<keyof T, string>[];
+	}
+
 	static enumValues<T extends Generic>(enumeration: T) {
-		return Object.keys(enumeration)
-			.map(key => +key)
-			.filter(key => !isNaN(key)) as unknown as T[keyof T][];
+		return this.enumKeys(enumeration).map((key) => enumeration[key])
 	}
 
 	static statusValues<T extends Generic>(enumeration: T) {
 		return Object.entries(enumeration)
-			.filter(([key]) => !isNaN(+key))
+			.filter(([key]) => typeof (key as unknown) == "string")
 			.map(([key, value]) => ({
-				id: +key,
-				name: value
-			})) as BaseSelect[];
+				id: +value,
+				name: key
+			}))
+			.filter(value => !isNaN(value.id)) as BaseSelect[]
 	}
 
 	static status<T extends Generic>(enumeration: T) {
 		const statusValues = this.statusValues(enumeration);
 
-		const randomIndex = this.integer(0, statusValues.length);
-		return statusValues[randomIndex];
+		return this.anyOfThese(...statusValues);
 	}
 
 	static enumeration<T extends Generic>(enumeration: T) {
 		const enumValues = this.enumValues(enumeration);
 
-		const randomIndex = this.integer(0, enumValues.length);
-		return enumValues[randomIndex];
+		return this.anyOfThese(...enumValues);
 	}
 
 	static trueFalse() {
-		const result = this.integer(0, 2);
-
-		return result === 1;
+		return this.anyOfThese(true, false);
 	}
 
 	static word(length: number) {
 		const characters = 'abcdefghijklmnopqrstuvwxyz';
 
-		let result = ' ';
+		let result = '';
 		const charactersLength = characters.length;
 		for (let i = 0; i < length; i++) {
 			result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -119,10 +115,10 @@ export class RandomGenerator {
 	}
 
 	static paragraphs(paragraphsCount: number) {
+		const generatePhrases = () => this.phrase(this.integer(8, 16));
+
 		const paragraphs = createArray(paragraphsCount).map(
-			() => createArray(this.integer(8, 15)).map(
-				() => this.phrase(this.integer(8, 16))
-			).join(' ')
+			generatePhrases
 		);
 
 		return paragraphs.join('\n\n');
@@ -131,6 +127,12 @@ export class RandomGenerator {
 	static randomHour(minHours = "00:00", maxHours = "23:59") {
 		const [minHour, minMinute] = minHours.split(":");
 		const [maxHour, maxMinute] = maxHours.split(":");
+
+		if(!timeIsValid(minHours))
+			throw new Error(`Min hour ${minHours} is invalid`);
+
+		if(!timeIsValid(maxHours))
+			throw new Error(`Max hour ${maxHours} is invalid`);
 
 		const hours: number = this.integer(+minHour, +maxHour);
 		let minutes = this.integer(0, 60);
@@ -154,28 +156,6 @@ export class RandomGenerator {
 		return {
 			start,
 			end
-		};
-	}
-
-	static period(minDate?: string | Date, maxDate?: string | Date, periodMaxLength = 7) {
-		const firstDate = this.randomDate(minDate, maxDate);
-		const secondDate = new Date(firstDate);
-
-		secondDate.setDate(secondDate.getDate() + this.integer(1, periodMaxLength));
-
-		firstDate.setHours(0, 0, 0, 0);
-		secondDate.setHours(23, 59, 0, 0);
-
-		const [startDate, finalDate] = [firstDate, secondDate]
-			.sort((a, b) => a.getTime() - b.getTime());
-
-		const hour = this.hourPeriod();
-
-		return {
-			startDate,
-			finalDate,
-			startHour: hour.start,
-			finalHour: hour.end
 		};
 	}
 
