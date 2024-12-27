@@ -63,6 +63,8 @@ export class AutocompleteComponent implements OnInit {
 	preventEmission = false;
 	searching = signal(false);
 
+	selectedId?: number | string;
+
 	stopSearching = effect(() => {
 		if (this.search().length) return;
 
@@ -88,6 +90,8 @@ export class AutocompleteComponent implements OnInit {
 		const value = $event.option.value as AutocompleteOption;
 
 		if (!value) return;
+
+		this.selectedId = value.id;
 
 		this.searching.set(false);
 		this.control().setValue(value.id);
@@ -132,7 +136,7 @@ export class AutocompleteComponent implements OnInit {
 		controlChanges$.subscribe(value => {
 			const id = toIdentifiable(value);
 
-			if(id !== null) {
+			if(id !== null && id !== this.selectedId) {
 				this.searchId(id).subscribe(result => {
 					search.setValue(result?.name ?? "", {emitEvent: false});
 				});

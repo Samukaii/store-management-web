@@ -1,14 +1,16 @@
-<mat-form-field [formGroup]="internalForm" class="example-full-width">
-	<mat-label>{{ label() }}</mat-label>
+<mat-form-field [formGroup]="internalForm">
+	<mat-label data-test-id="label">{{ label() }}</mat-label>
 	<input type="text"
+		   data-test-id="input"
 		   [placeholder]="placeholder()"
 		   matInput
 		   formControlName="search"
 		   [matAutocomplete]="auto">
 	<mat-autocomplete
+		data-test-id="autocomplete"
 		(optionSelected)="onSelect($event)" #auto="matAutocomplete">
 		@if (filteredData.isLoading()) {
-			<mat-option [value]="null">
+			<mat-option data-test-id="loading" [value]="null">
 				<div class="loading">
 					<app-progress-spinner/>
 				</div>
@@ -16,10 +18,10 @@
 		}
 
 		@for (option of (filteredData.value() ?? []); track option) {
-			<mat-option [value]="option">{{option.name}}</mat-option>
+			<mat-option data-test-id="option" [value]="option">{{ option.name }}</mat-option>
 		} @empty {
 			@if (!filteredData.isLoading()) {
-				<mat-option [value]="null" (click)="noResultsClick()">
+				<mat-option data-test-id="no-results" [value]="null" (click)="noResultsClick()">
 					<div class="no-results">
 						@if (noResultsValue().icon) {
 							<app-button
@@ -28,12 +30,14 @@
 								color="blue"
 							/>
 						}
+						<div data-test-id="message">
 						{{ noResultsValue().message }}
+						</div>
 					</div>
 				</mat-option>
 			}
 		}
 	</mat-autocomplete>
 
-	<app-field-error matError [control]="control()"/>
+	<app-field-error data-test-id="field-error" matError [control]="control()"/>
 </mat-form-field>
