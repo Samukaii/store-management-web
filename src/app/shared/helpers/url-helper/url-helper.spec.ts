@@ -3,7 +3,7 @@ import { Generic } from '../../models/generic';
 
 describe('UrlHelper', () => {
 	describe('joinParams', () => {
-		it('should replace URL params with values from params object', () => {
+		it('must replace URL params with values from params object', () => {
 			const url = '/user/:id/profile/:profileId';
 			const params: Generic = { id: 123, profileId: 'abc' };
 
@@ -12,7 +12,7 @@ describe('UrlHelper', () => {
 			expect(result).toBe('/user/123/profile/abc');
 		});
 
-		it('should keep the original slice if no matching param is found in params', () => {
+		it('must keep the original slice if no matching param is found in params', () => {
 			const url = '/user/:id/details/:otherId';
 			const params: Generic = { id: 123 };
 
@@ -21,7 +21,7 @@ describe('UrlHelper', () => {
 			expect(result).toBe('/user/123/details/:otherId');
 		});
 
-		it('should return the original URL if there are no params to replace', () => {
+		it('must return the original URL if there are no params to replace', () => {
 			const url = '/user/profile';
 			const params: Generic = {};
 
@@ -30,7 +30,7 @@ describe('UrlHelper', () => {
 			expect(result).toBe('/user/profile');
 		});
 
-		it('should handle empty params correctly', () => {
+		it('must handle empty params correctly', () => {
 			const url = '/user/:id/profile/:profileId';
 			const params: Generic = {};
 

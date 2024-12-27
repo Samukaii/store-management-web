@@ -2,7 +2,7 @@ import { extendedDate } from "src/app/shared/helpers/extended-date/extended-date
 
 describe(extendedDate.name, () => {
 	describe('Instance creation', () => {
-		it('should correctly create an ExtendedDate from a Date object', () => {
+		it('must correctly create an ExtendedDate from a Date object', () => {
 			const baseDate = new Date('2024-01-15T00:00:00.000Z');
 			const extDate = extendedDate(baseDate);
 
@@ -10,7 +10,7 @@ describe(extendedDate.name, () => {
 			expect(extDate.toISOString()).toBe(baseDate.toISOString());
 		});
 
-		it('should correctly create an ExtendedDate from a string', () => {
+		it('must correctly create an ExtendedDate from a string', () => {
 			const baseDate = '2024-01-15T00:00:00.000Z';
 			const extDate = extendedDate(baseDate);
 
@@ -18,7 +18,7 @@ describe(extendedDate.name, () => {
 			expect(extDate.toISOString()).toBe(new Date(baseDate).toISOString());
 		});
 
-		it('should handle default date parameter', () => {
+		it('must handle default date parameter', () => {
 			const now = new Date();
 			const extDate = extendedDate();
 
@@ -27,7 +27,7 @@ describe(extendedDate.name, () => {
 	});
 
 	describe('lastDayOf', () => {
-		it('should calculate the last day of the month', () => {
+		it('must calculate the last day of the month', () => {
 			const extDate = extendedDate(new Date('2024-02-10T00:00:00.000Z'));
 			const lastDayOfMonth = extDate.lastDayOf('month');
 
@@ -35,7 +35,7 @@ describe(extendedDate.name, () => {
 			expect(lastDayOfMonth.getMonth()).toBe(1); // February
 		});
 
-		it('should calculate the last day of the year', () => {
+		it('must calculate the last day of the year', () => {
 			const extDate = extendedDate(new Date('2024-05-10T00:00:00.000Z'));
 			const lastDayOfYear = extDate.lastDayOf('year');
 
@@ -43,7 +43,7 @@ describe(extendedDate.name, () => {
 			expect(lastDayOfYear.getMonth()).toBe(11); // December
 		});
 
-		it('should calculate the last day of the week', () => {
+		it('must calculate the last day of the week', () => {
 			const extDate = extendedDate(new Date('2024-01-10T00:00:00.000Z')); // Wednesday
 			const lastDayOfWeek = extDate.lastDayOf('week');
 
@@ -53,7 +53,7 @@ describe(extendedDate.name, () => {
 	});
 
 	describe('firstDayOf', () => {
-		it('should calculate the first day of the month', () => {
+		it('must calculate the first day of the month', () => {
 			const extDate = extendedDate(new Date('2024-05-15T00:00:00.000Z'));
 			const firstDayOfMonth = extDate.firstDayOf('month');
 
@@ -61,7 +61,7 @@ describe(extendedDate.name, () => {
 			expect(firstDayOfMonth.getMonth()).toBe(4); // May
 		});
 
-		it('should calculate the first day of the year', () => {
+		it('must calculate the first day of the year', () => {
 			const extDate = extendedDate(new Date('2024-11-15T00:00:00.000Z'));
 			const firstDayOfYear = extDate.firstDayOf('year');
 
@@ -69,7 +69,7 @@ describe(extendedDate.name, () => {
 			expect(firstDayOfYear.getMonth()).toBe(0); // January
 		});
 
-		it('should calculate the first day of the week', () => {
+		it('must calculate the first day of the week', () => {
 			const extDate = extendedDate(new Date('2024-01-10T00:00:00.000Z')); // Wednesday
 			const firstDayOfWeek = extDate.firstDayOf('week');
 
@@ -79,7 +79,7 @@ describe(extendedDate.name, () => {
 	});
 
 	describe('minus', () => {
-		it('should subtract days correctly', () => {
+		it('must subtract days correctly', () => {
 			const extDate = extendedDate(new Date('2024-01-15T00:00:00.000Z'));
 
 			const result = extDate.minus(5, 'day');
@@ -88,7 +88,7 @@ describe(extendedDate.name, () => {
 			expect(result.getUTCMonth()).toBe(0); // January
 		});
 
-		it('should subtract weeks correctly', () => {
+		it('must subtract weeks correctly', () => {
 			const extDate = extendedDate(new Date('2024-01-15T00:00:00.000Z'));
 			const result = extDate.minus(2, 'week');
 
@@ -96,7 +96,7 @@ describe(extendedDate.name, () => {
 			expect(result.getUTCMonth()).toBe(0); // January
 		});
 
-		it('should subtract months correctly', () => {
+		it('must subtract months correctly', () => {
 			const extDate = extendedDate(new Date('2024-05-15T00:00:00.000Z'));
 			const result = extDate.minus(2, 'month');
 
@@ -104,7 +104,7 @@ describe(extendedDate.name, () => {
 			expect(result.getUTCDate()).toBe(15);
 		});
 
-		it('should subtract years correctly', () => {
+		it('must subtract years correctly', () => {
 			const extDate = extendedDate(new Date('2024-05-15T00:00:00.000Z'));
 			const result = extDate.minus(1, 'year');
 
@@ -115,7 +115,7 @@ describe(extendedDate.name, () => {
 	});
 
 	describe('plus', () => {
-		it('should add days correctly', () => {
+		it('must add days correctly', () => {
 			const extDate = extendedDate(new Date('2024-01-15T00:00:00.000Z'));
 			const result = extDate.plus(5, 'day');
 
@@ -123,7 +123,7 @@ describe(extendedDate.name, () => {
 			expect(result.getUTCMonth()).toBe(0); // January
 		});
 
-		it('should add weeks correctly', () => {
+		it('must add weeks correctly', () => {
 			const extDate = extendedDate(new Date('2024-01-15T00:00:00.000Z'));
 			const result = extDate.plus(2, 'week');
 
@@ -131,7 +131,7 @@ describe(extendedDate.name, () => {
 			expect(result.getUTCMonth()).toBe(0); // January
 		});
 
-		it('should add months correctly', () => {
+		it('must add months correctly', () => {
 			const extDate = extendedDate(new Date('2024-05-15T00:00:00.000Z'));
 			const result = extDate.plus(2, 'month');
 
@@ -139,7 +139,7 @@ describe(extendedDate.name, () => {
 			expect(result.getUTCDate()).toBe(15);
 		});
 
-		it('should add years correctly', () => {
+		it('must add years correctly', () => {
 			const extDate = extendedDate(new Date('2024-05-15T00:00:00.000Z'));
 			const result = extDate.plus(1, 'year');
 

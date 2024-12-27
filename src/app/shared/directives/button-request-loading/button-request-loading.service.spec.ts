@@ -18,7 +18,7 @@ const createButtonMock = () => ({
 
 describe('ButtonRequestLoadingService', () => {
 	describe('Button Registration', () => {
-		it('should register buttons and associate them with identifiers', () => {
+		it('must register buttons and associate them with identifiers', () => {
 			const {service} = setup();
 
 			const button = createButtonMock();
@@ -32,7 +32,7 @@ describe('ButtonRequestLoadingService', () => {
 			expect(button.startRequestLoading).toHaveBeenCalled();
 		});
 
-		it('should allow re-registering an identifier after button removal', () => {
+		it('must allow re-registering an identifier after button removal', () => {
 			const {service} = setup();
 
 			const button1 = createButtonMock();
@@ -53,7 +53,7 @@ describe('ButtonRequestLoadingService', () => {
 
 	describe('Loading State Management', () => {
 		describe('addLoading', () => {
-			it('should trigger loading state for the last clicked button', () => {
+			it('must trigger loading state for the last clicked button', () => {
 				const {service} = setup();
 
 				const button = createButtonMock();
@@ -66,7 +66,7 @@ describe('ButtonRequestLoadingService', () => {
 				expect(button.startRequestLoading).toHaveBeenCalled();
 			});
 
-			it('should do nothing if no button was clicked', () => {
+			it('must do nothing if no button was clicked', () => {
 				const {service} = setup();
 
 				const button = createButtonMock();
@@ -80,7 +80,7 @@ describe('ButtonRequestLoadingService', () => {
 		});
 
 		describe('finishLoading', () => {
-			it('should finalize loading with success status for a successful response', () => {
+			it('must finalize loading with success status for a successful response', () => {
 				const {service} = setup();
 
 				const button = createButtonMock();
@@ -95,7 +95,7 @@ describe('ButtonRequestLoadingService', () => {
 				expect(button.finalizeLoading).toHaveBeenCalledWith('success');
 			});
 
-			it('should finalize loading with error status for a failed response', () => {
+			it('must finalize loading with error status for a failed response', () => {
 				const {service} = setup();
 
 				const button = createButtonMock();
@@ -112,7 +112,7 @@ describe('ButtonRequestLoadingService', () => {
 		});
 
 		describe('Handling Multiple Buttons and Requests', () => {
-			it('should correctly manage multiple simultaneous requests', () => {
+			it('must correctly manage multiple simultaneous requests', () => {
 				const {service} = setup();
 
 				const button = createButtonMock();
@@ -134,7 +134,7 @@ describe('ButtonRequestLoadingService', () => {
 				expect(button2.finalizeLoading).toHaveBeenCalledWith('error');
 			});
 
-			it('should ensure correct association between URLs and buttons', () => {
+			it('must ensure correct association between URLs and buttons', () => {
 				const {service} = setup();
 
 				const button = createButtonMock();

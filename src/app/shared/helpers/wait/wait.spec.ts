@@ -2,7 +2,7 @@ import { wait } from './wait';
 import { fakeAsync, tick } from '@angular/core/testing';
 
 describe(wait.name, () => {
-	it('should resolve after the specified time', fakeAsync(() => {
+	it('must resolve after the specified time', fakeAsync(() => {
 		const time = 1000;
 
 		let isResolved = false;
@@ -15,7 +15,7 @@ describe(wait.name, () => {
 		expect(isResolved).toBeTrue();
 	}));
 
-	it('should not resolve before the specified time', fakeAsync(() => {
+	it('must not resolve before the specified time', fakeAsync(() => {
 		const time = 500;
 
 		let isResolved = false;

@@ -4,7 +4,7 @@ import { FormModifier } from "src/app/shared/models/form-modifier";
 
 describe('FormHelper', () => {
 	describe('patchForm', () => {
-		it('should patch form controls with source values', () => {
+		it('must patch form controls with source values', () => {
 			const form = new FormGroup({
 				name: new FormControl(''),
 				age: new FormControl(''),
@@ -19,7 +19,7 @@ describe('FormHelper', () => {
 			expect(form.controls['age'].value).toBe(30);
 		});
 
-		it('should apply modifier to form control if modifier is found', () => {
+		it('must apply modifier to form control if modifier is found', () => {
 			const form = new FormGroup({
 				name: new FormControl(''),
 				age: new FormControl(''),
@@ -39,7 +39,7 @@ describe('FormHelper', () => {
 			expect(form.controls['age'].value).toBe(35);
 		});
 
-		it('should not modify form control value if no modifier is found', () => {
+		it('must not modify form control value if no modifier is found', () => {
 			const form = new FormGroup({
 				name: new FormControl(''),
 				age: new FormControl(''),
@@ -59,7 +59,7 @@ describe('FormHelper', () => {
 			expect(form.controls['age'].value).toBe(30);
 		});
 
-		it('should apply multiple modifiers correctly', () => {
+		it('must apply multiple modifiers correctly', () => {
 			const form = new FormGroup({
 				name: new FormControl(''),
 				age: new FormControl(''),

@@ -21,7 +21,7 @@ const mockGenerator = () => {
 }
 
 describe(generateSchema.name, () => {
-	it('should generate id schema', () => {
+	it('must generate id schema', () => {
 		const generator = mockGenerator();
 
 		generator.integer.mockReturnValue(1234);
@@ -32,7 +32,7 @@ describe(generateSchema.name, () => {
 		expect(generator.integer).toHaveBeenCalledExactlyOnceWith(1000, 9999);
 	});
 
-	it('should generate numeric schema', () => {
+	it('must generate numeric schema', () => {
 		const generator = mockGenerator();
 
 		generator.integer.mockReturnValue(1234);
@@ -43,7 +43,7 @@ describe(generateSchema.name, () => {
 		expect(generator.integer).toHaveBeenCalledExactlyOnceWith(0);
 	});
 
-	it('should generate word:short schema', () => {
+	it('must generate word:short schema', () => {
 		const generator = mockGenerator();
 
 		generator.word.mockReturnValue('abcdef');
@@ -54,7 +54,7 @@ describe(generateSchema.name, () => {
 		expect(generator.word).toHaveBeenCalledExactlyOnceWith(6);
 	});
 
-	it('should generate word:medium schema', () => {
+	it('must generate word:medium schema', () => {
 		const generator = mockGenerator();
 
 		generator.word.mockReturnValue('abcdef');
@@ -65,7 +65,7 @@ describe(generateSchema.name, () => {
 		expect(generator.word).toHaveBeenCalledExactlyOnceWith(9);
 	});
 
-	it('should generate word:long schema', () => {
+	it('must generate word:long schema', () => {
 		const generator = mockGenerator();
 
 		generator.word.mockReturnValue('abcdef');
@@ -76,7 +76,7 @@ describe(generateSchema.name, () => {
 		expect(generator.word).toHaveBeenCalledExactlyOnceWith(12);
 	});
 
-	it('should generate phrase schema', () => {
+	it('must generate phrase schema', () => {
 		const generator = mockGenerator();
 
 		generator.phrase.mockReturnValue('abcdef');
@@ -87,7 +87,7 @@ describe(generateSchema.name, () => {
 		expect(generator.phrase).toHaveBeenCalledExactlyOnceWith(7);
 	});
 
-	it('should generate text:short schema', () => {
+	it('must generate text:short schema', () => {
 		const generator = mockGenerator();
 
 		generator.paragraphs.mockReturnValue('abcdef');
@@ -98,7 +98,7 @@ describe(generateSchema.name, () => {
 		expect(generator.paragraphs).toHaveBeenCalledExactlyOnceWith(2);
 	});
 
-	it('should generate text:medium schema', () => {
+	it('must generate text:medium schema', () => {
 		const generator = mockGenerator();
 
 		generator.paragraphs.mockReturnValue('abcdef');
@@ -109,7 +109,7 @@ describe(generateSchema.name, () => {
 		expect(generator.paragraphs).toHaveBeenCalledExactlyOnceWith(4);
 	});
 
-	it('should generate text:long schema', () => {
+	it('must generate text:long schema', () => {
 		const generator = mockGenerator();
 
 		generator.paragraphs.mockReturnValue('abcdef');
@@ -120,7 +120,7 @@ describe(generateSchema.name, () => {
 		expect(generator.paragraphs).toHaveBeenCalledExactlyOnceWith(7);
 	});
 
-	it('should generate date schema', () => {
+	it('must generate date schema', () => {
 		const generator = mockGenerator();
 
 		const mockDate = new Date(2024, 0, 1).toString();
@@ -132,7 +132,7 @@ describe(generateSchema.name, () => {
 		expect(generator.date).toHaveBeenCalledExactlyOnceWith();
 	});
 
-	it('should generate baseSelects schema',
+	it('must generate baseSelects schema',
 		() => {
 			const generator = mockGenerator();
 
@@ -152,7 +152,7 @@ describe(generateSchema.name, () => {
 			expect(generator.array).toHaveBeenCalledExactlyOnceWith({id: "id", name: "word:short"}, 5);
 		});
 
-	it('should generate hour schema', () => {
+	it('must generate hour schema', () => {
 		const generator = mockGenerator();
 
 		generator.randomHour.mockReturnValue(true);
@@ -163,7 +163,7 @@ describe(generateSchema.name, () => {
 		expect(generator.randomHour).toHaveBeenCalledExactlyOnceWith();
 	});
 
-	it('should generate trueFalse schema', () => {
+	it('must generate trueFalse schema', () => {
 		const generator = mockGenerator();
 
 		generator.trueFalse.mockReturnValue(true);

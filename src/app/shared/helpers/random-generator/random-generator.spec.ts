@@ -169,7 +169,7 @@ describe(RandomGenerator.name, () => {
 	});
 
 	describe('date', () => {
-		it('should return a date between two specified dates', () => {
+		it('must return a date between two specified dates', () => {
 			const start = new Date('2020-01-01');
 			const end = new Date('2024-12-31');
 			const random = RandomGenerator.date(start, end);
@@ -179,7 +179,7 @@ describe(RandomGenerator.name, () => {
 			expect(random.getTime()).toBeLessThanOrEqual(end.getTime());
 		});
 
-		it('should return a date greater than or equal to the start date when only start date is specified', () => {
+		it('must return a date greater than or equal to the start date when only start date is specified', () => {
 			const start = new Date('2020-01-01');
 			const random = RandomGenerator.date(start);
 
@@ -187,7 +187,7 @@ describe(RandomGenerator.name, () => {
 			expect(random.getTime()).toBeGreaterThanOrEqual(start.getTime());
 		});
 
-		it('should return a date less than or equal to the end date when only end date is specified', () => {
+		it('must return a date less than or equal to the end date when only end date is specified', () => {
 			const end = new Date('2024-12-31');
 			const random = RandomGenerator.date(undefined, end);
 
@@ -195,14 +195,14 @@ describe(RandomGenerator.name, () => {
 			expect(random.getTime()).toBeLessThanOrEqual(end.getTime());
 		});
 
-		it('should return a random date when no dates are specified', () => {
+		it('must return a random date when no dates are specified', () => {
 			const random = RandomGenerator.date();
 
 			expect(random).toBeInstanceOf(Date);
 			expect(random.getTime()).toBeGreaterThanOrEqual(new Date(0).getTime());
 		});
 
-		it('should throw an error if the start date is after the end date', () => {
+		it('must throw an error if the start date is after the end date', () => {
 			const start = new Date('2024-12-31');
 			const end = new Date('2020-01-01');
 
@@ -544,7 +544,7 @@ describe(RandomGenerator.name, () => {
 	});
 
 	describe('randomHour', () => {
-		it('should return a valid time between minHours and maxHours', () => {
+		it('must return a valid time between minHours and maxHours', () => {
 			const minHours = '08:00';
 			const maxHours = '18:00';
 
@@ -556,7 +556,7 @@ describe(RandomGenerator.name, () => {
 			expect(timeToMinutes(result)).toBeLessThanOrEqual(timeToMinutes(maxHours));
 		});
 
-		it('should return a valid time between minHours and maxHours when both are equal', () => {
+		it('must return a valid time between minHours and maxHours when both are equal', () => {
 			const minHours = '08:00';
 			const maxHours = '08:59';
 
@@ -568,7 +568,7 @@ describe(RandomGenerator.name, () => {
 			expect(timeToMinutes(result)).toBeLessThanOrEqual(timeToMinutes(maxHours));
 		});
 
-		it('should return a valid time between 00:00 and 23:59 when both are not defined', () => {
+		it('must return a valid time between 00:00 and 23:59 when both are not defined', () => {
 			const minHours = '00:00';
 			const maxHours = '23:59';
 
@@ -580,28 +580,28 @@ describe(RandomGenerator.name, () => {
 			expect(timeToMinutes(result)).toBeLessThanOrEqual(timeToMinutes(maxHours));
 		});
 
-		it('should throw an error for invalid minHours', () => {
+		it('must throw an error for invalid minHours', () => {
 			const invalidMinHours = '25:00';
 			const validMaxHours = '23:59';
 
 			expect(() => RandomGenerator.randomHour(invalidMinHours, validMaxHours)).toThrow(`Min hour ${invalidMinHours} is invalid`);
 		});
 
-		it('should throw an error for invalid maxHours', () => {
+		it('must throw an error for invalid maxHours', () => {
 			const validMinHours = '00:00';
 			const invalidMaxHours = '24:00';
 
 			expect(() => RandomGenerator.randomHour(validMinHours, invalidMaxHours)).toThrow(`Max hour ${invalidMaxHours} is invalid`);
 		});
 
-		it('should throw an error for invalid minutes in minHours', () => {
+		it('must throw an error for invalid minutes in minHours', () => {
 			const invalidMinHours = '08:60';
 			const validMaxHours = '23:59';
 
 			expect(() => RandomGenerator.randomHour(invalidMinHours, validMaxHours)).toThrow(`Min hour ${invalidMinHours} is invalid`);
 		});
 
-		it('should throw an error for invalid minutes in maxHours', () => {
+		it('must throw an error for invalid minutes in maxHours', () => {
 			const validMinHours = '00:00';
 			const invalidMaxHours = '23:60';
 
@@ -611,7 +611,7 @@ describe(RandomGenerator.name, () => {
 
 
 	describe('hourPeriod', () => {
-		it('should return a valid time between minHours and maxHours', () => {
+		it('must return a valid time between minHours and maxHours', () => {
 			const minHours = '08:00';
 			const maxHours = '18:00';
 			const {start, end} = RandomGenerator.hourPeriod(minHours, maxHours);
@@ -626,7 +626,7 @@ describe(RandomGenerator.name, () => {
 			expect(timeToMinutes(end)).toBeLessThanOrEqual(timeToMinutes(maxHours));
 		});
 
-		it('should return a valid time between minHours and maxHours when both are equal', () => {
+		it('must return a valid time between minHours and maxHours when both are equal', () => {
 			const minHours = '08:00';
 			const maxHours = '08:59';
 
@@ -642,7 +642,7 @@ describe(RandomGenerator.name, () => {
 			expect(timeToMinutes(end)).toBeLessThanOrEqual(timeToMinutes(maxHours));
 		});
 
-		it('should return a valid time between 00:00 and 23:59 when both are not defined', () => {
+		it('must return a valid time between 00:00 and 23:59 when both are not defined', () => {
 			const minHours = '00:00';
 			const maxHours = '23:59';
 
@@ -658,28 +658,28 @@ describe(RandomGenerator.name, () => {
 			expect(timeToMinutes(end)).toBeLessThanOrEqual(timeToMinutes(maxHours));
 		});
 
-		it('should throw an error for invalid minHours', () => {
+		it('must throw an error for invalid minHours', () => {
 			const invalidMinHours = '25:00';
 			const validMaxHours = '23:59';
 
 			expect(() => RandomGenerator.hourPeriod(invalidMinHours, validMaxHours)).toThrow(`Min hour ${invalidMinHours} is invalid`);
 		});
 
-		it('should throw an error for invalid maxHours', () => {
+		it('must throw an error for invalid maxHours', () => {
 			const validMinHours = '00:00';
 			const invalidMaxHours = '24:00';
 
 			expect(() => RandomGenerator.hourPeriod(validMinHours, invalidMaxHours)).toThrow(`Max hour ${invalidMaxHours} is invalid`);
 		});
 
-		it('should throw an error for invalid minutes in minHours', () => {
+		it('must throw an error for invalid minutes in minHours', () => {
 			const invalidMinHours = '08:60';
 			const validMaxHours = '23:59';
 
 			expect(() => RandomGenerator.hourPeriod(invalidMinHours, validMaxHours)).toThrow(`Min hour ${invalidMinHours} is invalid`);
 		});
 
-		it('should throw an error for invalid minutes in maxHours', () => {
+		it('must throw an error for invalid minutes in maxHours', () => {
 			const validMinHours = '00:00';
 			const invalidMaxHours = '23:60';
 
