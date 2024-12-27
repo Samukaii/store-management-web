@@ -6,7 +6,7 @@ import { ComponentInputs } from "src/app/shared/models/component-inputs";
 
 interface SetupComponentTestingConfig<T> extends TestModuleMetadata{
 	overrideImports?: boolean;
-	inputs?: ComponentInputs<T>;
+	inputs?: Partial<ComponentInputs<T>>;
 }
 
 export const setupComponentTesting = <T>(component: Type<T>, config: SetupComponentTestingConfig<T>) => {
