@@ -2,7 +2,7 @@ import { CustomValidators } from "src/app/shared/validators/custom-validators";
 import { FormControl } from "@angular/forms";
 
 
-fdescribe('CustomValidators', () => {
+describe('CustomValidators', () => {
 	describe('#greaterThanZero', () => {
 		it('must return non-number error if the control value is not a number', () => {
 			const control = new FormControl();

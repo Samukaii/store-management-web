@@ -1,6 +1,6 @@
 import { compareUrls } from "src/app/shared/helpers/compare-urls/compare-urls";
 
-fdescribe(compareUrls.name, () => {
+describe(compareUrls.name, () => {
 	it('must receive a url schema and match correct params', () => {
 		const schema = "some-url/:someParam/other-url/:otherParam/new-url/:newParam";
 		let url = "some-url/123/other-url/test/new-url/false";

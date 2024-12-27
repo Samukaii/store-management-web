@@ -19,7 +19,7 @@ const setup = (config?: SetupConfig) => {
 	return {service};
 }
 
-fdescribe(SnackbarService.name, () => {
+describe(SnackbarService.name, () => {
 	it('must instantiate service', () => {
 		const {service} = setup();
 

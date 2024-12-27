@@ -72,7 +72,7 @@ const setup = () => {
 }
 
 
-fdescribe(CallPipe.name, () => {
+describe(CallPipe.name, () => {
 	describe('When calling with one arg', () => {
 		it('must apply correct operation and call only one time per change', () => {
 			const {component} = setup();

@@ -16,7 +16,7 @@ const setup = () => {
 	return {service};
 }
 
-fdescribe(DialogService.name, () => {
+describe(DialogService.name, () => {
 	it('must instantiate service', () => {
 		const {service} = setup();
 
