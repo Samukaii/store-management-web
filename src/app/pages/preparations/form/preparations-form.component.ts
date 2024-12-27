@@ -1,7 +1,7 @@
 import { Component, input, output } from '@angular/core';
-import { FormComponent } from "../../../shared/components/form/form/form.component";
+import { FormComponent } from "src/app/shared/components/form/form/form.component";
 import { Preparation } from "../models/preparation";
-import { FormInputComponent } from "../../../shared/components/form/input/form-input.component";
+import { FormInputComponent } from "src/app/shared/components/form/input/form-input.component";
 import { PreparationsFormValue } from "../models/preparations-form-value";
 import { createPreparationsForm } from "./create-preparations-form";
 import { ReactiveFormsModule } from "@angular/forms";

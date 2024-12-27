@@ -1,7 +1,7 @@
 import { Component, effect, input, output } from '@angular/core';
-import { FormComponent } from "../../../shared/components/form/form/form.component";
+import { FormComponent } from "src/app/shared/components/form/form/form.component";
 import { Order } from "../models/order";
-import { FormInputComponent } from "../../../shared/components/form/input/form-input.component";
+import { FormInputComponent } from "src/app/shared/components/form/input/form-input.component";
 import { OrdersFormValue } from "../models/orders-form-value";
 import { createOrdersForm } from "./create-orders-form";
 import { ReactiveFormsModule } from "@angular/forms";

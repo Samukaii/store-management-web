@@ -1,17 +1,17 @@
 import { Component, inject, input, output } from '@angular/core';
-import { FormComponent } from "../../../../shared/components/form/form/form.component";
+import { FormComponent } from "src/app/shared/components/form/form/form.component";
 import { Product } from "../models/product";
-import { FormInputComponent } from "../../../../shared/components/form/input/form-input.component";
+import { FormInputComponent } from "src/app/shared/components/form/input/form-input.component";
 import { ProductsFormValue } from "../models/products-form-value";
 import { createProductsForm } from "./create-products-form";
-import { AutocompleteComponent } from "../../../../shared/components/autocomplete/autocomplete.component";
-import { FormModifier } from "../../../../shared/models/form-modifier";
+import { AutocompleteComponent } from "src/app/shared/components/autocomplete/autocomplete.component";
+import { FormModifier } from "src/app/shared/models/form-modifier";
 import { ProductsForm } from "../models/products-form";
 import { OrdersItemsService } from "../../../orders/items/orders-items.service";
 import { ProductsCategoriesService } from "../../categories/products-categories.service";
 import { ReactiveFormsModule } from "@angular/forms";
-import { routeNames } from "../../../../shared/route-names";
-import { AutocompleteNoResults } from "../../../../shared/components/autocomplete/no-results/autocomplete-no.results";
+import { AutocompleteNoResults } from "src/app/shared/components/autocomplete/no-results/autocomplete-no.results";
+import { Generic } from "src/app/shared/models/generic";
 
 @Component({
     selector: 'app-products-form',
@@ -41,23 +41,8 @@ export class ProductsFormComponent {
 	noResults = AutocompleteNoResults.autoCreation(() => {
 		return {
 			noResultsIcon: "category",
-			method: params => this.categoriesService.create(params as any),
+			method: ((params: Generic) => this.categoriesService.create(params as any)) as any,
 			key: "name"
-		// 	destination: {
-		// 		url: `${routeNames.productsCategories}/new`,
-		// 		persistForm: {
-		// 			key: "products:categories",
-		// 			value: {name: searchValue}
-		// 		}
-		// 	},
-		// 	source: {
-		// 		message: `Voltar para a criação do produto`,
-		// 		icon: "lunch_dining",
-		// 		persistForm: {
-		// 			key: 'products',
-		// 			value: this.form.getRawValue()
-		// 		}
-		// 	}
 		}
 	});
 

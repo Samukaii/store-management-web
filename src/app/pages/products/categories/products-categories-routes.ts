@@ -2,7 +2,7 @@ import { Route } from "@angular/router";
 import { ProductsCategoriesListComponent } from "./list/products-categories-list.component";
 import { ProductsCategoriesCreateComponent } from "./create/products-categories-create.component";
 import { ProductsCategoriesUpdateComponent } from "./update/products-categories-update.component";
-import { routeNames } from "../../../shared/route-names";
+import { routeNames } from "src/app/shared/route-names";
 
 export default [
 	{

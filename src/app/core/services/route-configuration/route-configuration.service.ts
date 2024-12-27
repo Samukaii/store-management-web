@@ -1,6 +1,6 @@
 import { computed, Injectable } from '@angular/core';
-import { AppRouteConfiguration } from "../../../shared/models/app-route-configuration";
-import { injectRouteData } from "../../../shared/di/inject-route-data";
+import { AppRouteConfiguration } from "src/app/shared/models/app-route-configuration";
+import { injectRouteData } from "src/app/shared/di/inject-route-data";
 
 @Injectable({
 	providedIn: 'root'

@@ -1,17 +1,17 @@
-import { setupComponentTesting } from "../../../testing/setup/setup-component-testing";
+import { setupComponentTesting } from "src/app/testing/setup/setup-component-testing";
 import { WindowLoadingComponent } from "./window-loading.component";
-import { hasCreatedComponent } from "../../../testing/utils/has-created-component";
+import { hasCreatedComponent } from "src/app/testing/utils/has-created-component";
 import { Component, NO_ERRORS_SCHEMA, signal } from "@angular/core";
-import { getCurrentComponentFixture } from "../../../testing/core/current-component-fixture";
-import { getByTestId } from "../../../testing/getters/get-by-test-id";
-import { findByTestId } from "../../../testing/getters/find-by-test-id";
-import { detectChanges } from "../../../testing/utils/detect-changes";
-import { mockComponent } from "../../../testing/mocks/mock-component";
+import { getCurrentComponentFixture } from "src/app/testing/core/current-component-fixture";
+import { getByTestId } from "src/app/testing/getters/get-by-test-id";
+import { findByTestId } from "src/app/testing/getters/find-by-test-id";
+import { detectChanges } from "src/app/testing/utils/detect-changes";
+import { mockComponent } from "src/app/testing/mocks/mock-component";
 import { MatProgressSpinner } from "@angular/material/progress-spinner";
 import { TestBed } from "@angular/core/testing";
 import { MockProvider } from "ng-mocks";
 import { TopBarLoadingService } from "../top-bar/top-bar-loading.service";
-import { spyDependency } from "../../../testing/spies/spy-dependency";
+import { spyDependency } from "src/app/testing/spies/spy-dependency";
 
 const setup = () => {
 	@Component({

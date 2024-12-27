@@ -1,16 +1,15 @@
 import { Component, inject, input, output } from '@angular/core';
 import {
 	LocalActionsUpdaterComponent
-} from "../../../shared/components/local-actions/updater/local-actions-updater.component";
-import { TableComponent } from "../../../shared/components/table/table.component";
-import { OrdersService } from "../orders.service";
-import { TableColumnFn } from "../../../shared/components/table/table-column-fn";
+} from "src/app/shared/components/local-actions/updater/local-actions-updater.component";
+import { TableComponent } from "src/app/shared/components/table/table.component";
+import { TableColumnFn } from "src/app/shared/components/table/table-column-fn";
 import { Order } from "../models/order";
-import { Button } from "../../../shared/components/button/models/button";
-import { TableActionsFn } from "../../../shared/components/table/table-actions-fn";
+import { Button } from "src/app/shared/components/button/models/button";
+import { TableActionsFn } from "src/app/shared/components/table/table-actions-fn";
 import { OrdersItemsService } from "./orders-items.service";
-import { DialogService } from "../../../shared/services/dialog/dialog.service";
-import { NoResults } from "../../../shared/components/no-results/models/no-results";
+import { DialogService } from "src/app/shared/services/dialog/dialog.service";
+import { NoResults } from "src/app/shared/components/no-results/models/no-results";
 import { OrderItem } from "../models/order-item";
 import { of } from "rxjs";
 import { rxResource } from "@angular/core/rxjs-interop";
@@ -26,7 +25,6 @@ import { rxResource } from "@angular/core/rxjs-interop";
 })
 export class OrdersItemsComponent {
 	service = inject(OrdersItemsService);
-	productsService = inject(OrdersService);
 	dialog = inject(DialogService);
 	product = input<Order>();
 	requestUpdate = output();
@@ -70,6 +68,6 @@ export class OrdersItemsComponent {
 	actions: Button[] = [
 	]
 
-	getActions: TableActionsFn<OrderItem> = element => [
+	getActions: TableActionsFn<OrderItem> = () => [
 	];
 }

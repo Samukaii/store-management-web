@@ -1,9 +1,9 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { Order } from "../models/order";
 import { OrdersService } from "../orders.service";
-import { WindowLoadingComponent } from "../../../core/components/window-loading/window-loading.component";
+import { WindowLoadingComponent } from "src/app/core/components/window-loading/window-loading.component";
 import { Router } from "@angular/router";
-import { injectRouterActions } from "../../../shared/di/inject-router-actions";
+import { injectRouterActions } from "src/app/shared/di/inject-router-actions";
 import { OrdersItemsComponent } from "../items/orders-items.component";
 import { CurrencyPipe, DatePipe } from "@angular/common";
 import { rxResource } from "@angular/core/rxjs-interop";

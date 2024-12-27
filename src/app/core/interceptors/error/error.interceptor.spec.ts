@@ -1,11 +1,11 @@
 import { TestBed } from "@angular/core/testing";
 import { HttpClient, provideHttpClient, withInterceptors } from "@angular/common/http";
 import { MockProvider } from "ng-mocks";
-import { spyDependency } from "../../../testing/spies/spy-dependency";
+import { spyDependency } from "src/app/testing/spies/spy-dependency";
 import { HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
-import { validateRequest } from "../../../testing/utils/validate-request";
+import { validateRequest } from "src/app/testing/utils/validate-request";
 import { errorInterceptor } from "./error.interceptor";
-import { SnackbarService } from "../../../shared/services/snackbar/snackbar.service";
+import { SnackbarService } from "src/app/shared/services/snackbar/snackbar.service";
 import { ErrorsService } from "../../error-handling/errors.service";
 import { ApplicationErrorType } from "../../error-handling/enumerations/application-error-type";
 

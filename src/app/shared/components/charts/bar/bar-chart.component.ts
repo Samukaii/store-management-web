@@ -1,9 +1,8 @@
-import { booleanAttribute, Component, computed, effect, ElementRef, input, viewChild } from '@angular/core';
+import { Component, computed, effect, ElementRef, input, viewChild } from '@angular/core';
 import Chart, { ChartData } from 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { injectIsAtBrowser } from "../../../di/inject-is-at-browser";
-import { WindowLoadingComponent } from "../../../../core/components/window-loading/window-loading.component";
-
+import { WindowLoadingComponent } from "src/app/core/components/window-loading/window-loading.component";
 
 export const chartBluePalette: string[] = [
 	"#001f3f",
@@ -22,29 +21,6 @@ export const chartBluePalette: string[] = [
 	"#001828",
 	"#003046",
 ];
-
-const colorfulPalette: string[] = [
-	"#2D9A4B",
-	"#5A2DFF",
-	"#FF8D1A",
-	"#FF1493",
-	"#FF5733",
-	"#FF33CC",
-	"#FFB71B",
-	"#FFD700",
-	"#1E90FF",
-	"#FF00FF",
-	"#8A2BE2",
-	"#FF6347",
-	"#33FF57",
-	"#00BFFF",
-	"#7FFF00"
-]
-
-
-const getColor = (index: number): string => {
-	return chartBluePalette[index % chartBluePalette.length];
-}
 
 @Component({
 	selector: 'app-bar-chart',

@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ProductsCategoriesFormComponent } from "../form/products-categories-form.component";
 import { ProductsCategoriesService } from "../products-categories.service";
 import { ProductsCategoriesFormValue } from "../models/products-categories-form-value";
-import { injectRouterActions } from "../../../../shared/di/inject-router-actions";
+import { injectRouterActions } from "../src/app/shared/di/inject-router-actions";
 
 
 @Component({

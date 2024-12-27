@@ -1,22 +1,22 @@
 import { Component, computed, inject, input, output } from '@angular/core';
-import { FormComponent } from "../../../shared/components/form/form/form.component";
+import { FormComponent } from "src/app/shared/components/form/form/form.component";
 import { RawMaterial } from "../models/raw-material";
-import { FormInputComponent } from "../../../shared/components/form/input/form-input.component";
-import { FormRadioComponent } from "../../../shared/components/form/radio/form-radio.component";
-import { BasicOption } from "../../../shared/models/basic-option";
-import { FlexRowComponent } from "../../../shared/components/flex-row/flex-row.component";
+import { FormInputComponent } from "src/app/shared/components/form/input/form-input.component";
+import { FormRadioComponent } from "src/app/shared/components/form/radio/form-radio.component";
+import { BasicOption } from "src/app/shared/models/basic-option";
+import { FlexRowComponent } from "src/app/shared/components/flex-row/flex-row.component";
 import { RawMaterialsFormValue } from "../models/raw-materials-form-value";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { RawMaterialsMeasurementUnit } from "../enums/raw-materials-measurement-unit";
-import { FormModifier } from "../../../shared/models/form-modifier";
+import { FormModifier } from "src/app/shared/models/form-modifier";
 import { RawMaterialsForm } from "../models/raw-materials-form";
 import { createRawMaterialsForm } from "./create-raw-materials-form";
-import { AutocompleteComponent } from "../../../shared/components/autocomplete/autocomplete.component";
+import { AutocompleteComponent } from "src/app/shared/components/autocomplete/autocomplete.component";
 import { RawMaterialsCategoriesService } from "../categories/raw-materials-categories.service";
 import { ReactiveFormsModule } from "@angular/forms";
-import { routeNames } from "../../../shared/route-names";
+import { AutocompleteNoResults } from "src/app/shared/components/autocomplete/no-results/autocomplete-no.results";
+import { Generic } from "src/app/shared/models/generic";
 
-import { AutocompleteNoResults } from "../../../shared/components/autocomplete/no-results/autocomplete-no.results";
 
 @Component({
     selector: 'app-raw-materials-form',
@@ -40,7 +40,7 @@ export class RawMaterialsFormComponent {
 
 	noResults = AutocompleteNoResults.autoCreation(() => ({
 		noResultsIcon: "category",
-		method: (params) => this.categoriesService.create(params as any),
+		method: ((params: Generic) => this.categoriesService.create(params as any)) as any,
 		key: "name"
 	}))
 

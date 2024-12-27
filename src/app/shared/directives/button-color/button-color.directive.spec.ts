@@ -1,11 +1,11 @@
-import { setupComponentTesting } from "../../../testing/setup/setup-component-testing";
+import { setupComponentTesting } from "src/app/testing/setup/setup-component-testing";
 import { ButtonColorDirective } from "./button-color.directive";
 import { Component, signal } from "@angular/core";
 import { AppColor } from "../../components/button/models/app-color";
-import { getCurrentComponentFixture } from "../../../testing/core/current-component-fixture";
-import { getByTestId } from "../../../testing/getters/get-by-test-id";
-import { detectChanges } from "../../../testing/utils/detect-changes";
-import { hasCreatedComponent } from "../../../testing/utils/has-created-component";
+import { getCurrentComponentFixture } from "src/app/testing/core/current-component-fixture";
+import { getByTestId } from "src/app/testing/getters/get-by-test-id";
+import { detectChanges } from "src/app/testing/utils/detect-changes";
+import { hasCreatedComponent } from "src/app/testing/utils/has-created-component";
 
 const setup = () => {
 	@Component({

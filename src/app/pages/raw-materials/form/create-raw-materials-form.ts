@@ -1,10 +1,8 @@
 import { inject } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { RawMaterialsMeasurementUnit } from "../enums/raw-materials-measurement-unit";
-import { CustomValidators } from "../../../shared/validators/custom-validators";
-import { NavigationContextService } from "../../../core/components/navigation-context/navigation-context.service";
-import { FormValue } from "../../../shared/models/form-value";
-import { FormPersistenceService } from "../../../core/services/form-persistence/form-persistence.service";
+import { CustomValidators } from "src/app/shared/validators/custom-validators";
+import { FormPersistenceService } from "src/app/core/services/form-persistence/form-persistence.service";
 
 export const createRawMaterialsForm = () => {
 	const fb = inject(FormBuilder);

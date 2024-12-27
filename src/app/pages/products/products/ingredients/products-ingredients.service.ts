@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
-import { injectParametrizedUrl } from "../../../../shared/di/inject-parametrized-url";
+import { injectParametrizedUrl } from "../src/app/shared/di/inject-parametrized-url";
 import { HttpClient } from "@angular/common/http";
 import { ProductsAddIngredientFormValue } from "../models/products-add-ingredient-form-value";
-import { injectParams } from "../../../../shared/di/inject-params";
+import { injectParams } from "../src/app/shared/di/inject-params";
 import { ProductFoodInput } from "../models/product-food-input";
-import { environment } from "../../../../environments/environment";
-import { Generic } from "../../../../shared/models/generic";
+import { environment } from "../src/app/environments/environment";
+import { Generic } from "../src/app/shared/models/generic";
 
 @Injectable({
 	providedIn: 'root'

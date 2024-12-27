@@ -2,9 +2,9 @@ import { Component, inject, input, signal } from '@angular/core';
 import { RawMaterialsFormComponent } from "../form/raw-materials-form.component";
 import { RawMaterial } from "../models/raw-material";
 import { RawMaterialsService } from "../raw-materials.service";
-import { WindowLoadingComponent } from "../../../core/components/window-loading/window-loading.component";
+import { WindowLoadingComponent } from "src/app/core/components/window-loading/window-loading.component";
 import { RawMaterialsFormValue } from "../models/raw-materials-form-value";
-import { injectRouterActions } from "../../../shared/di/inject-router-actions";
+import { injectRouterActions } from "src/app/shared/di/inject-router-actions";
 import { rxResource } from "@angular/core/rxjs-interop";
 
 @Component({

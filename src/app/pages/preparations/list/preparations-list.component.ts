@@ -1,19 +1,19 @@
 import { Component, inject } from '@angular/core';
 import {
 	LocalActionsUpdaterComponent
-} from "../../../shared/components/local-actions/updater/local-actions-updater.component";
-import { TableComponent } from "../../../shared/components/table/table.component";
+} from "src/app/shared/components/local-actions/updater/local-actions-updater.component";
+import { TableComponent } from "src/app/shared/components/table/table.component";
 import { Preparation } from "../models/preparation";
-import { Button } from "../../../shared/components/button/models/button";
-import { routeNames } from "../../../shared/route-names";
-import { TableColumnFn } from "../../../shared/components/table/table-column-fn";
-import { TableActionsFn } from "../../../shared/components/table/table-actions-fn";
+import { Button } from "src/app/shared/components/button/models/button";
+import { routeNames } from "src/app/shared/route-names";
+import { TableColumnFn } from "src/app/shared/components/table/table-column-fn";
+import { TableActionsFn } from "src/app/shared/components/table/table-actions-fn";
 import { PreparationsService } from "../preparations.service";
-import { NoResults } from "../../../shared/components/no-results/models/no-results";
-import { DialogService } from "../../../shared/services/dialog/dialog.service";
+import { NoResults } from "src/app/shared/components/no-results/models/no-results";
+import { DialogService } from "src/app/shared/services/dialog/dialog.service";
 import { rxResource } from "@angular/core/rxjs-interop";
 import { RawMaterialsMeasurementUnit } from "../../raw-materials/enums/raw-materials-measurement-unit";
-import { ConfirmActionService } from "../../../shared/components/confirm-action/confirm-action.service";
+import { ConfirmActionService } from "src/app/shared/components/confirm-action/confirm-action.service";
 
 @Component({
 	selector: 'app-preparations-list',

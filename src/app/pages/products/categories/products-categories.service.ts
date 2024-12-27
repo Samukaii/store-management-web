@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { environment } from "../../../environments/environment";
+import { environment } from "src/app/environments/environment";
 import { ProductCategory } from "./models/product-category";
 import { ProductsCategoriesFormValue } from "./models/products-categories-form-value";
-import { Generic } from "../../../shared/models/generic";
+import { Generic } from "src/app/shared/models/generic";
 
 @Injectable({
 	providedIn: 'root'

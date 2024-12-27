@@ -1,4 +1,4 @@
-import { RandomSchema } from "../../../shared/models/random-schema";
+import { RandomSchema } from "src/app/shared/models/random-schema";
 
 export interface MockInterceptorConfig {
 	baseUrl: string;

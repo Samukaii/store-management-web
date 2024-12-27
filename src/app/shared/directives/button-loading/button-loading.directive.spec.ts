@@ -1,11 +1,11 @@
-import { setupComponentTesting } from "../../../testing/setup/setup-component-testing";
+import { setupComponentTesting } from "src/app/testing/setup/setup-component-testing";
 import { Component, signal } from "@angular/core";
-import { getCurrentComponentFixture } from "../../../testing/core/current-component-fixture";
-import { detectChanges } from "../../../testing/utils/detect-changes";
-import { hasCreatedComponent } from "../../../testing/utils/has-created-component";
+import { getCurrentComponentFixture } from "src/app/testing/core/current-component-fixture";
+import { detectChanges } from "src/app/testing/utils/detect-changes";
+import { hasCreatedComponent } from "src/app/testing/utils/has-created-component";
 import { ButtonLoadingDirective } from "./button-loading.directive";
 import { MatButton } from "@angular/material/button";
-import { getByDirective } from "../../../testing/getters/get-by-directive";
+import { getByDirective } from "src/app/testing/getters/get-by-directive";
 import { MatProgressSpinner } from "@angular/material/progress-spinner";
 import { MockProvider } from "ng-mocks";
 import { ButtonRequestLoadingService } from "../button-request-loading/button-request-loading.service";

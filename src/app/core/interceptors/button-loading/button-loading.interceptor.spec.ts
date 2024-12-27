@@ -11,10 +11,10 @@ import {
 import { MockProvider } from "ng-mocks";
 import {
 	ButtonRequestLoadingService
-} from "../../../shared/directives/button-request-loading/button-request-loading.service";
-import { spyDependency } from "../../../testing/spies/spy-dependency";
+} from "src/app/shared/directives/button-request-loading/button-request-loading.service";
+import { spyDependency } from "src/app/testing/spies/spy-dependency";
 import { HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
-import { validateRequest } from "../../../testing/utils/validate-request";
+import { validateRequest } from "src/app/testing/utils/validate-request";
 
 const setup = () => {
 	TestBed.configureTestingModule({

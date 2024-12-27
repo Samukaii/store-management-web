@@ -1,14 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { TableComponent } from "../../../shared/components/table/table.component";
+import { TableComponent } from "src/app/shared/components/table/table.component";
 import { Order } from "../models/order";
-import { TableColumnFn } from "../../../shared/components/table/table-column-fn";
-import { TableActionsFn } from "../../../shared/components/table/table-actions-fn";
+import { TableColumnFn } from "src/app/shared/components/table/table-column-fn";
+import { TableActionsFn } from "src/app/shared/components/table/table-actions-fn";
 import { OrdersService } from "../orders.service";
-import { NoResults } from "../../../shared/components/no-results/models/no-results";
-import { DialogService } from "../../../shared/services/dialog/dialog.service";
+import { NoResults } from "src/app/shared/components/no-results/models/no-results";
+import { DialogService } from "src/app/shared/services/dialog/dialog.service";
 import { formatDate } from "@angular/common";
 import { rxResource } from "@angular/core/rxjs-interop";
-import { ConfirmActionService } from "../../../shared/components/confirm-action/confirm-action.service";
+import { ConfirmActionService } from "src/app/shared/components/confirm-action/confirm-action.service";
 
 @Component({
     selector: 'app-orders-list',

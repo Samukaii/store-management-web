@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { PreparationsService } from "../preparations.service";
 import { PreparationsFormValue } from "../models/preparations-form-value";
-import { injectRouterActions } from "../../../shared/di/inject-router-actions";
+import { injectRouterActions } from "src/app/shared/di/inject-router-actions";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ProductsFormComponent } from "../form/preparations-form.component";
 

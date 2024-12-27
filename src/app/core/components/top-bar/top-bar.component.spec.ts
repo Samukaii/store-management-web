@@ -1,21 +1,18 @@
-import { setupComponentTesting } from "../../../testing/setup/setup-component-testing";
+import { setupComponentTesting } from "src/app/testing/setup/setup-component-testing";
 import { TopBarComponent } from "./top-bar.component";
-import { hasCreatedComponent } from "../../../testing/utils/has-created-component";
+import { hasCreatedComponent } from "src/app/testing/utils/has-created-component";
 import { TopBarLoadingService } from "./top-bar-loading.service";
 import { signal } from "@angular/core";
 import { BreadcrumbComponent } from "../breadcrumb/breadcrumb.component";
-import { LocalActionsComponent } from "../../../shared/components/local-actions/local-actions.component";
+import { LocalActionsComponent } from "src/app/shared/components/local-actions/local-actions.component";
 import { MatProgressBar } from "@angular/material/progress-bar";
-import { getByDirective } from "../../../testing/getters/get-by-directive";
+import { getByDirective } from "src/app/testing/getters/get-by-directive";
 import { TestBed } from "@angular/core/testing";
-import { detectChanges } from "../../../testing/utils/detect-changes";
-import { mockComponent } from "../../../testing/mocks/mock-component";
+import { detectChanges } from "src/app/testing/utils/detect-changes";
+import { mockComponent } from "src/app/testing/mocks/mock-component";
 
-interface SetupConfig {
 
-}
-
-const setup = (config?: SetupConfig) => {
+const setup = () => {
 	const loading = signal(false);
 
 	setupComponentTesting(TopBarComponent, {
@@ -37,7 +34,6 @@ const setup = (config?: SetupConfig) => {
 		]
 	})
 }
-
 
 describe(TopBarComponent.name, () => {
 	it('must create component', () => {

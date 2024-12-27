@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from "@angular/forms";
-import { Generic } from "../../../shared/models/generic";
+import { Generic } from "src/app/shared/models/generic";
 import { FormKeyOptions } from "./models/form-key-options";
 
 @Injectable({

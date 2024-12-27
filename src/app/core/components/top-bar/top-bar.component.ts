@@ -1,8 +1,8 @@
 import { Component, ElementRef, inject } from '@angular/core';
-import { LocalActionsComponent } from "../../../shared/components/local-actions/local-actions.component";
+import { LocalActionsComponent } from "src/app/shared/components/local-actions/local-actions.component";
 import { BreadcrumbComponent } from "../breadcrumb/breadcrumb.component";
 import { MatProgressBar } from "@angular/material/progress-bar";
-import { FlexRowComponent } from "../../../shared/components/flex-row/flex-row.component";
+import { FlexRowComponent } from "src/app/shared/components/flex-row/flex-row.component";
 import { TopBarLoadingService } from "./top-bar-loading.service";
 
 @Component({

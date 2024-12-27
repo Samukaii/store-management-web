@@ -1,8 +1,8 @@
 import { Component, computed, input, output } from '@angular/core';
 import { createProductsDefinePriceForm, ProductsDefinePricePayload } from "./create-products-define-price.form";
 import { toSignal } from "@angular/core/rxjs-interop";
-import { FormComponent } from "../../../../shared/components/form/form/form.component";
-import { FormInputComponent } from "../../../../shared/components/form/input/form-input.component";
+import { FormComponent } from "../src/app/shared/components/form/form/form.component";
+import { FormInputComponent } from "../src/app/shared/components/form/input/form-input.component";
 import { Product } from "../models/product";
 import { ReactiveFormsModule } from "@angular/forms";
 

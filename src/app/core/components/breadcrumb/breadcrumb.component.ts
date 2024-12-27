@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { injectBreadcrumbs } from "../../../shared/di/inject-breadcrumbs";
+import { injectBreadcrumbs } from "src/app/shared/di/inject-breadcrumbs";
 import { RouterLink } from "@angular/router";
 
 @Component({

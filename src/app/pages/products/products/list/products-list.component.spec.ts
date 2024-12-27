@@ -1,33 +1,33 @@
-import { setupComponentTesting } from "../../../../testing/setup/setup-component-testing";
+import { setupComponentTesting } from "../src/app/testing/setup/setup-component-testing";
 import { ProductsListComponent } from "./products-list.component";
-import { hasCreatedComponent } from "../../../../testing/utils/has-created-component";
+import { hasCreatedComponent } from "../src/app/testing/utils/has-created-component";
 import { ProductsService } from "../products.service";
 import { of } from "rxjs";
-import { DeepPartial } from "../../../../shared/models/deep-partial";
+import { DeepPartial } from "../src/app/shared/models/deep-partial";
 import { Product } from "../models/product";
 import {
 	LocalActionsUpdaterComponent
-} from "../../../../shared/components/local-actions/updater/local-actions-updater.component";
-import { getByDirective } from "../../../../testing/getters/get-by-directive";
-import { Button } from "../../../../shared/components/button/models/button";
+} from "../src/app/shared/components/local-actions/updater/local-actions-updater.component";
+import { getByDirective } from "../src/app/testing/getters/get-by-directive";
+import { Button } from "../src/app/shared/components/button/models/button";
 import { ProductsCategoriesService } from "../../categories/products-categories.service";
 import { ProductCategory } from "../../categories/models/product-category";
-import { AutocompleteOption } from "../../../../shared/components/autocomplete/models/autocomplete-option";
-import { ChipsSelectorComponent } from "../../../../shared/components/chips-selector/chips-selector.component";
+import { AutocompleteOption } from "../src/app/shared/components/autocomplete/models/autocomplete-option";
+import { ChipsSelectorComponent } from "../src/app/shared/components/chips-selector/chips-selector.component";
 import { fakeAsync, flush } from "@angular/core/testing";
-import { detectChanges } from "../../../../testing/utils/detect-changes";
-import { TableComponent } from "../../../../shared/components/table/table.component";
-import { testTable } from "../../../../testing/utils/test-table";
-import { testConfirmAction } from "../../../../testing/utils/test-confirm-action";
-import { spyDependency } from "../../../../testing/spies/spy-dependency";
-import { ConfirmActionService } from "../../../../shared/components/confirm-action/confirm-action.service";
-import { getByTestId } from "../../../../testing/getters/get-by-test-id";
+import { detectChanges } from "../src/app/testing/utils/detect-changes";
+import { TableComponent } from "../src/app/shared/components/table/table.component";
+import { testTable } from "../src/app/testing/utils/test-table";
+import { testConfirmAction } from "../src/app/testing/utils/test-confirm-action";
+import { spyDependency } from "../src/app/testing/spies/spy-dependency";
+import { ConfirmActionService } from "../src/app/shared/components/confirm-action/confirm-action.service";
+import { getByTestId } from "../src/app/testing/getters/get-by-test-id";
 import { FormControl } from "@angular/forms";
 import { MockProvider } from "ng-mocks";
-import { mockComponent } from "../../../../testing/mocks/mock-component";
-import { EntityWithParams } from "../../../../testing/models/entity-with-params";
-import { applyParams } from "../../../../testing/filtering/apply-params";
-import { applyToAllObjects } from "../../../../testing/utils/apply-to-all-objects";
+import { mockComponent } from "../src/app/testing/mocks/mock-component";
+import { EntityWithParams } from "../src/app/testing/models/entity-with-params";
+import { applyParams } from "../src/app/testing/filtering/apply-params";
+import { applyToAllObjects } from "../src/app/testing/utils/apply-to-all-objects";
 
 
 interface SetupConfig {

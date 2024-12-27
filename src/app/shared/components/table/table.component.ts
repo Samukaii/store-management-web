@@ -15,7 +15,7 @@ import { Identifiable } from "../../models/identifiable";
 import { TableActionsFn } from "./table-actions-fn";
 import { ButtonsListComponent } from "../buttons-list/buttons-list.component";
 import { NoResultsComponent } from "../no-results/no-results.component";
-import { WindowLoadingComponent } from "../../../core/components/window-loading/window-loading.component";
+import { WindowLoadingComponent } from "src/app/core/components/window-loading/window-loading.component";
 import { NoResults } from "../no-results/models/no-results";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RowClickFn } from "./models/row-click-fn";

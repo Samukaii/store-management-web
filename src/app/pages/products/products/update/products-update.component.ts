@@ -4,12 +4,12 @@ import { Product } from "../models/product";
 import { ProductsService } from "../products.service";
 import { ProductsFormValue } from "../models/products-form-value";
 import { Router } from "@angular/router";
-import { injectRouterActions } from "../../../../shared/di/inject-router-actions";
+import { injectRouterActions } from "../src/app/shared/di/inject-router-actions";
 import { ProductsIngredientsComponent } from "../ingredients/products-ingredients.component";
-import { TabsComponent } from "../../../../shared/components/tabs/tabs.component";
-import { TabsItemComponent } from "../../../../shared/components/tabs/item/tabs-item.component";
+import { TabsComponent } from "../src/app/shared/components/tabs/tabs.component";
+import { TabsItemComponent } from "../src/app/shared/components/tabs/item/tabs-item.component";
 import { rxResource } from "@angular/core/rxjs-interop";
-import { WindowLoadingComponent } from "../../../../core/components/window-loading/window-loading.component";
+import { WindowLoadingComponent } from "../src/app/core/components/window-loading/window-loading.component";
 
 @Component({
     selector: 'app-products-update',

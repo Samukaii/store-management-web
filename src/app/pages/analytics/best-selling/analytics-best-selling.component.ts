@@ -1,17 +1,17 @@
 import { Component, computed, inject } from '@angular/core';
-import { BarChartComponent, chartBluePalette } from "../../../shared/components/charts/bar/bar-chart.component";
-import { DateRangeComponent } from "../../../shared/components/date-range/date-range.component";
-import { FlexRowComponent } from "../../../shared/components/flex-row/flex-row.component";
-import { FormRadioComponent } from "../../../shared/components/form/radio/form-radio.component";
+import { BarChartComponent, chartBluePalette } from "src/app/shared/components/charts/bar/bar-chart.component";
+import { DateRangeComponent } from "src/app/shared/components/date-range/date-range.component";
+import { FlexRowComponent } from "src/app/shared/components/flex-row/flex-row.component";
+import { FormRadioComponent } from "src/app/shared/components/form/radio/form-radio.component";
 import { BestSellingDisplayType } from "../enum/best-selling-display-type";
 import { rxResource } from "@angular/core/rxjs-interop";
-import { distinctPropertiesAvoidingNull } from "../../../shared/helpers/distinct-properties-avoiding-null/distinct-properties-avoiding-null";
+import { distinctPropertiesAvoidingNull } from "src/app/shared/helpers/distinct-properties-avoiding-null/distinct-properties-avoiding-null";
 import { NonNullableFormBuilder } from "@angular/forms";
-import { extendedDate } from "../../../shared/helpers/extended-date/extended-date";
-import { controlValue } from "../../../shared/helpers/control-value/control-value";
+import { extendedDate } from "src/app/shared/helpers/extended-date/extended-date";
+import { controlValue } from "src/app/shared/helpers/control-value/control-value";
 import { AnalyticsService } from "../analytics.service";
-import { BasicOption } from "../../../shared/models/basic-option";
-import { WindowLoadingComponent } from "../../../core/components/window-loading/window-loading.component";
+import { BasicOption } from "src/app/shared/models/basic-option";
+import { WindowLoadingComponent } from "src/app/core/components/window-loading/window-loading.component";
 import { OrdersDisplayType } from "../enum/orders-display-type";
 import { ChartData } from 'chart.js';
 

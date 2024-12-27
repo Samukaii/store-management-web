@@ -1,20 +1,17 @@
-import { setupComponentTesting } from "../../../testing/setup/setup-component-testing";
+import { setupComponentTesting } from "src/app/testing/setup/setup-component-testing";
 import { NavigationContextComponent } from "./navigation-context.component";
-import { hasCreatedComponent } from "../../../testing/utils/has-created-component";
+import { hasCreatedComponent } from "src/app/testing/utils/has-created-component";
 import { NavigationContextService } from "./navigation-context.service";
 import { signal } from "@angular/core";
 import { NavigationContext } from "./models/navigation-context";
-import { DeepPartial } from "../../../shared/models/deep-partial";
+import { DeepPartial } from "src/app/shared/models/deep-partial";
 import { TestBed } from "@angular/core/testing";
-import { getByTestId } from "../../../testing/getters/get-by-test-id";
-import { findByTestId } from "../../../testing/getters/find-by-test-id";
-import { detectChanges } from "../../../testing/utils/detect-changes";
+import { getByTestId } from "src/app/testing/getters/get-by-test-id";
+import { findByTestId } from "src/app/testing/getters/find-by-test-id";
+import { detectChanges } from "src/app/testing/utils/detect-changes";
 
-interface SetupConfig {
 
-}
-
-const setup = (config?: SetupConfig) => {
+const setup = () => {
 	setupComponentTesting(NavigationContextComponent, {
 		providers: [
 			{

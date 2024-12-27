@@ -1,6 +1,6 @@
 import { booleanAttribute, Component, computed, effect, inject, input } from '@angular/core';
 import { TopBarLoadingService } from "../top-bar/top-bar-loading.service";
-import { ProgressSpinnerComponent } from "../../../shared/components/progress-spinner/progress-spinner.component";
+import { ProgressSpinnerComponent } from "src/app/shared/components/progress-spinner/progress-spinner.component";
 
 @Component({
     selector: 'app-window-loading',

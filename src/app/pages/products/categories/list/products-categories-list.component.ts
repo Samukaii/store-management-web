@@ -1,17 +1,17 @@
 import { Component, inject } from '@angular/core';
 import {
 	LocalActionsUpdaterComponent
-} from "../../../../shared/components/local-actions/updater/local-actions-updater.component";
-import { TableComponent } from "../../../../shared/components/table/table.component";
+} from "../src/app/shared/components/local-actions/updater/local-actions-updater.component";
+import { TableComponent } from "../src/app/shared/components/table/table.component";
 import { ProductCategory } from "../models/product-category";
-import { Button } from "../../../../shared/components/button/models/button";
-import { routeNames } from "../../../../shared/route-names";
-import { TableColumnFn } from "../../../../shared/components/table/table-column-fn";
-import { TableActionsFn } from "../../../../shared/components/table/table-actions-fn";
+import { Button } from "../src/app/shared/components/button/models/button";
+import { routeNames } from "../src/app/shared/route-names";
+import { TableColumnFn } from "../src/app/shared/components/table/table-column-fn";
+import { TableActionsFn } from "../src/app/shared/components/table/table-actions-fn";
 import { ProductsCategoriesService } from "../products-categories.service";
-import { NoResults } from "../../../../shared/components/no-results/models/no-results";
+import { NoResults } from "../src/app/shared/components/no-results/models/no-results";
 import { rxResource } from "@angular/core/rxjs-interop";
-import { ConfirmActionService } from "../../../../shared/components/confirm-action/confirm-action.service";
+import { ConfirmActionService } from "../src/app/shared/components/confirm-action/confirm-action.service";
 
 @Component({
 	selector: 'app-products-categories-list',

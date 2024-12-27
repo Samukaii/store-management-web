@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { environment } from "../../../environments/environment";
+import { environment } from "src/app/environments/environment";
 import { Product } from "./models/product";
 import { ProductsFormValue } from "./models/products-form-value";
 import { ProductsDefinePricePayload } from "./define-price/create-products-define-price.form";
-import { Generic } from "../../../shared/models/generic";
-import { toAutoCompleteOptions } from "../../../shared/helpers/to-auto-complete-options/to-auto-complete-options";
+import { Generic } from "src/app/shared/models/generic";
+import { toAutoCompleteOptions } from "src/app/shared/helpers/to-auto-complete-options/to-auto-complete-options";
 
 @Injectable({
 	providedIn: 'root'

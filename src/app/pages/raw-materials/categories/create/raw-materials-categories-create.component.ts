@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { RawMaterialsCategoriesFormComponent } from "../form/raw-materials-categories-form.component";
 import { RawMaterialsCategoriesService } from "../raw-materials-categories.service";
 import { RawMaterialsCategoriesFormValue } from "../models/raw-materials-categories-form-value";
-import { injectRouterActions } from "../../../../shared/di/inject-router-actions";
+import { injectRouterActions } from "../src/app/shared/di/inject-router-actions";
 
 
 @Component({

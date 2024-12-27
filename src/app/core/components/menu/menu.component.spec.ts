@@ -1,11 +1,11 @@
-import { setupComponentTesting } from "../../../testing/setup/setup-component-testing";
+import { setupComponentTesting } from "src/app/testing/setup/setup-component-testing";
 import { MenuComponent } from "./menu.component";
-import { hasCreatedComponent } from "../../../testing/utils/has-created-component";
-import { provideRouteConfiguration } from "../../../shared/di/providers/provide-route-configuration";
-import { AppRoutes } from "../../../shared/models/app-routes";
-import { DeepPartial } from "../../../shared/models/deep-partial";
-import { getAllByTestId } from "../../../testing/getters/get-all-by-test-id";
-import { MenuItem } from "../../../shared/di/inject-menu-items";
+import { hasCreatedComponent } from "src/app/testing/utils/has-created-component";
+import { provideRouteConfiguration } from "src/app/shared/di/providers/provide-route-configuration";
+import { AppRoutes } from "src/app/shared/models/app-routes";
+import { DeepPartial } from "src/app/shared/models/deep-partial";
+import { getAllByTestId } from "src/app/testing/getters/get-all-by-test-id";
+import { MenuItem } from "src/app/shared/di/inject-menu-items";
 
 interface SetupConfig {
 	routes?: DeepPartial<AppRoutes>;

@@ -1,21 +1,21 @@
 import { Component, computed, inject } from '@angular/core';
 import {
 	LocalActionsUpdaterComponent
-} from "../../../shared/components/local-actions/updater/local-actions-updater.component";
-import { TableComponent } from "../../../shared/components/table/table.component";
+} from "src/app/shared/components/local-actions/updater/local-actions-updater.component";
+import { TableComponent } from "src/app/shared/components/table/table.component";
 import { RawMaterial } from "../models/raw-material";
-import { Button } from "../../../shared/components/button/models/button";
-import { routeNames } from "../../../shared/route-names";
-import { TableColumnFn } from "../../../shared/components/table/table-column-fn";
-import { TableActionsFn } from "../../../shared/components/table/table-actions-fn";
+import { Button } from "src/app/shared/components/button/models/button";
+import { routeNames } from "src/app/shared/route-names";
+import { TableColumnFn } from "src/app/shared/components/table/table-column-fn";
+import { TableActionsFn } from "src/app/shared/components/table/table-actions-fn";
 import { RawMaterialsService } from "../raw-materials.service";
-import { NoResults } from "../../../shared/components/no-results/models/no-results";
+import { NoResults } from "src/app/shared/components/no-results/models/no-results";
 import { rxResource } from "@angular/core/rxjs-interop";
-import { ChipsSelectorComponent } from "../../../shared/components/chips-selector/chips-selector.component";
+import { ChipsSelectorComponent } from "src/app/shared/components/chips-selector/chips-selector.component";
 import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { RawMaterialsCategoriesService } from "../categories/raw-materials-categories.service";
-import { ConfirmActionService } from "../../../shared/components/confirm-action/confirm-action.service";
-import { formValue } from "../../../shared/helpers/form-value/form-value";
+import { ConfirmActionService } from "src/app/shared/components/confirm-action/confirm-action.service";
+import { formValue } from "src/app/shared/helpers/form-value/form-value";
 
 @Component({
 	selector: 'app-raw-materials-list',

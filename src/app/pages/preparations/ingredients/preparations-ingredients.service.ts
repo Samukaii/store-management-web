@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { injectParametrizedUrl } from "../../../shared/di/inject-parametrized-url";
+import { injectParametrizedUrl } from "src/app/shared/di/inject-parametrized-url";
 import { HttpClient } from "@angular/common/http";
 import { PreparationsIngredientsFormValue } from "../models/preparations-ingredients-form-value";
-import { environment } from "../../../environments/environment";
-import { injectParams } from "../../../shared/di/inject-params";
+import { environment } from "src/app/environments/environment";
+import { injectParams } from "src/app/shared/di/inject-params";
 import { PreparationIngredient } from "../models/preparation-ingredient";
 
 @Injectable({

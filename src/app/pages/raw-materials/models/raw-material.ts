@@ -1,4 +1,4 @@
-import { Identifiable } from "../../../shared/models/identifiable";
+import { Identifiable } from "src/app/shared/models/identifiable";
 import { RawMaterialsMeasurementUnit } from "../enums/raw-materials-measurement-unit";
 
 export interface RawMaterial extends Identifiable {

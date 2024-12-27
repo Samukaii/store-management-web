@@ -1,14 +1,14 @@
 import { Component, computed, input, output } from '@angular/core';
 import { toSignal } from "@angular/core/rxjs-interop";
-import { FormComponent } from "../../../shared/components/form/form/form.component";
-import { FormInputComponent } from "../../../shared/components/form/input/form-input.component";
+import { FormComponent } from "src/app/shared/components/form/form/form.component";
+import { FormInputComponent } from "src/app/shared/components/form/input/form-input.component";
 import { Preparation } from "../models/preparation";
 import {
 	createPreparationsDefineQuantityForm,
 	PreparationsDefineQuantityPayload
 } from "./create-preparations-define-quantity.form";
-import { FormRadioComponent } from "../../../shared/components/form/radio/form-radio.component";
-import { BasicOption } from "../../../shared/models/basic-option";
+import { FormRadioComponent } from "src/app/shared/components/form/radio/form-radio.component";
+import { BasicOption } from "src/app/shared/models/basic-option";
 import { RawMaterialsMeasurementUnit } from "../../raw-materials/enums/raw-materials-measurement-unit";
 import { ReactiveFormsModule } from "@angular/forms";
 

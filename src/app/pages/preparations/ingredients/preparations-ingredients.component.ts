@@ -1,22 +1,22 @@
 import { Component, inject, input, output } from '@angular/core';
 import {
 	LocalActionsUpdaterComponent
-} from "../../../shared/components/local-actions/updater/local-actions-updater.component";
-import { TableComponent } from "../../../shared/components/table/table.component";
+} from "src/app/shared/components/local-actions/updater/local-actions-updater.component";
+import { TableComponent } from "src/app/shared/components/table/table.component";
 import { PreparationsService } from "../preparations.service";
-import { TableColumnFn } from "../../../shared/components/table/table-column-fn";
+import { TableColumnFn } from "src/app/shared/components/table/table-column-fn";
 import { Preparation } from "../models/preparation";
-import { Button } from "../../../shared/components/button/models/button";
-import { TableActionsFn } from "../../../shared/components/table/table-actions-fn";
+import { Button } from "src/app/shared/components/button/models/button";
+import { TableActionsFn } from "src/app/shared/components/table/table-actions-fn";
 import { PreparationsIngredientsService } from "./preparations-ingredients.service";
-import { DialogService } from "../../../shared/services/dialog/dialog.service";
+import { DialogService } from "src/app/shared/services/dialog/dialog.service";
 import { PreparationsIngredientsCreatorComponent } from "./creator/preparations-ingredients-creator.component";
-import { NoResults } from "../../../shared/components/no-results/models/no-results";
+import { NoResults } from "src/app/shared/components/no-results/models/no-results";
 import { of } from "rxjs";
 import { rxResource } from "@angular/core/rxjs-interop";
 import { PreparationIngredient } from "../models/preparation-ingredient";
 import { PreparationsDefineQuantityComponent } from "../define-quantity/preparations-define-quantity.component";
-import { ConfirmActionService } from "../../../shared/components/confirm-action/confirm-action.service";
+import { ConfirmActionService } from "src/app/shared/components/confirm-action/confirm-action.service";
 
 @Component({
     selector: 'app-preparations-ingredients',
