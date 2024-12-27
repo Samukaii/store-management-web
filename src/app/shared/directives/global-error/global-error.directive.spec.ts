@@ -13,6 +13,7 @@ import { BehaviorSubject, map } from "rxjs";
 import { fakeAsync, flush } from "@angular/core/testing";
 import { getByTestId } from "src/app/testing/getters/get-by-test-id";
 import { spyDependency } from "src/app/testing/spies/spy-dependency";
+import { mockErrorsService } from "src/app/testing/mocks/mock-errors-service";
 
 const mockElementRef = (selector: string) => {
 	const field = getByTestId(selector).read(GlobalErrorDirective);
@@ -54,23 +55,12 @@ const setup = () => {
 		control2 = signal<FormControl | null>(null);
 	}
 
-	const errors$ = new BehaviorSubject<Generic>({});
-
 	setupComponentTesting(HostComponent, {
 		imports: [
 			GlobalErrorDirective
 		],
 		providers: [
-			MockProvider(ErrorsService, {
-				watchFieldError: (fieldName: string) => {
-					return errors$.pipe(
-						map(errors => errors[fieldName]),
-					);
-				},
-				setErrors: (errors: Generic) => {
-					errors$.next(errors);
-				}
-			})
+			mockErrorsService()
 		]
 	});
 
