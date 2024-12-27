@@ -1,15 +1,4 @@
-import {
-	computed,
-	Directive,
-	inject,
-	input,
-	OnChanges,
-	OnDestroy,
-	OnInit,
-	output,
-	signal,
-	SimpleChanges
-} from '@angular/core';
+import { computed, Directive, effect, inject, input, OnDestroy, output, signal } from '@angular/core';
 import { ButtonRequestLoadingService } from "./button-request-loading.service";
 import { ButtonLoadingFinishStatus } from "./models/button-loading-finish.status";
 import { UuidService } from "../../services/uuid/uuid.service";
@@ -20,9 +9,10 @@ import { UuidService } from "../../services/uuid/uuid.service";
 		'(click)': 'onButtonClick()'
 	}
 })
-export class ButtonRequestLoadingDirective implements OnChanges, OnInit, OnDestroy {
+export class ButtonRequestLoadingDirective implements OnDestroy {
 	private service = inject(ButtonRequestLoadingService);
 	private uuidService = inject(UuidService);
+	private lastIdentifier?: string;
 	internalLoading = signal(false);
 
 	finishLoading = output<ButtonLoadingFinishStatus>();
@@ -30,18 +20,14 @@ export class ButtonRequestLoadingDirective implements OnChanges, OnInit, OnDestr
 	identifier = input<string>(this.uuidService.generate());
 	loading = computed(() => this.internalLoading())
 
-	ngOnInit() {
-		this.service.registerButton(this.identifier(), this);
-	}
+	updateButtonRegistration = effect(() => {
+		const identifier = this.identifier();
 
-	ngOnChanges(changes: SimpleChanges) {
-		const change = changes['identifier'];
+		if(this.lastIdentifier) this.service.unregisterButton(this.lastIdentifier);
 
-		if(change) {
-			if (change.previousValue) this.service.unregisterButton(change.previousValue);
-			this.service.registerButton(change.currentValue, this);
-		}
-	}
+		this.lastIdentifier = identifier;
+		this.service.registerButton(this.lastIdentifier, this);
+	});
 
 	startRequestLoading() {
 		this.internalLoading.set(true);
