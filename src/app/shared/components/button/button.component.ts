@@ -3,7 +3,6 @@ import { ButtonType } from "./models/button-type";
 import { MatButton, MatFabButton, MatIconButton, MatMiniFabButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
 import { MatTooltip } from "@angular/material/tooltip";
-import { NgClass } from "@angular/common";
 import { AppColor } from "./models/app-color";
 import {
 	ButtonRequestLoadingDirective
@@ -19,7 +18,6 @@ import { ButtonExtendedDirective } from "../../directives/button-extended/button
 		MatFabButton,
 		MatMiniFabButton,
 		MatTooltip,
-		NgClass,
 		ButtonExtendedDirective
 	],
     templateUrl: './button.component.html',
@@ -27,7 +25,8 @@ import { ButtonExtendedDirective } from "../../directives/button-extended/button
 	hostDirectives: [
 		{
 			directive: ButtonRequestLoadingDirective,
-			outputs: ['finishLoading']
+			outputs: ['finishLoading'],
+			inputs: ['identifier']
 		}
 	],
 	host: {

@@ -3,6 +3,7 @@
 @switch (buttonType) {
 	@case ("basic") {
 		<button
+			data-test-id="button"
 			appButtonExtended
 			[color]="color()"
 			[loading]="loading() || requestLoading.loading()"
@@ -15,6 +16,7 @@
 	@case ("raised") {
 		{{loading() || requestLoading.loading()}}
 		<button
+			data-test-id="button"
 			appButtonExtended
 			[color]="color()"
 			[loading]="loading() || requestLoading.loading()"
@@ -26,6 +28,7 @@
 	}
 	@case ("stroked") {
 		<button
+			data-test-id="button"
 			appButtonExtended
 			[color]="color()"
 			[loading]="loading() || requestLoading.loading()"
@@ -37,6 +40,7 @@
 	}
 	@case ("flat") {
 		<button
+			data-test-id="button"
 			appButtonExtended
 			[color]="color()"
 			[loading]="loading() || requestLoading.loading()"
@@ -48,19 +52,20 @@
 	}
 	@case ("icon") {
 		<button
+			data-test-id="button"
 			appButtonExtended
 			[color]="color()"
 			[loading]="loading() || requestLoading.loading()"
 			[disabled]="disabled()"
 			[matTooltip]="tooltip()"
-			[ngClass]="['icon-color-' + color()]"
 			mat-icon-button
 		>
-			<mat-icon>{{icon()}}</mat-icon>
+			<mat-icon data-test-id="icon">{{icon()}}</mat-icon>
 		</button>
 	}
 	@case ("fab") {
 		<button
+			data-test-id="button"
 			appButtonExtended
 			[color]="color()"
 			[loading]="loading() || requestLoading.loading()"
@@ -68,11 +73,12 @@
 			[matTooltip]="tooltip()"
 			mat-fab
 		>
-			<mat-icon>{{icon()}}</mat-icon>
+			<mat-icon data-test-id="icon">{{icon()}}</mat-icon>
 		</button>
 	}
 	@case ("mini-fab") {
 		<button
+			data-test-id="button"
 			appButtonExtended
 			[color]="color()"
 			[loading]="loading() || requestLoading.loading()"
@@ -80,11 +86,12 @@
 			[matTooltip]="tooltip()"
 			mat-mini-fab
 		>
-			<mat-icon>{{icon()}}</mat-icon>
+			<mat-icon data-test-id="icon">{{icon()}}</mat-icon>
 		</button>
 	}
 	@case ("extended-fab") {
 		<button
+			data-test-id="button"
 			appButtonExtended
 			[color]="color()"
 			[loading]="loading() || requestLoading.loading()"
@@ -93,7 +100,7 @@
 			mat-fab
 			extended
 		>
-			<mat-icon>{{icon()}}</mat-icon>
+			<mat-icon data-test-id="icon">{{icon()}}</mat-icon>
 			{{label()}}
 		</button>
 	}
