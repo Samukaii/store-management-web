@@ -1,4 +1,4 @@
-import { Identifiable } from "../src/app/shared/models/identifiable";
+import { Identifiable } from "src/app/shared/models/identifiable";
 
 export interface ProductFoodInput extends Identifiable {
 	totalCost: number;

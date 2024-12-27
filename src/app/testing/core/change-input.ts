@@ -3,7 +3,7 @@ import { Generic } from "src/app/shared/models/generic";
 import { detectChanges } from "src/app/testing/utils/detect-changes";
 import { ComponentInputNames } from "src/app/shared/models/component-input-names";
 
-export const changeInput = <Component extends Generic>(
+export const changeInput = <Component extends Generic = Generic>(
 	key: ComponentInputNames<Component>, value: any) => {
 	const {componentRef} = getCurrentComponentFixture();
 

@@ -2,7 +2,7 @@ import { inject } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { RawMaterialsMeasurementUnit } from "../../../raw-materials/enums/raw-materials-measurement-unit";
 import { ProductIngredientType } from "../enums/product-ingredient-type";
-import { FormPersistenceService } from "../src/app/core/services/form-persistence/form-persistence.service";
+import { FormPersistenceService } from "src/app/core/services/form-persistence/form-persistence.service";
 
 export const createProductsIngredientsForm = () => {
 	const fb = inject(FormBuilder);

@@ -1,6 +1,6 @@
 import { Component, input, output } from '@angular/core';
-import { FormComponent } from "../src/app/shared/components/form/form/form.component";
-import { FormInputComponent } from "../src/app/shared/components/form/input/form-input.component";
+import { FormComponent } from "src/app/shared/components/form/form/form.component";
+import { FormInputComponent } from "src/app/shared/components/form/input/form-input.component";
 import { ProductsCategoriesFormValue } from "../models/products-categories-form-value";
 import { createProductsCategoriesForm } from "./create-products-categories-form";
 import { ProductCategory } from "../models/product-category";

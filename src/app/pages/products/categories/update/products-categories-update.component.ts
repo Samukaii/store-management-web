@@ -2,9 +2,9 @@ import { Component, inject, input, signal } from '@angular/core';
 import { ProductsCategoriesFormComponent } from "../form/products-categories-form.component";
 import { ProductCategory } from "../models/product-category";
 import { ProductsCategoriesService } from "../products-categories.service";
-import { WindowLoadingComponent } from "../src/app/core/components/window-loading/window-loading.component";
+import { WindowLoadingComponent } from "src/app/core/components/window-loading/window-loading.component";
 import { ProductsCategoriesFormValue } from "../models/products-categories-form-value";
-import { injectRouterActions } from "../src/app/shared/di/inject-router-actions";
+import { injectRouterActions } from "src/app/shared/di/inject-router-actions";
 import { rxResource } from "@angular/core/rxjs-interop";
 
 @Component({

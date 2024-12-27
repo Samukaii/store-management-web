@@ -1,27 +1,27 @@
 import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
 import { createProductsIngredientsForm } from "../create-products-ingredients-form";
 import { ProductsAddIngredientFormValue } from "../../models/products-add-ingredient-form-value";
-import { FormInputComponent } from "../../src/app/shared/components/form/input/form-input.component";
-import { FormComponent } from "../../src/app/shared/components/form/form/form.component";
-import { AutocompleteComponent } from "../../src/app/shared/components/autocomplete/autocomplete.component";
-import { FlexRowComponent } from "../../src/app/shared/components/flex-row/flex-row.component";
-import { FormRadioComponent } from "../../src/app/shared/components/form/radio/form-radio.component";
+import { FormInputComponent } from "src/app/shared/components/form/input/form-input.component";
+import { FormComponent } from "src/app/shared/components/form/form/form.component";
+import { AutocompleteComponent } from "src/app/shared/components/autocomplete/autocomplete.component";
+import { FlexRowComponent } from "src/app/shared/components/flex-row/flex-row.component";
+import { FormRadioComponent } from "src/app/shared/components/form/radio/form-radio.component";
 import { toSignal } from "@angular/core/rxjs-interop";
-import { AutocompleteOption } from "../../src/app/shared/components/autocomplete/models/autocomplete-option";
-import { BasicOption } from "../../src/app/shared/models/basic-option";
+import { AutocompleteOption } from "src/app/shared/components/autocomplete/models/autocomplete-option";
+import { BasicOption } from "src/app/shared/models/basic-option";
 import { RawMaterialsService } from "../../../../raw-materials/raw-materials.service";
 import { PreparationsService } from "../../../../preparations/preparations.service";
 import { RawMaterial } from "../../../../raw-materials/models/raw-material";
 import { RawMaterialsMeasurementUnit } from "../../../../raw-materials/enums/raw-materials-measurement-unit";
-import { FormValidation } from "../../src/app/shared/models/form-validation";
+import { FormValidation } from "src/app/shared/models/form-validation";
 import { ProductsAddIngredientForm } from "../../models/products-add-ingredient-form";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ProductIngredientType } from "../../enums/product-ingredient-type";
 import { Product } from "../../models/product";
-import { routeNames } from "../../src/app/shared/route-names";
+import { routeNames } from "src/app/shared/route-names";
 import {
 	AutocompleteNoResults
-} from "../../src/app/shared/components/autocomplete/no-results/autocomplete-no.results";
+} from "src/app/shared/components/autocomplete/no-results/autocomplete-no.results";
 
 @Component({
 	selector: 'app-products-ingredients-creator',

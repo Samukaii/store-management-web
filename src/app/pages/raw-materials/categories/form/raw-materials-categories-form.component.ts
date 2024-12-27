@@ -1,6 +1,6 @@
 import { Component, input, output } from '@angular/core';
-import { FormComponent } from "../src/app/shared/components/form/form/form.component";
-import { FormInputComponent } from "../src/app/shared/components/form/input/form-input.component";
+import { FormComponent } from "src/app/shared/components/form/form/form.component";
+import { FormInputComponent } from "src/app/shared/components/form/input/form-input.component";
 import { RawMaterialsCategoriesFormValue } from "../models/raw-materials-categories-form-value";
 import { createRawMaterialsCategoriesForm } from "./create-raw-materials-categories-form";
 import { RawMaterialCategory } from "../models/raw-material-category";

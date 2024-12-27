@@ -1,4 +1,4 @@
-import { FormKeyOptions } from "../src/app/core/services/form-persistence/models/form-key-options";
+import { FormKeyOptions } from "src/app/core/services/form-persistence/models/form-key-options";
 import { Generic } from "../../../models/generic";
 
 export interface NoResultsShowGoToCreationOptions {
