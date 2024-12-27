@@ -7,8 +7,6 @@ import { FormBuilder, FormControl, NgControl, ReactiveFormsModule } from "@angul
 import { of } from "rxjs";
 import { AutocompleteOption } from "src/app/shared/components/autocomplete/models/autocomplete-option";
 import { changeInput } from "src/app/testing/core/change-input";
-import { ComponentInputs } from "src/app/shared/models/component-inputs";
-import { ComponentInputValue } from "src/app/shared/models/component-input-value";
 import { getByTestId } from "src/app/testing/getters/get-by-test-id";
 import { valueType } from "src/app/shared/helpers/value-type/value-type";
 import { fakeAsync, flush } from "@angular/core/testing";
@@ -103,9 +101,7 @@ const setup = (config?: SetupConfig) => {
 	return {
 		elementRef: mockElementRef(),
 		method,
-		changeInput: <Key extends keyof ComponentInputs<AutocompleteComponent>>(key: Key, value: ComponentInputValue<AutocompleteComponent, Key>) => {
-			changeInput(key, value);
-		}
+		changeInput: changeInput<AutocompleteComponent>
 	}
 }
 
