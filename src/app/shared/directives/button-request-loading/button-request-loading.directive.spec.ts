@@ -1,60 +1,48 @@
-import { setupComponentTesting } from "../../../testing/setup/setup-component-testing";
-import { Component, effect, output, signal } from "@angular/core";
-import { getCurrentComponentFixture } from "../../../testing/core/current-component-fixture";
-import { hasCreatedComponent } from "../../../testing/utils/has-created-component";
+import { setupComponentTesting } from "src/app/testing/setup/setup-component-testing";
+import { Component } from "@angular/core";
+import { getCurrentComponentFixture } from "src/app/testing/core/current-component-fixture";
+import { hasCreatedComponent } from "src/app/testing/utils/has-created-component";
 import { ButtonLoadingFinishStatus } from "./models/button-loading-finish.status";
-import { spyDependencyBeforeCreation } from "../../../testing/spies/spy-dependency-before-creation";
+import { spyDependencyBeforeCreation } from "src/app/testing/spies/spy-dependency-before-creation";
 import { MockProvider } from "ng-mocks";
 import { ButtonRequestLoadingService } from "./button-request-loading.service";
-import { getByTestId } from "../../../testing/getters/get-by-test-id";
 import { ButtonRequestLoadingDirective } from "./button-request-loading.directive";
-import { beforeComponentCreate } from "../../../testing/core/before-component-create";
-import { spyDependency } from "../../../testing/spies/spy-dependency";
+import { beforeComponentCreate } from "src/app/testing/core/before-component-create";
+import { spyDependency } from "src/app/testing/spies/spy-dependency";
 import { UuidService } from "../../services/uuid/uuid.service";
-import { detectChanges } from "../../../testing/utils/detect-changes";
-import { fakeAsync, flush, TestBed, tick } from "@angular/core/testing";
+import { fakeAsync, flush, tick } from "@angular/core/testing";
+import { getFixtureDependency } from "src/app/testing/core/get-fixture-dependency";
+import { changeInput } from "src/app/testing/core/change-input";
+import { ComponentInputs } from "src/app/shared/models/component-inputs";
 
-const setup = () => {
+
+interface SetupConfig {
+	inputs?: Partial<ComponentInputs<ButtonRequestLoadingDirective>>;
+}
+
+const setup = (config?: SetupConfig) => {
 	@Component({
-		template: `
-			@let id = identifier();
-
-			@if (id) {
-				<button
-					data-test-id="button"
-					(finishLoading)="finishLoading.emit($event)"
-					[identifier]="id"
-					appButtonRequestLoading
-				>
-				</button>
-			} @else {
-				<button
-					data-test-id="button"
-					(finishLoading)="finishLoading.emit($event)"
-					appButtonRequestLoading
-				>
-				</button>
-			}
-		`,
-		imports: [
-			ButtonRequestLoadingDirective
-		],
+		template: ``,
 		selector: "app-root-test",
+		hostDirectives: [
+			{
+				directive: ButtonRequestLoadingDirective,
+				inputs: ['identifier'],
+				outputs: ['finishLoading'],
+			}
+		]
 	})
 	class HostComponent {
-		finishLoading = output<ButtonLoadingFinishStatus>();
-		identifier = signal('');
 	}
 
 	setupComponentTesting(HostComponent, {
 		imports: [ButtonRequestLoadingDirective],
+		inputs: config?.inputs,
 		providers: [
 			MockProvider(ButtonRequestLoadingService),
 			MockProvider(UuidService)
 		]
 	});
-
-	return {component: getCurrentComponentFixture<HostComponent>().componentInstance}
 }
 
 describe(ButtonRequestLoadingDirective.name, () => {
@@ -64,57 +52,64 @@ describe(ButtonRequestLoadingDirective.name, () => {
 		expect(hasCreatedComponent()).toBeTruthy();
 	});
 
-	it('must call registerButton with generated uuid and directive instance on start', () => {
-		const registerButton = spyDependencyBeforeCreation(ButtonRequestLoadingService, 'registerButton');
-
-		beforeComponentCreate(() => {
-			spyDependency(UuidService, 'generate').mockReturnValue('generated-uuid');
-		})
-
-		setup();
-
-		const button = getByTestId('button');
-
-		const directive = button.read(ButtonRequestLoadingDirective)
-
-		const spy = registerButton.resolve();
-
-		const [identifier, directiveArg] = spy.mock.lastCall ?? [];
-
-		expect(identifier).toBe('generated-uuid');
-		expect(directiveArg).toBe(directive)
-	});
-
-	describe('When identifier is defined', () => {
+	describe('When identification changes', () => {
 		it('must unregister last identifier and register with new identifier', () => {
 			beforeComponentCreate(() => {
-				spyDependency(UuidService, 'generate').mockReturnValue('first-identifier');
+				spyDependency(UuidService, 'generate').mockReturnValue('generated-uuid');
 			});
 
-			const {component} = setup();
+			setup();
 
 			const unregister = spyDependency(ButtonRequestLoadingService, 'unregisterButton');
 			const register = spyDependency(ButtonRequestLoadingService, 'registerButton');
+			const directive = getFixtureDependency(ButtonRequestLoadingDirective);
 
-			component.identifier.set('second-identifier');
-			detectChanges();
+			changeInput('identifier', 'second-identifier');
+			changeInput('identifier', 'third-identifier');
 
-			const directive = getByTestId('button').read(ButtonRequestLoadingDirective)!;
-
-			expect(unregister).toHaveBeenCalledWith('first-identifier');
-			expect(unregister).toHaveBeenCalledTimes(1);
-
-			expect(register).toHaveBeenCalledWith('second-identifier', directive);
-			expect(register).toHaveBeenCalledTimes(2);
-
-			component.identifier.set('third-identifier');
-			detectChanges();
-
-			expect(unregister).toHaveBeenCalledWith('second-identifier');
+			expect(unregister).toHaveBeenNthCalledWith(1, 'generated-uuid');
+			expect(unregister).toHaveBeenNthCalledWith(2, 'second-identifier');
 			expect(unregister).toHaveBeenCalledTimes(2);
 
-			expect(register).toHaveBeenCalledWith('third-identifier', directive);
-			expect(register).toHaveBeenCalledTimes(3);
+			expect(register).toHaveBeenNthCalledWith(1, 'second-identifier', directive);
+			expect(register).toHaveBeenNthCalledWith(2, 'third-identifier', directive);
+			expect(register).toHaveBeenCalledTimes(2);
+		});
+	});
+
+	describe('When identifier is not initially provided', () => {
+		it('must call registerButton with generated uuid and directive instance on start', () => {
+			const registerButton = spyDependencyBeforeCreation(ButtonRequestLoadingService, 'registerButton');
+
+			beforeComponentCreate(() => {
+				spyDependency(UuidService, 'generate').mockReturnValue('generated-uuid');
+			});
+
+			setup();
+
+			const directive = getFixtureDependency(ButtonRequestLoadingDirective);
+
+			expect(registerButton.resolve()).toHaveBeenCalledExactlyOnceWith('generated-uuid', directive);
+		});
+	});
+
+	describe('When identifier is initially provided', () => {
+		it('must call registerButton with provided input on start', () => {
+			const registerButton = spyDependencyBeforeCreation(ButtonRequestLoadingService, 'registerButton');
+
+			beforeComponentCreate(() => {
+				spyDependency(UuidService, 'generate').mockReturnValue('generated-uuid');
+			})
+
+			setup({
+				inputs: {
+					identifier: 'provided-identifier',
+				}
+			});
+
+			const directive = getFixtureDependency(ButtonRequestLoadingDirective);
+
+			expect(registerButton.resolve()).toHaveBeenCalledExactlyOnceWith('provided-identifier', directive);
 		});
 	});
 
@@ -128,9 +123,9 @@ describe(ButtonRequestLoadingDirective.name, () => {
 
 			const setLastClickedButton = spyDependency(ButtonRequestLoadingService, 'setLastClickedButton');
 
-			const button = getByTestId('button');
+			const fixture = getCurrentComponentFixture();
 
-			button.triggerEventHandler('click');
+			fixture.debugElement.triggerEventHandler('click');
 
 			expect(setLastClickedButton).toHaveBeenCalledExactlyOnceWith('generated-uuid');
 		});
@@ -140,7 +135,7 @@ describe(ButtonRequestLoadingDirective.name, () => {
 		it('must update loading to true', () => {
 			setup();
 
-			const directive = getByTestId('button').read(ButtonRequestLoadingDirective)!;
+			const directive = getFixtureDependency(ButtonRequestLoadingDirective);
 
 			directive.startRequestLoading();
 
@@ -160,7 +155,7 @@ describe(ButtonRequestLoadingDirective.name, () => {
 				it(`must emit finishLoading with status "${status}" when called with ${status}`, fakeAsync(() => {
 					setup();
 
-					const directive = getByTestId('button').read(ButtonRequestLoadingDirective)!;
+					const directive = getFixtureDependency(ButtonRequestLoadingDirective);
 
 					let finishStatus: ButtonLoadingFinishStatus | undefined = undefined;
 
@@ -179,7 +174,7 @@ describe(ButtonRequestLoadingDirective.name, () => {
 			it('must set loading to false after 100 ms', fakeAsync(() => {
 				setup();
 
-				const directive = getByTestId('button').read(ButtonRequestLoadingDirective)!;
+				const directive = getFixtureDependency(ButtonRequestLoadingDirective);
 
 				directive.startRequestLoading();
 
