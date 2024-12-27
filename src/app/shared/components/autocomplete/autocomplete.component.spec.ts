@@ -14,7 +14,6 @@ import { valueType } from "src/app/shared/helpers/value-type/value-type";
 import { fakeAsync, flush } from "@angular/core/testing";
 import { ProgressSpinnerComponent } from "src/app/shared/components/progress-spinner/progress-spinner.component";
 import { detectChanges } from "src/app/testing/utils/detect-changes";
-import { getAllByTestId } from "src/app/testing/getters/get-all-by-test-id";
 import { mockComponent } from "src/app/testing/mocks/mock-component";
 import { findAllByTestId } from "src/app/testing/getters/find-all-by-test-id";
 import { findByTestId } from "src/app/testing/getters/find-by-test-id";
