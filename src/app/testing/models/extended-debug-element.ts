@@ -1,4 +1,5 @@
 import { DebugElement, ProviderToken, Type } from "@angular/core";
+import { ControlValueAccessor } from "@angular/forms";
 
 export interface ExtendedDebugElement<T = any> extends DebugElement {
 	nativeElement: HTMLElement;
@@ -13,4 +14,5 @@ export interface ExtendedDebugElement<T = any> extends DebugElement {
 	getProperty: <T = any>(property: string) => T | null;
 	click: (event?: any) => void;
 	read: <T>(token: ProviderToken<T>) => T | null;
+	valueAccessor: () => ControlValueAccessor | undefined;
 }

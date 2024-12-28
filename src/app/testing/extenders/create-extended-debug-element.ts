@@ -6,6 +6,7 @@ import { getAllByTestId } from "../getters/get-all-by-test-id";
 import { findByDirective } from "../getters/find-by-directive";
 import { findByTestId } from "../getters/find-by-test-id";
 import { findAllByTestId } from "../getters/find-all-by-test-id";
+import { NG_VALUE_ACCESSOR } from "@angular/forms";
 
 export const createExtendedDebugElement = <T>(element: DebugElement) => {
 	const result = element as ExtendedDebugElement<T>;
@@ -23,6 +24,7 @@ export const createExtendedDebugElement = <T>(element: DebugElement) => {
 
 	result.read = (token) => result.injector.get(token)
 	result.click = (event?: any) => result.triggerEventHandler('click', event)
+	result.valueAccessor = () => result.read(NG_VALUE_ACCESSOR)?.[0];
 
 	return result;
 };
