@@ -2,6 +2,7 @@ import { DebugElement, ProviderToken, Type } from "@angular/core";
 import { ControlValueAccessor } from "@angular/forms";
 
 export interface ExtendedDebugElement<T = any> extends DebugElement {
+	getStyle: (style: keyof CSSStyleDeclaration) => string | null;
 	nativeElement: HTMLElement;
 	componentInstance: T;
 	text: () => string;
