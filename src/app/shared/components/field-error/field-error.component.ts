@@ -21,9 +21,7 @@ export class FieldErrorComponent implements OnInit {
 
 		if(!invalid) return '';
 
-		const errors = this.control().errors;
-
-		if (!errors) return null;
+		const errors = this.control().errors!;
 
 		if (errors['required']) return "Campo obrigatório";
 

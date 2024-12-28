@@ -1,6 +1,7 @@
-<app-flex-row [gap]="gap()" [verticalAlignment]="alignment()">
+<app-flex-row data-test-id="row" [gap]="gap()" [verticalAlignment]="alignment()">
 	@for(action of actions(); track action) {
 		<app-button
+			data-test-id="button"
 			(finishLoading)="finishLoading(action, $event)"
 			(click)="onClick(action)"
 			[routerLink]="action.relativeRoute"

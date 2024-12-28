@@ -1,11 +1,11 @@
 @switch (size()) {
 	@case ("small"){
-		<h3>{{value()}}</h3>
+		<h3 data-test-id="small-title">{{value()}}</h3>
 	}
 	@case ("medium"){
-		<h2>{{value()}}</h2>
+		<h2 data-test-id="medium-title">{{value()}}</h2>
 	}
 	@case ("large"){
-		<h1>{{value()}}</h1>
+		<h1 data-test-id="large-title">{{value()}}</h1>
 	}
 }
