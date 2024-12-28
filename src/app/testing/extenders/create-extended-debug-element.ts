@@ -22,6 +22,7 @@ export const createExtendedDebugElement = <T>(element: DebugElement) => {
 	result.getProperty = (property) => result.properties[property] ?? result.attributes[property] ?? null;
 
 	result.read = (token) => result.injector.get(token)
+	result.click = (event?: any) => result.triggerEventHandler('click', event)
 
 	return result;
 };
