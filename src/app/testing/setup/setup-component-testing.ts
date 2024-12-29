@@ -4,13 +4,15 @@ import { setCurrentComponentFixture } from "../core/current-component-fixture";
 import { runBeforeComponentCreateActions } from "../core/before-component-create";
 import { ComponentInputs } from "src/app/shared/models/component-inputs";
 import { runBeforeFirstChangeDetectionActions } from "src/app/testing/core/before-first-change-detection";
+import { fixtureUtils } from "src/app/testing/utils/fixture-utils";
+import { Generic } from "src/app/shared/models/generic";
 
 interface SetupComponentTestingConfig<T> extends TestModuleMetadata{
 	overrideImports?: boolean;
 	inputs?: Partial<ComponentInputs<T>>;
 }
 
-export const setupComponentTesting = <T>(component: Type<T>, config: SetupComponentTestingConfig<T>) => {
+export const setupComponentTesting = <T extends Generic>(component: Type<T>, config: SetupComponentTestingConfig<T>) => {
 	const configCopy = {...config};
 
 	const mirror = reflectComponentType(component);
@@ -48,4 +50,6 @@ export const setupComponentTesting = <T>(component: Type<T>, config: SetupCompon
 	runBeforeFirstChangeDetectionActions();
 
 	fixture.detectChanges();
+
+	return fixtureUtils<T>();
 };

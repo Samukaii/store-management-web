@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, computed, effect, ElementRef, input, viewChild } from '@angular/core';
+import { Component, computed, effect, ElementRef, input, viewChild } from '@angular/core';
 import Chart, { ChartData } from 'chart.js/auto';
 import { injectIsAtBrowser } from "../../../di/inject-is-at-browser";
 
@@ -11,13 +11,11 @@ import { injectIsAtBrowser } from "../../../di/inject-is-at-browser";
 export class LineChartComponent {
 	direction = input<"horizontal" | "vertical">("horizontal");
 	data = input.required<ChartData<"line">>();
-	label = input.required<string>();
-	showAverage = input(false, {transform: booleanAttribute});
-	isAtBrowser = false;
+	protected isAtBrowser = false;
 
-	chartElement = viewChild('canvas', {read: ElementRef});
+	private chartElement = viewChild('canvas', {read: ElementRef});
 
-	element = computed(() =>
+	private element = computed(() =>
 		this.chartElement()?.nativeElement as HTMLCanvasElement | undefined
 	);
 
@@ -25,9 +23,9 @@ export class LineChartComponent {
 		this.isAtBrowser = injectIsAtBrowser();
 	}
 
-	chart?: Chart;
+	private chart?: Chart;
 
-	updateChart = effect(() => {
+	private updateChart = effect(() => {
 		this.chart?.destroy();
 
 		const element = this.element();
