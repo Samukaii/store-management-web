@@ -1,6 +1,7 @@
 import { Component, computed, effect, ElementRef, input, viewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { ChartData } from "chart.js";
+import { injectIsAtBrowser } from "src/app/shared/di/inject-is-at-browser";
 
 @Component({
     selector: 'app-pie-chart',
@@ -8,6 +9,8 @@ import { ChartData } from "chart.js";
     styleUrl: './pie-chart.component.scss'
 })
 export class PieChartComponent {
+	protected isAtBrowser = injectIsAtBrowser();
+
 	data = input.required<ChartData<"pie">>();
 
 	private chartElement = viewChild('canvas', {read: ElementRef});
@@ -18,12 +21,14 @@ export class PieChartComponent {
 
 	private chart?: Chart;
 
-	private updateChart = effect(() => {
+	protected updateChart = effect(() => {
 		this.chart?.destroy();
 
 		const data = this.data();
 
-		const element = this.element()!;
+		const element = this.element();
+
+		if(!element) return;
 
 		this.chart = new Chart(element, {
 			type: 'pie',

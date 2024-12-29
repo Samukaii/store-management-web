@@ -57,10 +57,8 @@
 
 		@if (filters().periodType === OrdersPeriodType.DAY) {
 			<app-line-chart
-				showAverage
 				class="d-block"
 				[data]="dailyChartData()"
-				label="Faturamento"
 			/>
 		} @else {
 			<app-bar-chart

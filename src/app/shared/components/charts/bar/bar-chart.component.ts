@@ -15,19 +15,19 @@ import { WindowLoadingComponent } from "src/app/core/components/window-loading/w
 export class BarChartComponent {
 	direction = input<"horizontal" | "vertical">("horizontal");
 	data = input.required<ChartData>();
-	chartElement = viewChild('canvas', {read: ElementRef});
-	minHeight = input(500);
 	height = input<string>("auto");
 
-	isAtBrowser = injectIsAtBrowser();
+	private chartElement = viewChild('canvas', {read: ElementRef});
 
-	element = computed(() =>
+	protected isAtBrowser = injectIsAtBrowser();
+
+	private element = computed(() =>
 		this.chartElement()?.nativeElement as HTMLCanvasElement | undefined
 	);
 
-	chart?: Chart;
+	private chart?: Chart;
 
-	updateChart = effect(() => {
+	protected updateChart = effect(() => {
 		this.chart?.destroy();
 
 		const element = this.element();
