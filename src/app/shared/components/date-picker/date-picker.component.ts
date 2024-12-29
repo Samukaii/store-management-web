@@ -5,7 +5,7 @@ import { FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { MatInput } from "@angular/material/input";
 import { Moment } from "moment/moment";
 import moment from "moment";
-import { getControl } from "src/app/shared/helpers/get-control";
+import { getControl } from "src/app/shared/helpers/get-control/get-control";
 
 @Component({
     selector: 'app-datepicker',
