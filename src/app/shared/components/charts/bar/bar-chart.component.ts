@@ -4,24 +4,6 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { injectIsAtBrowser } from "../../../di/inject-is-at-browser";
 import { WindowLoadingComponent } from "src/app/core/components/window-loading/window-loading.component";
 
-export const chartBluePalette: string[] = [
-	"#001f3f",
-	"#002e5d",
-	"#003f5c",
-	"#2c5282",
-	"#2b6cb0",
-	"#3182ce",
-	"#4299e1",
-	"#005f99",
-	"#0077b3",
-	"#63b3ed",
-	"#7ed3f4",
-	"#90cdf4",
-	"#1c3d5a",
-	"#001828",
-	"#003046",
-];
-
 @Component({
 	selector: 'app-bar-chart',
 	templateUrl: './bar-chart.component.html',

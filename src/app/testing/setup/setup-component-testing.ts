@@ -3,6 +3,7 @@ import { MetadataOverride, TestBed, TestModuleMetadata } from "@angular/core/tes
 import { setCurrentComponentFixture } from "../core/current-component-fixture";
 import { runBeforeComponentCreateActions } from "../core/before-component-create";
 import { ComponentInputs } from "src/app/shared/models/component-inputs";
+import { runBeforeFirstChangeDetectionActions } from "src/app/testing/core/before-first-change-detection";
 
 interface SetupComponentTestingConfig<T> extends TestModuleMetadata{
 	overrideImports?: boolean;
@@ -42,7 +43,9 @@ export const setupComponentTesting = <T>(component: Type<T>, config: SetupCompon
 		fixture.componentRef.setInput(key, value);
 	});
 
-	fixture.detectChanges();
-
 	setCurrentComponentFixture(fixture);
+
+	runBeforeFirstChangeDetectionActions();
+
+	fixture.detectChanges();
 };

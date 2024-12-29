@@ -1,5 +1,5 @@
 import { Component, computed, inject } from '@angular/core';
-import { BarChartComponent, chartBluePalette } from "src/app/shared/components/charts/bar/bar-chart.component";
+import { BarChartComponent } from "src/app/shared/components/charts/bar/bar-chart.component";
 import { DateRangeComponent } from "src/app/shared/components/date-range/date-range.component";
 import { FlexRowComponent } from "src/app/shared/components/flex-row/flex-row.component";
 import { FormRadioComponent } from "src/app/shared/components/form/radio/form-radio.component";
@@ -14,6 +14,7 @@ import { BasicOption } from "src/app/shared/models/basic-option";
 import { WindowLoadingComponent } from "src/app/core/components/window-loading/window-loading.component";
 import { OrdersDisplayType } from "../enum/orders-display-type";
 import { ChartData } from 'chart.js';
+import { bluePalette } from "src/app/shared/components/charts/palettes/blue-palette";
 
 @Component({
   selector: 'app-analytics-best-selling',
@@ -123,8 +124,8 @@ export class AnalyticsBestSellingComponent {
 				{
 					label: "Faturamento",
 					data: data.map(item => item.value),
-					backgroundColor: chartBluePalette,
-					borderColor: chartBluePalette,
+					backgroundColor: bluePalette,
+					borderColor: bluePalette,
 					maxBarThickness: 25
 				},
 			]

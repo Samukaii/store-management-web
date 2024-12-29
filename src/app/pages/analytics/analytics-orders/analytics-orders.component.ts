@@ -16,13 +16,14 @@ import {
 	distinctPropertiesAvoidingNull
 } from "src/app/shared/helpers/distinct-properties-avoiding-null/distinct-properties-avoiding-null";
 import { distinctValue } from "src/app/shared/helpers/distinct-value/distinct-value";
-import { BarChartComponent, chartBluePalette } from "src/app/shared/components/charts/bar/bar-chart.component";
+import { BarChartComponent } from "src/app/shared/components/charts/bar/bar-chart.component";
 import { DatePickerComponent } from "src/app/shared/components/date-picker/date-picker.component";
 import { YearFormatDirective } from "src/app/shared/directives/year-format/year-format.directive";
 import { capitalize } from "src/app/shared/helpers/capitalize/capitalize";
 import { ChartData } from "chart.js/auto";
 import { ScriptableContext } from "chart.js";
 import { OrdersPeriodType } from "../enum/orders-period-type";
+import { bluePalette } from "src/app/shared/components/charts/palettes/blue-palette";
 
 const fillPeriodWithDates = (start: Date | string, end: Date | string) => {
 	let current = new Date(start);
@@ -234,8 +235,8 @@ export class AnalyticsOrdersComponent {
 				{
 					label: displayType === OrdersDisplayType.BILLING ? "Faturamento": "Quantidade de vendas",
 					data: data.map(item => item.value),
-					backgroundColor: chartBluePalette,
-					borderColor: chartBluePalette
+					backgroundColor: bluePalette,
+					borderColor: bluePalette
 				},
 			]
 		}
