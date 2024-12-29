@@ -5,7 +5,7 @@ export const getControl = <Form extends FormGroup>(form: Form, name: FormControl
 	const control = form.controls[name];
 
 	if (!control)
-		throw new Error(`Control with name ${name} not found`);
+		throw new Error(`Control with name "${name}" not found`);
 
 	return control as FormControl;
 }
