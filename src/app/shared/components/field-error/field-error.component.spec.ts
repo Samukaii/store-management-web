@@ -21,7 +21,7 @@ const setup = (config?: SetupConfig) => {
 }
 
 
-fdescribe(FieldErrorComponent.name, () => {
+describe(FieldErrorComponent.name, () => {
 	it('must create component', () => {
 		setup();
 

@@ -18,7 +18,7 @@ const setup = () => {
 	return fixtureUtils<ProgressSpinnerComponent>();
 }
 
-fdescribe(ProgressSpinnerComponent.name, () => {
+describe(ProgressSpinnerComponent.name, () => {
 	it('must create component', () => {
 		setup();
 

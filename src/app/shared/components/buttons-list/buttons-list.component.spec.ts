@@ -25,7 +25,7 @@ const setup = (config?: SetupConfig) => {
 }
 
 
-fdescribe(ButtonsListComponent.name, () => {
+describe(ButtonsListComponent.name, () => {
 	it('must create component', () => {
 		setup();
 

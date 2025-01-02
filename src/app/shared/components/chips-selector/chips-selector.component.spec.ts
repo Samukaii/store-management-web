@@ -14,7 +14,7 @@ const setup = () => {
 	return fixtureUtils<ChipsSelectorComponent>();
 }
 
-fdescribe(ChipsSelectorComponent.name, () => {
+describe(ChipsSelectorComponent.name, () => {
 	it('must create component', () => {
 		setup();
 

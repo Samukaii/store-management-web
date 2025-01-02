@@ -17,7 +17,7 @@ const setup = () => {
 	return fixtureUtils<NoResultsComponent>();
 }
 
-fdescribe(NoResultsComponent.name, () => {
+describe(NoResultsComponent.name, () => {
 	it('must create component', () => {
 		setup();
 

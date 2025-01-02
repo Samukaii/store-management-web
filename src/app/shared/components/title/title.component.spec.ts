@@ -23,7 +23,7 @@ const setup = (config?: SetupConfig) => {
 }
 
 
-fdescribe(TitleComponent.name, () => {
+describe(TitleComponent.name, () => {
 	it('must create component', () => {
 		setup();
 

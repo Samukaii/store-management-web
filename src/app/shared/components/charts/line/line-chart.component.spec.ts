@@ -25,7 +25,7 @@ const setup = (config?: SetupConfig) => {
 	})
 }
 
-fdescribe(LineChartComponent.name, () => {
+describe(LineChartComponent.name, () => {
 	it('must create component', () => {
 		setup();
 

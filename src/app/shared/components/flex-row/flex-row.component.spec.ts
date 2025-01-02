@@ -39,7 +39,7 @@ const setup = () => {
 	return fixtureUtils<HostComponent>();
 }
 
-fdescribe(FlexRowComponent.name, () => {
+describe(FlexRowComponent.name, () => {
 	const alignmentsTestCase: FlexAlignment[] = [
 		'center',
 		'flex-end',

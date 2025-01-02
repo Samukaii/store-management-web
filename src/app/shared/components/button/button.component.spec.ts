@@ -171,7 +171,7 @@ const setup = (config?: SetupConfig) => {
 	});
 }
 
-fdescribe(ButtonComponent.name, () => {
+describe(ButtonComponent.name, () => {
 	it('must create component', () => {
 		setup();
 

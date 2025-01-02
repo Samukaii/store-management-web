@@ -25,7 +25,7 @@ const setup = (config?: SetupConfig) => {
 	})
 }
 
-fdescribe(BarChartComponent.name, () => {
+describe(BarChartComponent.name, () => {
 	it('must create component', () => {
 		setup();
 

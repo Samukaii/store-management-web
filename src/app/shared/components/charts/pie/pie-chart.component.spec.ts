@@ -24,7 +24,7 @@ const setup = (config?: SetupConfig) => {
 	})
 }
 
-fdescribe(PieChartComponent.name, () => {
+describe(PieChartComponent.name, () => {
 	it('must create component', () => {
 		setup();
 
