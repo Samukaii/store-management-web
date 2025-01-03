@@ -7,8 +7,7 @@ import {
 	MatStartDate
 } from "@angular/material/datepicker";
 import { MatFormField, MatLabel, MatSuffix } from "@angular/material/form-field";
-import { FormGroup, ReactiveFormsModule } from "@angular/forms";
-import { provideNativeDateAdapter } from "@angular/material/core";
+import { FormControl, ReactiveFormsModule } from "@angular/forms";
 
 @Component({
     selector: 'app-date-range',
@@ -27,9 +26,8 @@ import { provideNativeDateAdapter } from "@angular/material/core";
     styleUrl: './date-range.component.scss'
 })
 export class DateRangeComponent {
-	form = input.required<FormGroup>();
-	startName = input.required<string>();
-	endName = input.required<string>();
+	startControl = input.required<FormControl>();
+	endControl = input.required<FormControl>();
 
 	label = input("");
 }

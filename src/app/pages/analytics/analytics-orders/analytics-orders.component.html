@@ -21,10 +21,9 @@
 			@if (filters().periodType === OrdersPeriodType.DAY) {
 				<app-date-range
 					class="d-flex flex-center"
-					[form]="form"
 					label="Período"
-					startName="startDate"
-					endName="endDate"
+					[startControl]="form.controls.startDate"
+					[endControl]="form.controls.startDate"
 				/>
 			} @else {
 				<app-datepicker
@@ -33,8 +32,7 @@
 					startView="multi-year"
 					closeOnYearSelect
 					label="Ano"
-					[form]="form"
-					name="startDate"
+					[control]="form.controls.startDate"
 				/>
 			}
 			<app-flex-row verticalAlignment="flex-end" column>

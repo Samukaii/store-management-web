@@ -1,10 +1,10 @@
 <mat-form-field>
-	<mat-label>{{ label() }}</mat-label>
-	<mat-date-range-input [formGroup]="form()" [rangePicker]="picker">
-		<input matStartDate [formControlName]="startName()" placeholder="Data inicial">
-		<input matEndDate [formControlName]="endName()" placeholder="Data final">
+	<mat-label data-test-id="label">{{ label() }}</mat-label>
+	<mat-date-range-input data-test-id="range-input" [rangePicker]="picker">
+		<input matStartDate data-test-id="start-input" [formControl]="startControl()" placeholder="Data inicial">
+		<input matEndDate data-test-id="end-input" [formControl]="endControl()" placeholder="Data final">
 	</mat-date-range-input>
-	<mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-	<mat-date-range-picker #picker></mat-date-range-picker>
+	<mat-datepicker-toggle data-test-id="toggle" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+	<mat-date-range-picker data-test-id="date-range-picker" #picker></mat-date-range-picker>
 </mat-form-field>
 
