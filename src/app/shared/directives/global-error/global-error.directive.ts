@@ -20,8 +20,6 @@ export class GlobalErrorDirective implements OnDestroy {
 
 		const name = this.controlName();
 
-		if (!name) return;
-
 		this.subscription = this.errorsService.watchFieldError(name).subscribe(error => {
 			if(!error) return;
 
@@ -37,7 +35,7 @@ export class GlobalErrorDirective implements OnDestroy {
 
 		const controls = parent.controls as Generic;
 
-		return Object.keys(controls).find(name => control === controls[name]);
+		return Object.keys(controls).find(name => control === controls[name])!;
 	}
 
 	private applyError(error: string) {
@@ -52,6 +50,6 @@ export class GlobalErrorDirective implements OnDestroy {
 
 	ngOnDestroy() {
 		this.subscription?.unsubscribe();
-		this.errorsService.clearFieldError(this.controlName() ?? "");
+		this.errorsService.clearFieldError(this.controlName());
 	}
 }

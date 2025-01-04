@@ -12,8 +12,14 @@ export class LocalActionsUpdaterComponent implements OnDestroy {
 	actions = input.required<Button[]>();
 
 	private service = inject(LocalActionsService);
+	private lastWhere?: string;
 
 	private updateActions = effect(() => {
+		if(this.lastWhere && this.lastWhere !== this.where())
+			this.service.deleteActions(this.lastWhere);
+
+		this.lastWhere = this.where();
+
 		this.service.updateActions(this.where(), this.actions())
 	});
 

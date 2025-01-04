@@ -22,7 +22,7 @@ export class FormPersistenceService {
 
 		if(value) {
 			this.persisted.delete(name);
-			form.patchValue(value ?? {});
+			form.patchValue(value);
 			form.markAsDirty();
 		}
 	}
