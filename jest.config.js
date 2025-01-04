@@ -9,6 +9,6 @@ module.exports = {
 		'./src/app/app.component.{ts,html}',
 	],
 	moduleNameMapper: {
-		'src/(.*)': '<rootDir>/src/$1'
+		'^src/(.*)$': '<rootDir>/src/$1',
 	}
 };
