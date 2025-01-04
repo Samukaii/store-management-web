@@ -1,6 +1,5 @@
 import { TestBed } from "@angular/core/testing";
 import { mockRouter } from "src/app/testing/mocks/mock-router";
-import { injectRouteData } from "src/app/shared/di/inject-route-data";
 import { injectRouterActions } from "src/app/shared/di/inject-router-actions";
 import { injectDep } from "src/app/testing/utils/inject-dep";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -12,7 +11,7 @@ const setup = () => {
 	})
 };
 
-describe(injectRouteData.name, () => {
+describe(injectRouterActions.name, () => {
 	describe('goBack', () => {
 		it('must call router navigate with "../" and activated route', () => {
 			setup();
