@@ -11,10 +11,9 @@
 		></app-form-radio>
 		<app-date-range
 			class="pos-top-0-5"
-			[form]="form"
 			label="Período"
-			startName="startDate"
-			endName="endDate"
+			[startControl]="form.controls.startDate"
+			[endControl]="form.controls.endDate"
 		/>
 		<app-flex-row class="badge badge--success p-0-5" gap=".5rem" verticalAlignment="center" horizontalAlignment="center">
 			<h2 class="title--medium m-0">Margem de lucro média: </h2>
