@@ -1,4 +1,4 @@
-import { Component, contentChildren, inject } from '@angular/core';
+import { Component, contentChildren, inject, output } from '@angular/core';
 import { LocalActionsComponent } from "../local-actions/local-actions.component";
 import { MatTab, MatTabGroup, MatTabLabel } from "@angular/material/tabs";
 import { ActivatedRoute, Router } from "@angular/router";

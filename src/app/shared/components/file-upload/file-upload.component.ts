@@ -21,23 +21,13 @@ import { MatIcon } from "@angular/material/icon";
     styleUrl: './file-upload.component.scss'
 })
 export class FileUploadComponent {
-	form = input.required<FormGroup>();
-	name = input.required<string>();
+	control = input.required<FormControl>();
 	accept = input("*");
 	multiple = input(false);
 
 	document = inject(DOCUMENT);
 
 	currentFiles = signal<File[]>([]);
-
-	control = computed(() => {
-		const control = this.form().get(this.name());
-
-		if(!control)
-			throw new Error(`Control ${this.name()} not found on this form`);
-
-		return control as FormControl;
-	});
 
 	label = computed(() => {
 		if(this.multiple()) return "Adicionar arquivo";

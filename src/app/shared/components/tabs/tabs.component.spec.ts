@@ -12,13 +12,10 @@ import { spyDependency } from "src/app/testing/spies/spy-dependency";
 import { Router } from "@angular/router";
 import { getAllByTestId } from "src/app/testing/getters/get-all-by-test-id";
 import { NgTemplateOutlet } from "@angular/common";
-import { phl } from "@angular-extensions/pretty-html-log";
+import { MatTabLabel } from "@angular/material/tabs";
 
-interface SetupConfig {
 
-}
-
-const setup = (config?: SetupConfig) => {
+const setup = () => {
 	@Component({
 		selector: "app-root",
 		template: `
@@ -55,6 +52,7 @@ const setup = (config?: SetupConfig) => {
 			schemas: [NO_ERRORS_SCHEMA],
 			imports: [
 				NgTemplateOutlet,
+				MatTabLabel
 			]
 		}
 	});
@@ -62,7 +60,7 @@ const setup = (config?: SetupConfig) => {
 	return setupComponentTesting(HostComponent, {
 		overrideImports: false,
 		providers: [
-			mockRouter()
+			mockRouter(),
 		]
 	})
 }
@@ -84,6 +82,14 @@ describe(TabsComponent.name, () => {
 			expect(group.getProperty("ngSkipHydration")).toBe("");
 		});
 
+		it('must has dynamicHeight attribute', () => {
+			setup();
+
+			const group = getByTestId('group');
+
+			expect(group.getProperty("dynamicHeight")).toBe("");
+		});
+
 		it('must has [preserveContent] false', () => {
 			setup();
 
@@ -97,6 +103,8 @@ describe(TabsComponent.name, () => {
 
 			const group = getByTestId('group');
 			const router = testRouter();
+
+			expect(group.getProperty("selectedIndex")).toBe(0);
 
 			router.updateQueryParams({tab: 23});
 			detectChanges();
@@ -118,6 +126,7 @@ describe(TabsComponent.name, () => {
 			setup();
 
 			const group = getByTestId('group');
+
 			const navigate = spyDependency(Router, 'navigate');
 
 			group.triggerEventHandler('selectedIndexChange', 15);
@@ -150,24 +159,23 @@ describe(TabsComponent.name, () => {
 			});
 		});
 
-		it('must render all tab icons and labels', () => {
+		it('must render all local-actions with where equal to "tab-" + tab index', () => {
 			setup();
 
-			const expectedContents = [
-				{icon: "first-tab-icon", label: "First tab"},
-				{icon: "second-tab-icon", label: "Second tab"},
-				{icon: "third-tab-icon", label: "Third tab"}
+			const expectedLocalActionsWhere = [
+				'tab-0',
+				'tab-1',
+				'tab-2',
 			];
 
 			const tabs = getAllByTestId('tab');
 
-			expectedContents.forEach((expectedContent, index) => {
+			expectedLocalActionsWhere.forEach((where, index) => {
 				const tab = tabs[index];
 
-				tab.print();
+				const actions = tab.getByTestId('local-actions');
 
-				// expect(tab.getByTestId('header-icon').text()).toBe(expectedContent.icon);
-				// expect(tab.getByTestId('header-label').text()).toBe(expectedContent.label);
+				expect(actions.getProperty("where")).toBe(where);
 			});
 		});
 	});
