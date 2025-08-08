@@ -5,6 +5,7 @@ import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { MatInput } from "@angular/material/input";
 import { Moment } from "moment/moment";
 import moment from "moment";
+import { FormDateDirective } from "src/app/shared/directives/form-date.directive";
 
 @Component({
     selector: 'app-datepicker',
@@ -16,7 +17,8 @@ import moment from "moment";
 		MatFormField,
 		MatDatepicker,
 		MatInput,
-		MatDatepickerInput
+		MatDatepickerInput,
+		FormDateDirective
 	],
     templateUrl: './date-picker.component.html',
     styleUrl: './date-picker.component.scss'
@@ -28,6 +30,9 @@ export class DatePickerComponent {
 	closeOnMonthSelect = input(false, {transform: booleanAttribute})
 
 	label = input("");
+	dateConfig = {
+		mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
+	};
 
 	setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
 		if(!this.closeOnMonthSelect()) return;

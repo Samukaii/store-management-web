@@ -20,7 +20,7 @@ export class ProductsService {
 		});
 	}
 
-	autocomplete(params: Generic) {
+	autocomplete = (params: Generic) => {
 		return this.http.get<Product[]>(this.baseUrl, {
 			params
 		}).pipe(toAutoCompleteOptions());

@@ -9,11 +9,17 @@ import { DialogService } from "src/app/shared/services/dialog/dialog.service";
 import { formatDate } from "@angular/common";
 import { rxResource } from "@angular/core/rxjs-interop";
 import { ConfirmActionService } from "src/app/shared/components/confirm-action/confirm-action.service";
+import { Button } from "src/app/shared/components/button/models/button";
+import { routeNames } from "src/app/shared/route-names";
+import {
+	LocalActionsUpdaterComponent
+} from "src/app/shared/components/local-actions/updater/local-actions-updater.component";
 
 @Component({
     selector: 'app-orders-list',
 	imports: [
-		TableComponent
+		TableComponent,
+		LocalActionsUpdaterComponent
 	],
     templateUrl: './orders-list.component.html',
     styleUrl: './orders-list.component.scss'
@@ -35,6 +41,15 @@ export class OrdersListComponent {
 		description: "Quando algum for adicionado ele aparecerá aqui",
 		icon: "menu_book"
 	}
+
+	actions: Button[] = [
+		{
+			type: "flat",
+			name: "add",
+			label: "Adicionar pedido",
+			relativeRoute: `${routeNames.orders}/${routeNames.new}`
+		}
+	];
 
 	getColumns: TableColumnFn<Order> = element => [
 		{

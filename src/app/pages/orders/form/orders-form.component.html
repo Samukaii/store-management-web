@@ -3,10 +3,51 @@
 	[data]="data()"
 	(formSubmit)="onSubmit()"
 >
-	<app-form-input
-		[control]="form.controls.name"
-		label="Nome"
-		placeholder="Informe aqui o nome">
+	<app-flex-row fill>
+		<app-datepicker
+			class="d-flex flex-center"
+			label="Data"
+			[control]="form.controls.date"
+		/>
+	</app-flex-row>
 
-	</app-form-input>
+	<app-flex-row verticalAlignment="flex-end">
+		<app-button
+			(click)="addProduct()"
+			label="Adicionar produto"
+			class="d-block mb-1"
+			type="flat"
+		/>
+	</app-flex-row>
+
+	@for (control of form.controls.items.controls; track $index) {
+		<app-flex-row gap=".5rem">
+			<app-flex-row class="w-100" fill>
+				<app-autocomplete
+					[control]="control.controls.productId"
+					placeholder="Informe aqui o produto"
+					label="Produto"
+					[method]="productsService.autocomplete"
+				/>
+
+				<app-form-input
+					[control]="control.controls.quantity"
+					type="number"
+					label="Quantidade"
+					placeholder="Informe aqui a quantidade"
+				/>
+			</app-flex-row>
+			@if (form.controls.items.controls.length > 1) {
+				<app-button
+					(click)="form.controls.items.removeAt($index)"
+					tooltip="Remover produto"
+					color="red"
+					icon="delete"
+					class="d-block mt-0-5"
+					type="icon"
+				/>
+			}
+		</app-flex-row>
+
+	}
 </app-form>

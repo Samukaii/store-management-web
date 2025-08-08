@@ -7,6 +7,8 @@ import { injectRouterActions } from "src/app/shared/di/inject-router-actions";
 import { OrdersItemsComponent } from "../items/orders-items.component";
 import { CurrencyPipe, DatePipe } from "@angular/common";
 import { rxResource } from "@angular/core/rxjs-interop";
+import { OrdersFormComponent } from "src/app/pages/orders/form/orders-form.component";
+import { OrdersFormValue } from "src/app/pages/orders/models/orders-form-value";
 
 @Component({
     selector: 'app-orders-update',
@@ -14,7 +16,8 @@ import { rxResource } from "@angular/core/rxjs-interop";
 		WindowLoadingComponent,
 		OrdersItemsComponent,
 		DatePipe,
-		CurrencyPipe
+		CurrencyPipe,
+		OrdersFormComponent
 	],
     templateUrl: './orders-update.component.html',
     styleUrl: './orders-update.component.scss'
@@ -28,6 +31,10 @@ export class OrdersUpdateComponent {
 
 	resource = rxResource({
 		request: this.id,
-		loader: ({request: id}) => this.service.single(id)
+		loader: ({request: id}) => this.service.single(id),
 	});
+
+	update(payload: OrdersFormValue) {
+		this.service.update(this.id(), payload).subscribe();
+	}
 }

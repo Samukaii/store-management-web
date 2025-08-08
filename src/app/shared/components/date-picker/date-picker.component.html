@@ -1,6 +1,8 @@
 <mat-form-field>
 	<mat-label data-test-id="label">{{ label() }}</mat-label>
-	<input matInput data-test-id="input" [formControl]="control()" [matDatepicker]="picker" placeholder="Data">
+	<input
+		[appFormDate]="dateConfig"
+		matInput data-test-id="input" [formControl]="control()" [matDatepicker]="picker" placeholder="Data">
 	<mat-datepicker-toggle data-test-id="toggle" matIconSuffix [for]="picker"></mat-datepicker-toggle>
 	<mat-datepicker
 		data-test-id="datepicker"
